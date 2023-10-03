@@ -1,7 +1,7 @@
 import Foundation
 
 // NOTE: this could be also URLMusicBrainzEntity
-public struct RecentTrack<Artist: MusicBrainz>: Track {
+public struct RecentTrack<Artist: MusicBrainz>: RecentTrackProtocol {
     public let name: String
     public let artist: Artist
     public let album: MusicBrainzEntity

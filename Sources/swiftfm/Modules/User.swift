@@ -27,10 +27,10 @@ public struct User {
         self.instance = instance
     }
 
-    private func getBaseRecentTracks<Artist: MusicBrainz>(
+    private func getBaseRecentTracks<T: RecentTrackProtocol>(
         params: RecentTracksParams,
         extended: Bool,
-        onCompletion: @escaping(Result<CollectionPage<RecentTrack<Artist>>, Error>) -> Void
+        onCompletion: @escaping(Result<CollectionPage<T>, Error>) -> Void
     ) {
         var parsedParams = [
             ("method", APIMethod.getRecentTracks.getMethodName()),
@@ -58,7 +58,7 @@ public struct User {
                 onCompletion(.failure(serviceError))
             case .success(let data):
                 do {
-                    let recentTracks = try JSONDecoder().decode(CollectionPage<RecentTrack<Artist>>.self, from: data)
+                    let recentTracks = try JSONDecoder().decode(CollectionPage<T>.self, from: data)
                     onCompletion(.success(recentTracks))
                 } catch {
                     onCompletion(.failure(error))
@@ -76,7 +76,7 @@ public struct User {
 
     public func getExtendedRecentTracks(
         params: RecentTracksParams,
-        onCompletion: @escaping(Result<CollectionPage<RecentTrack<LastFMMusicBrainzWithImageEntity>>, Error>) -> Void
+        onCompletion: @escaping(Result<CollectionPage<ExtendedRecentTrack>, Error>) -> Void
     ) {
         getBaseRecentTracks(params: params, extended: true, onCompletion: onCompletion)
     }

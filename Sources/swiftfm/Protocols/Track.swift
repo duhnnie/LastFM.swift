@@ -1,6 +1,6 @@
 import Foundation
 
-internal protocol Track: Named {
+public protocol Track: Named {
     associatedtype Artist: MusicBrainz
 
     var name: String { get }
