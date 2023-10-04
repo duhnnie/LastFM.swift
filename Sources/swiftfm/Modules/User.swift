@@ -80,4 +80,38 @@ public struct User {
     ) {
         getBaseRecentTracks(params: params, extended: true, onCompletion: onCompletion)
     }
+
+    public func getTopTracks(
+        params: UserTopTracksParams,
+        onCompletion: @escaping(Result<CollectionPage<UserTopTrack>, Error>) -> Void
+    ) {
+        let parsedParams = [
+            ("method", APIMethod.getTopTracks.getMethodName()),
+            ("user", params.user),
+            ("limit", String(params.limit)),
+            ("page", String(params.page)),
+            ("period", params.period.rawValue),
+            ("api_key", instance.apiKey),
+            ("format", "json"),
+        ];
+
+        let requestURL = RequestUtils.build(params: parsedParams, secure: false)
+
+        RequestUtils.makeGetRequest(url: requestURL, headers: nil) { result in
+            switch (result) {
+            case .failure(let serviceError):
+                onCompletion(.failure(serviceError))
+                break
+            case .success(let data):
+                do {
+                    let list = try JSONDecoder().decode(CollectionPage<UserTopTrack>.self, from: data)
+
+                    onCompletion(.success(list))
+                } catch {
+                    onCompletion(.failure(error))
+                }
+            }
+        }
+
+    }
 }
