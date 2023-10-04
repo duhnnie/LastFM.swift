@@ -1,13 +1,13 @@
 import Foundation
 
 // NOTE: this could be also URLMusicBrainzEntity
-public struct RecentTrack<Artist: MusicBrainz>: RecentTrackProtocol {
+public struct RecentTrack: Decodable {
     public let name: String
-    public let artist: Artist
-    public let album: MusicBrainzEntity
-    public let mbid: String?
+    public let artist: MBEntity
+    public let album: MBEntity
+    public let mbid: String
     public let url: URL
-    public let images: LastFMImages?
+    public let images: LastFMImages
     public let date: Date?
     public let nowPlaying: Bool
 
@@ -34,13 +34,12 @@ public struct RecentTrack<Artist: MusicBrainz>: RecentTrackProtocol {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         self.name = try container.decode(String.self, forKey: .name)
-        self.artist = try container.decode(Artist.self, forKey: .artist)
-        self.album = try container.decode(MusicBrainzEntity.self, forKey: .album)
+        self.artist = try container.decode(MBEntity.self, forKey: .artist)
+        self.album = try container.decode(MBEntity.self, forKey: .album)
         self.mbid = try container.decode(String.self, forKey: .mbid)
         self.url = try container.decode(URL.self, forKey: .url)
 
-        let images = try container.decode(LastFMImages.self, forKey: .images)
-        self.images = images.hasImages ? images : nil
+        self.images = try container.decode(LastFMImages.self, forKey: .images)
 
         do {
             let attrContainer = try container.nestedContainer(keyedBy: CodingKeys.AttrKeys.self, forKey: .attr)

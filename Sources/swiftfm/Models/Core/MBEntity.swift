@@ -1,6 +1,6 @@
 import Foundation
 
-public struct MusicBrainzEntity: MusicBrainz {
+public struct MBEntity: MBeable {
     public let name: String
     public let mbid: String
 
@@ -10,8 +10,8 @@ public struct MusicBrainzEntity: MusicBrainz {
     }
 
     // TODO: remove this initializer when turning this struct into internal
-    public init(name: String, mbid: String) {
-        self.name = name
-        self.mbid = mbid
-    }
+//    public init(name: String, mbid: String) {
+//        self.name = name
+//        self.mbid = mbid
+//    }
 }

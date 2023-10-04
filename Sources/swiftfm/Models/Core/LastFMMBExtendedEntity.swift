@@ -1,6 +1,6 @@
 import Foundation
 
-public struct LastFMMusicBrainzWithImageEntity: URLNamed, MusicBrainz {
+public struct LastFMMBExtendedEntity: MBeable {
     public let name: String
     public let mbid: String
     public let url: URL

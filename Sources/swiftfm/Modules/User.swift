@@ -27,7 +27,7 @@ public struct User {
         self.instance = instance
     }
 
-    private func getBaseRecentTracks<T: RecentTrackProtocol>(
+    private func getBaseRecentTracks<T: Decodable>(
         params: RecentTracksParams,
         extended: Bool,
         onCompletion: @escaping(Result<CollectionPage<T>, Error>) -> Void
@@ -69,7 +69,7 @@ public struct User {
 
     public func getRecentTracks(
         params: RecentTracksParams,
-        onCompletion: @escaping(Result<CollectionPage<RecentTrack<MusicBrainzEntity>>, Error>) -> Void
+        onCompletion: @escaping(Result<CollectionPage<RecentTrack>, Error>) -> Void
     ) {
         getBaseRecentTracks(params: params, extended: false, onCompletion: onCompletion)
     }
