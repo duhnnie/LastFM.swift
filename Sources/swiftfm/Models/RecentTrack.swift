@@ -10,6 +10,7 @@ public struct RecentTrack: Decodable {
     public let images: LastFMImages
     public let date: Date?
     public let nowPlaying: Bool
+    public let streamable: Bool
 
     private enum CodingKeys: String, CodingKey {
         case name
@@ -18,6 +19,7 @@ public struct RecentTrack: Decodable {
         case mbid
         case url
         case date
+        case streamable
         case images = "image"
         case attr = "@attr"
 
@@ -32,12 +34,14 @@ public struct RecentTrack: Decodable {
 
     public init (from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        let streamableString = try container.decode(String.self, forKey: .streamable)
 
         self.name = try container.decode(String.self, forKey: .name)
         self.artist = try container.decode(MBEntity.self, forKey: .artist)
         self.album = try container.decode(MBEntity.self, forKey: .album)
         self.mbid = try container.decode(String.self, forKey: .mbid)
         self.url = try container.decode(URL.self, forKey: .url)
+        self.streamable = streamableString == "1"
 
         self.images = try container.decode(LastFMImages.self, forKey: .images)
 
