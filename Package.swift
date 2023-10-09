@@ -18,7 +18,10 @@ let package = Package(
             targets: ["swiftfm"]),
     ],
     dependencies: [
-        .package(name: "SwiftRestClient", path: "/Users/daniel/Projects/SwiftRestClient")
+        .package(
+            name: "SwiftRestClient",
+            url: "https://github.com/duhnnie/SwiftRestClient",
+            from: "0.2.0")
     ],
     targets: [
         .target(
