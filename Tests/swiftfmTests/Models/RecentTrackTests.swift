@@ -103,7 +103,6 @@ class RecentTrackTests: XCTestCase {
 
     func testSuccessfulDefaultDecoding() throws {
         let data = Self.generateJSON()
-        print(String(data: data, encoding: .utf8)!)
         let recentTrack = try JSONDecoder().decode(RecentTrack.self, from: data)
 
         XCTAssertEqual(
