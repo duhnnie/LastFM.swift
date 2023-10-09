@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SwiftRestClient",
+        "repositoryURL": "https://github.com/duhnnie/SwiftRestClient",
+        "state": {
+          "branch": null,
+          "revision": "7acd8124cdd92881f9f40f65b2b33b2e22445c0b",
+          "version": "0.2.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
