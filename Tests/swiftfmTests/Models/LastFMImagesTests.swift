@@ -17,12 +17,12 @@ class LastFMImagesTests: XCTestCase {
         "extraLarge": "https://images.net/extralarge.jpg"
     ]
 
-    private static func generateJSON(
+    internal static func generateJSON(
         small: String? = defaultValues["small"],
         medium: String? = defaultValues["medium"],
         large: String? = defaultValues["large"],
         extraLarge: String? = defaultValues["extraLarge"]
-    ) -> Data {
+    ) -> String {
         let allImages = [
             "small": small,
             "medium": medium,
@@ -34,11 +34,11 @@ class LastFMImagesTests: XCTestCase {
             return "{ \"size\": \"\(key)\", \"#text\": \"\(value!)\" }"
         }
 
-        return "[\(nonNilImages.joined(separator: ","))]".data(using: .utf8)!
+        return "[\(nonNilImages.joined(separator: ","))]"
     }
 
     func testSuccessfulDecodingWithImages() throws {
-        let data = Self.generateJSON()
+        let data = Self.generateJSON().data(using: .utf8)!
         let lastFMImages = try JSONDecoder().decode(LastFMImages.self, from: data)
 
         XCTAssertEqual(lastFMImages.small!.absoluteURL, URL(string: Self.defaultValues["small"]!)!)
@@ -54,7 +54,7 @@ class LastFMImagesTests: XCTestCase {
             medium: nil,
             large: nil,
             extraLarge: nil
-        )
+        ).data(using: .utf8)!
         let lastFMImages = try JSONDecoder().decode(LastFMImages.self, from: data)
 
         XCTAssertNil(lastFMImages.small)

@@ -69,45 +69,18 @@ class ExtendedRecentTrackTests: XCTestCase {
   "artist": {
     "url": "\(artistURL)",
     "name": "\(artistName)",
-    "image": [
-      {
-        "size": "small",
-        "#text": "\(artistImageSmall)"
-      },
-      {
-        "size": "medium",
-        "#text": "\(artistImageMedium)"
-      },
-      {
-        "size": "large",
-        "#text": "\(artistImageLarge)"
-      },
-      {
-        "size": "extralarge",
-        "#text": "\(artistImageExtraLarge)"
-      }
-    ],
+    "image": \(LastFMImagesTests.generateJSON(
+    small: artistImageSmall,
+    medium: artistImageMedium,
+    large: artistImageLarge,
+    extraLarge: artistImageExtraLarge
+)),
     "mbid": "\(artistMBID)"
   },
   "streamable": "\(streamable ? 1 : 0)",
-  "image": [
-    {
-      "size": "small",
-      "#text": "\(imageSmall)"
-    },
-    {
-      "size": "medium",
-      "#text": "\(imageMedium)"
-    },
-    {
-      "size": "large",
-      "#text": "\(imageLarge)"
-    },
-    {
-      "size": "extralarge",
-      "#text": "\(imageExtraLarge)"
-    }
-  ],
+  "image": \(LastFMImagesTests.generateJSON(
+    small: imageSmall, medium: imageMedium, large: imageLarge, extraLarge: imageExtraLarge
+)),
   "mbid": "\(mbid)",
   "album": {
     "mbid": "\(albumMBID)",
