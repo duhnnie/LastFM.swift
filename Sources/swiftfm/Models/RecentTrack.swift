@@ -54,17 +54,18 @@ public struct RecentTrack: Decodable {
             self.nowPlaying = false
         }
 
-        do {
-            let dateContainer = try container.nestedContainer(keyedBy: CodingKeys.DateKeys.self, forKey: CodingKeys.date)
-
-            let utsString = try dateContainer.decode(String.self, forKey: CodingKeys.DateKeys.uts)
-            guard let uts = Int(utsString) else {
-                throw RuntimeError("No valid timestamp")
-            }
-
-            self.date = Date(timeIntervalSince1970: Double(uts))
-        } catch {
+        guard
+            let dateContainer = try? container.nestedContainer(keyedBy: CodingKeys.DateKeys.self, forKey: CodingKeys.date),
+            let utsString = try dateContainer.decodeIfPresent(String.self, forKey: CodingKeys.DateKeys.uts)
+        else {
             self.date = nil
+            return
         }
+
+        guard let uts = Int(utsString) else {
+            throw RuntimeError("No valid timestamp")
+        }
+
+        self.date = Date(timeIntervalSince1970: Double(uts))
     }
 }

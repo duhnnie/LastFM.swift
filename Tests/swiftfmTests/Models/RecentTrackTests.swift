@@ -10,6 +10,13 @@ import XCTest
 
 class RecentTrackTests: XCTestCase {
 
+    static private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yyyy, HH:mm"
+
+        return formatter
+    }()
+
     static private let defaultValues: [String: Any] = [
         "artistMBID": "someArtistMBID",
         "artistName": "someArtistName",
@@ -24,7 +31,8 @@ class RecentTrackTests: XCTestCase {
         "name": "someTrackName",
         "url": "https://some.track/url",
         "nowPlaying": false,
-        "date": Date(timeIntervalSince1970: 1696622288)
+        "dateUTS": "1696622288",
+        "dateText": "06 Oct 2023, 15:58"
     ]
 
     static private func generateJSON(
@@ -41,11 +49,9 @@ class RecentTrackTests: XCTestCase {
         name: String = defaultValues["name"] as! String,
         url: String = defaultValues["url"] as! String,
         nowPlaying: Bool = defaultValues["nowPlaying"] as! Bool,
-        date: Date? = defaultValues["date"] as! Date
+        dateUTS: String? = defaultValues["dateUTS"] as? String,
+        dateText: String? = defaultValues["dateText"] as? String
     ) -> Data {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd MMM yyyy, HH:mm"
-
         return """
 {
   "artist": {
@@ -78,11 +84,11 @@ class RecentTrackTests: XCTestCase {
   },
   "name": "\(name)",
   \(
-    date != nil
+    dateUTS != nil && dateText != nil
     ? """
     "date": {
-      "uts": "\(Int(date!.timeIntervalSince1970))",
-      "#text": "\(formatter.string(from: date!))"
+      "uts": "\(dateUTS!)",
+      "#text": "\(dateText!)"
     },
     """
     : ""
@@ -120,7 +126,9 @@ class RecentTrackTests: XCTestCase {
         XCTAssertEqual(recentTrack.url.absoluteString, Self.defaultValues["url"] as! String)
 
         let unwrappedDate = try XCTUnwrap(recentTrack.date)
-        XCTAssertEqual(unwrappedDate, Self.defaultValues["date"] as! Date)
+        let timestamp = Double(Int(Self.defaultValues["dateUTS"] as! String)!)
+        let date = Date(timeIntervalSince1970: timestamp)
+        XCTAssertEqual(unwrappedDate, date)
 
         let unwrappedImageSmall = try XCTUnwrap(recentTrack.images.small)
         XCTAssertEqual(unwrappedImageSmall.absoluteString, Self.defaultValues["imageSmall"] as! String)
@@ -152,7 +160,7 @@ class RecentTrackTests: XCTestCase {
     }
 
     func testSuccessfulDecodingWithNoDate() throws {
-        let data = Self.generateJSON(date: nil)
+        let data = Self.generateJSON(dateUTS: nil, dateText: nil)
         let recentTrack = try JSONDecoder().decode(RecentTrack.self, from: data)
 
         XCTAssertNil(recentTrack.date)
@@ -163,5 +171,14 @@ class RecentTrackTests: XCTestCase {
         let recentTrack = try JSONDecoder().decode(RecentTrack.self, from: data)
 
         XCTAssertTrue(recentTrack.nowPlaying)
+    }
+
+    func testFailDecodingDueIncorrectDate() throws {
+        let data = Self.generateJSON(dateUTS: "hello this is not a timestamp", dateText: "this is not a date string")
+        XCTAssertThrowsError(
+            try JSONDecoder().decode(RecentTrack.self, from: data),
+            "A RuntimeError with \"Invalid Timestamp\" should be have been thrown") { error in
+            XCTAssertTrue(error is RuntimeError)
+        }
     }
 }
