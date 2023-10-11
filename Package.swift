@@ -7,7 +7,7 @@ let package = Package(
     name: "swiftfm",
     platforms: [
         .iOS(.v11),
-        .macOS(.v10_13),
+        .macOS(.v10_10),
         .watchOS(.v4),
         .tvOS(.v11),
         .macCatalyst(.v13)
