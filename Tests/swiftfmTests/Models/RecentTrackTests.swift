@@ -59,24 +59,9 @@ class RecentTrackTests: XCTestCase {
     "#text": "\(artistName)"
   },
   "streamable": "\(streamable ? 1 : 0)",
-  "image": [
-    {
-      "size": "small",
-      "#text": "\(imageSmall)"
-    },
-    {
-      "size": "medium",
-      "#text": "\(imageMedium)"
-    },
-    {
-      "size": "large",
-      "#text": "\(imageLarge)"
-    },
-    {
-      "size": "extralarge",
-      "#text": "\(imageExtraLarge)"
-    }
-  ],
+  "image": \(LastFMImagesTests.generateJSON(
+    small: imageSmall, medium: imageMedium, large: imageLarge, extraLarge: imageExtraLarge
+)),
   "mbid": "\(mbid)",
   "album": {
     "mbid": "\(albumMBID)",
