@@ -3,13 +3,14 @@ import Foundation
 // NOTE: this could be also URLMusicBrainzEntity
 public struct ExtendedRecentTrack: Decodable {
     public let name: String
-    public let artist: LastFMMBEntity
+    public let artist: LastFMMBExtendedEntity
     public let album: MBEntity
     public let mbid: String
     public let url: URL
     public let images: LastFMImages
     public let date: Date?
     public let nowPlaying: Bool
+    public let streamable: Bool
     public let loved: Bool
 
     private enum CodingKeys: String, CodingKey {
@@ -19,6 +20,7 @@ public struct ExtendedRecentTrack: Decodable {
         case mbid
         case url
         case date
+        case streamable
         case loved
         case images = "image"
         case attr = "@attr"
@@ -34,12 +36,14 @@ public struct ExtendedRecentTrack: Decodable {
 
     public init (from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        let streamableString = try container.decode(String.self, forKey: .streamable)
 
         self.name = try container.decode(String.self, forKey: .name)
-        self.artist = try container.decode(LastFMMBEntity.self, forKey: .artist)
+        self.artist = try container.decode(LastFMMBExtendedEntity.self, forKey: .artist)
         self.album = try container.decode(MBEntity.self, forKey: .album)
         self.mbid = try container.decode(String.self, forKey: .mbid)
         self.url = try container.decode(URL.self, forKey: .url)
+        self.streamable = streamableString == "1"
 
         self.images = try container.decode(LastFMImages.self, forKey: .images)
 
@@ -55,17 +59,18 @@ public struct ExtendedRecentTrack: Decodable {
             self.nowPlaying = false
         }
 
-        do {
-            let dateContainer = try container.nestedContainer(keyedBy: CodingKeys.DateKeys.self, forKey: CodingKeys.date)
-
-            let utsString = try dateContainer.decode(String.self, forKey: CodingKeys.DateKeys.uts)
-            guard let uts = Int(utsString) else {
-                throw RuntimeError("No valid timestamp")
-            }
-
-            self.date = Date(timeIntervalSince1970: Double(uts))
-        } catch {
+        guard
+            let dateContainer = try? container.nestedContainer(keyedBy: CodingKeys.DateKeys.self, forKey: CodingKeys.date),
+            let utsString = try dateContainer.decodeIfPresent(String.self, forKey: CodingKeys.DateKeys.uts)
+        else {
             self.date = nil
+            return
         }
+
+        guard let uts = Int(utsString) else {
+            throw RuntimeError("No valid timestamp")
+        }
+
+        self.date = Date(timeIntervalSince1970: Double(uts))
     }
 }
