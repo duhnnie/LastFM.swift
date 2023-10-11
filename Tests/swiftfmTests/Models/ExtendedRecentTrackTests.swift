@@ -229,8 +229,9 @@ class ExtendedRecentTrackTests: XCTestCase {
         let data = Self.generateJSON(dateUTS: "hello this is not a timestamp", dateText: "this is not a date string")
         XCTAssertThrowsError(
             try JSONDecoder().decode(ExtendedRecentTrack.self, from: data),
-            "A RuntimeError with \"Invalid Timestamp\" should be have been thrown") { error in
+            "A RuntimeError with \"No valid timestamp\" should be have been thrown") { error in
             XCTAssertTrue(error is RuntimeError)
+            XCTAssertEqual((error as! RuntimeError).errorDescription, "No valid timestamp")
         }
     }
 }
