@@ -22,9 +22,11 @@ public struct User {
     }
 
     private let instance: SwiftFM
+    private let requester: Requester
 
-    internal init(instance: SwiftFM) {
+    internal init(instance: SwiftFM, requester: Requester = RequestUtils.shared) {
         self.instance = instance
+        self.requester = requester
     }
 
     private func getBaseRecentTracks<T: Decodable>(
@@ -50,9 +52,9 @@ public struct User {
             parsedParams.append(("to", String(to)))
         }
 
-        let requestURL = RequestUtils.build(params: parsedParams, secure: false)
+        let requestURL = requester.build(params: parsedParams, secure: false)
 
-        RequestUtils.makeGetRequest(url: requestURL, headers: nil) { result in
+        requester.makeGetRequest(url: requestURL, headers: nil) { result in
             switch (result) {
             case .failure(let serviceError):
                 onCompletion(.failure(serviceError))
@@ -95,9 +97,9 @@ public struct User {
             ("format", "json"),
         ];
 
-        let requestURL = RequestUtils.build(params: parsedParams, secure: false)
+        let requestURL = requester.build(params: parsedParams, secure: false)
 
-        RequestUtils.makeGetRequest(url: requestURL, headers: nil) { result in
+        requester.makeGetRequest(url: requestURL, headers: nil) { result in
             switch (result) {
             case .failure(let serviceError):
                 onCompletion(.failure(serviceError))

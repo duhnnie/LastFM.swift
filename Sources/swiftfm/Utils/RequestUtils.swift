@@ -1,8 +1,12 @@
 import Foundation
 import SwiftRestClient
 
-internal struct RequestUtils {
-    public static func build(params: [(String, String)] = [], secure: Bool) -> URL {
+internal struct RequestUtils: Requester {
+    internal static let shared = RequestUtils()
+
+    fileprivate init() {}
+
+    internal func build(params: [(String, String)] = [], secure: Bool) -> URL {
         var urlComponents = URLComponents(
             string: secure ? Constants.SECURE_API_HOST : Constants.INSECURE_API_HOST
         )!
@@ -12,7 +16,7 @@ internal struct RequestUtils {
         return urlComponents.url!
     }
 
-    public static func makeGetRequest(
+    internal func makeGetRequest(
         url: URL,
         headers: SwiftRestClient.Headers?,
         onCompletion: @escaping (Result<Data, ServiceError>) -> Void
