@@ -56,8 +56,6 @@ public struct User {
 
         requester.makeGetRequest(url: requestURL, headers: nil) { result in
             switch (result) {
-            case .failure(let serviceError):
-                onCompletion(.failure(serviceError))
             case .success(let data):
                 do {
                     let recentTracks = try JSONDecoder().decode(CollectionPage<T>.self, from: data)
@@ -65,6 +63,8 @@ public struct User {
                 } catch {
                     onCompletion(.failure(error))
                 }
+            case .failure(let serviceError):
+                onCompletion(.failure(serviceError))
             }
         }
     }
@@ -101,9 +101,6 @@ public struct User {
 
         requester.makeGetRequest(url: requestURL, headers: nil) { result in
             switch (result) {
-            case .failure(let serviceError):
-                onCompletion(.failure(serviceError))
-                break
             case .success(let data):
                 do {
                     let list = try JSONDecoder().decode(CollectionPage<UserTopTrack>.self, from: data)
@@ -112,8 +109,44 @@ public struct User {
                 } catch {
                     onCompletion(.failure(error))
                 }
+            case .failure(let serviceError):
+                onCompletion(.failure(serviceError))
             }
         }
 
+    }
+
+    public func getWeeklyTrackChart(
+        params: UserWeeklyTrackChartParams,
+        onCompletion: @escaping (Result<CollectionList<UserWeeklyChartTrack>, Error>) -> Void
+    ) {
+        let parsedParams = [
+            ("method", APIMethod.getWeeklyTrackChart.getMethodName()),
+            ("user", params.user),
+            ("from", String(params.from)),
+            ("to", String(params.to)),
+            ("api_key", instance.apiKey),
+            ("format", "json"),
+        ]
+
+        let requestURL = requester.build(params: parsedParams, secure: false)
+
+        requester.makeGetRequest(url: requestURL, headers: nil) { result in
+            switch (result) {
+            case .success(let data):
+                do {
+                    let weeklyTrackChart = try JSONDecoder().decode(
+                        CollectionList<UserWeeklyChartTrack>.self,
+                        from: data
+                    )
+                    
+                    onCompletion(.success(weeklyTrackChart))
+                } catch{
+                    onCompletion(.failure(error))
+                }
+            case .failure(let error):
+                onCompletion(.failure(error))
+            }
+        }
     }
 }
