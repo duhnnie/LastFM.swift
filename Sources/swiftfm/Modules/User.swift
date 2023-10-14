@@ -126,7 +126,7 @@ public struct User {
             ("from", String(params.from)),
             ("to", String(params.to)),
             ("api_key", instance.apiKey),
-            ("format", "json"),
+            ("format", "json")
         ]
 
         let requestURL = requester.build(params: parsedParams, secure: false)
@@ -148,5 +148,27 @@ public struct User {
                 onCompletion(.failure(error))
             }
         }
+    }
+
+    public func getLovedTracks(
+        params: LovedTracksParams,
+        onCompletion: @escaping (Result<CollectionPage<LovedTrack>, Error>) -> Void
+    ) {
+        let parsedParams = [
+            ("method", APIMethod.getLovedTracks.getMethodName()),
+            ("user", params.user),
+            ("limit", String(params.limit)),
+            ("page", String(params.page)),
+            ("api_key", instance.apiKey),
+            ("format", "json")
+        ]
+
+        let request = requester.build(params: parsedParams, secure: false)
+
+        return requester.getDataAndParse(
+            url: request,
+            headers: nil,
+            onCompletion: onCompletion
+        )
     }
 }

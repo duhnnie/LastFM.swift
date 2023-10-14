@@ -1,7 +1,9 @@
 import Foundation
 @testable import swiftfm
+@testable import SwiftRestClient
 
 final class RequesterMock: Requester {
+
     internal private(set) var buildCalls: [(
         params: [(String, String)],
         secure: Bool)
@@ -52,6 +54,10 @@ final class RequesterMock: Requester {
         } else {
             onCompletion(.success(makeRequestData))
         }
+    }
+
+    func getDataAndParse<T>(url: URL, headers: SwiftRestClient.Headers?, onCompletion: @escaping (Result<T, Error>) -> Void) where T : Decodable {
+
     }
 
     func clearMock() {

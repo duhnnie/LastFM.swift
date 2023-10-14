@@ -54,4 +54,28 @@ internal struct RequestUtils: Requester {
             }
         }
     }
+
+    internal func getDataAndParse<T: Decodable>(
+        url: URL,
+        headers: SwiftRestClient.Headers?,
+        onCompletion: @escaping (Result<T, Error>) -> Void
+    ) {
+        makeGetRequest(url: url, headers: headers) { result in
+            switch (result) {
+            case .success(let data):
+                do {
+                    let entity = try JSONDecoder().decode(
+                        T.self,
+                        from: data
+                    )
+
+                    onCompletion(.success(entity))
+                } catch{
+                    onCompletion(.failure(error))
+                }
+            case .failure(let error):
+                onCompletion(.failure(error))
+            }
+        }
+    }
 }
