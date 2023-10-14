@@ -1,6 +1,6 @@
 import Foundation
 
-public struct CollectionList<T: Decodable>: Decodable {
+public struct CollectionList<T: Decodable & Equatable>: Decodable, Equatable {
     struct CodingKeys: CodingKey {
         var stringValue: String
 

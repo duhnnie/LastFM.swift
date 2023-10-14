@@ -1,6 +1,6 @@
 import Foundation
 
-public struct LastFMImages: Decodable {
+public struct LastFMImages: Decodable, Equatable {
     public enum LastFMImageSize: String, Decodable {
         case S = "small"
         case M = "medium"

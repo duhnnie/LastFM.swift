@@ -1,7 +1,7 @@
 import Foundation
 
-public struct CollectionPage<T: Decodable>: Decodable {
-    public struct Pagination: Codable {
+public struct CollectionPage<T: Decodable & Equatable>: Decodable, Equatable {
+    public struct Pagination: Codable, Equatable {
         enum CodingKeys: String, CodingKey {
             case totalPages, page, perPage, total
         }
@@ -65,4 +65,3 @@ public struct CollectionPage<T: Decodable>: Decodable {
         self.pagination = try subcontainer.decode(Pagination.self, forKey: .pagination)
     }
 }
-

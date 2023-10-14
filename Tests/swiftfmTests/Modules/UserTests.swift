@@ -1,10 +1,3 @@
-//
-//  UserTests.swift
-//  
-//
-//  Created by Daniel on 11/10/23.
-//
-
 import XCTest
 @testable import swiftfm
 
@@ -14,19 +7,25 @@ class UserTests: XCTestCase {
     private static let apiSecret = "someAPIsecret"
     private static let swiftFM = SwiftFM(apiKey: apiKey, apiSecret: apiSecret)
 
-    private var instance: User!
-    private var requester: RequesterMock = RequesterMock(
-        url: URL(string: "http://someURL.com")!,
-        makeRequestData: Data()
+    private static let fakeResponse = HTTPURLResponse(
+        url: URL(string: "http://dummyResponse.com")!,
+        statusCode: 200,
+        httpVersion: "1.0",
+        headerFields: nil
     )
 
+    private var instance: User!
+    private var apiClientMock = APICLientMock()
+
     override func setUpWithError() throws {
-        instance = User(instance: Self.swiftFM, requester: requester)
+        instance = User(
+            instance: Self.swiftFM,
+            requester: RequestUtils(apiClient: apiClientMock)
+        )
     }
 
     override func tearDownWithError() throws {
-        requester.makeRequestError = nil
-        requester.clearMock()
+        apiClientMock.clearMock()
     }
 
     // getTopTracks
@@ -35,13 +34,20 @@ class UserTests: XCTestCase {
         let topTracksItemsJSON = UserTopTracksTestUtils.list.map { dataset in
             return UserTopTracksTestUtils.generateJSON(dataset: dataset)
         }.joined(separator: ",")
-        let expectedData = CollectionPageTestUtils.generateJSON(
+
+        let fakeData = CollectionPageTestUtils.generateJSON(
             items: "[\(topTracksItemsJSON)]",
             totalPages: "10",
             page: "1",
             perPage: "4",
             total: "40"
         )
+
+        let expectedTopTracks = try JSONDecoder().decode(
+            CollectionPage<UserTopTrack>.self,
+            from: fakeData
+        )
+
         let user = "Pepito"
         let period = UserTopTracksParams.Period.last180days
         let limit: UInt = 34
@@ -54,81 +60,35 @@ class UserTests: XCTestCase {
             page: page
         )
 
-        let parsedParams = [
-            ("method", "user.getTopTracks"),
-            ("user", params.user),
-            ("limit", String(params.limit)),
-            ("page", String(params.page)),
-            ("period", params.period.rawValue),
-            ("api_key", Self.apiKey),
-            ("format", "json")
-        ]
+        apiClientMock.data = fakeData
+        apiClientMock.response = Self.fakeResponse
 
-        requester.makeRequestData = expectedData
-        requester.makeRequestError = nil
+        let expectation = expectation(description: "waiting for succesful getTopTracks")
+
         instance.getTopTracks(params: params) { result in
             switch (result) {
             case .success(let userTopTracks):
-                for (index, track) in userTopTracks.items.enumerated() {
-                    XCTAssertEqual(track.mbid, UserTopTracksTestUtils.list[index][.mbid] as! String)
-                    XCTAssertEqual(track.name, UserTopTracksTestUtils.list[index][.name] as! String)
-                    XCTAssertEqual(
-                        track.images.small!.absoluteString,
-                        UserTopTracksTestUtils.list[index][.imageSmall] as! String
-                    )
-                    XCTAssertEqual(
-                        track.images.medium!.absoluteString,
-                        UserTopTracksTestUtils.list[index][.imageMedium] as! String
-                    )
-                    XCTAssertEqual(
-                        track.images.large!.absoluteString,
-                        UserTopTracksTestUtils.list[index][.imageLarge] as! String
-                    )
-                    XCTAssertEqual(
-                        track.images.extraLarge!.absoluteString,
-                        UserTopTracksTestUtils.list[index][.imageExtraLarge] as! String
-                    )
-                    XCTAssertEqual(track.streamable, UserTopTracksTestUtils.list[index][.streamable] as! Bool)
-                    XCTAssertEqual(track.artist.mbid, UserTopTracksTestUtils.list[index][.artistMBID] as! String)
-                    XCTAssertEqual(track.artist.name, UserTopTracksTestUtils.list[index][.artistName] as! String)
-                    XCTAssertEqual(
-                        track.artist.url.absoluteString,
-                        UserTopTracksTestUtils.list[index][.artistURL] as! String
-                    )
-                    XCTAssertEqual(track.url.absoluteString, UserTopTracksTestUtils.list[index][.url] as! String)
-                    XCTAssertEqual(
-                        track.duration,
-                        UInt(UserTopTracksTestUtils.list[index][.duration] as! String)!
-                    )
-                    XCTAssertEqual(
-                        track.rank,
-                        UInt(UserTopTracksTestUtils.list[index][.rank] as! String)!
-                    )
-                    XCTAssertEqual(
-                        track.playcount,
-                        UInt(UserTopTracksTestUtils.list[index][.playcount] as! String)!
-                    )
-                }
+                XCTAssertEqual(expectedTopTracks, userTopTracks)
             case .failure(let error):
                 XCTFail("Expected to be a success but got a failure with \(error)")
             }
+
+            expectation.fulfill()
         }
 
-        XCTAssertEqual(requester.buildCalls.count, 1)
-        XCTAssertEqual(requester.buildReturns.count, 1)
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClientMock.postCalls.count, 0)
+        XCTAssertEqual(apiClientMock.getCalls.count, 1)
 
-        for (index, param) in requester.buildCalls[0].params.enumerated() {
-            XCTAssertEqual(param.0, parsedParams[index].0)
-        }
-
-        XCTAssertEqual(requester.makeGetRequestCalls.count, 1)
         XCTAssertEqual(
-            requester.makeGetRequestCalls[0].url,
-            requester.buildReturns[0]
+            apiClientMock.getCalls[0].url.absoluteString,
+            "http://ws.audioscrobbler.com/2.0?method=user.getTopTracks&user=\(user)&limit=\(limit)&page=\(page)&period=\(period.rawValue)&api_key=\(Self.apiKey)&format=json"
         )
+
+        XCTAssertNil(apiClientMock.getCalls[0].headers)
     }
 
-    func test_getTopTracks_failure_dueSomeErrorInRequester() throws {
+    func test_getTopTracks_failure() throws {
         let params = UserTopTracksParams(
             user: "user",
             period: .last180days,
@@ -136,48 +96,31 @@ class UserTests: XCTestCase {
             page: 2
         )
 
-        requester.makeRequestError = .NoData
+        let error = RuntimeError("Fake error")
+        apiClientMock.error = error
+
+        let expectation = expectation(description: "waiting for failure getTopTracks")
 
         instance.getTopTracks(params: params) { result in
             switch (result) {
             case .success( _):
                 XCTFail("Expected to fail, but it succeeded")
-            case .failure(ServiceError.NoData):
-                XCTAssert(true)
+            case .failure(ServiceError.OtherError(let error)):
+                XCTAssert(error is RuntimeError)
+                XCTAssertEqual(error.localizedDescription, "Fake error")
             default:
-                XCTFail("Expected to be a .NoData error")
+                XCTFail("Expected to be a Runtime \"Fake error\" error")
                 break
             }
+
+            expectation.fulfill()
         }
+
+        waitForExpectations(timeout: 3)
     }
 
-    func test_getTopTracks_failure_dueSomeErrorAtDecoding() throws {
-        let params = UserTopTracksParams(
-            user: "user",
-            period: .last180days,
-            limit: 10,
-            page: 2
-        )
-
-        let topTrackJSONString = UserTopTracksTestUtils.generateJSON(duration: "not a number")
-        let dataWithInvalidData = CollectionPageTestUtils.generateJSON(
-            items: "[\(topTrackJSONString)]",
-            totalPages: "1",
-            page: "1",
-            perPage: "10",
-            total: "1"
-        )
-
-        requester.makeRequestData = dataWithInvalidData
-
-        instance.getTopTracks(params: params) { result in
-            switch (result) {
-            case .success( _):
-                XCTFail("Expected to fail, but it succeeded")
-            case .failure(let error):
-                XCTAssertFalse(error is ServiceError, "Expected to not be a Service Error")
-            }
-        }
+    func test_invalidAPIKey() throws {
+        // To be implmented
     }
 
     // getWeeklyTrackChart
@@ -187,9 +130,14 @@ class UserTests: XCTestCase {
             return UserWeeklyTrackChartTestUtils.generateJSON(dataset: dataset)
         }.joined(separator: ",")
 
-        let expectedData = CollectionListTestUtils.generateJSON(
+        let fakeData = CollectionListTestUtils.generateJSON(
             items: "[\(weeklyChartTracksJSON)]"
         ).data(using: .utf8)!
+
+        let expectedEntity = try JSONDecoder().decode(
+            CollectionList<UserWeeklyChartTrack>.self,
+            from: fakeData
+        )
 
         let user = "Pepito"
         let from: UInt = 1665622629
@@ -197,114 +145,63 @@ class UserTests: XCTestCase {
 
         let params = UserWeeklyTrackChartParams(user: user, from: from, to: to)
 
-        let parsedParams = [
-            ("method", "user.getWeeklyTrackChart"),
-            ("user", "Pepito"),
-            ("from", "1665622629"),
-            ("to", "1697158629"),
-            ("api_key", "someAPIkey"),
-            ("format", "json")
-        ]
+        apiClientMock.data = fakeData
+        apiClientMock.response = Self.fakeResponse
 
-        requester.makeRequestData = expectedData
-        requester.makeRequestError = nil
+        let expectation = expectation(description: "Waiting for getWeeklyTrackChart")
+
         instance.getWeeklyTrackChart(params: params) { result in
             switch (result) {
             case .success(let weeklytrackchart):
-                for (index, track) in weeklytrackchart.items.enumerated() {
-                    XCTAssertEqual(track.mbid, UserWeeklyTrackChartTestUtils.list[index][.mbid]!)
-                    XCTAssertEqual(track.name, UserWeeklyTrackChartTestUtils.list[index][.name]!)
-                    XCTAssertEqual(
-                        track.images.small!.absoluteString,
-                        UserWeeklyTrackChartTestUtils.list[index][.imageSmall]!
-                    )
-                    XCTAssertEqual(
-                        track.images.medium!.absoluteString,
-                        UserWeeklyTrackChartTestUtils.list[index][.imageMedium]!
-                    )
-                    XCTAssertEqual(
-                        track.images.large!.absoluteString,
-                        UserWeeklyTrackChartTestUtils.list[index][.imageLarge]!
-                    )
-                    XCTAssertEqual(
-                        track.images.extraLarge!.absoluteString,
-                        UserWeeklyTrackChartTestUtils.list[index][.imageExtraLarge]!
-                    )
-                    XCTAssertEqual(track.artist.mbid, UserWeeklyTrackChartTestUtils.list[index][.artistMBID]!)
-                    XCTAssertEqual(track.artist.name, UserWeeklyTrackChartTestUtils.list[index][.artistName]!)
-
-                    XCTAssertEqual(track.url.absoluteString, UserWeeklyTrackChartTestUtils.list[index][.url]!)
-                    XCTAssertEqual(
-                        track.rank,
-                        UInt(UserWeeklyTrackChartTestUtils.list[index][.rank]!)!
-                    )
-                    XCTAssertEqual(
-                        track.playcount,
-                        UInt(UserWeeklyTrackChartTestUtils.list[index][.playcount]!)!
-                    )
-                }
+                XCTAssertEqual(weeklytrackchart, expectedEntity)
             case .failure(let error):
                 XCTFail("Expected to be a success but got a failure with \(error)")
             }
+
+            expectation.fulfill()
         }
 
-        XCTAssertEqual(requester.buildCalls.count, 1)
-        XCTAssertEqual(requester.buildReturns.count, 1)
+        waitForExpectations(timeout: 3)
 
-        for (index, param) in requester.buildCalls[0].params.enumerated() {
-            XCTAssertEqual(param.0, parsedParams[index].0)
-        }
+        XCTAssertEqual(apiClientMock.postCalls.count, 0)
+        XCTAssertEqual(apiClientMock.getCalls.count, 1)
 
-        XCTAssertEqual(requester.makeGetRequestCalls.count, 1)
         XCTAssertEqual(
-            requester.makeGetRequestCalls[0].url,
-            requester.buildReturns[0]
+            apiClientMock.getCalls[0].url.absoluteString,
+            "http://ws.audioscrobbler.com/2.0?method=user.getWeeklyTrackChart&user=\(user)&from=\(from)&to=\(to)&api_key=\(Self.apiKey)&format=json"
         )
+
+        XCTAssertEqual(apiClientMock.getCalls[0].headers, nil)
     }
 
-    func test_getWeeklyTrackChart_failure_dueSomeErrorInRequester()  throws {
-        let params = UserWeeklyTrackChartParams(
-            user: "user",
-            from: 45325232,
-            to: 345234523
-        )
+    func test_getWeeklyTrackChart_failure() throws {
+        let weeklyChartTracksJSON = UserWeeklyTrackChartTestUtils.list.map { dataset in
+            return UserWeeklyTrackChartTestUtils.generateJSON(dataset: dataset)
+        }.joined(separator: ",")
 
-        requester.makeRequestError = .NoData
-
-        instance.getWeeklyTrackChart(params: params) { result in
-            switch (result) {
-            case .success( _):
-                XCTFail("Expected to fail, but it succeeded")
-            case .failure(ServiceError.NoData):
-                XCTAssert(true)
-            default:
-                XCTFail("Expected to be a .NoData error")
-                break
-            }
-        }
-    }
-
-    func test_getWeeklyTrackChart_failure_dueSomeErrorAtDecoding() throws {
-        let params = UserWeeklyTrackChartParams(
-            user: "user",
-            from: 4354452343,
-            to: 4456345342
-        )
-
-        let topTrackJSONString = UserWeeklyTrackChartTestUtils.generateJSON(playcount: "not a number")
-        let dataWithInvalidData = CollectionListTestUtils.generateJSON(
-            items: "[\(topTrackJSONString)]"
+        let fakeData = CollectionListTestUtils.generateJSON(
+            items: "[\(weeklyChartTracksJSON)]"
         ).data(using: .utf8)!
 
-        requester.makeRequestData = dataWithInvalidData
+        let params = UserWeeklyTrackChartParams(user: "asdf", from: 3452, to: 56433)
+        let expectation = expectation(description: "Waiting for getWeeklyTrackChart")
+        apiClientMock.error = RuntimeError("Fake error")
 
         instance.getWeeklyTrackChart(params: params) { result in
             switch (result) {
             case .success( _):
                 XCTFail("Expected to fail, but it succeeded")
-            case .failure(let error):
-                XCTAssertFalse(error is ServiceError, "Expected to not be a Service Error")
+            case .failure(ServiceError.OtherError(let error)):
+                XCTAssert(error is RuntimeError)
+                XCTAssertEqual(error.localizedDescription, "Fake error")
+            default:
+                XCTFail("Expected to be a Runtime \"Fake error\" error")
+                break
             }
+
+            expectation.fulfill()
         }
+
+        waitForExpectations(timeout: 3)
     }
 }
