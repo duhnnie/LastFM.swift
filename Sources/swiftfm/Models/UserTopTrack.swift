@@ -1,6 +1,6 @@
 import Foundation
 
-public struct UserTopTrack: Decodable {
+public struct UserTopTrack: Decodable, Equatable {
     public let mbid: String
     public let name: String
     public let images: LastFMImages

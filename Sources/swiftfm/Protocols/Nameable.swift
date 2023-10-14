@@ -1,5 +1,5 @@
 import Foundation
 
-protocol Nameable: Decodable {
+protocol Nameable: Decodable, Equatable {
     var name: String { get }
 }

@@ -4,7 +4,11 @@ import SwiftRestClient
 internal struct RequestUtils: Requester {
     internal static let shared = RequestUtils()
 
-    fileprivate init() {}
+    private let apiClient: APIClient
+
+    internal init(apiClient: APIClient = SwiftRestClient.shared) {
+        self.apiClient = apiClient
+    }
 
     internal func build(params: [(String, String)] = [], secure: Bool) -> URL {
         var urlComponents = URLComponents(
@@ -21,7 +25,7 @@ internal struct RequestUtils: Requester {
         headers: SwiftRestClient.Headers?,
         onCompletion: @escaping (Result<Data, ServiceError>) -> Void
     ) {
-        SwiftRestClient.shared.get(url, headers: headers) { data, response, error in
+        apiClient.get(url, headers: headers) { data, response, error in
             guard error == nil else {
                 onCompletion(.failure(.OtherError(error!)))
                 return

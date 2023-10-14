@@ -1,7 +1,7 @@
 import Foundation
 
 // NOTE: this could be also URLMusicBrainzEntity
-public struct ExtendedRecentTrack: Decodable {
+public struct ExtendedRecentTrack: Decodable, Equatable {
     public let name: String
     public let artist: LastFMMBExtendedEntity
     public let album: MBEntity
