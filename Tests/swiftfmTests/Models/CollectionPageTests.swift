@@ -10,33 +10,11 @@ import swiftfm
 
 class CollectionPageTests: XCTestCase {
 
-    internal static func generateJSON(
-        items: String,
-        totalPages: String,
-        page: String,
-        perPage: String,
-        total: String
-    ) -> Data {
-        return """
-{
-  "listname": {
-    "track": \(items),
-    "@attr": {
-      "totalPages": "\(totalPages)",
-      "page": "\(page)",
-      "perPage": "\(perPage)",
-      "total": "\(total)"
-    }
-  }
-}
-""".data(using: .utf8)!
-    }
-
     func testSucessfulDecoding() throws {
         let items = [2, 4, 6, 8, 10]
         var itemsData = try JSONEncoder().encode(items)
         var itemsString = String(data: itemsData, encoding: .utf8)!
-        let intData = Self.generateJSON(
+        let intData = CollectionPageTestUtils.generateJSON(
             items: itemsString,
             totalPages: "30",
             page: "1",
@@ -55,7 +33,7 @@ class CollectionPageTests: XCTestCase {
         let stringItems = ["This", "Is", "A", "Test"]
         itemsData = try JSONEncoder().encode(stringItems)
         itemsString = String(data: itemsData, encoding: .utf8)!
-        let stringData = Self.generateJSON(
+        let stringData = CollectionPageTestUtils.generateJSON(
             items: itemsString,
             totalPages: "300",
             page: "10",
@@ -76,7 +54,7 @@ class CollectionPageTests: XCTestCase {
         let items = [2, 4, 6, 8, 10]
         let itemsData = try JSONEncoder().encode(items)
         let itemsString = String(data: itemsData, encoding: .utf8)!
-        let data = Self.generateJSON(
+        let data = CollectionPageTestUtils.generateJSON(
             items: itemsString,
             totalPages: "This is not a valid totalPages",
             page: "This is not a a valid page",
