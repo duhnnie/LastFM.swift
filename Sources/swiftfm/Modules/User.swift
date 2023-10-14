@@ -54,19 +54,11 @@ public struct User {
 
         let requestURL = requester.build(params: parsedParams, secure: false)
 
-        requester.makeGetRequest(url: requestURL, headers: nil) { result in
-            switch (result) {
-            case .success(let data):
-                do {
-                    let recentTracks = try JSONDecoder().decode(CollectionPage<T>.self, from: data)
-                    onCompletion(.success(recentTracks))
-                } catch {
-                    onCompletion(.failure(error))
-                }
-            case .failure(let serviceError):
-                onCompletion(.failure(serviceError))
-            }
-        }
+        requester.getDataAndParse(
+            url: requestURL,
+            headers: nil,
+            onCompletion: onCompletion
+        )
     }
 
     public func getRecentTracks(
@@ -99,21 +91,11 @@ public struct User {
 
         let requestURL = requester.build(params: parsedParams, secure: false)
 
-        requester.makeGetRequest(url: requestURL, headers: nil) { result in
-            switch (result) {
-            case .success(let data):
-                do {
-                    let list = try JSONDecoder().decode(CollectionPage<UserTopTrack>.self, from: data)
-
-                    onCompletion(.success(list))
-                } catch {
-                    onCompletion(.failure(error))
-                }
-            case .failure(let serviceError):
-                onCompletion(.failure(serviceError))
-            }
-        }
-
+        requester.getDataAndParse(
+            url: requestURL,
+            headers: nil,
+            onCompletion: onCompletion
+        )
     }
 
     public func getWeeklyTrackChart(
@@ -131,23 +113,11 @@ public struct User {
 
         let requestURL = requester.build(params: parsedParams, secure: false)
 
-        requester.makeGetRequest(url: requestURL, headers: nil) { result in
-            switch (result) {
-            case .success(let data):
-                do {
-                    let weeklyTrackChart = try JSONDecoder().decode(
-                        CollectionList<UserWeeklyChartTrack>.self,
-                        from: data
-                    )
-                    
-                    onCompletion(.success(weeklyTrackChart))
-                } catch{
-                    onCompletion(.failure(error))
-                }
-            case .failure(let error):
-                onCompletion(.failure(error))
-            }
-        }
+        requester.getDataAndParse(
+            url: requestURL,
+            headers: nil,
+            onCompletion: onCompletion
+        )
     }
 
     public func getLovedTracks(
@@ -163,10 +133,10 @@ public struct User {
             ("format", "json")
         ]
 
-        let request = requester.build(params: parsedParams, secure: false)
+        let requestURL = requester.build(params: parsedParams, secure: false)
 
-        return requester.getDataAndParse(
-            url: request,
+        requester.getDataAndParse(
+            url: requestURL,
             headers: nil,
             onCompletion: onCompletion
         )
