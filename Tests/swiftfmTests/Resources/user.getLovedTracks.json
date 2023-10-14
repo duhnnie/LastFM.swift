@@ -1,0 +1,193 @@
+{
+  "lovedtracks": {
+    "track": [
+      {
+        "artist": {
+          "url": "https://www.last.fm/music/The+Knack",
+          "name": "The Knack",
+          "mbid": ""
+        },
+        "date": {
+          "uts": "1697238762",
+          "#text": "13 Oct 2023, 23:12"
+        },
+        "mbid": "5c3d1ff3-00c8-4bff-bcae-610cf327b5bf",
+        "url": "https://www.last.fm/music/The+Knack/_/My+Sharona",
+        "name": "My Sharona",
+        "image": [
+          {
+            "size": "small",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+          },
+          {
+            "size": "medium",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+          },
+          {
+            "size": "large",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+          },
+          {
+            "size": "extralarge",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+          }
+        ],
+        "streamable": {
+          "fulltrack": "0",
+          "#text": "0"
+        }
+      },
+      {
+        "artist": {
+          "url": "https://www.last.fm/music/Vagabon",
+          "name": "Vagabon",
+          "mbid": "4b50ec9e-ea83-4824-8dae-2e520d45e6f9"
+        },
+        "date": {
+          "uts": "1696622301",
+          "#text": "06 Oct 2023, 19:58"
+        },
+        "mbid": "ff89d158-d2ef-48c6-a66f-82021d0bd174",
+        "url": "https://www.last.fm/music/Vagabon/_/Lexicon",
+        "name": "Lexicon",
+        "image": [
+          {
+            "size": "small",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+          },
+          {
+            "size": "medium",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+          },
+          {
+            "size": "large",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+          },
+          {
+            "size": "extralarge",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+          }
+        ],
+        "streamable": {
+          "fulltrack": "0",
+          "#text": "0"
+        }
+      },
+      {
+        "artist": {
+          "url": "https://www.last.fm/music/searows",
+          "name": "searows",
+          "mbid": ""
+        },
+        "date": {
+          "uts": "1696417775",
+          "#text": "04 Oct 2023, 11:09"
+        },
+        "mbid": "",
+        "url": "https://www.last.fm/music/searows/_/I+have+more+than+enough",
+        "name": "I have more than enough",
+        "image": [
+          {
+            "size": "small",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+          },
+          {
+            "size": "medium",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+          },
+          {
+            "size": "large",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+          },
+          {
+            "size": "extralarge",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+          }
+        ],
+        "streamable": {
+          "fulltrack": "0",
+          "#text": "0"
+        }
+      },
+      {
+        "artist": {
+          "url": "https://www.last.fm/music/Siddhartha+&+Emmanuel+Horvilleur",
+          "name": "Siddhartha & Emmanuel Horvilleur",
+          "mbid": ""
+        },
+        "date": {
+          "uts": "1696269111",
+          "#text": "02 Oct 2023, 17:51"
+        },
+        "mbid": "",
+        "url": "https://www.last.fm/music/Siddhartha+&+Emmanuel+Horvilleur/_/Acapulco",
+        "name": "Acapulco",
+        "image": [
+          {
+            "size": "small",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+          },
+          {
+            "size": "medium",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+          },
+          {
+            "size": "large",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+          },
+          {
+            "size": "extralarge",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+          }
+        ],
+        "streamable": {
+          "fulltrack": "0",
+          "#text": "0"
+        }
+      },
+      {
+        "artist": {
+          "url": "https://www.last.fm/music/The+Black+Keys",
+          "name": "The Black Keys",
+          "mbid": "d15721d8-56b4-453d-b506-fc915b14cba2"
+        },
+        "date": {
+          "uts": "1695173180",
+          "#text": "20 Sep 2023, 01:26"
+        },
+        "mbid": "e1db29d5-7e9e-4fd8-84b1-dc1b9d26a5ff",
+        "url": "https://www.last.fm/music/The+Black+Keys/_/Go",
+        "name": "Go",
+        "image": [
+          {
+            "size": "small",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+          },
+          {
+            "size": "medium",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+          },
+          {
+            "size": "large",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+          },
+          {
+            "size": "extralarge",
+            "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+          }
+        ],
+        "streamable": {
+          "fulltrack": "0",
+          "#text": "0"
+        }
+      }
+    ],
+    "@attr": {
+      "user": "Duhnnie",
+      "totalPages": "308",
+      "page": "1",
+      "total": "1536",
+      "perPage": "5"
+    }
+  }
+}

@@ -48,16 +48,11 @@ class UserTests: XCTestCase {
             from: fakeData
         )
 
-        let user = "Pepito"
-        let period = UserTopTracksParams.Period.last180days
-        let limit: UInt = 34
-        let page: UInt = 21
-
         let params = UserTopTracksParams(
-            user: user,
-            period: period,
-            limit: limit,
-            page: page
+            user: "pepito",
+            period: .last180days,
+            limit: 34,
+            page: 234
         )
 
         apiClientMock.data = fakeData
@@ -82,7 +77,7 @@ class UserTests: XCTestCase {
 
         XCTAssertEqual(
             apiClientMock.getCalls[0].url.absoluteString,
-            "http://ws.audioscrobbler.com/2.0?method=user.getTopTracks&user=\(user)&limit=\(limit)&page=\(page)&period=\(period.rawValue)&api_key=\(Self.apiKey)&format=json"
+            "http://ws.audioscrobbler.com/2.0?method=user.getTopTracks&user=\(params.user)&limit=\(params.limit)&page=\(params.page)&period=\(params.period.rawValue)&api_key=\(Self.apiKey)&format=json"
         )
 
         XCTAssertNil(apiClientMock.getCalls[0].headers)
@@ -139,11 +134,7 @@ class UserTests: XCTestCase {
             from: fakeData
         )
 
-        let user = "Pepito"
-        let from: UInt = 1665622629
-        let to: UInt = 1697158629
-
-        let params = UserWeeklyTrackChartParams(user: user, from: from, to: to)
+        let params = UserWeeklyTrackChartParams(user: "user", from: 123412, to: 53452)
 
         apiClientMock.data = fakeData
         apiClientMock.response = Self.fakeResponse
@@ -168,21 +159,13 @@ class UserTests: XCTestCase {
 
         XCTAssertEqual(
             apiClientMock.getCalls[0].url.absoluteString,
-            "http://ws.audioscrobbler.com/2.0?method=user.getWeeklyTrackChart&user=\(user)&from=\(from)&to=\(to)&api_key=\(Self.apiKey)&format=json"
+            "http://ws.audioscrobbler.com/2.0?method=user.getWeeklyTrackChart&user=\(params.user)&from=\(params.from)&to=\(params.to)&api_key=\(Self.apiKey)&format=json"
         )
 
         XCTAssertEqual(apiClientMock.getCalls[0].headers, nil)
     }
 
     func test_getWeeklyTrackChart_failure() throws {
-        let weeklyChartTracksJSON = UserWeeklyTrackChartTestUtils.list.map { dataset in
-            return UserWeeklyTrackChartTestUtils.generateJSON(dataset: dataset)
-        }.joined(separator: ",")
-
-        let fakeData = CollectionListTestUtils.generateJSON(
-            items: "[\(weeklyChartTracksJSON)]"
-        ).data(using: .utf8)!
-
         let params = UserWeeklyTrackChartParams(user: "asdf", from: 3452, to: 56433)
         let expectation = expectation(description: "Waiting for getWeeklyTrackChart")
         apiClientMock.error = RuntimeError("Fake error")
@@ -199,6 +182,62 @@ class UserTests: XCTestCase {
                 break
             }
 
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+    }
+
+    // getLovedTracks
+
+    func test_getLovedTracks_success() throws {
+        let fakeDataURL = Bundle.module.url(forResource: "Resources/user.getLovedTracks", withExtension: "json")!
+        let fakeData = try Data(contentsOf: fakeDataURL)
+        let params = LovedTracksParams(user: "someUser", limit: 5, page: 12)
+        let expectation = expectation(description: "waiting for getLovedTracks")
+
+        let expectedEntity = try JSONDecoder().decode(
+            CollectionPage<LovedTrack>.self,
+            from: fakeData
+        )
+
+        apiClientMock.data = fakeData
+        apiClientMock.response = Self.fakeResponse
+
+        instance.getLovedTracks(params: params) { result in
+            switch(result) {
+            case .success(let lovedTracks):
+                XCTAssertEqual(lovedTracks, expectedEntity)
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it fail with error: \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClientMock.getCalls.count, 1)
+        XCTAssertEqual(apiClientMock.getCalls[0].headers, nil)
+
+        XCTAssertEqual(
+            apiClientMock.getCalls[0].url.absoluteString,
+            "http://ws.audioscrobbler.com/2.0?method=user.getLovedTracks&user=\(params.user)&limit=\(params.limit)&page=\(params.page)&api_key=\(Self.apiKey)&format=json"
+        )
+    }
+
+    func test_getLovedTracks_failure() throws {
+        let params = LovedTracksParams(user: "Copo", limit: 345, page: 345)
+        let expectation = expectation(description: "waiting for getLovedTracks")
+
+        apiClientMock.error = RuntimeError("Any error")
+
+        instance.getLovedTracks(params: params) { result in
+            switch(result) {
+            case .success(_):
+                XCTFail("Expected to fail, but it succeed.")
+            case .failure(_):
+                XCTAssert(true)
+            }
             expectation.fulfill()
         }
 
