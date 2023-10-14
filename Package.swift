@@ -31,6 +31,10 @@ let package = Package(
             ]),
         .testTarget(
             name: "swiftfmTests",
-            dependencies: ["swiftfm"]),
+            dependencies: ["swiftfm"],
+            resources: [
+                .copy("Resources")
+            ]
+        ),
     ]
 )
