@@ -164,7 +164,7 @@ class RecentTrackTests: XCTestCase {
             try JSONDecoder().decode(RecentTrack.self, from: data),
             "A RuntimeError with \"No valid timestamp\" should have been thrown") { error in
             XCTAssertTrue(error is RuntimeError)
-            XCTAssertEqual((error as! RuntimeError).errorDescription, "No valid timestamp")
+            XCTAssertEqual((error as! RuntimeError).errorDescription, "No valid date")
         }
     }
 }

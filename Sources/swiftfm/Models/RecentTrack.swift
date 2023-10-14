@@ -63,7 +63,7 @@ public struct RecentTrack: Decodable {
         }
 
         guard let uts = Int(utsString) else {
-            throw RuntimeError("No valid timestamp")
+            throw RuntimeError("No valid date")
         }
 
         self.date = Date(timeIntervalSince1970: Double(uts))

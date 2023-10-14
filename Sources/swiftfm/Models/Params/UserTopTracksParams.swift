@@ -15,7 +15,12 @@ public struct UserTopTracksParams {
         case lastYear = "12month"
     }
 
-    public init(user: String, period: Period = .overall, limit: UInt = 50, page: UInt = 1) {
+    public init(
+        user: String,
+        period: Period = .overall,
+        limit: UInt = 50,
+        page: UInt = 1
+    ) {
         self.user = user
         self.period = period
         self.limit = limit
