@@ -75,13 +75,14 @@ class UserTests: XCTestCase {
         waitForExpectations(timeout: 3)
         XCTAssertEqual(apiClientMock.postCalls.count, 0)
         XCTAssertEqual(apiClientMock.getCalls.count, 1)
-
-        XCTAssertEqual(
-            apiClientMock.getCalls[0].url.absoluteString,
-            "http://ws.audioscrobbler.com/2.0?method=user.getTopTracks&user=\(params.user)&limit=\(params.limit)&page=\(params.page)&period=\(params.period.rawValue)&api_key=\(Constants.API_KEY)&format=json"
-        )
-
         XCTAssertNil(apiClientMock.getCalls[0].headers)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClientMock.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?method=user.getTopTracks&user=\(params.user)&limit=\(params.limit)&page=\(params.page)&period=\(params.period.rawValue)&api_key=\(Constants.API_KEY)&format=json"
+            )
+        )
     }
 
     func test_getTopTracks_failure() throws {
@@ -157,13 +158,14 @@ class UserTests: XCTestCase {
 
         XCTAssertEqual(apiClientMock.postCalls.count, 0)
         XCTAssertEqual(apiClientMock.getCalls.count, 1)
-
-        XCTAssertEqual(
-            apiClientMock.getCalls[0].url.absoluteString,
-            "http://ws.audioscrobbler.com/2.0?method=user.getWeeklyTrackChart&user=\(params.user)&from=\(params.from)&to=\(params.to)&api_key=\(Constants.API_KEY)&format=json"
-        )
-
         XCTAssertEqual(apiClientMock.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClientMock.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?method=user.getWeeklyTrackChart&user=\(params.user)&from=\(params.from)&to=\(params.to)&api_key=\(Constants.API_KEY)&format=json"
+            )
+        )
     }
 
     func test_getWeeklyTrackChart_failure() throws {
@@ -220,9 +222,11 @@ class UserTests: XCTestCase {
         XCTAssertEqual(apiClientMock.getCalls.count, 1)
         XCTAssertEqual(apiClientMock.getCalls[0].headers, nil)
 
-        XCTAssertEqual(
-            apiClientMock.getCalls[0].url.absoluteString,
-            "http://ws.audioscrobbler.com/2.0?method=user.getLovedTracks&user=\(params.user)&limit=\(params.limit)&page=\(params.page)&api_key=\(Constants.API_KEY)&format=json"
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClientMock.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?method=user.getLovedTracks&user=\(params.user)&limit=\(params.limit)&page=\(params.page)&api_key=\(Constants.API_KEY)&format=json"
+            )
         )
     }
 
