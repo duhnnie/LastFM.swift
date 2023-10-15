@@ -32,19 +32,13 @@ class UserTests: XCTestCase {
     // getTopTracks
 
     func test_getTopTracks_success() throws {
-        let topTracksItemsJSON = UserTopTracksTestUtils.list.map { dataset in
-            return UserTopTracksTestUtils.generateJSON(dataset: dataset)
-        }.joined(separator: ",")
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/user.getTopTracks",
+            withExtension: "json"
+        )!
 
-        let fakeData = CollectionPageTestUtils.generateJSON(
-            items: "[\(topTracksItemsJSON)]",
-            totalPages: "10",
-            page: "1",
-            perPage: "4",
-            total: "40"
-        )
-
-        let expectedTopTracks = try JSONDecoder().decode(
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectedEntity = try JSONDecoder().decode(
             CollectionPage<UserTopTrack>.self,
             from: fakeData
         )
@@ -63,8 +57,8 @@ class UserTests: XCTestCase {
 
         instance.getTopTracks(params: params) { result in
             switch (result) {
-            case .success(let userTopTracks):
-                XCTAssertEqual(expectedTopTracks, userTopTracks)
+            case .success(let entity):
+                XCTAssertEqual(expectedEntity, entity)
             case .failure(let error):
                 XCTFail("Expected to be a success but got a failure with \(error)")
             }
@@ -120,16 +114,20 @@ class UserTests: XCTestCase {
         // To be implmented
     }
 
+    func test_withInvalidPageNumber() throws {
+        // To be implmented
+    }
+
     // getWeeklyTrackChart
 
     func test_getWeeklyTrackChart_success() throws {
-        let weeklyChartTracksJSON = UserWeeklyTrackChartTestUtils.list.map { dataset in
-            return UserWeeklyTrackChartTestUtils.generateJSON(dataset: dataset)
-        }.joined(separator: ",")
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/user.getWeeklyTrackChart",
+            withExtension: "json"
+        )!
 
-        let fakeData = CollectionListTestUtils.generateJSON(
-            items: "[\(weeklyChartTracksJSON)]"
-        ).data(using: .utf8)!
+        let fakeData = try Data(contentsOf: jsonURL)
+
 
         let expectedEntity = try JSONDecoder().decode(
             CollectionList<UserWeeklyChartTrack>.self,
@@ -145,8 +143,8 @@ class UserTests: XCTestCase {
 
         instance.getWeeklyTrackChart(params: params) { result in
             switch (result) {
-            case .success(let weeklytrackchart):
-                XCTAssertEqual(weeklytrackchart, expectedEntity)
+            case .success(let entity):
+                XCTAssertEqual(entity, expectedEntity)
             case .failure(let error):
                 XCTFail("Expected to be a success but got a failure with \(error)")
             }
