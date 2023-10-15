@@ -5,6 +5,7 @@ internal struct Constants {
     internal static let API_KEY = "someAPIKey"
     internal static let API_SECRET = "someAPISecret"
 
-    internal static let SUCCESSFUL_RESPONSE = Util.createResponse()
+    internal static let RESPONSE_200_OK = Util.createResponse()
+    internal static let RESPONSE_403_FORBIDDEN = Util.createResponse(statusCode: 403)
 
 }

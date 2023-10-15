@@ -32,7 +32,7 @@ class TagModuleTests: XCTestCase {
         let expectation = expectation(description: "waiting for getTopTracks")
 
         apiClient.data = fakeData
-        apiClient.response = Constants.SUCCESSFUL_RESPONSE
+        apiClient.response = Constants.RESPONSE_200_OK
 
         instance.getTopTracks(params: params) { result in
             switch(result) {
