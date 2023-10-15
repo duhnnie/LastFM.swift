@@ -22,6 +22,43 @@ class UserTests: XCTestCase {
         apiClientMock.clearMock()
     }
 
+    func test_invalidAPIKey() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/errorInvalidAPIKey",
+            withExtension: "json"
+        )!
+
+        let params = UserTopTracksParams(user: "andrea")
+        let expectation = expectation(description: "waiting for request with invalid api key")
+
+        apiClientMock.data = try Data(contentsOf: jsonURL)
+        apiClientMock.response = Constants.RESPONSE_403_FORBIDDEN
+
+        instance.getTopTracks(params: params) { result in
+            switch(result) {
+            case .success(_):
+                XCTFail("Expected to fail, but it succeeded")
+            case .failure(let error):
+                switch (error) {
+
+                case .LastFMError(let lastfmErrorType, let message):
+                    XCTAssertEqual(lastfmErrorType, .InvalidAPIKey)
+                    XCTAssertEqual(message, "Invalid API key - You must be granted a valid key by last.fm")
+                default:
+                    XCTFail("Expected to be a LastFMError.InvalidAPIKey, but we got \(error) instead")
+                }
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+    }
+
+    func test_withInvalidPageNumber() throws {
+        // To be implmented
+    }
+
     // getRecentTracks
 
     func test_getRecentTracks_success() throws {
@@ -41,7 +78,7 @@ class UserTests: XCTestCase {
         let params = RecentTracksParams(user: "someUser", limit: 5, page: 1)
 
         apiClientMock.data = fakeData
-        apiClientMock.response = Constants.SUCCESSFUL_RESPONSE
+        apiClientMock.response = Constants.RESPONSE_200_OK
 
         instance.getRecentTracks(params: params) { result in
             switch(result) {
@@ -111,7 +148,7 @@ class UserTests: XCTestCase {
         )
 
         apiClientMock.data = fakeData
-        apiClientMock.response = Constants.SUCCESSFUL_RESPONSE
+        apiClientMock.response = Constants.RESPONSE_200_OK
 
         instance.getExtendedRecentTracks(params: params) { result in
             switch(result) {
@@ -178,7 +215,7 @@ class UserTests: XCTestCase {
         )
 
         apiClientMock.data = fakeData
-        apiClientMock.response = Constants.SUCCESSFUL_RESPONSE
+        apiClientMock.response = Constants.RESPONSE_200_OK
 
         let expectation = expectation(description: "waiting for succesful getTopTracks")
 
@@ -223,7 +260,7 @@ class UserTests: XCTestCase {
             switch (result) {
             case .success( _):
                 XCTFail("Expected to fail, but it succeeded")
-            case .failure(ServiceError.OtherError(let error)):
+            case .failure(SwiftFMError.OtherError(let error)):
                 XCTAssert(error is RuntimeError)
                 XCTAssertEqual(error.localizedDescription, "Fake error")
             default:
@@ -235,14 +272,6 @@ class UserTests: XCTestCase {
         }
 
         waitForExpectations(timeout: 3)
-    }
-
-    func test_invalidAPIKey() throws {
-        // To be implmented
-    }
-
-    func test_withInvalidPageNumber() throws {
-        // To be implmented
     }
 
     // getWeeklyTrackChart
@@ -264,7 +293,7 @@ class UserTests: XCTestCase {
         let params = UserWeeklyTrackChartParams(user: "user", from: 123412, to: 53452)
 
         apiClientMock.data = fakeData
-        apiClientMock.response = Constants.SUCCESSFUL_RESPONSE
+        apiClientMock.response = Constants.RESPONSE_200_OK
 
         let expectation = expectation(description: "Waiting for getWeeklyTrackChart")
 
@@ -302,7 +331,7 @@ class UserTests: XCTestCase {
             switch (result) {
             case .success( _):
                 XCTFail("Expected to fail, but it succeeded")
-            case .failure(ServiceError.OtherError(let error)):
+            case .failure(SwiftFMError.OtherError(let error)):
                 XCTAssert(error is RuntimeError)
                 XCTAssertEqual(error.localizedDescription, "Fake error")
             default:
@@ -330,7 +359,7 @@ class UserTests: XCTestCase {
         )
 
         apiClientMock.data = fakeData
-        apiClientMock.response = Constants.SUCCESSFUL_RESPONSE
+        apiClientMock.response = Constants.RESPONSE_200_OK
 
         instance.getLovedTracks(params: params) { result in
             switch(result) {
