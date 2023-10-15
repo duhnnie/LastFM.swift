@@ -1,7 +1,7 @@
 import Foundation
 
-public struct User {
-    public enum APIMethod: String {
+public struct UserModule {
+    internal enum APIMethod: String {
         case getFriends = "getfriends"
         case getInfo
         case getLovedTracks
@@ -32,7 +32,7 @@ public struct User {
     private func getBaseRecentTracks<T: Decodable>(
         params: RecentTracksParams,
         extended: Bool,
-        onCompletion: @escaping(Result<CollectionPage<T>, Error>) -> Void
+        onCompletion: @escaping SwiftFM.OnCompletion<CollectionPage<T>>
     ) {
         var parsedParams = [
             ("method", APIMethod.getRecentTracks.getMethodName()),
@@ -63,21 +63,21 @@ public struct User {
 
     public func getRecentTracks(
         params: RecentTracksParams,
-        onCompletion: @escaping(Result<CollectionPage<RecentTrack>, Error>) -> Void
+        onCompletion: @escaping SwiftFM.OnCompletion<CollectionPage<RecentTrack>>
     ) {
         getBaseRecentTracks(params: params, extended: false, onCompletion: onCompletion)
     }
 
     public func getExtendedRecentTracks(
         params: RecentTracksParams,
-        onCompletion: @escaping(Result<CollectionPage<ExtendedRecentTrack>, Error>) -> Void
+        onCompletion: @escaping SwiftFM.OnCompletion<CollectionPage<ExtendedRecentTrack>>
     ) {
         getBaseRecentTracks(params: params, extended: true, onCompletion: onCompletion)
     }
 
     public func getTopTracks(
         params: UserTopTracksParams,
-        onCompletion: @escaping(Result<CollectionPage<UserTopTrack>, Error>) -> Void
+        onCompletion: @escaping SwiftFM.OnCompletion<CollectionPage<UserTopTrack>>
     ) {
         let parsedParams = [
             ("method", APIMethod.getTopTracks.getMethodName()),
@@ -100,7 +100,7 @@ public struct User {
 
     public func getWeeklyTrackChart(
         params: UserWeeklyTrackChartParams,
-        onCompletion: @escaping (Result<CollectionList<UserWeeklyChartTrack>, Error>) -> Void
+        onCompletion: @escaping SwiftFM.OnCompletion<CollectionList<UserWeeklyChartTrack>>
     ) {
         let parsedParams = [
             ("method", APIMethod.getWeeklyTrackChart.getMethodName()),
@@ -122,7 +122,7 @@ public struct User {
 
     public func getLovedTracks(
         params: LovedTracksParams,
-        onCompletion: @escaping (Result<CollectionPage<LovedTrack>, Error>) -> Void
+        onCompletion: @escaping SwiftFM.OnCompletion<CollectionPage<LovedTrack>>
     ) {
         let parsedParams = [
             ("method", APIMethod.getLovedTracks.getMethodName()),

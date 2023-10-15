@@ -1,6 +1,7 @@
 import Foundation
 
 public struct LovedTracksParams {
+
     public var user: String
     public var limit: UInt
     public var page: UInt
@@ -10,4 +11,5 @@ public struct LovedTracksParams {
         self.limit = limit
         self.page = page
     }
+
 }

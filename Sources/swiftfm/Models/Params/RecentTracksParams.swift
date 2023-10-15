@@ -1,6 +1,7 @@
 import Foundation
 
 public struct RecentTracksParams {
+
     public var user: String
     public var limit: UInt
     public var page: UInt
@@ -14,4 +15,5 @@ public struct RecentTracksParams {
         self.from = from
         self.to = to
     }
+    
 }

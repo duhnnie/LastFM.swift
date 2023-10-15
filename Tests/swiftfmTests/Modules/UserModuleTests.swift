@@ -14,11 +14,11 @@ class UserTests: XCTestCase {
         headerFields: nil
     )
 
-    private var instance: User!
+    private var instance: UserModule!
     private var apiClientMock = APICLientMock()
 
     override func setUpWithError() throws {
-        instance = User(
+        instance = UserModule(
             instance: Self.swiftFM,
             requester: RequestUtils(apiClient: apiClientMock)
         )
