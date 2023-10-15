@@ -3,7 +3,7 @@ import XCTest
 
 class UserTests: XCTestCase {
 
-    private static let swiftFM = LastFM(
+    private static let lastFM = LastFM(
         apiKey: Constants.API_KEY,
         apiSecret: Constants.API_SECRET
     )
@@ -13,7 +13,7 @@ class UserTests: XCTestCase {
 
     override func setUpWithError() throws {
         instance = UserModule(
-            instance: Self.swiftFM,
+            instance: Self.lastFM,
             requester: RequestUtils(apiClient: apiClientMock)
         )
     }
