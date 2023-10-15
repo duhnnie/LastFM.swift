@@ -56,7 +56,35 @@ class UserTests: XCTestCase {
     }
 
     func test_withInvalidPageNumber() throws {
-        // To be implmented
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/errorInvalidParameters",
+            withExtension: "json"
+        )!
+
+        let params = RecentTracksParams(user: "stephanie")
+        let expectation = expectation(description: "waiting for invalid parameters response")
+
+        apiClientMock.data = try Data(contentsOf: jsonURL)
+        apiClientMock.response = Constants.RESPONSE_400_BAD_REQUEST
+
+        instance.getRecentTracks(params: params) { result in
+            switch(result) {
+            case .success(_):
+                XCTFail("Expected to fail, but it succeeded instead")
+            case .failure(let error):
+                switch(error) {
+                case .LastFMError(let lastfmErrorType, let message):
+                    XCTAssertEqual(lastfmErrorType, .InvalidParameters)
+                    XCTAssertEqual(message, "page param out of bounds (1-1000000)")
+                default:
+                    XCTFail("Expected to be a LastFMError.InvaluParameters error, but we got \(error)")
+                }
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
     }
 
     // getRecentTracks
