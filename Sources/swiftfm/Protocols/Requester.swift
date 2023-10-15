@@ -2,7 +2,10 @@ import Foundation
 import SwiftRestClient
 
 internal protocol Requester {
+
     func build(params: [(String, String)], secure: Bool) -> URL
+
+    func build(params: [String: String], secure: Bool) -> URL
 
     func makeGetRequest(
         url: URL,
@@ -13,6 +16,7 @@ internal protocol Requester {
     func getDataAndParse<T: Decodable>(
         url: URL,
         headers: SwiftRestClient.Headers?,
-        onCompletion: @escaping (Result<T, Error>) -> Void
+        onCompletion: @escaping SwiftFM.OnCompletion<T>
     )
+
 }

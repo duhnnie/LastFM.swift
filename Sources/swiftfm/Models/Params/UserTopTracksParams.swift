@@ -1,6 +1,7 @@
 import Foundation
 
 public struct UserTopTracksParams {
+
     public var user: String
     public var period: Period
     public var limit: UInt
@@ -26,4 +27,5 @@ public struct UserTopTracksParams {
         self.limit = limit
         self.page = page
     }
+    
 }

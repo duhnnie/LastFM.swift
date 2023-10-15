@@ -3,24 +3,24 @@ import Foundation
 public struct UserTopTrack: Decodable, Equatable {
     public let mbid: String
     public let name: String
-    public let images: LastFMImages
-    public let streamable: Bool
     public let artist: LastFMMBEntity
+    public let images: LastFMImages
     public let url: URL
     public let duration: UInt
-    public let rank: UInt
     public let playcount: UInt
+    public let streamable: Bool
+    public let rank: UInt
 
     private enum CodingKeys: String, CodingKey {
         case mbid
         case name
-        case streamable
         case artist
+        case images = "image"
         case url
         case duration
         case playcount
+        case streamable
         case attr = "@attr"
-        case images = "image"
 
         enum StreamableKeys: String, CodingKey {
             case fulltrack

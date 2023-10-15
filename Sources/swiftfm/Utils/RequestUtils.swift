@@ -10,12 +10,25 @@ internal struct RequestUtils: Requester {
         self.apiClient = apiClient
     }
 
+    @available(*, deprecated, message: "Use build(params: [String: String]) instead.")
     internal func build(params: [(String, String)] = [], secure: Bool) -> URL {
         var urlComponents = URLComponents(
             string: secure ? Constants.SECURE_API_HOST : Constants.INSECURE_API_HOST
         )!
 
         urlComponents.queryItems = params.map { URLQueryItem(name: $0.0, value: $0.1) }
+
+        return urlComponents.url!
+    }
+
+    internal func build(params: [String : String], secure: Bool) -> URL {
+        var urlComponents = URLComponents(
+            string: secure ? Constants.SECURE_API_HOST : Constants.INSECURE_API_HOST
+        )!
+
+        urlComponents.queryItems = params.map({ (key: String, value: String) in
+            return URLQueryItem(name: key, value: value)
+        })
 
         return urlComponents.url!
     }
@@ -62,7 +75,7 @@ internal struct RequestUtils: Requester {
     internal func getDataAndParse<T: Decodable>(
         url: URL,
         headers: SwiftRestClient.Headers?,
-        onCompletion: @escaping (Result<T, Error>) -> Void
+        onCompletion: @escaping SwiftFM.OnCompletion<T>
     ) {
         makeGetRequest(url: url, headers: headers) { result in
             switch (result) {

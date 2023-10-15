@@ -1,6 +1,7 @@
 import Foundation
 
 public struct UserWeeklyTrackChartParams {
+
     public var user: String
     public var from: UInt
     public var to: UInt
@@ -10,4 +11,5 @@ public struct UserWeeklyTrackChartParams {
         self.from = from
         self.to = to
     }
+    
 }
