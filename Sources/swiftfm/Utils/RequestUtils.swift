@@ -25,7 +25,7 @@ internal struct RequestUtils: Requester {
     internal func makeGetRequest(
         url: URL,
         headers: SwiftRestClient.Headers?,
-        onCompletion: @escaping (Result<Data, ServiceError>) -> Void
+        onCompletion: @escaping SwiftFM.OnCompletion<Data>
     ) {
         apiClient.get(url, headers: headers) { data, response, error in
             guard error == nil else {
@@ -47,13 +47,17 @@ internal struct RequestUtils: Requester {
                 } else {
                     let jsonDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
 
-                    // TODO: remove forced unwrapping
-                    let code = jsonDict!["code"] as! Int
-                    let message = jsonDict!["message"] as! String
+                    guard
+                        let json = jsonDict,
+                        let code = json["error"] as? Int,
+                        let message = json["message"] as? String,
+                        let lastfmError = LastFMError(rawValue: code)
+                    else {
+                        onCompletion(.failure(.OtherError(RuntimeError("Unknown response"))))
+                        return
+                    }
 
-                    // TODO: remove forced unwrapping
-                    let lastFMError = LastFMError(rawValue: code)!
-                    onCompletion(.failure(ServiceError.LastFMError(lastFMError, message)))
+                    onCompletion(.failure(.LastFMError(lastfmError, message)))
                 }
             } catch {
                 onCompletion(.failure(.OtherError(error)))
@@ -77,7 +81,7 @@ internal struct RequestUtils: Requester {
 
                     onCompletion(.success(entity))
                 } catch{
-                    onCompletion(.failure(error))
+                    onCompletion(.failure(.OtherError(error)))
                 }
             case .failure(let error):
                 onCompletion(.failure(error))
