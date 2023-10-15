@@ -11,6 +11,7 @@ final public class LastFM {
     lazy public var User = UserModule(instance: self)
     lazy public var Tag = TagModule(instance: self)
     lazy public var Geo = GeoModule(instance: self)
+    lazy public var Chart = ChartModule(instance: self)
 
     public init(apiKey: String, apiSecret: String) {
         self.apiKey = apiKey

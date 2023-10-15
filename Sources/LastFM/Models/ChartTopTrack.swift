@@ -1,6 +1,6 @@
 import Foundation
 
-public struct GeoTopTrack: Decodable, Equatable {
+public struct ChartTopTrack: Decodable, Equatable {
 
     public let mbid: String
     public let name: String
@@ -9,8 +9,8 @@ public struct GeoTopTrack: Decodable, Equatable {
     public let duration: UInt
     public let url: URL
     public let streamable: Bool
+    public let playcount: UInt
     public let listeners: UInt
-    public let rank: UInt
 
     private enum CodingKeys: String, CodingKey {
         case mbid
@@ -20,15 +20,11 @@ public struct GeoTopTrack: Decodable, Equatable {
         case duration
         case url
         case streamable
+        case playcount
         case listeners
-        case attr = "@attr"
 
         enum StreamableKeys: String, CodingKey {
             case fulltrack
-        }
-
-        enum AttrKeys: String, CodingKey {
-            case rank
         }
     }
 
@@ -40,15 +36,10 @@ public struct GeoTopTrack: Decodable, Equatable {
             forKey: .streamable
         )
 
-        let attrContainer = try container.nestedContainer(
-            keyedBy: CodingKeys.AttrKeys.self,
-            forKey: .attr
-        )
-
         let durationString = try container.decode(String.self, forKey: .duration)
         let listenersString = try container.decode(String.self, forKey: .listeners)
         let streamableString = try streamableContainer.decode(String.self, forKey: .fulltrack)
-        let rankString = try attrContainer.decode(String.self, forKey: .rank)
+        let playcountString = try container.decode(String.self, forKey: .playcount)
 
         self.mbid = try container.decode(String.self, forKey: .mbid)
         self.name = try container.decode(String.self, forKey: .name)
@@ -60,13 +51,13 @@ public struct GeoTopTrack: Decodable, Equatable {
         guard
             let duration = UInt(durationString),
             let listeners = UInt(listenersString),
-            let rank = UInt(rankString)
+            let playcount = UInt(playcountString)
         else {
             throw RuntimeError("invalid duration, listeners or rank")
         }
 
         self.duration = duration
         self.listeners = listeners
-        self.rank = rank
+        self.playcount = playcount
     }
 }
