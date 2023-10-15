@@ -1,7 +1,7 @@
 import Foundation
 
 public struct UserModule {
-    internal enum APIMethod: String {
+    internal enum APIMethod: String, MethodKey {
         case getFriends = "getfriends"
         case getInfo
         case getLovedTracks
@@ -16,7 +16,7 @@ public struct UserModule {
         case getWeeklyChartList
         case getWeeklyTrackChart
 
-        func getMethodName() -> String {
+        func getName() -> String {
             return "user.\(self.rawValue)"
         }
     }
@@ -34,24 +34,7 @@ public struct UserModule {
         extended: Bool,
         onCompletion: @escaping SwiftFM.OnCompletion<CollectionPage<T>>
     ) {
-        var parsedParams = [
-            ("method", APIMethod.getRecentTracks.getMethodName()),
-            ("user", params.user),
-            ("limit", String(params.limit)),
-            ("page", String(params.page)),
-            ("extended", extended ? "1" : "0"),
-            ("api_key", instance.apiKey),
-            ("format", "json"),
-        ];
-
-        if let from = params.from {
-            parsedParams.append(("from", String(from)))
-        }
-
-        if let to = params.to {
-            parsedParams.append(("to", String(to)))
-        }
-
+        let parsedParams = instance.parseParams(params: params, method: APIMethod.getRecentTracks)
         let requestURL = requester.build(params: parsedParams, secure: false)
 
         requester.getDataAndParse(
@@ -79,16 +62,7 @@ public struct UserModule {
         params: UserTopTracksParams,
         onCompletion: @escaping SwiftFM.OnCompletion<CollectionPage<UserTopTrack>>
     ) {
-        let parsedParams = [
-            ("method", APIMethod.getTopTracks.getMethodName()),
-            ("user", params.user),
-            ("limit", String(params.limit)),
-            ("page", String(params.page)),
-            ("period", params.period.rawValue),
-            ("api_key", instance.apiKey),
-            ("format", "json"),
-        ];
-
+        let parsedParams = instance.parseParams(params: params, method: APIMethod.getTopTracks)
         let requestURL = requester.build(params: parsedParams, secure: false)
 
         requester.getDataAndParse(
@@ -102,14 +76,10 @@ public struct UserModule {
         params: UserWeeklyTrackChartParams,
         onCompletion: @escaping SwiftFM.OnCompletion<CollectionList<UserWeeklyChartTrack>>
     ) {
-        let parsedParams = [
-            ("method", APIMethod.getWeeklyTrackChart.getMethodName()),
-            ("user", params.user),
-            ("from", String(params.from)),
-            ("to", String(params.to)),
-            ("api_key", instance.apiKey),
-            ("format", "json")
-        ]
+        let parsedParams = instance.parseParams(
+            params: params,
+            method: APIMethod.getWeeklyTrackChart
+        )
 
         let requestURL = requester.build(params: parsedParams, secure: false)
 
@@ -124,15 +94,7 @@ public struct UserModule {
         params: LovedTracksParams,
         onCompletion: @escaping SwiftFM.OnCompletion<CollectionPage<LovedTrack>>
     ) {
-        let parsedParams = [
-            ("method", APIMethod.getLovedTracks.getMethodName()),
-            ("user", params.user),
-            ("limit", String(params.limit)),
-            ("page", String(params.page)),
-            ("api_key", instance.apiKey),
-            ("format", "json")
-        ]
-
+        let parsedParams = instance.parseParams(params: params, method: APIMethod.getLovedTracks)
         let requestURL = requester.build(params: parsedParams, secure: false)
 
         requester.getDataAndParse(
