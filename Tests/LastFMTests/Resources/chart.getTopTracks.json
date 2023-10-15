@@ -1,0 +1,187 @@
+{
+    "tracks": {
+        "track": [
+            {
+                "name": "My Love Mine All Mine",
+                "duration": "0",
+                "playcount": "5518993",
+                "listeners": "410822",
+                "mbid": "",
+                "url": "https://www.last.fm/music/Mitski/_/My+Love+Mine+All+Mine",
+                "streamable": {
+                    "#text": "0",
+                    "fulltrack": "0"
+                },
+                "artist": {
+                    "name": "Mitski",
+                    "mbid": "fa58cf24-0e44-421d-8519-8bf461dcfaa5",
+                    "url": "https://www.last.fm/music/Mitski"
+                },
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "extralarge"
+                    }
+                ]
+            },
+            {
+                "name": "Paint the Town Red",
+                "duration": "0",
+                "playcount": "5658088",
+                "listeners": "560749",
+                "mbid": "",
+                "url": "https://www.last.fm/music/Doja+Cat/_/Paint+the+Town+Red",
+                "streamable": {
+                    "#text": "0",
+                    "fulltrack": "0"
+                },
+                "artist": {
+                    "name": "Doja Cat",
+                    "mbid": "5df62a88-cac9-490a-b62c-c7c88f4020f4",
+                    "url": "https://www.last.fm/music/Doja+Cat"
+                },
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "extralarge"
+                    }
+                ]
+            },
+            {
+                "name": "vampire",
+                "duration": "0",
+                "playcount": "12319667",
+                "listeners": "698017",
+                "mbid": "",
+                "url": "https://www.last.fm/music/Olivia+Rodrigo/_/vampire",
+                "streamable": {
+                    "#text": "0",
+                    "fulltrack": "0"
+                },
+                "artist": {
+                    "name": "Olivia Rodrigo",
+                    "mbid": "",
+                    "url": "https://www.last.fm/music/Olivia+Rodrigo"
+                },
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "extralarge"
+                    }
+                ]
+            },
+            {
+                "name": "Bad Idea Right?",
+                "duration": "0",
+                "playcount": "7510810",
+                "listeners": "561219",
+                "mbid": "",
+                "url": "https://www.last.fm/music/Olivia+Rodrigo/_/Bad+Idea+Right%3F",
+                "streamable": {
+                    "#text": "0",
+                    "fulltrack": "0"
+                },
+                "artist": {
+                    "name": "Olivia Rodrigo",
+                    "mbid": "",
+                    "url": "https://www.last.fm/music/Olivia+Rodrigo"
+                },
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "extralarge"
+                    }
+                ]
+            },
+            {
+                "name": "Cruel Summer",
+                "duration": "0",
+                "playcount": "26385560",
+                "listeners": "929588",
+                "mbid": "",
+                "url": "https://www.last.fm/music/Taylor+Swift/_/Cruel+Summer",
+                "streamable": {
+                    "#text": "0",
+                    "fulltrack": "0"
+                },
+                "artist": {
+                    "name": "Taylor Swift",
+                    "mbid": "20244d07-534f-4eff-b4d4-930878889970",
+                    "url": "https://www.last.fm/music/Taylor+Swift"
+                },
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "extralarge"
+                    }
+                ]
+            }
+        ],
+        "@attr": {
+            "page": "1",
+            "perPage": "5",
+            "totalPages": "7192052",
+            "total": "35960258"
+        }
+    }
+}
