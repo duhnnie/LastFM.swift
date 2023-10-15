@@ -3,7 +3,7 @@ import XCTest
 
 class TagModuleTests: XCTestCase {
 
-    private static let swiftFM = LastFM(
+    private static let lastFM = LastFM(
         apiKey: Constants.API_KEY,
         apiSecret: Constants.API_SECRET
     )
@@ -13,7 +13,7 @@ class TagModuleTests: XCTestCase {
 
     override func setUpWithError() throws {
         instance = TagModule(
-            instance: Self.swiftFM,
+            instance: Self.lastFM,
             requester: RequestUtils(apiClient: apiClient)
         )
     }
