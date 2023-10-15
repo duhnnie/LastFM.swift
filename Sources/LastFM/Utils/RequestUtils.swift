@@ -12,7 +12,7 @@ internal struct RequestUtils: Requester {
 
     internal func build(params: [String : String], secure: Bool) -> URL {
         var urlComponents = URLComponents(
-            string: secure ? SwiftFM.SECURE_API_HOST : SwiftFM.INSECURE_API_HOST
+            string: secure ? LastFM.SECURE_API_HOST : LastFM.INSECURE_API_HOST
         )!
 
         urlComponents.queryItems = params.map({ (key: String, value: String) in
@@ -25,7 +25,7 @@ internal struct RequestUtils: Requester {
     internal func makeGetRequest(
         url: URL,
         headers: SwiftRestClient.Headers?,
-        onCompletion: @escaping SwiftFM.OnCompletion<Data>
+        onCompletion: @escaping LastFM.OnCompletion<Data>
     ) {
         apiClient.get(url, headers: headers) { data, response, error in
             guard error == nil else {
@@ -51,13 +51,13 @@ internal struct RequestUtils: Requester {
                         let json = jsonDict,
                         let code = json["error"] as? Int,
                         let message = json["message"] as? String,
-                        let lastfmError = LastFMError(rawValue: code)
+                        let lastfmErrorType = LastFMServiceErrorType(rawValue: code)
                     else {
                         onCompletion(.failure(.OtherError(RuntimeError("Unknown response"))))
                         return
                     }
 
-                    onCompletion(.failure(.LastFMError(lastfmError, message)))
+                    onCompletion(.failure(.LastFMServiceError(lastfmErrorType, message)))
                 }
             } catch {
                 onCompletion(.failure(.OtherError(error)))
@@ -68,7 +68,7 @@ internal struct RequestUtils: Requester {
     internal func getDataAndParse<T: Decodable>(
         url: URL,
         headers: SwiftRestClient.Headers?,
-        onCompletion: @escaping SwiftFM.OnCompletion<T>
+        onCompletion: @escaping LastFM.OnCompletion<T>
     ) {
         makeGetRequest(url: url, headers: headers) { result in
             switch (result) {

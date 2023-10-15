@@ -1,9 +1,9 @@
 import XCTest
-@testable import swiftfm
+@testable import LastFM
 
 class UserTests: XCTestCase {
 
-    private static let swiftFM = SwiftFM(
+    private static let swiftFM = LastFM(
         apiKey: Constants.API_KEY,
         apiSecret: Constants.API_SECRET
     )
@@ -41,7 +41,7 @@ class UserTests: XCTestCase {
             case .failure(let error):
                 switch (error) {
 
-                case .LastFMError(let lastfmErrorType, let message):
+                case .LastFMServiceError(let lastfmErrorType, let message):
                     XCTAssertEqual(lastfmErrorType, .InvalidAPIKey)
                     XCTAssertEqual(message, "Invalid API key - You must be granted a valid key by last.fm")
                 default:
@@ -73,7 +73,7 @@ class UserTests: XCTestCase {
                 XCTFail("Expected to fail, but it succeeded instead")
             case .failure(let error):
                 switch(error) {
-                case .LastFMError(let lastfmErrorType, let message):
+                case .LastFMServiceError(let lastfmErrorType, let message):
                     XCTAssertEqual(lastfmErrorType, .InvalidParameters)
                     XCTAssertEqual(message, "page param out of bounds (1-1000000)")
                 default:
@@ -288,7 +288,7 @@ class UserTests: XCTestCase {
             switch (result) {
             case .success( _):
                 XCTFail("Expected to fail, but it succeeded")
-            case .failure(SwiftFMError.OtherError(let error)):
+            case .failure(LastFMError.OtherError(let error)):
                 XCTAssert(error is RuntimeError)
                 XCTAssertEqual(error.localizedDescription, "Fake error")
             default:
@@ -359,7 +359,7 @@ class UserTests: XCTestCase {
             switch (result) {
             case .success( _):
                 XCTFail("Expected to fail, but it succeeded")
-            case .failure(SwiftFMError.OtherError(let error)):
+            case .failure(LastFMError.OtherError(let error)):
                 XCTAssert(error is RuntimeError)
                 XCTAssertEqual(error.localizedDescription, "Fake error")
             default:
