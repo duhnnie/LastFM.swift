@@ -1,6 +1,6 @@
 import Foundation
 
-public struct UserTopTracksParams {
+public struct UserTopTracksParams: Params {
 
     public var user: String
     public var period: Period
@@ -26,6 +26,15 @@ public struct UserTopTracksParams {
         self.period = period
         self.limit = limit
         self.page = page
+    }
+
+    internal func toDictionary() -> Dictionary<String, String> {
+        return [
+            "user": user,
+            "period": period.rawValue,
+            "limit": String(limit),
+            "page": String(page)
+        ]
     }
     
 }
