@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "swiftfm",
+    name: "LastFM.swift",
     platforms: [
         .iOS(.v11),
         .macOS(.v10_10),
@@ -14,8 +14,8 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "swiftfm",
-            targets: ["swiftfm"]),
+            name: "LastFM",
+            targets: ["LastFM"]),
     ],
     dependencies: [
         .package(
@@ -25,13 +25,13 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "swiftfm",
+            name: "LastFM",
             dependencies: [
                 .product(name: "SwiftRestClient", package: "SwiftRestClient")
             ]),
         .testTarget(
-            name: "swiftfmTests",
-            dependencies: ["swiftfm"],
+            name: "LastFMTests",
+            dependencies: ["LastFM"],
             resources: [
                 .copy("Resources")
             ]

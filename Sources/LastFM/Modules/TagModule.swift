@@ -10,17 +10,17 @@ public struct TagModule {
         }
     }
 
-    private let instance: SwiftFM
+    private let instance: LastFM
     private let requester: Requester
 
-    internal init(instance: SwiftFM, requester: Requester = RequestUtils.shared) {
+    internal init(instance: LastFM, requester: Requester = RequestUtils.shared) {
         self.instance = instance
         self.requester = requester
     }
 
     public func getTopTracks(
         params: TagTopTracksParams,
-        onCompletion: @escaping SwiftFM.OnCompletion<CollectionPage<TagTopTrack>>
+        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<TagTopTrack>>
     ) {
         let parsedParams = instance.parseParams(params: params, method: APIMethod.getTopTracks)
         let requestURL = requester.build(params: parsedParams, secure: false)

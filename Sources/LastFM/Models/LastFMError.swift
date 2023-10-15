@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum LastFMError: Int {
+public enum LastFMServiceErrorType: Int {
     case InvalidService = 2
     case InvalidMethod = 3
     case AuthenticationFailed = 4
@@ -24,20 +24,20 @@ public enum LastFMError: Int {
     case RateLimitExceeded = 29
 }
 
-public enum SwiftFMError: Error {
-    case LastFMError(LastFMError, String)
+public enum LastFMError: Error {
+    case LastFMServiceError(LastFMServiceErrorType, String)
     case NoSessionKey
     case NoData
     case OtherError(Error)
 }
 
-extension SwiftFMError: LocalizedError {
+extension LastFMError: LocalizedError {
 
     public var errorDescription: String? {
         var detail = ""
 
         switch (self) {
-        case .LastFMError(_, let message):
+        case .LastFMServiceError(_, let message):
             detail = "\(message)"
         case .NoSessionKey:
             detail = "No session key."

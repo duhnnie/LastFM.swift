@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "swiftfm"
-               BuildableName = "swiftfm"
-               BlueprintName = "swiftfm"
+               BlueprintIdentifier = "LastFM.swift_LastFMTests"
+               BuildableName = "LastFM.swift_LastFMTests"
+               BlueprintName = "LastFM.swift_LastFMTests"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "LastFM"
+               BuildableName = "LastFM"
+               BlueprintName = "LastFM"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +42,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "swiftfmTests"
-               BuildableName = "swiftfmTests"
-               BlueprintName = "swiftfmTests"
+               BlueprintIdentifier = "LastFMTests"
+               BuildableName = "LastFMTests"
+               BlueprintName = "LastFMTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,23 +56,14 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       codeCoverageEnabled = "YES">
-      <CodeCoverageTargets>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "swiftfm"
-            BuildableName = "swiftfm"
-            BlueprintName = "swiftfm"
-            ReferencedContainer = "container:">
-         </BuildableReference>
-      </CodeCoverageTargets>
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "swiftfmTests"
-               BuildableName = "swiftfmTests"
-               BlueprintName = "swiftfmTests"
+               BlueprintIdentifier = "LastFMTests"
+               BuildableName = "LastFMTests"
+               BlueprintName = "LastFMTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
@@ -84,9 +89,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "swiftfm"
-            BuildableName = "swiftfm"
-            BlueprintName = "swiftfm"
+            BlueprintIdentifier = "LastFM.swift_LastFMTests"
+            BuildableName = "LastFM.swift_LastFMTests"
+            BlueprintName = "LastFM.swift_LastFMTests"
             ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>

@@ -8,13 +8,13 @@ internal protocol Requester {
     func makeGetRequest(
         url: URL,
         headers: [String: String]?,
-        onCompletion: @escaping (Result<Data, SwiftFMError>) -> Void
+        onCompletion: @escaping (Result<Data, LastFMError>) -> Void
     )
 
     func getDataAndParse<T: Decodable>(
         url: URL,
         headers: SwiftRestClient.Headers?,
-        onCompletion: @escaping SwiftFM.OnCompletion<T>
+        onCompletion: @escaping LastFM.OnCompletion<T>
     )
 
 }

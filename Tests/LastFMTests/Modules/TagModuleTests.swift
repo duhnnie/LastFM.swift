@@ -1,9 +1,9 @@
 import XCTest
-@testable import swiftfm
+@testable import LastFM
 
 class TagModuleTests: XCTestCase {
 
-    private static let swiftFM = SwiftFM(
+    private static let swiftFM = LastFM(
         apiKey: Constants.API_KEY,
         apiSecret: Constants.API_SECRET
     )
