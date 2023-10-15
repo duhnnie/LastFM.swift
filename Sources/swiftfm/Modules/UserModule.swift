@@ -17,7 +17,7 @@ public struct UserModule {
         case getWeeklyTrackChart
 
         func getName() -> String {
-            return "user.\(self.rawValue)"
+            return "user.\(self.rawValue.lowercased())"
         }
     }
 

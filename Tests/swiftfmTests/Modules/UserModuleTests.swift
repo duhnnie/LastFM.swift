@@ -8,13 +8,6 @@ class UserTests: XCTestCase {
         apiSecret: Constants.API_SECRET
     )
 
-    private static let fakeResponse = HTTPURLResponse(
-        url: URL(string: "http://dummyResponse.com")!,
-        statusCode: 200,
-        httpVersion: "1.0",
-        headerFields: nil
-    )
-
     private var instance: UserModule!
     private var apiClientMock = APICLientMock()
 
@@ -27,6 +20,70 @@ class UserTests: XCTestCase {
 
     override func tearDownWithError() throws {
         apiClientMock.clearMock()
+    }
+
+    // getRecentTracks
+
+    func test_getRecentTracks_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/user.getRecentTracks",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "waiting for getRecentTracks")
+
+        let expectedEntity = try JSONDecoder().decode(
+            CollectionPage<RecentTrack>.self,
+            from: fakeData
+        )
+
+        let params = RecentTracksParams(user: "someUser", limit: 5, page: 1)
+
+        apiClientMock.data = fakeData
+        apiClientMock.response = Constants.SUCCESSFUL_RESPONSE
+
+        instance.getRecentTracks(params: params) { result in
+            switch(result) {
+            case .success(let entity):
+                XCTAssertEqual(entity, expectedEntity)
+            case .failure(_):
+                XCTFail("Expected to succeed but it failed")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClientMock.getCalls.count, 1)
+        XCTAssertEqual(apiClientMock.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClientMock.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=\(params.user)&extended=0&limit=\(params.limit)&api_key=\(Constants.API_KEY)&format=json&page=\(params.page)"
+            )
+        )
+    }
+
+    func test_getRecentTracks_failure() throws {
+        let params = RecentTracksParams(user: "pepito")
+        let expectation = expectation(description: "waiting for getRecentTracks")
+
+        apiClientMock.error = RuntimeError("fake error")
+
+        instance.getRecentTracks(params: params) { result in
+            switch(result) {
+            case .success(_):
+                XCTFail("It was expected to fail, but it succeeded")
+            case .failure(_):
+                XCTAssertTrue(true)
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
     }
 
     // getTopTracks
@@ -51,7 +108,7 @@ class UserTests: XCTestCase {
         )
 
         apiClientMock.data = fakeData
-        apiClientMock.response = Self.fakeResponse
+        apiClientMock.response = Constants.SUCCESSFUL_RESPONSE
 
         let expectation = expectation(description: "waiting for succesful getTopTracks")
 
@@ -74,7 +131,7 @@ class UserTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=user.getTopTracks&user=\(params.user)&limit=\(params.limit)&page=\(params.page)&period=\(params.period.rawValue)&api_key=\(Constants.API_KEY)&format=json"
+                "http://ws.audioscrobbler.com/2.0?method=user.gettoptracks&user=\(params.user)&limit=\(params.limit)&page=\(params.page)&period=\(params.period.rawValue)&api_key=\(Constants.API_KEY)&format=json"
             )
         )
     }
@@ -137,7 +194,7 @@ class UserTests: XCTestCase {
         let params = UserWeeklyTrackChartParams(user: "user", from: 123412, to: 53452)
 
         apiClientMock.data = fakeData
-        apiClientMock.response = Self.fakeResponse
+        apiClientMock.response = Constants.SUCCESSFUL_RESPONSE
 
         let expectation = expectation(description: "Waiting for getWeeklyTrackChart")
 
@@ -161,7 +218,7 @@ class UserTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=user.getWeeklyTrackChart&user=\(params.user)&from=\(params.from)&to=\(params.to)&api_key=\(Constants.API_KEY)&format=json"
+                "http://ws.audioscrobbler.com/2.0?method=user.getweeklytrackchart&user=\(params.user)&from=\(params.from)&to=\(params.to)&api_key=\(Constants.API_KEY)&format=json"
             )
         )
     }
@@ -203,7 +260,7 @@ class UserTests: XCTestCase {
         )
 
         apiClientMock.data = fakeData
-        apiClientMock.response = Self.fakeResponse
+        apiClientMock.response = Constants.SUCCESSFUL_RESPONSE
 
         instance.getLovedTracks(params: params) { result in
             switch(result) {
@@ -223,7 +280,7 @@ class UserTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=user.getLovedTracks&user=\(params.user)&limit=\(params.limit)&page=\(params.page)&api_key=\(Constants.API_KEY)&format=json"
+                "http://ws.audioscrobbler.com/2.0?method=user.getlovedtracks&user=\(params.user)&limit=\(params.limit)&page=\(params.page)&api_key=\(Constants.API_KEY)&format=json"
             )
         )
     }
