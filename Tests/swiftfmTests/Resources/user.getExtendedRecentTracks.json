@@ -1,0 +1,348 @@
+{
+    "recenttracks": {
+        "track": [
+            {
+                "artist": {
+                    "url": "https://www.last.fm/music/Mew",
+                    "name": "Mew",
+                    "image": [
+                        {
+                            "size": "small",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        },
+                        {
+                            "size": "medium",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        },
+                        {
+                            "size": "large",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        },
+                        {
+                            "size": "extralarge",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        }
+                    ],
+                    "mbid": ""
+                },
+                "mbid": "1e8cf157-9f5f-3e7c-ac82-c59259970a92",
+                "name": "Symmetry",
+                "image": [
+                    {
+                        "size": "small",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/87480021191328af5dc130dd879d8bd2.png"
+                    },
+                    {
+                        "size": "medium",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/87480021191328af5dc130dd879d8bd2.png"
+                    },
+                    {
+                        "size": "large",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/87480021191328af5dc130dd879d8bd2.png"
+                    },
+                    {
+                        "size": "extralarge",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/87480021191328af5dc130dd879d8bd2.png"
+                    }
+                ],
+                "streamable": "0",
+                "album": {
+                    "mbid": "17486085-c26f-3e0e-a8af-e5d91dece258",
+                    "#text": "Half the World Is Watching Me"
+                },
+                "url": "https://www.last.fm/music/Mew/_/Symmetry",
+                "@attr": {
+                    "nowplaying": "true"
+                },
+                "loved": "1"
+            },
+            {
+                "artist": {
+                    "url": "https://www.last.fm/music/Nine+Inch+Nails",
+                    "name": "Nine Inch Nails",
+                    "image": [
+                        {
+                            "size": "small",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        },
+                        {
+                            "size": "medium",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        },
+                        {
+                            "size": "large",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        },
+                        {
+                            "size": "extralarge",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        }
+                    ],
+                    "mbid": ""
+                },
+                "date": {
+                    "uts": "1697382918",
+                    "#text": "15 Oct 2023, 15:15"
+                },
+                "mbid": "3a1b35a6-5291-393b-a6ba-7afdfabf22b1",
+                "name": "Echoplex",
+                "image": [
+                    {
+                        "size": "small",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/86bf0aab05704d2e880dc37384485c32.png"
+                    },
+                    {
+                        "size": "medium",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/86bf0aab05704d2e880dc37384485c32.png"
+                    },
+                    {
+                        "size": "large",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/86bf0aab05704d2e880dc37384485c32.png"
+                    },
+                    {
+                        "size": "extralarge",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/86bf0aab05704d2e880dc37384485c32.png"
+                    }
+                ],
+                "url": "https://www.last.fm/music/Nine+Inch+Nails/_/Echoplex",
+                "streamable": "0",
+                "album": {
+                    "mbid": "12b57d46-a192-499e-a91f-7da66790a1c1",
+                    "#text": "The Slip"
+                },
+                "loved": "1"
+            },
+            {
+                "artist": {
+                    "url": "https://www.last.fm/music/Damone",
+                    "name": "Damone",
+                    "image": [
+                        {
+                            "size": "small",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        },
+                        {
+                            "size": "medium",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        },
+                        {
+                            "size": "large",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        },
+                        {
+                            "size": "extralarge",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        }
+                    ],
+                    "mbid": ""
+                },
+                "date": {
+                    "uts": "1697382636",
+                    "#text": "15 Oct 2023, 15:10"
+                },
+                "mbid": "e127f548-3ac4-3c9e-8643-5dd764201553",
+                "name": "On My Mind",
+                "image": [
+                    {
+                        "size": "small",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/223fcfc78a9f3060ac7f45d0785bf62a.jpg"
+                    },
+                    {
+                        "size": "medium",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/223fcfc78a9f3060ac7f45d0785bf62a.jpg"
+                    },
+                    {
+                        "size": "large",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/223fcfc78a9f3060ac7f45d0785bf62a.jpg"
+                    },
+                    {
+                        "size": "extralarge",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/223fcfc78a9f3060ac7f45d0785bf62a.jpg"
+                    }
+                ],
+                "url": "https://www.last.fm/music/Damone/_/On+My+Mind",
+                "streamable": "0",
+                "album": {
+                    "mbid": "0f48becf-15a6-480f-9a70-0bd4e9f4d280",
+                    "#text": "From the Attic"
+                },
+                "loved": "1"
+            },
+            {
+                "artist": {
+                    "url": "https://www.last.fm/music/Tripping+Daisy",
+                    "name": "Tripping Daisy",
+                    "image": [
+                        {
+                            "size": "small",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        },
+                        {
+                            "size": "medium",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        },
+                        {
+                            "size": "large",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        },
+                        {
+                            "size": "extralarge",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        }
+                    ],
+                    "mbid": ""
+                },
+                "date": {
+                    "uts": "1697382463",
+                    "#text": "15 Oct 2023, 15:07"
+                },
+                "mbid": "13b0034d-b4fe-4bb2-aca3-bd2498d222d4",
+                "name": "Raindrop",
+                "image": [
+                    {
+                        "size": "small",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/cf8db55462804578b1e6d0c5c99b6409.jpg"
+                    },
+                    {
+                        "size": "medium",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/cf8db55462804578b1e6d0c5c99b6409.jpg"
+                    },
+                    {
+                        "size": "large",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/cf8db55462804578b1e6d0c5c99b6409.jpg"
+                    },
+                    {
+                        "size": "extralarge",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/cf8db55462804578b1e6d0c5c99b6409.jpg"
+                    }
+                ],
+                "url": "https://www.last.fm/music/Tripping+Daisy/_/Raindrop",
+                "streamable": "0",
+                "album": {
+                    "mbid": "6233a746-932e-38d0-9dea-073be3ce1606",
+                    "#text": "I Am An Elastic Firecracker"
+                },
+                "loved": "1"
+            },
+            {
+                "artist": {
+                    "url": "https://www.last.fm/music/NOFX",
+                    "name": "NOFX",
+                    "image": [
+                        {
+                            "size": "small",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        },
+                        {
+                            "size": "medium",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        },
+                        {
+                            "size": "large",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        },
+                        {
+                            "size": "extralarge",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        }
+                    ],
+                    "mbid": ""
+                },
+                "date": {
+                    "uts": "1697382157",
+                    "#text": "15 Oct 2023, 15:02"
+                },
+                "mbid": "0ae832d9-25c5-3511-8636-30afb10140b2",
+                "name": "Theme From a NOFX Album",
+                "image": [
+                    {
+                        "size": "small",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/930c2ba144454634c625f1dc00062976.png"
+                    },
+                    {
+                        "size": "medium",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/930c2ba144454634c625f1dc00062976.png"
+                    },
+                    {
+                        "size": "large",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/930c2ba144454634c625f1dc00062976.png"
+                    },
+                    {
+                        "size": "extralarge",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/930c2ba144454634c625f1dc00062976.png"
+                    }
+                ],
+                "url": "https://www.last.fm/music/NOFX/_/Theme+From+a+NOFX+Album",
+                "streamable": "0",
+                "album": {
+                    "mbid": "2e2299dd-6551-4c8e-af60-5282d26bd115",
+                    "#text": "Pump Up the Valuum"
+                },
+                "loved": "1"
+            },
+            {
+                "artist": {
+                    "url": "https://www.last.fm/music/John+Mayer",
+                    "name": "John Mayer",
+                    "image": [
+                        {
+                            "size": "small",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        },
+                        {
+                            "size": "medium",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        },
+                        {
+                            "size": "large",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        },
+                        {
+                            "size": "extralarge",
+                            "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        }
+                    ],
+                    "mbid": ""
+                },
+                "date": {
+                    "uts": "1697381919",
+                    "#text": "15 Oct 2023, 14:58"
+                },
+                "mbid": "0079848f-0ca1-406f-abfc-2aa8c8652d4e",
+                "name": "Daughters",
+                "image": [
+                    {
+                        "size": "small",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/1d1b6e18660632d6dae3f5e7c8b6312e.jpg"
+                    },
+                    {
+                        "size": "medium",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/1d1b6e18660632d6dae3f5e7c8b6312e.jpg"
+                    },
+                    {
+                        "size": "large",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/1d1b6e18660632d6dae3f5e7c8b6312e.jpg"
+                    },
+                    {
+                        "size": "extralarge",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/1d1b6e18660632d6dae3f5e7c8b6312e.jpg"
+                    }
+                ],
+                "url": "https://www.last.fm/music/John+Mayer/_/Daughters",
+                "streamable": "0",
+                "album": {
+                    "mbid": "045fef10-96f0-4e6c-93f8-06b6b8685e81",
+                    "#text": "Heavier Things"
+                },
+                "loved": "1"
+            }
+        ],
+        "@attr": {
+            "user": "Duhnnie",
+            "totalPages": "69260",
+            "page": "1",
+            "perPage": "5",
+            "total": "346297"
+        }
+    }
+}

@@ -86,6 +86,76 @@ class UserTests: XCTestCase {
         waitForExpectations(timeout: 3)
     }
 
+    // getExtendedRecentTracks
+
+    func test_getExtendedRecentTracks_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/user.getExtendedRecentTracks",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "waiting for getExtendedRecentTracks")
+
+        let expectedEntity = try JSONDecoder().decode(
+            CollectionPage<ExtendedRecentTrack>.self,
+            from: fakeData
+        )
+
+        let params = RecentTracksParams(
+            user: "Pepito",
+            limit: 5,
+            page: 1,
+            from: 23454646,
+            to: 345646343
+        )
+
+        apiClientMock.data = fakeData
+        apiClientMock.response = Constants.SUCCESSFUL_RESPONSE
+
+        instance.getExtendedRecentTracks(params: params) { result in
+            switch(result) {
+            case .success(let entity):
+                XCTAssertEqual(entity, expectedEntity)
+            case .failure(_):
+                XCTFail("It was expected to fail, but it succeeded instead")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClientMock.getCalls.count, 1)
+        XCTAssertEqual(apiClientMock.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClientMock.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=\(params.user)&extended=1&limit=\(params.limit)&api_key=\(Constants.API_KEY)&format=json&page=\(params.page)&from=\(params.from!)&to=\(params.to!)"
+            )
+        )
+    }
+
+    func test_getExtendedRecentTracks_failure() throws {
+        let expectation = expectation(description: "waiting for getExtendedRecentTracks")
+        let params = RecentTracksParams(user: "trent")
+
+        apiClientMock.error = RuntimeError("Beautiful error")
+
+        instance.getExtendedRecentTracks(params: params) { result in
+            switch(result) {
+            case .success(_):
+                XCTFail("It was expected to fail, but it succeeded instead")
+            case .failure(_):
+                XCTAssertTrue(true)
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+    }
+
     // getTopTracks
 
     func test_getTopTracks_success() throws {
