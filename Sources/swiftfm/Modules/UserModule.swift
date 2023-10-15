@@ -34,7 +34,10 @@ public struct UserModule {
         extended: Bool,
         onCompletion: @escaping SwiftFM.OnCompletion<CollectionPage<T>>
     ) {
-        let parsedParams = instance.parseParams(params: params, method: APIMethod.getRecentTracks)
+        var parsedParams = instance.parseParams(params: params, method: APIMethod.getRecentTracks)
+
+        parsedParams["extended"] = extended ? "1" : "0"
+
         let requestURL = requester.build(params: parsedParams, secure: false)
 
         requester.getDataAndParse(

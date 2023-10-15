@@ -3,8 +3,6 @@ import SwiftRestClient
 
 internal protocol Requester {
 
-    func build(params: [(String, String)], secure: Bool) -> URL
-
     func build(params: [String: String], secure: Bool) -> URL
 
     func makeGetRequest(
