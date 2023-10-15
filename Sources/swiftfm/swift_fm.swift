@@ -1,11 +1,11 @@
-public class SwiftFM {
+final public class SwiftFM {
 
     public typealias OnCompletion<T> = (Result<T, Error>) -> Void
 
     public private(set) var text = "Hello, World!"
 
-    internal let apiKey: String
-    internal let apiSecret: String
+    private let apiKey: String
+    private let apiSecret: String
 
     lazy public var User = UserModule(instance: self)
     lazy public var Tag = TagModule(instance: self)
