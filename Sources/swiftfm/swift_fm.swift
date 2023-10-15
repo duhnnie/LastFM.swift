@@ -1,6 +1,6 @@
 final public class SwiftFM {
 
-    public typealias OnCompletion<T> = (Result<T, Error>) -> Void
+    public typealias OnCompletion<T> = (Result<T, SwiftFMError>) -> Void
 
     internal static let SECURE_API_HOST = "https://ws.audioscrobbler.com/2.0"
     internal static let INSECURE_API_HOST = "http://ws.audioscrobbler.com/2.0"

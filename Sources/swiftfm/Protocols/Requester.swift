@@ -8,7 +8,7 @@ internal protocol Requester {
     func makeGetRequest(
         url: URL,
         headers: [String: String]?,
-        onCompletion: @escaping (Result<Data, ServiceError>) -> Void
+        onCompletion: @escaping (Result<Data, SwiftFMError>) -> Void
     )
 
     func getDataAndParse<T: Decodable>(
