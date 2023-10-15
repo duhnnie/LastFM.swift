@@ -3,9 +3,10 @@ import XCTest
 
 class UserTests: XCTestCase {
 
-    private static let apiKey = "someAPIkey"
-    private static let apiSecret = "someAPIsecret"
-    private static let swiftFM = SwiftFM(apiKey: apiKey, apiSecret: apiSecret)
+    private static let swiftFM = SwiftFM(
+        apiKey: Constants.API_KEY,
+        apiSecret: Constants.API_SECRET
+    )
 
     private static let fakeResponse = HTTPURLResponse(
         url: URL(string: "http://dummyResponse.com")!,
@@ -77,7 +78,7 @@ class UserTests: XCTestCase {
 
         XCTAssertEqual(
             apiClientMock.getCalls[0].url.absoluteString,
-            "http://ws.audioscrobbler.com/2.0?method=user.getTopTracks&user=\(params.user)&limit=\(params.limit)&page=\(params.page)&period=\(params.period.rawValue)&api_key=\(Self.apiKey)&format=json"
+            "http://ws.audioscrobbler.com/2.0?method=user.getTopTracks&user=\(params.user)&limit=\(params.limit)&page=\(params.page)&period=\(params.period.rawValue)&api_key=\(Constants.API_KEY)&format=json"
         )
 
         XCTAssertNil(apiClientMock.getCalls[0].headers)
@@ -159,7 +160,7 @@ class UserTests: XCTestCase {
 
         XCTAssertEqual(
             apiClientMock.getCalls[0].url.absoluteString,
-            "http://ws.audioscrobbler.com/2.0?method=user.getWeeklyTrackChart&user=\(params.user)&from=\(params.from)&to=\(params.to)&api_key=\(Self.apiKey)&format=json"
+            "http://ws.audioscrobbler.com/2.0?method=user.getWeeklyTrackChart&user=\(params.user)&from=\(params.from)&to=\(params.to)&api_key=\(Constants.API_KEY)&format=json"
         )
 
         XCTAssertEqual(apiClientMock.getCalls[0].headers, nil)
@@ -221,7 +222,7 @@ class UserTests: XCTestCase {
 
         XCTAssertEqual(
             apiClientMock.getCalls[0].url.absoluteString,
-            "http://ws.audioscrobbler.com/2.0?method=user.getLovedTracks&user=\(params.user)&limit=\(params.limit)&page=\(params.page)&api_key=\(Self.apiKey)&format=json"
+            "http://ws.audioscrobbler.com/2.0?method=user.getLovedTracks&user=\(params.user)&limit=\(params.limit)&page=\(params.page)&api_key=\(Constants.API_KEY)&format=json"
         )
     }
 
