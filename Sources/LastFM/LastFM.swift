@@ -9,6 +9,7 @@ final public class LastFM {
     private let apiSecret: String
 
     lazy public var User = UserModule(instance: self)
+    lazy public var Artist = ArtistModule(instance: self)
     lazy public var Tag = TagModule(instance: self)
     lazy public var Geo = GeoModule(instance: self)
     lazy public var Chart = ChartModule(instance: self)
