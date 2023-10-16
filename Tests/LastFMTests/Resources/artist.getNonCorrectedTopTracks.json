@@ -1,0 +1,173 @@
+{
+    "toptracks": {
+        "track": [
+            {
+                "name": "Olor a Gas",
+                "playcount": "7",
+                "listeners": "2",
+                "url": "https://www.last.fm/music/Cafe+Tacuva/_/Olor+a+Gas",
+                "streamable": "0",
+                "artist": {
+                    "name": "Cafe Tacuva",
+                    "url": "https://www.last.fm/music/Cafe+Tacuva"
+                },
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "extralarge"
+                    }
+                ],
+                "@attr": {
+                    "rank": "1"
+                }
+            },
+            {
+                "name": "Eres",
+                "playcount": "6",
+                "listeners": "2",
+                "url": "https://www.last.fm/music/Cafe+Tacuva/_/Eres",
+                "streamable": "0",
+                "artist": {
+                    "name": "Cafe Tacuva",
+                    "url": "https://www.last.fm/music/Cafe+Tacuva"
+                },
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "extralarge"
+                    }
+                ],
+                "@attr": {
+                    "rank": "2"
+                }
+            },
+            {
+                "name": "mediodía",
+                "playcount": "2",
+                "listeners": "1",
+                "url": "https://www.last.fm/music/Cafe+Tacuva/_/mediod%C3%ADa",
+                "streamable": "0",
+                "artist": {
+                    "name": "Cafe Tacuva",
+                    "url": "https://www.last.fm/music/Cafe+Tacuva"
+                },
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "extralarge"
+                    }
+                ],
+                "@attr": {
+                    "rank": "3"
+                }
+            },
+            {
+                "name": "Cierto o falso",
+                "playcount": "1",
+                "listeners": "1",
+                "url": "https://www.last.fm/music/Cafe+Tacuva/_/Cierto+o+falso",
+                "streamable": "0",
+                "artist": {
+                    "name": "Cafe Tacuva",
+                    "url": "https://www.last.fm/music/Cafe+Tacuva"
+                },
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "extralarge"
+                    }
+                ],
+                "@attr": {
+                    "rank": "4"
+                }
+            },
+            {
+                "name": "Gracias",
+                "playcount": "1",
+                "listeners": "1",
+                "url": "https://www.last.fm/music/Cafe+Tacuva/_/Gracias",
+                "streamable": "0",
+                "artist": {
+                    "name": "Cafe Tacuva",
+                    "url": "https://www.last.fm/music/Cafe+Tacuva"
+                },
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "extralarge"
+                    }
+                ],
+                "@attr": {
+                    "rank": "5"
+                }
+            }
+        ],
+        "@attr": {
+            "artist": "Cafe Tacuva",
+            "page": "1",
+            "perPage": "5",
+            "totalPages": "3",
+            "total": "15"
+        }
+    }
+}
