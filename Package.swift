@@ -7,7 +7,7 @@ let package = Package(
     name: "LastFM.swift",
     platforms: [
         .iOS(.v11),
-        .macOS(.v10_10),
+        .macOS(.v10_15),
         .watchOS(.v4),
         .tvOS(.v11),
         .macCatalyst(.v13)

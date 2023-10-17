@@ -22,10 +22,9 @@ public struct ChartModule {
         params: ChartTopTracksParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ChartTopTrack>>
     ) {
-        let parsedParams = instance.parseParams(params: params, method: APIMethod.getTopTracks)
-        let requestURL = requester.build(params: parsedParams, secure: false)
+        let params = instance.normalizeParams(params: params, method: APIMethod.getTopTracks)
 
-        requester.getDataAndParse(url: requestURL, headers: nil, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
 
 }

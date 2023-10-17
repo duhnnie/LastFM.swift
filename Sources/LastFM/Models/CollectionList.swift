@@ -28,7 +28,10 @@ public struct CollectionList<T: Decodable & Equatable>: Decodable, Equatable {
             throw RuntimeError("Error at getting root key.")
         }
 
-        let subcontainer = try container.nestedContainer(keyedBy: InnerCodingKeys.self, forKey: rootKey)
+        let subcontainer = try container.nestedContainer(
+            keyedBy: InnerCodingKeys.self,
+            forKey: rootKey
+        )
 
         self.items = try subcontainer.decode([T].self, forKey: .items)
     }

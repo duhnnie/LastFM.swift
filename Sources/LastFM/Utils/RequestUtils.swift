@@ -2,7 +2,30 @@ import Foundation
 import SwiftRestClient
 
 internal struct RequestUtils: Requester {
+
     internal static let shared = RequestUtils()
+    internal static let allowedURLQueryCharacters: CharacterSet = {
+        var allowedCharacters = CharacterSet.urlQueryAllowed
+
+        allowedCharacters.remove("+")
+        allowedCharacters.remove("/")
+        allowedCharacters.remove("?")
+        allowedCharacters.remove("&")
+        allowedCharacters.remove("=")
+        allowedCharacters.remove("*")
+
+        return allowedCharacters
+    }()
+
+    internal static func urlEncode(_ string: String) throws -> String {
+        guard let string = string.addingPercentEncoding(
+            withAllowedCharacters: Self.allowedURLQueryCharacters
+        ) else {
+            throw RuntimeError("Can't encode string")
+        }
+
+        return string
+    }
 
     private let apiClient: APIClient
 
@@ -10,7 +33,7 @@ internal struct RequestUtils: Requester {
         self.apiClient = apiClient
     }
 
-    internal func build(params: [String : String], secure: Bool) -> URL {
+    internal static func build(params: [String : String], secure: Bool) -> URL {
         var urlComponents = URLComponents(
             string: secure ? LastFM.SECURE_API_HOST : LastFM.INSECURE_API_HOST
         )!
@@ -22,12 +45,10 @@ internal struct RequestUtils: Requester {
         return urlComponents.url!
     }
 
-    internal func makeGetRequest(
-        url: URL,
-        headers: SwiftRestClient.Headers?,
-        onCompletion: @escaping LastFM.OnCompletion<Data>
-    ) {
-        apiClient.get(url, headers: headers) { data, response, error in
+    private static func handleResponse(
+        _ onCompletion: @escaping LastFM.OnCompletion<Data>
+    ) -> (Data?, URLResponse?, Error?) -> Void {
+        return { (data: Data?, response: URLResponse?, error: Error?) in
             guard error == nil else {
                 onCompletion(.failure(.OtherError(error!)))
                 return
@@ -45,7 +66,10 @@ internal struct RequestUtils: Requester {
                 {
                     onCompletion(.success(data))
                 } else {
-                    let jsonDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                    let jsonDict = try JSONSerialization.jsonObject(
+                        with: data,
+                        options: []
+                    ) as? [String: Any]
 
                     guard
                         let json = jsonDict,
@@ -65,12 +89,10 @@ internal struct RequestUtils: Requester {
         }
     }
 
-    internal func getDataAndParse<T: Decodable>(
-        url: URL,
-        headers: SwiftRestClient.Headers?,
-        onCompletion: @escaping LastFM.OnCompletion<T>
-    ) {
-        makeGetRequest(url: url, headers: headers) { result in
+    private static func handleEntityDecoding<T: Decodable>(
+        _ onCompletion: @escaping LastFM.OnCompletion<T>
+    ) -> (LastFM.OnCompletion<Data>) {
+        return { result in
             switch (result) {
             case .success(let data):
                 do {
@@ -88,4 +110,42 @@ internal struct RequestUtils: Requester {
             }
         }
     }
+
+    internal func getDataAndParse<T: Decodable>(
+        params: [String: String],
+        secure: Bool = false,
+        onCompletion: @escaping LastFM.OnCompletion<T>
+    ) {
+        var params = params
+        params["format"] =  "json"
+
+        let url = Self.build(params: params, secure: secure)
+        let onDataReady = Self.handleEntityDecoding(onCompletion)
+        let onRequestCompletion = Self.handleResponse(onDataReady)
+
+        apiClient.get(url, headers: nil, onCompletion: onRequestCompletion)
+    }
+
+    internal func postFormURLEncodedAndParse<T: Decodable>(
+        payload: [String: String],
+        secure: Bool,
+        onCompletion: @escaping LastFM.OnCompletion<T>
+    ) throws {
+        guard
+            let encodedFields = try? payload.map({ (key, value) -> String in
+                return try "\(Self.urlEncode(key))=\(Self.urlEncode(value))"
+            }),
+            let body = encodedFields.joined(separator: "&").data(using: .utf8)
+        else {
+            throw RuntimeError("Can't encode fields.")
+        }
+
+        let headers = ["Content-Type": "application/x-www-formurlencoded"]
+        let url = Self.build(params: ["format": "json"], secure: secure)
+        let onDataReady = Self.handleEntityDecoding(onCompletion)
+        let onRequestCompletion = Self.handleResponse(onDataReady)
+
+        apiClient.post(url, body: body, headers: headers, onCompletion: onRequestCompletion)
+    }
+
 }
