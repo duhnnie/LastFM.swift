@@ -34,17 +34,11 @@ public struct UserModule {
         extended: Bool,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<T>>
     ) {
-        var parsedParams = instance.parseParams(params: params, method: APIMethod.getRecentTracks)
+        var params = instance.normalizeParams(params: params, method: APIMethod.getRecentTracks)
 
-        parsedParams["extended"] = extended ? "1" : "0"
+        params["extended"] = extended ? "1" : "0"
 
-        let requestURL = requester.build(params: parsedParams, secure: false)
-
-        requester.getDataAndParse(
-            url: requestURL,
-            headers: nil,
-            onCompletion: onCompletion
-        )
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
 
     public func getRecentTracks(
@@ -65,45 +59,29 @@ public struct UserModule {
         params: UserTopTracksParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<UserTopTrack>>
     ) {
-        let parsedParams = instance.parseParams(params: params, method: APIMethod.getTopTracks)
-        let requestURL = requester.build(params: parsedParams, secure: false)
+        let params = instance.normalizeParams(params: params, method: APIMethod.getTopTracks)
 
-        requester.getDataAndParse(
-            url: requestURL,
-            headers: nil,
-            onCompletion: onCompletion
-        )
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
 
     public func getWeeklyTrackChart(
         params: UserWeeklyTrackChartParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionList<UserWeeklyChartTrack>>
     ) {
-        let parsedParams = instance.parseParams(
+        let params = instance.normalizeParams(
             params: params,
             method: APIMethod.getWeeklyTrackChart
         )
 
-        let requestURL = requester.build(params: parsedParams, secure: false)
-
-        requester.getDataAndParse(
-            url: requestURL,
-            headers: nil,
-            onCompletion: onCompletion
-        )
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
 
     public func getLovedTracks(
         params: LovedTracksParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<LovedTrack>>
     ) {
-        let parsedParams = instance.parseParams(params: params, method: APIMethod.getLovedTracks)
-        let requestURL = requester.build(params: parsedParams, secure: false)
+        let params = instance.normalizeParams(params: params, method: APIMethod.getLovedTracks)
 
-        requester.getDataAndParse(
-            url: requestURL,
-            headers: nil,
-            onCompletion: onCompletion
-        )
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
 }

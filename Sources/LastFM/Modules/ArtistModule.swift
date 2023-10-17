@@ -22,10 +22,9 @@ public struct ArtistModule {
         params: ArtistTopTracksParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ArtistTopTrack>>
     ) {
-        let parsedParams = instance.parseParams(params: params, method: APIMethod.getTopTracks)
-        let requestURL = requester.build(params: parsedParams, secure: false)
+        let params = instance.normalizeParams(params: params, method: APIMethod.getTopTracks)
 
-        requester.getDataAndParse(url: requestURL, headers: nil, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
 
 }
