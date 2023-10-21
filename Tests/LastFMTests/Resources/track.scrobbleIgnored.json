@@ -1,0 +1,147 @@
+{
+    "scrobbles": {
+        "scrobble": [
+            {
+                "artist": {
+                    "corrected": "0",
+                    "#text": "Snail Mail"
+                },
+                "album": {
+                    "corrected": "0",
+                    "#text": "Lush"
+                },
+                "track": {
+                    "corrected": "0",
+                    "#text": "Pristine"
+                },
+                "ignoredMessage": {
+                    "code": "0",
+                    "#text": ""
+                },
+                "albumArtist": {
+                    "corrected": "0",
+                    "#text": "Snail Mail"
+                },
+                "timestamp": "1697901133"
+            },
+            {
+                "artist": {
+                    "corrected": "0"
+                },
+                "album": {
+                    "corrected": "0",
+                    "#text": "If These Streets Could Talk"
+                },
+                "track": {
+                    "corrected": "0",
+                    "#text": "Our Work Of Art"
+                },
+                "ignoredMessage": {
+                    "code": "1",
+                    "#text": ""
+                },
+                "albumArtist": {
+                    "corrected": "0",
+                    "#text": "Just Surrender"
+                },
+                "timestamp": "1697901133"
+            },
+            {
+                "artist": {
+                    "corrected": "0",
+                    "#text": "+44"
+                },
+                "album": {
+                    "corrected": "0",
+                    "#text": "When Your Heart Stops Beating"
+                },
+                "track": {
+                    "corrected": "0"
+                },
+                "ignoredMessage": {
+                    "code": "2",
+                    "#text": ""
+                },
+                "albumArtist": {
+                    "corrected": "0",
+                    "#text": "+44"
+                },
+                "timestamp": "1697905422"
+            },
+            {
+                "artist": {
+                    "corrected": "0",
+                    "#text": "Jamiroquai"
+                },
+                "album": {
+                    "corrected": "0",
+                    "#text": "Dynamite"
+                },
+                "track": {
+                    "corrected": "0",
+                    "#text": "Seven Days In Sunny June"
+                },
+                "ignoredMessage": {
+                    "code": "3",
+                    "#text": ""
+                },
+                "albumArtist": {
+                    "corrected": "0",
+                    "#text": "Jamiroquai"
+                },
+                "timestamp": "1457853498"
+            },
+            {
+                "artist": {
+                    "corrected": "0",
+                    "#text": "Soccer Mommy"
+                },
+                "album": {
+                    "corrected": "0",
+                    "#text": "Clean"
+                },
+                "track": {
+                    "corrected": "0",
+                    "#text": "Flaw"
+                },
+                "ignoredMessage": {
+                    "code": "4",
+                    "#text": ""
+                },
+                "albumArtist": {
+                    "corrected": "0",
+                    "#text": "Soccer Mommy"
+                },
+                "timestamp": "4853580042"
+            },
+            {
+                "artist": {
+                    "corrected": "0",
+                    "#text": "Broken Social Scene"
+                },
+                "album": {
+                    "corrected": "0",
+                    "#text": "You Forgot It In People"
+                },
+                "track": {
+                    "corrected": "0",
+                    "#text": "Cause = Time"
+                },
+                "ignoredMessage": {
+                    "code": "5",
+                    "#text": ""
+                },
+                "albumArtist": {
+                    "corrected": "0",
+                    "#text": "Broken Social Scene"
+                },
+                "timestamp": "1697905362"
+            }
+        ],
+        "@attr": {
+            "ignored": 5,
+            "accepted": 1
+        }
+    }
+}
+

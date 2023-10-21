@@ -9,7 +9,7 @@ class ChartModuleTests: XCTestCase {
     )
 
     private var instance: ChartModule!
-    private var apiClient = APICLientMock()
+    private var apiClient = APIClientMock()
 
     override func setUpWithError() throws {
         instance = ChartModule(

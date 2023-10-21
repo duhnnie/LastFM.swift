@@ -14,6 +14,15 @@ internal struct Util {
         )
     }
 
+    internal static func areSameQueries(
+        _ queryItemsA: [URLQueryItem],
+        _ queryItemsB: [URLQueryItem]
+    ) -> Bool {
+        return queryItemsA.count == queryItemsB.count && queryItemsA.allSatisfy({ urlQueryItem in
+            return queryItemsB.contains(urlQueryItem)
+        })
+    }
+
     internal static func areSameURL(_ urlA: URL, _ urlB: URL) -> Bool {
         if !(urlA.scheme == urlB.scheme && urlA.host == urlB.host) {
             return false
@@ -29,9 +38,7 @@ internal struct Util {
             return false
         }
 
-        return queryItemsA.count == queryItemsB.count && queryItemsA.allSatisfy({ urlQueryItem in
-            return queryItemsB.contains(urlQueryItem)
-        })
+        return areSameQueries(queryItemsA, queryItemsB)
     }
 
     internal static func areSameURL(_ urlStringA: String, _ urlStringB: String) -> Bool {

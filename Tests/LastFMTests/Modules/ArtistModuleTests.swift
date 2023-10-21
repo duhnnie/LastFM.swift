@@ -9,7 +9,7 @@ class ArtistModuleTests: XCTestCase {
     )
 
     private var instance: ArtistModule!
-    private var apiClient = APICLientMock()
+    private var apiClient = APIClientMock()
 
     override func setUpWithError() throws {
         instance = ArtistModule(

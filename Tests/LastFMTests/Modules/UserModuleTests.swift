@@ -9,7 +9,7 @@ class UserTests: XCTestCase {
     )
 
     private var instance: UserModule!
-    private var apiClientMock = APICLientMock()
+    private var apiClientMock = APIClientMock()
 
     override func setUpWithError() throws {
         instance = UserModule(

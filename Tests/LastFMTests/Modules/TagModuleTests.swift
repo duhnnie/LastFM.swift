@@ -9,7 +9,7 @@ class TagModuleTests: XCTestCase {
     )
 
     private var instance: TagModule!
-    private var apiClient = APICLientMock()
+    private var apiClient = APIClientMock()
 
     override func setUpWithError() throws {
         instance = TagModule(

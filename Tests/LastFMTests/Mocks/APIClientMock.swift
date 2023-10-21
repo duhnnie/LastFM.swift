@@ -2,7 +2,7 @@ import Foundation
 import SwiftRestClient
 @testable import LastFM
 
-final internal class APICLientMock: APIClient, Mock {
+final internal class APIClientMock: APIClient, Mock {
     internal var data: Data?
     internal var response: URLResponse?
     internal var error: Error?
