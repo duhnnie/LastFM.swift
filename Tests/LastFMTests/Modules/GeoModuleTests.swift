@@ -9,7 +9,7 @@ class GeoModuleTests: XCTestCase {
     )
 
     private var instance: GeoModule!
-    private var apiClient = APICLientMock()
+    private var apiClient = APIClientMock()
 
     override func setUpWithError() throws {
         instance = GeoModule(

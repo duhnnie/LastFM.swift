@@ -1,0 +1,125 @@
+{
+    "scrobbles": {
+        "scrobble": [
+            {
+                "artist": {
+                    "corrected": "0",
+                    "#text": "+44"
+                },
+                "album": {
+                    "corrected": "0",
+                    "#text": "When Your Heart Stops Beating"
+                },
+                "track": {
+                    "corrected": "0",
+                    "#text": "Cliff Diving"
+                },
+                "ignoredMessage": {
+                    "code": "0",
+                    "#text": ""
+                },
+                "albumArtist": {
+                    "corrected": "0",
+                    "#text": "+44"
+                },
+                "timestamp": "1697843437"
+            },
+            {
+                "artist": {
+                    "corrected": "0",
+                    "#text": "Broken Social Scene"
+                },
+                "album": {
+                    "corrected": "0",
+                    "#text": "You Forgot It In People"
+                },
+                "track": {
+                    "corrected": "0",
+                    "#text": "Cause = Time"
+                },
+                "ignoredMessage": {
+                    "code": "0",
+                    "#text": ""
+                },
+                "albumArtist": {
+                    "corrected": "0",
+                    "#text": "Broken Social Scene"
+                },
+                "timestamp": "1697843377"
+            },
+            {
+                "artist": {
+                    "corrected": "0",
+                    "#text": "Nine Inch Nails"
+                },
+                "album": {
+                    "corrected": "0",
+                    "#text": "Not The Actual Events"
+                },
+                "track": {
+                    "corrected": "0",
+                    "#text": "Branches / Bones"
+                },
+                "ignoredMessage": {
+                    "code": "0",
+                    "#text": ""
+                },
+                "albumArtist": {
+                    "corrected": "0",
+                    "#text": "Nine Inch Nails"
+                },
+                "timestamp": "1697843317"
+            },
+            {
+                "artist": {
+                    "corrected": "0",
+                    "#text": "Llegas"
+                },
+                "album": {
+                    "corrected": "0",
+                    "#text": "#VieneElSol"
+                },
+                "track": {
+                    "corrected": "0",
+                    "#text": "Viene El Sol"
+                },
+                "ignoredMessage": {
+                    "code": "0",
+                    "#text": ""
+                },
+                "albumArtist": {
+                    "corrected": "0",
+                    "#text": "Llegas"
+                },
+                "timestamp": "1697843257"
+            },
+            {
+                "artist": {
+                    "corrected": "0",
+                    "#text": "Foo Fighters"
+                },
+                "album": {
+                    "corrected": "0",
+                    "#text": "Wasting Light"
+                },
+                "track": {
+                    "corrected": "0",
+                    "#text": "Back & Forth"
+                },
+                "ignoredMessage": {
+                    "code": "0",
+                    "#text": ""
+                },
+                "albumArtist": {
+                    "corrected": "0",
+                    "#text": "Foo Fighters"
+                },
+                "timestamp": "1697843197"
+            }
+        ],
+        "@attr": {
+            "ignored": 0,
+            "accepted": 5
+        }
+    }
+}
