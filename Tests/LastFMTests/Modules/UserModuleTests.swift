@@ -311,14 +311,12 @@ class UserTests: XCTestCase {
         )!
 
         let fakeData = try Data(contentsOf: jsonURL)
-
+        let params = UserWeeklyChartParams(user: "user", from: 123412, to: 53452)
 
         let expectedEntity = try JSONDecoder().decode(
-            CollectionList<UserWeeklyChartTrack>.self,
+            CollectionList<UserWeeklyTrackChart>.self,
             from: fakeData
         )
-
-        let params = UserWeeklyTrackChartParams(user: "user", from: 123412, to: 53452)
 
         apiClientMock.data = fakeData
         apiClientMock.response = Constants.RESPONSE_200_OK
@@ -351,7 +349,7 @@ class UserTests: XCTestCase {
     }
 
     func test_getWeeklyTrackChart_failure() throws {
-        let params = UserWeeklyTrackChartParams(user: "asdf", from: 3452, to: 56433)
+        let params = UserWeeklyChartParams(user: "asdf", from: 3452, to: 56433)
         let expectation = expectation(description: "Waiting for getWeeklyTrackChart")
         apiClientMock.error = RuntimeError("Fake error")
 
@@ -487,5 +485,51 @@ class UserTests: XCTestCase {
         }
 
         waitForExpectations(timeout: 3)
+    }
+
+    // getWeeklyArtistChart
+
+    func test_getWeeklyArtistChart_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/user.getWeeklyArtistChart",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let params = UserWeeklyChartParams(user: "user", from: 123412, to: 53452)
+
+        let expectedEntity = try JSONDecoder().decode(
+            CollectionList<UserWeeklyArtistChart>.self,
+            from: fakeData
+        )
+
+        apiClientMock.data = fakeData
+        apiClientMock.response = Constants.RESPONSE_200_OK
+
+        let expectation = expectation(description: "Waiting for getWeeklyArtistChart")
+
+        instance.getWeeklyArtistChart(params: params) { result in
+            switch (result) {
+            case .success(let entity):
+                XCTAssertEqual(entity, expectedEntity)
+            case .failure(let error):
+                XCTFail("Expected to be a success but got a failure with \(error)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+
+        XCTAssertEqual(apiClientMock.postCalls.count, 0)
+        XCTAssertEqual(apiClientMock.getCalls.count, 1)
+        XCTAssertEqual(apiClientMock.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClientMock.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?method=user.getweeklyartistchart&user=\(params.user)&from=\(params.from)&to=\(params.to)&api_key=\(Constants.API_KEY)&format=json"
+            )
+        )
     }
 }
