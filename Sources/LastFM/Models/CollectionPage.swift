@@ -59,9 +59,26 @@ public struct CollectionPage<T: Decodable & Equatable>: Decodable, Equatable {
             throw RuntimeError("Error at getting root key.")
         }
 
-        let subcontainer = try container.nestedContainer(keyedBy: InnerCodingKeys.self, forKey: rootKey)
+        let subcontainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: rootKey)
+        var pagination: Pagination?
+        var items: [T]?
 
-        self.items = try subcontainer.decode([T].self, forKey: .items)
-        self.pagination = try subcontainer.decode(Pagination.self, forKey: .pagination)
+        for key in subcontainer.allKeys {
+            if key.stringValue == InnerCodingKeys.pagination.stringValue {
+                pagination = try subcontainer.decode(Pagination.self, forKey: key)
+            } else {
+                items = try subcontainer.decode([T].self, forKey: key)
+            }
+        }
+
+        guard
+            let pagination = pagination,
+            let items = items
+        else {
+            throw RuntimeError("Can't decode list")
+        }
+
+        self.pagination = pagination
+        self.items = items
     }
 }
