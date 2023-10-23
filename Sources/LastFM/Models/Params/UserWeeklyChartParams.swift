@@ -1,6 +1,6 @@
 import Foundation
 
-public struct UserWeeklyTrackChartParams: Params {
+public struct UserWeeklyChartParams: Params {
 
     public var user: String
     public var from: UInt
