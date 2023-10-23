@@ -1,6 +1,7 @@
 import Foundation
 
 public struct MBEntity: MBeable {
+    
     public let name: String
     public let mbid: String
 
@@ -9,9 +10,4 @@ public struct MBEntity: MBeable {
         case mbid = "mbid"
     }
 
-    // TODO: remove this initializer when turning this struct into internal
-//    public init(name: String, mbid: String) {
-//        self.name = name
-//        self.mbid = mbid
-//    }
 }
