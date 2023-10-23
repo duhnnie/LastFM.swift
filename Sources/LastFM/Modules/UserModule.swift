@@ -84,4 +84,13 @@ public struct UserModule {
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
+
+    public func getTopArtists(
+        params: UserTopArtistsParams,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<UserTopArtist>>
+    ) {
+        let params = instance.normalizeParams(params: params, method: APIMethod.getTopArtists)
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
 }

@@ -6,19 +6,22 @@ public struct LastFMImages: Decodable, Equatable {
         case M = "medium"
         case L = "large"
         case XL = "extralarge"
+        case MG = "mega"
     }
 
     private(set) public var small: URL?
     private(set) public var medium: URL?
     private(set) public var large: URL?
     private(set) public var extraLarge: URL?
+    private(set) public var mega: URL?
 
     public var hasImages: Bool {
         return [
             small,
             medium,
             large,
-            extraLarge
+            extraLarge,
+            mega
         ].contains { url in
             url != nil
         }
@@ -46,6 +49,8 @@ public struct LastFMImages: Decodable, Equatable {
                 self.large = URL(string: urlString)
             case .XL:
                 self.extraLarge = URL(string: urlString)
+            case .MG:
+                self.mega = URL(string: urlString)
             }
         }
     }
