@@ -22,7 +22,7 @@ class TagModuleTests: XCTestCase {
         apiClient.clearMock()
     }
 
-    // getTropTracks
+    // getTopTracks
 
     func test_getTopTracks_success() throws {
         let fakeDataURL = Bundle.module.url(forResource: "Resources/tag.getTopTracks", withExtension: "json")!
@@ -72,4 +72,43 @@ class TagModuleTests: XCTestCase {
         }
     }
 
+    // getTopArtists
+
+    func test_getTopArtists_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/tag.getTopArtists",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectedEntity = try JSONDecoder().decode(CollectionPage<TagTopArtist>.self, from: fakeData)
+        let params = TagTopArtistsParams(tag: "Progressive", limit: 5, page: 1)
+        let expectation = expectation(description: "waiting for getTopArtists")
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getTopArtists(params: params) { result in
+            switch(result) {
+            case .success(let list):
+                XCTAssertEqual(list, expectedEntity)
+            case .failure(let error):
+                XCTFail("Expected to fail. Got \"\(error.localizedDescription)\" error instead")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertNil(apiClient.getCalls[0].headers)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?method=tag.gettopartists&api_key=\(Constants.API_KEY)&limit=\(params.limit)&format=json&tag=\(params.tag.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&page=1"
+            )
+        )
+
+    }
 }
