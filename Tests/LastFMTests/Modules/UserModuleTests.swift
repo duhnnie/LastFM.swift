@@ -430,4 +430,62 @@ class UserTests: XCTestCase {
 
         waitForExpectations(timeout: 3)
     }
+
+    // getTopArtists
+
+    func test_getTopArtists_success() throws {
+        let fakeDataURL = Bundle.module.url(forResource: "Resources/user.getTopArtists", withExtension: "json")!
+        let fakeData = try Data(contentsOf: fakeDataURL)
+        let params = UserTopArtistsParams(user: "someUser", limit: 5, page: 12)
+        let expectation = expectation(description: "waiting for getTopArtists")
+
+        let expectedEntity = try JSONDecoder().decode(
+            CollectionPage<UserTopArtist>.self,
+            from: fakeData
+        )
+
+        apiClientMock.data = fakeData
+        apiClientMock.response = Constants.RESPONSE_200_OK
+
+        instance.getTopArtists(params: params) { result in
+            switch(result) {
+            case .success(let entity):
+                XCTAssertEqual(entity, expectedEntity)
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it fail with error: \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClientMock.getCalls.count, 1)
+        XCTAssertEqual(apiClientMock.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClientMock.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?method=user.gettopartists&user=\(params.user)&period=\(params.period)&limit=\(params.limit)&page=\(params.page)&api_key=\(Constants.API_KEY)&format=json"
+            )
+        )
+    }
+
+    func test_getTopArtists_failure() throws {
+        let params = UserTopArtistsParams(user: "Copo", limit: 345, page: 345)
+        let expectation = expectation(description: "waiting for getLovedTracks")
+
+        apiClientMock.error = RuntimeError("Any error")
+
+        instance.getTopArtists(params: params) { result in
+            switch(result) {
+            case .success(_):
+                XCTFail("Expected to fail, but it succeed.")
+            case .failure(_):
+                XCTAssert(true)
+            }
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+    }
 }
