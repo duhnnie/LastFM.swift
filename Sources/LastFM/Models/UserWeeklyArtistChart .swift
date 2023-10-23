@@ -1,6 +1,6 @@
 import Foundation
 
-public struct UserWeeklyChartTrack: Decodable, Equatable {
+public struct UserWeeklyTrackChart: Decodable, Equatable {
     public let mbid: String
     public let name: String
     public let url: URL

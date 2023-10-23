@@ -65,8 +65,8 @@ public struct UserModule {
     }
 
     public func getWeeklyTrackChart(
-        params: UserWeeklyTrackChartParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionList<UserWeeklyChartTrack>>
+        params: UserWeeklyChartParams,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionList<UserWeeklyTrackChart>>
     ) {
         let params = instance.normalizeParams(
             params: params,
@@ -93,4 +93,14 @@ public struct UserModule {
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
+
+    public func getWeeklyArtistChart(
+        params: UserWeeklyChartParams,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionList<UserWeeklyArtistChart>>
+    ) {
+        let params = instance.normalizeParams(params: params, method: APIMethod.getWeeklyArtistChart)
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
 }

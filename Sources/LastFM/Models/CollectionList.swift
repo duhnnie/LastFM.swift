@@ -15,10 +15,6 @@ public struct CollectionList<T: Decodable & Equatable>: Decodable, Equatable {
         }
     }
 
-    enum InnerCodingKeys: String, CodingKey {
-        case items = "track"
-    }
-
     public let items: [T]
 
     public init(from decoder: Decoder) throws {
@@ -29,11 +25,23 @@ public struct CollectionList<T: Decodable & Equatable>: Decodable, Equatable {
         }
 
         let subcontainer = try container.nestedContainer(
-            keyedBy: InnerCodingKeys.self,
+            keyedBy: CodingKeys.self,
             forKey: rootKey
         )
 
-        self.items = try subcontainer.decode([T].self, forKey: .items)
+        var items: [T]?
+
+        for key in subcontainer.allKeys {
+            if key.stringValue != "@attr" {
+                items = try subcontainer.decode([T].self, forKey: key)
+            }
+        }
+
+        guard let items = items else {
+            throw RuntimeError("Can't decode list")
+        }
+
+        self.items = items
     }
 }
 
