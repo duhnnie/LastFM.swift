@@ -43,8 +43,5 @@ public struct ScrobbleList: Decodable, Equatable {
         } else {
             throw RuntimeError("Can't decode scrobbles")
         }
-
-//        self.accepted = accepted
-//        self.ignored = ignored
     }
 }
