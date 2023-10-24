@@ -37,7 +37,13 @@ public struct LastFMImages: Decodable, Equatable {
 
         while !container.isAtEnd {
             let imageContainer = try container.nestedContainer(keyedBy: CodingKeys.self)
-            let size = try imageContainer.decode(LastFMImageSize.self, forKey: .size)
+
+            guard
+                let size = try? imageContainer.decode(LastFMImageSize.self, forKey: .size)
+            else {
+                continue
+            }
+
             let urlString = try imageContainer.decode(String.self, forKey: .url)
 
             switch (size) {

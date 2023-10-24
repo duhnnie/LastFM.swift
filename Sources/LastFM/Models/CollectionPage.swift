@@ -1,6 +1,7 @@
 import Foundation
 
 public struct CollectionPage<T: Decodable & Equatable>: Decodable, Equatable {
+
     public struct Pagination: Codable, Equatable {
         enum CodingKeys: String, CodingKey {
             case totalPages, page, perPage, total
@@ -81,4 +82,5 @@ public struct CollectionPage<T: Decodable & Equatable>: Decodable, Equatable {
         self.pagination = pagination
         self.items = items
     }
+    
 }
