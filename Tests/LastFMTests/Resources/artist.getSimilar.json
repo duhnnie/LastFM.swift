@@ -1,0 +1,174 @@
+{
+    "similarartists": {
+        "artist": [
+            {
+                "name": "Them Crooked Vultures",
+                "mbid": "4bc09c51-5d42-4c93-9ba6-8cc21a0edb8d",
+                "match": "1",
+                "url": "https://www.last.fm/music/Them+Crooked+Vultures",
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "extralarge"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "mega"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": ""
+                    }
+                ],
+                "streamable": "0"
+            },
+            {
+                "name": "Desert Sessions",
+                "mbid": "7a2e6b55-f149-4e74-be6a-30a1b1a387bb",
+                "match": "0.620856",
+                "url": "https://www.last.fm/music/Desert+Sessions",
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "extralarge"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "mega"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": ""
+                    }
+                ],
+                "streamable": "0"
+            },
+            {
+                "name": "Eagles of Death Metal",
+                "mbid": "de11b037-d880-40e0-8901-0397c768c457",
+                "match": "0.531252",
+                "url": "https://www.last.fm/music/Eagles+of+Death+Metal",
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "extralarge"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "mega"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": ""
+                    }
+                ],
+                "streamable": "0"
+            },
+            {
+                "name": "Kyuss",
+                "mbid": "ea0f2a37-7007-4217-a812-396227f5013a",
+                "match": "0.442753",
+                "url": "https://www.last.fm/music/Kyuss",
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "extralarge"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "mega"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": ""
+                    }
+                ],
+                "streamable": "0"
+            },
+            {
+                "name": "Royal Blood",
+                "mbid": "aadee541-1990-41df-b8a9-38ac679435ec",
+                "match": "0.303181",
+                "url": "https://www.last.fm/music/Royal+Blood",
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "extralarge"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": "mega"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "size": ""
+                    }
+                ],
+                "streamable": "0"
+            }
+        ],
+        "@attr": {
+            "artist": "Queens of the Stone Age"
+        }
+    }
+}
