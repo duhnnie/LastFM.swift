@@ -152,4 +152,84 @@ class ArtistModuleTests: XCTestCase {
 
         waitForExpectations(timeout: 3)
     }
+
+    // getSimilar
+
+    func test_getSimilar_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/artist.getSimilar",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectaction = expectation(description: "waiting for artist.getSimilar")
+
+        let params = ArtistSimilarParams(
+            artist: "Queens Of The Stone Age",
+            mbid: nil,
+            autocorrect: false,
+            limit: 5
+        )
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getSimilar(params: params) { result in
+            switch (result) {
+            case .success(let similarArtist):
+                XCTAssertEqual(similarArtist.items.count, 5)
+                XCTAssertEqual(similarArtist.items[1].name, "Desert Sessions")
+                XCTAssertEqual(similarArtist.items[1].mbid, "7a2e6b55-f149-4e74-be6a-30a1b1a387bb")
+                XCTAssertEqual(similarArtist.items[1].match, 0.620856)
+
+                XCTAssertEqual(
+                    similarArtist.items[1].url.absoluteString,
+                    "https://www.last.fm/music/Desert+Sessions"
+                )
+
+                XCTAssertEqual(
+                    similarArtist.items[1].images.small!.absoluteString,
+                    "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(
+                    similarArtist.items[1].images.medium!.absoluteString,
+                    "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(
+                    similarArtist.items[1].images.large!.absoluteString,
+                    "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(
+                    similarArtist.items[1].images.extraLarge!.absoluteString,
+                    "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(
+                    similarArtist.items[1].images.mega!.absoluteString,
+                    "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(similarArtist.items[0].streamable, false)
+            case .failure(let error):
+                XCTFail(
+                    "Expected to succeed, but it failed with error: \(error.localizedDescription)"
+                )
+            }
+
+            expectaction.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertNil(apiClient.getCalls[0].headers)
+
+//        XCTAssertTrue(
+//            Util.areSameURL(
+//                apiClient.getCalls[0].url.absoluteString,
+//                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettoptracks&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
+//        )
+    }
 }
