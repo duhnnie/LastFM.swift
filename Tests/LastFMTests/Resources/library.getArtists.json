@@ -1,0 +1,163 @@
+{
+    "artists": {
+        "artist": [
+            {
+                "tagcount": "0",
+                "image": [
+                    {
+                        "size": "small",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "medium",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "large",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "extralarge",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "mega",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    }
+                ],
+                "mbid": "67f66c07-6e61-4026-ade5-7e782fad3a5d",
+                "url": "https://www.last.fm/music/Foo+Fighters",
+                "playcount": "3690",
+                "name": "Foo Fighters",
+                "streamable": "0"
+            },
+            {
+                "tagcount": "0",
+                "image": [
+                    {
+                        "size": "small",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "medium",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "large",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "extralarge",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "mega",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    }
+                ],
+                "mbid": "",
+                "url": "https://www.last.fm/music/Llegas",
+                "playcount": "3398",
+                "name": "Llegas",
+                "streamable": "0"
+            },
+            {
+                "tagcount": "0",
+                "image": [
+                    {
+                        "size": "small",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "medium",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "large",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "extralarge",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "mega",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    }
+                ],
+                "mbid": "b7ffd2af-418f-4be2-bdd1-22f8b48613da",
+                "url": "https://www.last.fm/music/Nine+Inch+Nails",
+                "playcount": "3129",
+                "name": "Nine Inch Nails",
+                "streamable": "0"
+            },
+            {
+                "tagcount": "0",
+                "image": [
+                    {
+                        "size": "small",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "medium",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "large",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "extralarge",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "mega",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    }
+                ],
+                "mbid": "a74b1b7f-71a5-4011-9441-d0b5e4122711",
+                "url": "https://www.last.fm/music/Radiohead",
+                "playcount": "3060",
+                "name": "Radiohead",
+                "streamable": "0"
+            },
+            {
+                "tagcount": "0",
+                "image": [
+                    {
+                        "size": "small",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "medium",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "large",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "extralarge",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    },
+                    {
+                        "size": "mega",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                    }
+                ],
+                "mbid": "ba0d6274-db14-4ef5-b28d-657ebde1a396",
+                "url": "https://www.last.fm/music/The+Smashing+Pumpkins",
+                "playcount": "2000",
+                "name": "The Smashing Pumpkins",
+                "streamable": "0"
+            }
+        ],
+        "@attr": {
+            "user": "duhnnie",
+            "totalPages": "2850",
+            "page": "1",
+            "total": "14248",
+            "perPage": "5"
+        }
+    }
+}
