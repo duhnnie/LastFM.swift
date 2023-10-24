@@ -1,12 +1,12 @@
 import Foundation
 
-public struct GeoTopArtist: Decodable, Equatable {
+public struct ArtistSimilar: Decodable, Equatable {
 
     public let mbid: String
     public let name: String
     public let images: LastFMImages
     public let url: URL
-    public let listeners: UInt
+    public let match: Float
     public let streamable: Bool
 
     private enum CodingKeys: String, CodingKey {
@@ -14,7 +14,7 @@ public struct GeoTopArtist: Decodable, Equatable {
         case name
         case images = "image"
         case url
-        case listeners
+        case match
         case streamable
     }
 
@@ -26,14 +26,14 @@ public struct GeoTopArtist: Decodable, Equatable {
         self.images = try container.decode(LastFMImages.self, forKey: CodingKeys.images)
         self.url = try container.decode(URL.self, forKey: .url)
 
-        let listenersString = try container.decode(String.self, forKey: CodingKeys.listeners)
+        let matchString = try container.decode(String.self, forKey: CodingKeys.match)
         let streamableString = try container.decode(String.self, forKey: CodingKeys.streamable)
 
-        guard let listeners = UInt(listenersString) else {
-            throw RuntimeError("Can't parse listeners")
+        guard let match = Float(matchString) else {
+            throw RuntimeError("Can't parse match property")
         }
 
-        self.listeners = listeners
+        self.match = match
         self.streamable = streamableString == "1" ? true : false
     }
 

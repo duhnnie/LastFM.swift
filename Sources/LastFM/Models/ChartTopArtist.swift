@@ -1,6 +1,7 @@
 import Foundation
 
 public struct ChartTopArtist: Decodable, Equatable {
+
     public let mbid: String
     public let name: String
     public let images: LastFMImages
@@ -42,4 +43,5 @@ public struct ChartTopArtist: Decodable, Equatable {
         self.listeners = listeners
         self.streamable = streamableString == "1" ? true : false
     }
+    
 }
