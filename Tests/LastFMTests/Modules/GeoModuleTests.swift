@@ -107,6 +107,8 @@ class GeoModuleTests: XCTestCase {
         waitForExpectations(timeout: 3)
     }
 
+    // getTopArtists
+
     func test_getTopArtists_success() throws {
         let jsonURL = Bundle.module.url(
             forResource: "Resources/geo.getTopArtists",
@@ -168,4 +170,5 @@ class GeoModuleTests: XCTestCase {
 
         waitForExpectations(timeout: 3)
     }
+
 }

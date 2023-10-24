@@ -101,4 +101,68 @@ class ChartModuleTests: XCTestCase {
 
         waitForExpectations(timeout: 3)
     }
+
+    // getTopArtists
+
+    func test_getTopArtists_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/chart.getTopArtists",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "Waiting for getTopArtists")
+        let params = ChartTopArtistsParams(page: 1, limit: 5)
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getTopArtists(params: params) { result in
+            switch(result) {
+            case .success(let topArtists):
+                XCTAssertEqual(topArtists.pagination.page, 1)
+                XCTAssertEqual(topArtists.pagination.perPage, 5)
+                XCTAssertEqual(topArtists.pagination.total, 5552670)
+                XCTAssertEqual(topArtists.pagination.totalPages, 1110534)
+
+                XCTAssertEqual(topArtists.items.count, 5)
+                XCTAssertEqual(topArtists.items[0].name, "The Weeknd")
+                XCTAssertEqual(topArtists.items[0].listeners, 3555460)
+                XCTAssertEqual(topArtists.items[0].mbid, "c8b03190-306c-4120-bb0b-6f2ebfc06ea9")
+                XCTAssertEqual(topArtists.items[0].url.absoluteString, "https://www.last.fm/music/The+Weeknd")
+                XCTAssertEqual(topArtists.items[0].streamable, false)
+
+                XCTAssertEqual(
+                    topArtists.items[0].images.small!.absoluteString,
+                    "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(
+                    topArtists.items[0].images.medium!.absoluteString,
+                    "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(
+                    topArtists.items[0].images.large!.absoluteString,
+                    "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(
+                    topArtists.items[0].images.extraLarge!.absoluteString,
+                    "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(
+                    topArtists.items[0].images.mega!.absoluteString,
+                    "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+            case .failure(let error):
+                XCTFail("It was expected to succeed, but it failed with error \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+    }
 }
