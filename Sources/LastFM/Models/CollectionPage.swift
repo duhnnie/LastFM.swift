@@ -2,7 +2,7 @@ import Foundation
 
 public struct CollectionPage<T: Decodable & Equatable>: Decodable, Equatable {
 
-    public struct Pagination: Codable, Equatable {
+    public struct Pagination: Decodable, Equatable {
         enum CodingKeys: String, CodingKey {
             case totalPages, page, perPage, total
         }
@@ -31,20 +31,6 @@ public struct CollectionPage<T: Decodable & Equatable>: Decodable, Equatable {
         }
     }
 
-    struct CodingKeys: CodingKey {
-        var stringValue: String
-
-        init?(stringValue: String) {
-            self.stringValue = stringValue
-        }
-
-        var intValue: Int?
-
-        init?(intValue: Int) {
-            return nil
-        }
-    }
-
     enum InnerCodingKeys: String, CodingKey {
         case items = "track"
         case pagination = "@attr"
@@ -54,13 +40,17 @@ public struct CollectionPage<T: Decodable & Equatable>: Decodable, Equatable {
     public let pagination: Pagination
 
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let container = try decoder.container(keyedBy: StringCodingKeys.self)
 
         guard let rootKey = container.allKeys.first else {
             throw RuntimeError("Error at getting root key.")
         }
 
-        let subcontainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: rootKey)
+        let subcontainer = try container.nestedContainer(
+            keyedBy: StringCodingKeys.self,
+            forKey: rootKey
+        )
+        
         var pagination: Pagination?
         var items: [T]?
 

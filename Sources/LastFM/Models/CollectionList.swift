@@ -1,31 +1,18 @@
 import Foundation
 
 public struct CollectionList<T: Decodable & Equatable>: Decodable, Equatable {
-    struct CodingKeys: CodingKey {
-        var stringValue: String
-
-        init?(stringValue: String) {
-            self.stringValue = stringValue
-        }
-
-        var intValue: Int?
-
-        init?(intValue: Int) {
-            return nil
-        }
-    }
 
     public let items: [T]
 
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let container = try decoder.container(keyedBy: StringCodingKeys.self)
 
         guard let rootKey = container.allKeys.first else {
             throw RuntimeError("Error at getting root key.")
         }
 
         let subcontainer = try container.nestedContainer(
-            keyedBy: CodingKeys.self,
+            keyedBy: StringCodingKeys.self,
             forKey: rootKey
         )
 
@@ -43,5 +30,6 @@ public struct CollectionList<T: Decodable & Equatable>: Decodable, Equatable {
 
         self.items = items
     }
+
 }
 
