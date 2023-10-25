@@ -226,10 +226,68 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertEqual(apiClient.getCalls.count, 1)
         XCTAssertNil(apiClient.getCalls[0].headers)
 
-//        XCTAssertTrue(
-//            Util.areSameURL(
-//                apiClient.getCalls[0].url.absoluteString,
-//                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettoptracks&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
-//        )
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.getsimilar&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)")
+        )
+    }
+
+    // search
+
+    func test_search() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/artist.search",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let params = ArtistSearchParams(artist: "neuronas", limit: 5, page: 1)
+        let expectation = expectation(description: "waiting for artist search results")
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.search(params: params) { result in
+            switch(result) {
+            case .success(let searchResults):
+                XCTAssertEqual(searchResults.items.count, 5)
+                XCTAssertEqual(searchResults.items[3].name, "Las Últimas Neuronas")
+                XCTAssertEqual(searchResults.items[3].listeners, 1)
+                XCTAssertEqual(searchResults.items[3].mbid, "")
+
+                XCTAssertEqual(
+                    searchResults.items[3].url.absoluteString,
+                    "https://www.last.fm/music/Las+%C3%9Altimas+Neuronas"
+                )
+
+                XCTAssertEqual(searchResults.items[3].streamable, false)
+                XCTAssertNil(searchResults.items[3].images.small)
+                XCTAssertNil(searchResults.items[3].images.medium)
+                XCTAssertNil(searchResults.items[3].images.large)
+                XCTAssertNil(searchResults.items[3].images.extraLarge)
+                XCTAssertNil(searchResults.items[3].images.mega)
+
+                XCTAssertEqual(searchResults.pagination.startPage, 1)
+                XCTAssertEqual(searchResults.pagination.totalResults, 31)
+                XCTAssertEqual(searchResults.pagination.startIndex, 0)
+                XCTAssertEqual(searchResults.pagination.itemsPerPage, 5)
+
+            case.failure(let error):
+                XCTFail("It was supposed to succeed, but it failed with error \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertNil(apiClient.getCalls[0].headers)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.search&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&limit=\(params.limit)&page=\(params.page)")
+        )
     }
 }
