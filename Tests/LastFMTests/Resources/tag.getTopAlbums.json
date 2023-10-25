@@ -1,0 +1,168 @@
+{
+    "albums": {
+        "album": [
+            {
+                "name": "Miss Anthropocene (Deluxe Edition)",
+                "mbid": "",
+                "url": "https://www.last.fm/music/Grimes",
+                "artist": {
+                    "name": "Grimes",
+                    "mbid": "7e5a2a59-6d9f-4a17-b7c2-e1eedb7bd222",
+                    "url": "https://www.last.fm/music/Grimes"
+                },
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/c403c8620830e646a8f9eabcadb8c8a7.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/c403c8620830e646a8f9eabcadb8c8a7.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/c403c8620830e646a8f9eabcadb8c8a7.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/c403c8620830e646a8f9eabcadb8c8a7.png",
+                        "size": "extralarge"
+                    }
+                ],
+                "@attr": {
+                    "rank": "1"
+                }
+            },
+            {
+                "name": "The Human Condition",
+                "mbid": "",
+                "url": "https://www.last.fm/music/Jon+Bellion",
+                "artist": {
+                    "name": "Jon Bellion",
+                    "mbid": "2bd8101a-11c3-42d5-a9bd-6a3b26445f7e",
+                    "url": "https://www.last.fm/music/Jon+Bellion"
+                },
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/bf8ec059d42aa299906032caabec36fb.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/bf8ec059d42aa299906032caabec36fb.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/bf8ec059d42aa299906032caabec36fb.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/bf8ec059d42aa299906032caabec36fb.png",
+                        "size": "extralarge"
+                    }
+                ],
+                "@attr": {
+                    "rank": "2"
+                }
+            },
+            {
+                "name": "Sung Tongs",
+                "mbid": "7c9dec6f-4e55-3999-939c-6d8d912de3d0",
+                "url": "https://www.last.fm/music/Animal+Collective",
+                "artist": {
+                    "name": "Animal Collective",
+                    "mbid": "0c751690-c784-4a4f-b1e4-c1de27d47581",
+                    "url": "https://www.last.fm/music/Animal+Collective"
+                },
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/b636decc2e8922887e0987373421e626.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/b636decc2e8922887e0987373421e626.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/b636decc2e8922887e0987373421e626.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/b636decc2e8922887e0987373421e626.png",
+                        "size": "extralarge"
+                    }
+                ],
+                "@attr": {
+                    "rank": "3"
+                }
+            },
+            {
+                "name": "After School EP",
+                "mbid": "",
+                "url": "https://www.last.fm/music/Melanie+Martinez",
+                "artist": {
+                    "name": "Melanie Martinez",
+                    "mbid": "0df563ec-1a79-486e-a46d-5b9862a40311",
+                    "url": "https://www.last.fm/music/Melanie+Martinez"
+                },
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/0326b3a1f32cd199238f9c0b8db3d51b.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/0326b3a1f32cd199238f9c0b8db3d51b.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/0326b3a1f32cd199238f9c0b8db3d51b.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/0326b3a1f32cd199238f9c0b8db3d51b.png",
+                        "size": "extralarge"
+                    }
+                ],
+                "@attr": {
+                    "rank": "4"
+                }
+            },
+            {
+                "name": "House of Sugar",
+                "mbid": "",
+                "url": "https://www.last.fm/music/Alex+G",
+                "artist": {
+                    "name": "Alex G",
+                    "mbid": "b9e306aa-5f93-4f50-9dd1-335526e33c1a",
+                    "url": "https://www.last.fm/music/Alex+G"
+                },
+                "image": [
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/0fb06d94de31102e30dc28b6c23246b5.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/0fb06d94de31102e30dc28b6c23246b5.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/0fb06d94de31102e30dc28b6c23246b5.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/0fb06d94de31102e30dc28b6c23246b5.png",
+                        "size": "extralarge"
+                    }
+                ],
+                "@attr": {
+                    "rank": "5"
+                }
+            }
+        ],
+        "@attr": {
+            "tag": "Experimental",
+            "page": "1",
+            "perPage": "5",
+            "totalPages": "7708",
+            "total": "38538"
+        }
+    }
+}
