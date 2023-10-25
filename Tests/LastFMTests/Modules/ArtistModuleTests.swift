@@ -290,4 +290,92 @@ class ArtistModuleTests: XCTestCase {
                 "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.search&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&limit=\(params.limit)&page=\(params.page)")
         )
     }
+
+    func test_getTopAlbums_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/artist.getTopAlbums",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "waiting for artists' top albums")
+        let params = ArtistTopAlbumsParams(artist: "No Use For a Name", limit: 5)
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getTopAlbums(params: params) { result in
+            switch(result) {
+            case .success(let topAlbums):
+                XCTAssertEqual(topAlbums.items.count, 5)
+                XCTAssertEqual(topAlbums.pagination.page, 1)
+                XCTAssertEqual(topAlbums.pagination.perPage, 5)
+                XCTAssertEqual(topAlbums.pagination.totalPages, 1049)
+                XCTAssertEqual(topAlbums.pagination.total, 5244)
+
+                XCTAssertEqual(topAlbums.pagination.total, 5244)
+                XCTAssertEqual(topAlbums.items[1].name, "More Betterness!")
+                XCTAssertEqual(topAlbums.items[1].playcount, 1235966)
+
+                XCTAssertEqual(
+                    topAlbums.items[1].mbid,
+                    "272591da-1dd6-4713-8e01-7d180861129c"
+                )
+
+                XCTAssertEqual(
+                    topAlbums.items[1].url.absoluteString,
+                    "https://www.last.fm/music/No+Use+for+a+Name/More+Betterness%21"
+                )
+
+                XCTAssertEqual(topAlbums.items[1].artist.name, "No Use for a Name")
+
+                XCTAssertEqual(
+                    topAlbums.items[1].artist.mbid,
+                    "d7bd0fad-2f06-4936-89ad-60c5b6ada3c1"
+                )
+
+                XCTAssertEqual(
+                    topAlbums.items[1].artist.url.absoluteString,
+                    "https://www.last.fm/music/No+Use+for+a+Name"
+                )
+
+                XCTAssertEqual(
+                    topAlbums.items[1].images.small?.absoluteString,
+                    "https://lastfm.freetls.fastly.net/i/u/34s/a3ee30ac1c7c4176be8757ab8b8be5ce.png"
+                )
+
+                XCTAssertEqual(
+                    topAlbums.items[1].images.medium?.absoluteString,
+                    "https://lastfm.freetls.fastly.net/i/u/64s/a3ee30ac1c7c4176be8757ab8b8be5ce.png"
+                )
+
+                XCTAssertEqual(
+                    topAlbums.items[1].images.large?.absoluteString,
+                    "https://lastfm.freetls.fastly.net/i/u/174s/a3ee30ac1c7c4176be8757ab8b8be5ce.png"
+                )
+
+                XCTAssertEqual(
+                    topAlbums.items[1].images.extraLarge?.absoluteString,
+                    "https://lastfm.freetls.fastly.net/i/u/300x300/a3ee30ac1c7c4176be8757ab8b8be5ce.png"
+                )
+
+                XCTAssertNil(topAlbums.items[1].images.mega)
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it failed with error \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertNil(apiClient.getCalls[0].headers)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettopalbums&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
+        )
+    }
+
 }
