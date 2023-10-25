@@ -532,4 +532,75 @@ class UserTests: XCTestCase {
             )
         )
     }
+
+    // getTopAlbums
+
+    func test_getTopAlbums_success() throws {
+        let fakeDataURL = Bundle.module.url(forResource: "Resources/user.getTopAlbums", withExtension: "json")!
+        let fakeData = try Data(contentsOf: fakeDataURL)
+        let params = UserTopAlbumsParams(user: "someUser", limit: 5, page: 12)
+        let expectation = expectation(description: "waiting for getTopAlbums")
+
+        apiClientMock.data = fakeData
+        apiClientMock.response = Constants.RESPONSE_200_OK
+
+        instance.getTopAlbums(params: params) { result in
+            switch(result) {
+            case .success(let entity):
+                XCTAssertEqual(entity.items.count, 5)
+                XCTAssertEqual(entity.items[0].artist.name, "The Ataris")
+
+                XCTAssertEqual(
+                    entity.items[0].artist.mbid,
+                    "57805d77-f947-4851-b7fb-78baad154451"
+                )
+
+                XCTAssertEqual(
+                    entity.items[0].artist.url.absoluteString,
+                    "https://www.last.fm/music/The+Ataris"
+                )
+
+                XCTAssertEqual(
+                    entity.items[0].images.small!.absoluteString,
+                    "https://lastfm.freetls.fastly.net/i/u/34s/baad825eec21da267b92599dc9ed2f66.jpg"
+                )
+
+                XCTAssertEqual(
+                    entity.items[0].images.medium!.absoluteString,
+                    "https://lastfm.freetls.fastly.net/i/u/64s/baad825eec21da267b92599dc9ed2f66.jpg"
+                )
+
+                XCTAssertEqual(
+                    entity.items[0].images.large!.absoluteString,
+                    "https://lastfm.freetls.fastly.net/i/u/174s/baad825eec21da267b92599dc9ed2f66.jpg"
+                )
+
+                XCTAssertEqual(
+                    entity.items[0].images.extraLarge!.absoluteString,
+                    "https://lastfm.freetls.fastly.net/i/u/300x300/baad825eec21da267b92599dc9ed2f66.jpg"
+                )
+
+                XCTAssertNil(entity.items[0].images.mega)
+                XCTAssertEqual(entity.pagination.page, 1)
+                XCTAssertEqual(entity.pagination.perPage, 5)
+                XCTAssertEqual(entity.pagination.total, 30448)
+                XCTAssertEqual(entity.pagination.totalPages, 6090)
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it fail with error: \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClientMock.getCalls.count, 1)
+        XCTAssertEqual(apiClientMock.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClientMock.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?method=user.gettopalbums&user=\(params.user)&period=\(params.period)&limit=\(params.limit)&page=\(params.page)&api_key=\(Constants.API_KEY)&format=json"
+            )
+        )
+    }
 }
