@@ -5,6 +5,7 @@ public struct TagModule {
     internal enum APIMethod: String, MethodKey {
         case getTopTracks = "gettoptracks"
         case getTopArtists = "gettopartists"
+        case getTopAlbums = "gettopalbums"
 
         func getName() -> String {
             return "tag.\(self.rawValue)"
@@ -36,4 +37,15 @@ public struct TagModule {
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
+
+
+    public func getTopAlbums(
+        params: TagTopAlbumsParams,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<TagTopAlbum>>
+    ) {
+        let params = instance.normalizeParams(params: params, method: APIMethod.getTopAlbums)
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+    
 }
