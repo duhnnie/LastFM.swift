@@ -6,6 +6,7 @@ public struct ArtistModule {
         case getTopTracks = "gettoptracks"
         case getSimilar = "getsimilar"
         case search = "search"
+        case getTopAlbums = "gettopalbums"
 
         func getName() -> String {
             return "artist.\(self.rawValue)"
@@ -47,4 +48,12 @@ public struct ArtistModule {
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
 
+    public func getTopAlbums(
+        params: ArtistTopAlbumsParams,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ArtistTopAlbum>>
+    ) {
+        let params = instance.normalizeParams(params: params, method: APIMethod.getTopAlbums)
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
 }
