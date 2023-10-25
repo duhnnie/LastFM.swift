@@ -1,0 +1,173 @@
+{
+    "topalbums": {
+        "album": [
+            {
+                "artist": {
+                    "url": "https://www.last.fm/music/The+Ataris",
+                    "name": "The Ataris",
+                    "mbid": "57805d77-f947-4851-b7fb-78baad154451"
+                },
+                "image": [
+                    {
+                        "size": "small",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/baad825eec21da267b92599dc9ed2f66.jpg"
+                    },
+                    {
+                        "size": "medium",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/baad825eec21da267b92599dc9ed2f66.jpg"
+                    },
+                    {
+                        "size": "large",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/baad825eec21da267b92599dc9ed2f66.jpg"
+                    },
+                    {
+                        "size": "extralarge",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/baad825eec21da267b92599dc9ed2f66.jpg"
+                    }
+                ],
+                "mbid": "13b10ccd-7a67-3090-a59f-0833f8a1681d",
+                "url": "https://www.last.fm/music/The+Ataris/So+Long,+Astoria",
+                "playcount": "1118",
+                "@attr": {
+                    "rank": "1"
+                },
+                "name": "So Long, Astoria"
+            },
+            {
+                "artist": {
+                    "url": "https://www.last.fm/music/Goldmund",
+                    "name": "Goldmund",
+                    "mbid": ""
+                },
+                "image": [
+                    {
+                        "size": "small",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/ac8a5e157cd3b593fbda7ec19377521d.jpg"
+                    },
+                    {
+                        "size": "medium",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/ac8a5e157cd3b593fbda7ec19377521d.jpg"
+                    },
+                    {
+                        "size": "large",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/ac8a5e157cd3b593fbda7ec19377521d.jpg"
+                    },
+                    {
+                        "size": "extralarge",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/ac8a5e157cd3b593fbda7ec19377521d.jpg"
+                    }
+                ],
+                "mbid": "358b3195-77ed-4cfa-a57e-a95cd2f9d15e",
+                "url": "https://www.last.fm/music/Goldmund/Sometimes",
+                "playcount": "934",
+                "@attr": {
+                    "rank": "2"
+                },
+                "name": "Sometimes"
+            },
+            {
+                "artist": {
+                    "url": "https://www.last.fm/music/Foo+Fighters",
+                    "name": "Foo Fighters",
+                    "mbid": "67f66c07-6e61-4026-ade5-7e782fad3a5d"
+                },
+                "image": [
+                    {
+                        "size": "small",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/5f47acfda92b4ff488a52aee4b80da3f.png"
+                    },
+                    {
+                        "size": "medium",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/5f47acfda92b4ff488a52aee4b80da3f.png"
+                    },
+                    {
+                        "size": "large",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/5f47acfda92b4ff488a52aee4b80da3f.png"
+                    },
+                    {
+                        "size": "extralarge",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/5f47acfda92b4ff488a52aee4b80da3f.png"
+                    }
+                ],
+                "mbid": "12b54c44-8e71-4cda-9bb2-937fe3faa85d",
+                "url": "https://www.last.fm/music/Foo+Fighters/There+Is+Nothing+Left+to+Lose",
+                "playcount": "842",
+                "@attr": {
+                    "rank": "3"
+                },
+                "name": "There Is Nothing Left to Lose"
+            },
+            {
+                "artist": {
+                    "url": "https://www.last.fm/music/Nine+Inch+Nails",
+                    "name": "Nine Inch Nails",
+                    "mbid": "b7ffd2af-418f-4be2-bdd1-22f8b48613da"
+                },
+                "image": [
+                    {
+                        "size": "small",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/f4241803c93d47478518a5b33e71f0ab.png"
+                    },
+                    {
+                        "size": "medium",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/f4241803c93d47478518a5b33e71f0ab.png"
+                    },
+                    {
+                        "size": "large",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/f4241803c93d47478518a5b33e71f0ab.png"
+                    },
+                    {
+                        "size": "extralarge",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/f4241803c93d47478518a5b33e71f0ab.png"
+                    }
+                ],
+                "mbid": "44cbff72-9db6-4ad0-b4c8-b14986afc93a",
+                "url": "https://www.last.fm/music/Nine+Inch+Nails/With+Teeth",
+                "playcount": "827",
+                "@attr": {
+                    "rank": "4"
+                },
+                "name": "With Teeth"
+            },
+            {
+                "artist": {
+                    "url": "https://www.last.fm/music/The+Early+November",
+                    "name": "The Early November",
+                    "mbid": "8448783d-a68c-490f-b5c5-4a6364ef5537"
+                },
+                "image": [
+                    {
+                        "size": "small",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/39f11ca44c90a474db53c1f63b1baa5c.jpg"
+                    },
+                    {
+                        "size": "medium",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/39f11ca44c90a474db53c1f63b1baa5c.jpg"
+                    },
+                    {
+                        "size": "large",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/39f11ca44c90a474db53c1f63b1baa5c.jpg"
+                    },
+                    {
+                        "size": "extralarge",
+                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/39f11ca44c90a474db53c1f63b1baa5c.jpg"
+                    }
+                ],
+                "mbid": "78463b8a-adda-48c9-bba0-991e0bfd2240",
+                "url": "https://www.last.fm/music/The+Early+November/The+Mother,+The+Mechanic,+And+The+Path",
+                "playcount": "742",
+                "@attr": {
+                    "rank": "5"
+                },
+                "name": "The Mother, The Mechanic, And The Path"
+            }
+        ],
+        "@attr": {
+            "user": "Duhnnie",
+            "totalPages": "6090",
+            "page": "1",
+            "total": "30448",
+            "perPage": "5"
+        }
+    }
+}
