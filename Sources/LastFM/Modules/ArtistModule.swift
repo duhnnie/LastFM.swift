@@ -5,6 +5,7 @@ public struct ArtistModule {
     internal enum APIMethod: String, MethodKey {
         case getTopTracks = "gettoptracks"
         case getSimilar = "getsimilar"
+        case search = "search"
 
         func getName() -> String {
             return "artist.\(self.rawValue)"
@@ -33,6 +34,15 @@ public struct ArtistModule {
         onCompletion: @escaping LastFM.OnCompletion<CollectionList<ArtistSimilar>>
     ) {
         let params = instance.normalizeParams(params: params, method: APIMethod.getSimilar)
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
+    public func search(
+        params: ArtistSearchParams,
+        onCompletion: @escaping LastFM.OnCompletion<SearchResults<ArtistSearchResult>>
+    ) {
+        let params = instance.normalizeParams(params: params, method: APIMethod.search)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
