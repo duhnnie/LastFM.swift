@@ -112,4 +112,13 @@ public struct UserModule {
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
 
+    public func getWeeklyAlbumChart(
+        params: UserWeeklyChartParams,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionList<UserWeeklyAlbumChart>>
+    ) {
+        let params = instance.normalizeParams(params: params, method: APIMethod.getWeeklyAlbumChart)
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
 }
