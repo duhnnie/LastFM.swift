@@ -603,4 +603,64 @@ class UserTests: XCTestCase {
             )
         )
     }
+
+    func test_getWeeklyAlbumChart() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/user.getWeeklyAlbumChart",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let params = UserWeeklyChartParams(user: "user", from: 123412, to: 53452)
+
+        apiClientMock.data = fakeData
+        apiClientMock.response = Constants.RESPONSE_200_OK
+
+        let expectation = expectation(description: "Waiting for getWeeklyArtistChart")
+
+        instance.getWeeklyAlbumChart(params: params) { result in
+            switch (result) {
+            case .success(let entity):
+                XCTAssertEqual(entity.items.count, 1000)
+
+                XCTAssertEqual(
+                    entity.items[0].artist.mbid,
+                    "03ad1736-b7c9-412a-b442-82536d63a5c4"
+                )
+
+                XCTAssertEqual(entity.items[0].artist.name, "Elliott Smith")
+
+                XCTAssertEqual(
+                    entity.items[0].mbid,
+                    "028eb7db-16a4-4934-b3a8-2462ab50b121"
+                )
+
+                XCTAssertEqual(
+                    entity.items[0].url.absoluteString,
+                    "https://www.last.fm/music/Elliott+Smith/Either%2FOr"
+                )
+                XCTAssertEqual(entity.items[0].name, "Either/Or")
+                XCTAssertEqual(entity.items[0].rank, 1)
+                XCTAssertEqual(entity.items[0].playcount, 162)
+            case .failure(let error):
+                XCTFail("Expected to be a success but got a failure with \(error)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+
+        XCTAssertEqual(apiClientMock.postCalls.count, 0)
+        XCTAssertEqual(apiClientMock.getCalls.count, 1)
+        XCTAssertEqual(apiClientMock.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClientMock.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?method=user.getweeklyalbumchart&user=\(params.user)&from=\(params.from)&to=\(params.to)&api_key=\(Constants.API_KEY)&format=json"
+            )
+        )
+    }
+    
 }
