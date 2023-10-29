@@ -295,4 +295,47 @@ class TrackModuleTests: XCTestCase {
         )
     }
 
+    func test_unlove_success() throws {
+        let expectation = expectation(description: "waiting for unlove track request")
+        let params = TrackLoveParams(
+            track: "SomeTrack",
+            artist: "SomeArtist",
+            sessionKey: "someSessionKey"
+        )
+
+        let expectedPayload = "sk=someSessionKey&track=SomeTrack&artist=SomeArtist&method=track.unlove&api_sig=481b0418b5318df585faff2d8da9e0bf&api_key=someAPIKey"
+
+        apiClient.data = "{}".data(using: .utf8)
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        try instance.unlove(params: params) { error in
+            if error != nil {
+                XCTFail("It was suppossed to succeed, but it failed with error \(error!.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.postCalls.count, 1)
+
+        let payloadData = try XCTUnwrap(apiClient.postCalls[0].body)
+        let payload = String(data: payloadData, encoding: .utf8)!
+
+        XCTAssertTrue(Util.areSameURL(
+            "http://fakeDomain.com/?\(payload)",
+            "http://fakeDomain.com/?\(expectedPayload)"
+        ))
+
+        XCTAssertEqual(
+            apiClient.postCalls[0].headers,
+            ["Content-Type": "application/x-www-formurlencoded"]
+        )
+
+        XCTAssertEqual(
+            apiClient.postCalls[0].url.absoluteString,
+            "http://ws.audioscrobbler.com/2.0?format=json"
+        )
+    }
+
 }
