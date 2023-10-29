@@ -24,7 +24,7 @@ class TrackModuleTests: XCTestCase {
 
     // scrobble
 
-    func _test_scrobble_success() throws {
+    func test_scrobble_success() throws {
         let jsonURL = Bundle.module.url(forResource: "Resources/track.scrobble", withExtension: "json")!
         let fakeData = try Data(contentsOf: jsonURL)
         let expectedEntity = try JSONDecoder().decode(ScrobbleList.self, from: fakeData)
@@ -158,7 +158,7 @@ class TrackModuleTests: XCTestCase {
         )
     }
 
-    func _test_invalid_sessionkey() throws {
+    func test_invalid_sessionkey() throws {
         let jsonURL = Bundle.module.url(forResource: "Resources/invalidSessionKey", withExtension: "json")!
         let fakeData = try Data(contentsOf: jsonURL)
         let expectation = expectation(
@@ -250,6 +250,49 @@ class TrackModuleTests: XCTestCase {
         }
 
         waitForExpectations(timeout: 3)
+    }
+
+    func test_love_success() throws {
+        let expectation = expectation(description: "waiting for love track request")
+        let params = TrackLoveParams(
+            track: "SomeTrack",
+            artist: "SomeArtist",
+            sessionKey: "someSessionKey"
+        )
+
+        let expectedPayload = "sk=someSessionKey&track=SomeTrack&artist=SomeArtist&method=track.love&api_sig=c993788654294e65dc11ce48d6af0fab&api_key=someAPIKey"
+
+        apiClient.data = "{}".data(using: .utf8)
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        try instance.love(params: params) { error in
+            if error != nil {
+                XCTFail("It was suppossed to succeed, but it failed with error \(error!.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.postCalls.count, 1)
+
+        let payloadData = try XCTUnwrap(apiClient.postCalls[0].body)
+        let payload = String(data: payloadData, encoding: .utf8)!
+
+        XCTAssertTrue(Util.areSameURL(
+            "http://fakeDomain.com/?\(payload)",
+            "http://fakeDomain.com/?\(expectedPayload)"
+        ))
+
+        XCTAssertEqual(
+            apiClient.postCalls[0].headers,
+            ["Content-Type": "application/x-www-formurlencoded"]
+        )
+
+        XCTAssertEqual(
+            apiClient.postCalls[0].url.absoluteString,
+            "http://ws.audioscrobbler.com/2.0?format=json"
+        )
     }
 
 }
