@@ -15,4 +15,10 @@ internal protocol Requester {
         onCompletion: @escaping LastFM.OnCompletion<T>
     ) throws
 
+    func postFormURLEncoded(
+        payload: [String: String],
+        secure: Bool,
+        onCompletion: @escaping (LastFMError?) -> Void
+    ) throws
+
 }
