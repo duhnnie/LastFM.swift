@@ -6,6 +6,7 @@ public struct TrackModule {
     internal enum APIMethod: String, MethodKey {
         case scrobble = "scrobble"
         case love
+        case unlove
 
         func getName() -> String {
             return "track.\(self.rawValue)"
@@ -39,6 +40,20 @@ public struct TrackModule {
         onCompletion: @escaping (LastFMError?) -> Void
     ) throws {
         var payload = instance.normalizeParams(params: params, method: APIMethod.love)
+        try instance.addSignature(params: &payload)
+
+        try requester.postFormURLEncoded(
+            payload: payload,
+            secure: false,
+            onCompletion: onCompletion
+        )
+    }
+
+    public func unlove(
+        params: TrackLoveParams,
+        onCompletion: @escaping (LastFMError?) -> Void
+    ) throws {
+        var payload = instance.normalizeParams(params: params, method: APIMethod.unlove)
         try instance.addSignature(params: &payload)
 
         try requester.postFormURLEncoded(
