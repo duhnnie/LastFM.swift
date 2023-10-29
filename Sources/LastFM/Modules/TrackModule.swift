@@ -1,11 +1,11 @@
 import Foundation
 import SwiftRestClient
 
-
 public struct TrackModule {
 
     internal enum APIMethod: String, MethodKey {
         case scrobble = "scrobble"
+        case love
 
         func getName() -> String {
             return "track.\(self.rawValue)"
@@ -28,6 +28,20 @@ public struct TrackModule {
         try instance.addSignature(params: &payload)
 
         try requester.postFormURLEncodedAndParse(
+            payload: payload,
+            secure: false,
+            onCompletion: onCompletion
+        )
+    }
+
+    public func love(
+        params: TrackLoveParams,
+        onCompletion: @escaping (LastFMError?) -> Void
+    ) throws {
+        var payload = instance.normalizeParams(params: params, method: APIMethod.love)
+        try instance.addSignature(params: &payload)
+
+        try requester.postFormURLEncoded(
             payload: payload,
             secure: false,
             onCompletion: onCompletion

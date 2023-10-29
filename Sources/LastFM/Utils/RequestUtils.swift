@@ -45,6 +45,23 @@ internal struct RequestUtils: Requester {
         return urlComponents.url!
     }
 
+    internal static func buildForFormURLEncoded(
+        payload: [String: String]
+    ) throws -> (body: Data, headers: [String: String]) {
+        guard
+            let encodedFields = try? payload.map({ (key, value) -> String in
+                return try "\(Self.urlEncode(key))=\(Self.urlEncode(value))"
+            }),
+            let body = encodedFields.joined(separator: "&").data(using: .utf8)
+        else {
+            throw RuntimeError("Can't encode fields.")
+        }
+
+        let headers = ["Content-Type": "application/x-www-formurlencoded"]
+
+        return ( body: body, headers: headers )
+    }
+
     private static func handleResponse(
         _ onCompletion: @escaping LastFM.OnCompletion<Data>
     ) -> (Data?, URLResponse?, Error?) -> Void {
@@ -131,19 +148,40 @@ internal struct RequestUtils: Requester {
         secure: Bool,
         onCompletion: @escaping LastFM.OnCompletion<T>
     ) throws {
-        guard
-            let encodedFields = try? payload.map({ (key, value) -> String in
-                return try "\(Self.urlEncode(key))=\(Self.urlEncode(value))"
-            }),
-            let body = encodedFields.joined(separator: "&").data(using: .utf8)
-        else {
-            throw RuntimeError("Can't encode fields.")
+        guard let headerAndBody = try? Self.buildForFormURLEncoded(payload: payload) else {
+            throw RuntimeError("Error at building payload body.")
         }
 
-        let headers = ["Content-Type": "application/x-www-formurlencoded"]
+        let body = headerAndBody.body
+        let headers = headerAndBody.headers
         let url = Self.build(params: ["format": "json"], secure: secure)
         let onDataReady = Self.handleEntityDecoding(onCompletion)
         let onRequestCompletion = Self.handleResponse(onDataReady)
+
+        apiClient.post(url, body: body, headers: headers, onCompletion: onRequestCompletion)
+    }
+
+    internal func postFormURLEncoded(
+        payload: [String: String],
+        secure: Bool,
+        onCompletion: @escaping (LastFMError?) -> Void
+    ) throws {
+        guard let headerAndBody = try? Self.buildForFormURLEncoded(payload: payload) else {
+            throw RuntimeError("Error at building payload body.")
+        }
+
+        let body = headerAndBody.body
+        let headers = headerAndBody.headers
+        let url = Self.build(params: ["format": "json"], secure: secure)
+
+        let onRequestCompletion = Self.handleResponse { result in
+            switch(result) {
+            case .success(_):
+                onCompletion(nil)
+            case .failure(let error):
+                onCompletion(error)
+            }
+        }
 
         apiClient.post(url, body: body, headers: headers, onCompletion: onRequestCompletion)
     }
