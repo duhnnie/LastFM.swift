@@ -7,6 +7,7 @@ public struct TrackModule {
         case scrobble = "scrobble"
         case love
         case unlove
+        case updateNowPlaying
 
         func getName() -> String {
             return "track.\(self.rawValue)"
@@ -57,6 +58,21 @@ public struct TrackModule {
         try instance.addSignature(params: &payload)
 
         try requester.postFormURLEncoded(
+            payload: payload,
+            secure: false,
+            onCompletion: onCompletion
+        )
+    }
+
+    public func updateNowPlaying(
+        params: TrackNowPlayingParams,
+        onCompletion: @escaping LastFM.OnCompletion<TrackPlayingNow>
+    ) throws {
+        var payload = instance.normalizeParams(params: params, method: APIMethod.updateNowPlaying)
+
+        try instance.addSignature(params: &payload)
+
+        try requester.postFormURLEncodedAndParse(
             payload: payload,
             secure: false,
             onCompletion: onCompletion
