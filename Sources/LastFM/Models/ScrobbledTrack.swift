@@ -29,7 +29,7 @@ public struct ScrobbledTrack: Decodable, Equatable {
         }
     }
 
-    private enum CodingKeys: String, CodingKey {
+    internal enum CodingKeys: String, CodingKey {
         case artist
         case album
         case track
