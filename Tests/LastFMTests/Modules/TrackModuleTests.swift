@@ -338,4 +338,67 @@ class TrackModuleTests: XCTestCase {
         )
     }
 
+    func test_update_now_playing_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/track.updateNowPlaying",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+
+        let params = TrackNowPlayingParams(
+            artist: "Soccer Mommy",
+            track: "Flaw",
+            album: "Clean",
+            albumArtist: "Soccer Mpmmy",
+            sessionKey: "someSessionKey"
+        )
+
+        let expectedPayload = "track=Flaw&albumArtist=Soccer%20Mpmmy&api_key=someAPIKey&method=track.updateNowPlaying&sk=someSessionKey&api_sig=375e3e8321c7161de5d6c3fc89bb33e1&album=Clean&artist=Soccer%20Mommy"
+        let expectation = expectation(description: "Waiting for now playing update")
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        try instance.updateNowPlaying(params: params) { result in
+            switch(result) {
+            case .success(let entity):
+                XCTAssertEqual(entity.albumArtist.corrected, false)
+                XCTAssertEqual(entity.albumArtist.text, "Soccer Mommy")
+                XCTAssertEqual(entity.album.corrected, false)
+                XCTAssertEqual(entity.album.text, "Clean")
+                XCTAssertEqual(entity.track.corrected, false)
+                XCTAssertEqual(entity.track.text, "Flaw")
+                XCTAssertEqual(entity.artist.corrected, false)
+                XCTAssertEqual(entity.artist.text, "Soccer Mommy")
+                XCTAssertEqual(entity.ignored.rawValue, 0)
+            case .failure(_):
+                XCTFail("Expected to succeed, but it failed")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.postCalls.count, 1)
+
+        let payloadData = try XCTUnwrap(apiClient.postCalls[0].body)
+        let payload = String(data: payloadData, encoding: .utf8)!
+
+        XCTAssertTrue(Util.areSameURL(
+            "http://fakeDomain.com/?\(payload)",
+            "http://fakeDomain.com/?\(expectedPayload)"
+        ))
+
+        XCTAssertEqual(
+            apiClient.postCalls[0].headers,
+            ["Content-Type": "application/x-www-formurlencoded"]
+        )
+
+        XCTAssertEqual(
+            apiClient.postCalls[0].url.absoluteString,
+            "http://ws.audioscrobbler.com/2.0?format=json"
+        )
+    }
+
 }
