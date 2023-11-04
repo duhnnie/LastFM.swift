@@ -23,13 +23,20 @@ final public class LastFM {
         self.apiSecret = apiSecret
     }
 
-    internal func normalizeParams(params: Params, method: MethodKey) -> [String: String] {
-        var params = params.toDictionary()
+    internal func normalizeParams(
+        params: [String: String],
+        method: MethodKey
+    ) -> [String: String] {
+        var params = params
 
         params["api_key"] = apiKey
         params["method"] = method.getName()
 
         return params
+    }
+
+    internal func normalizeParams(params: Params, method: MethodKey) -> [String: String] {
+        return normalizeParams(params: params.toDictionary(), method: method)
     }
 
     private func generateSignature(for data: [String: String ]) throws -> String {
