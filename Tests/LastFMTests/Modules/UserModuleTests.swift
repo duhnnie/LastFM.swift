@@ -662,5 +662,82 @@ class UserTests: XCTestCase {
             )
         )
     }
+
+    func test_getInfo() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/user.getInfo",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "Waiting for getInfo")
+
+        apiClientMock.data = fakeData
+        apiClientMock.response = Constants.RESPONSE_200_OK
+
+        instance.getInfo(user: "pepito") { result in
+            switch (result) {
+            case .success(let userInfo):
+                XCTAssertEqual(userInfo.name, "pepito")
+                XCTAssertEqual(userInfo.age, 0)
+                XCTAssertEqual(userInfo.subscriber, false)
+                XCTAssertEqual(userInfo.realname, "Jose")
+                XCTAssertEqual(userInfo.bootsrap, false)
+                XCTAssertEqual(userInfo.playcount, 347575)
+                XCTAssertEqual(userInfo.artistCount, 14264)
+                XCTAssertEqual(userInfo.playlists, 0)
+                XCTAssertEqual(userInfo.trackCount, 55279)
+                XCTAssertEqual(userInfo.albumCount, 30492)
+
+                XCTAssertEqual(
+                    userInfo.images.small?.absoluteString,
+                    "https://images.com/pepito-small.png"
+                )
+
+                XCTAssertEqual(
+                    userInfo.images.medium?.absoluteString,
+                    "https://images.com/pepito-medium.png"
+                )
+
+                XCTAssertEqual(
+                    userInfo.images.large?.absoluteString,
+                    "https://images.com/pepito-large.png"
+                )
+
+                XCTAssertEqual(
+                    userInfo.images.extraLarge?.absoluteString,
+                    "https://images.com/pepito-extralarge.png"
+                )
+
+                XCTAssertNil(userInfo.images.mega)
+
+                var dateComponents = DateComponents()
+                dateComponents.year = 2011
+                dateComponents.month = 8
+                dateComponents.day = 17
+                dateComponents.hour = 18
+                dateComponents.minute = 28
+                dateComponents.second = 10
+                dateComponents.timeZone = TimeZone(secondsFromGMT: -4 * 60 * 60)
+
+                XCTAssertEqual(userInfo.registered, Calendar.current.date(from: dateComponents))
+                XCTAssertEqual(userInfo.country, "Bolivia")
+                XCTAssertEqual(userInfo.gender, "n")
+                XCTAssertEqual(userInfo.url.absoluteString, "https://pepito.profile")
+                XCTAssertEqual(userInfo.type, "user")
+            case .failure(let error):
+                XCTFail("It was supposed to succeed, but it failed with error \(error.localizedDescription)")
+            }
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClientMock.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?method=user.getinfo&user=pepito&api_key=\(Constants.API_KEY)&format=json"
+            )
+        )
+    }
     
 }

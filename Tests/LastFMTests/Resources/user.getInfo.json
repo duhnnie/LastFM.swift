@@ -1,0 +1,40 @@
+{
+    "user": {
+        "name": "pepito",
+        "age": "0",
+        "subscriber": "0",
+        "realname": "Jose",
+        "bootstrap": "0",
+        "playcount": "347575",
+        "artist_count": "14264",
+        "playlists": "0",
+        "track_count": "55279",
+        "album_count": "30492",
+        "image": [
+            {
+                "size": "small",
+                "#text": "https://images.com/pepito-small.png"
+            },
+            {
+                "size": "medium",
+                "#text": "https://images.com/pepito-medium.png"
+            },
+            {
+                "size": "large",
+                "#text": "https://images.com/pepito-large.png"
+            },
+            {
+                "size": "extralarge",
+                "#text": "https://images.com/pepito-extralarge.png"
+            }
+        ],
+        "registered": {
+            "unixtime": "1313620090",
+            "#text": 1313620090
+        },
+        "country": "Bolivia",
+        "gender": "n",
+        "url": "https://pepito.profile",
+        "type": "user"
+    }
+}
