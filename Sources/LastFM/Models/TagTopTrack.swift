@@ -1,6 +1,7 @@
 import Foundation
 
 public struct TagTopTrack: Decodable, Equatable {
+
     public let mbid: String
     public let name: String
     public let artist: LastFMMBEntity
@@ -63,4 +64,5 @@ public struct TagTopTrack: Decodable, Equatable {
         self.duration = duration
         self.rank = rank
     }
+    
 }

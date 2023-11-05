@@ -1,6 +1,7 @@
 import Foundation
 
 public struct TagTopArtist: Decodable, Equatable {
+
     public let mbid: String?
     public let name: String
     public let images: LastFMImages
@@ -40,4 +41,5 @@ public struct TagTopArtist: Decodable, Equatable {
         self.rank = rank
         self.streamable = streamableString == "1" ? true : false
     }
+    
 }
