@@ -12,7 +12,7 @@ public struct TrackLoveParams: Params {
         self.sessionKey = sessionKey
     }
 
-    public func toDictionary() -> Dictionary<String, String> {
+    internal func toDictionary() -> Dictionary<String, String> {
         return [
             "track": track,
             "artist": artist,

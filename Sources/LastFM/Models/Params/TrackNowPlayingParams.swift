@@ -34,7 +34,7 @@ public struct TrackNowPlayingParams: Params {
         self.sessionKey = sessionKey
     }
 
-    public func toDictionary() -> Dictionary<String, String> {
+    internal func toDictionary() -> Dictionary<String, String> {
         var dict: [String: String] = [
             "artist": artist,
             "track": track,
