@@ -19,27 +19,4 @@ public struct LibraryArtist: Decodable, Equatable {
         case tagcount
     }
 
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        self.mbid = try container.decode(String.self, forKey: CodingKeys.mbid)
-        self.name = try container.decode(String.self, forKey: CodingKeys.name)
-        self.images = try container.decode(LastFMImages.self, forKey: CodingKeys.images)
-        self.url = try container.decode(URL.self, forKey: .url)
-
-        let tagcountString = try container.decode(String.self, forKey: CodingKeys.tagcount)
-        let playcountString = try container.decode(String.self, forKey: CodingKeys.playcount)
-        let streamableString = try container.decode(String.self, forKey: CodingKeys.streamable)
-
-        guard
-            let tagcount = UInt(tagcountString),
-            let playcount = UInt(playcountString)
-        else {
-            throw RuntimeError("Can't parse tagcount or playcount")
-        }
-
-        self.tagcount = tagcount
-        self.playcount = playcount
-        self.streamable = streamableString == "1" ? true : false
-    }
 }
