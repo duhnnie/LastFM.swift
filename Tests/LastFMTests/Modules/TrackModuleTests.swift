@@ -401,4 +401,304 @@ class TrackModuleTests: XCTestCase {
         )
     }
 
+    func test_getTrackInfo_by_artist_name_no_username_and_no_mbid_in_response() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/track.getInfo_withTrackArtist_noUsername_noMBID",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "watiting for getTrackInfo")
+
+        let params = TrackInfoParams(
+            artist: "Some Artist",
+            track: "Some Track",
+            autocorrect: true,
+            username: nil
+        )
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getInfo(params: params) { result in
+            switch (result) {
+            case .success(let trackInfo):
+                XCTAssertEqual(trackInfo.name, "Some Track")
+                XCTAssertNil(trackInfo.mbid)
+                XCTAssertEqual(trackInfo.url.absoluteString, "https://sometrack.com")
+                XCTAssertEqual(trackInfo.duration, 302000)
+                XCTAssertEqual(trackInfo.streamable, false)
+                XCTAssertEqual(trackInfo.listeners, 19)
+                XCTAssertEqual(trackInfo.playcount, 136)
+                XCTAssertEqual(trackInfo.artist.name, "Some Artist")
+                XCTAssertEqual(trackInfo.artist.url.absoluteString, "https://someartist.com")
+                XCTAssertEqual(trackInfo.album.artist, "Some Artist")
+                XCTAssertEqual(trackInfo.album.title, "Some Album")
+                XCTAssertEqual(trackInfo.album.url.absoluteString, "https://somealbum.com")
+                XCTAssertNil(trackInfo.album.images.small)
+                XCTAssertNil(trackInfo.album.images.medium)
+                XCTAssertNil(trackInfo.album.images.large)
+                XCTAssertNil(trackInfo.album.images.extraLarge)
+                XCTAssertNil(trackInfo.album.images.mega)
+                XCTAssertNil(trackInfo.userLoved)
+                XCTAssertNil(trackInfo.userPlaycount)
+                XCTAssertEqual(trackInfo.topTags.count, 0)
+                XCTAssertNil(trackInfo.wiki)
+            case .failure(let error):
+                XCTFail("It was expected to succeed, but it failed with error \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some%20Track&format=json&method=track.getInfo&artist=Some%20Artist&autocorrect=1"
+            )
+        )
+    }
+
+    func test_getTrackInfo_by_artist_name_with_username_and_no_mbid_in_response() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/track.getInfo_withTrackArtist_withUsername_noMBID",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "watiting for getTrackInfo")
+
+        let params = TrackInfoParams(
+            artist: "Some Artist",
+            track: "Some Track",
+            autocorrect: true,
+            username: "pepiro"
+        )
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getInfo(params: params) { result in
+            switch (result) {
+            case .success(let trackInfo):
+                XCTAssertEqual(trackInfo.name, "Some Track")
+                XCTAssertNil(trackInfo.mbid)
+                XCTAssertEqual(trackInfo.url.absoluteString, "https://sometrack.com")
+                XCTAssertEqual(trackInfo.duration, 302000)
+                XCTAssertEqual(trackInfo.streamable, false)
+                XCTAssertEqual(trackInfo.listeners, 19)
+                XCTAssertEqual(trackInfo.playcount, 136)
+                XCTAssertEqual(trackInfo.artist.name, "Some Artist")
+                XCTAssertEqual(trackInfo.artist.url.absoluteString, "https://someartist.com")
+                XCTAssertEqual(trackInfo.album.artist, "Some Artist")
+                XCTAssertEqual(trackInfo.album.title, "Some Album")
+                XCTAssertEqual(trackInfo.album.url.absoluteString, "https://somealbum.com")
+                XCTAssertNil(trackInfo.album.images.small)
+                XCTAssertNil(trackInfo.album.images.medium)
+                XCTAssertNil(trackInfo.album.images.large)
+                XCTAssertNil(trackInfo.album.images.extraLarge)
+                XCTAssertNil(trackInfo.album.images.mega)
+                XCTAssertEqual(trackInfo.userLoved, true)
+                XCTAssertEqual(trackInfo.userPlaycount, 48)
+                XCTAssertEqual(trackInfo.topTags.count, 0)
+                XCTAssertNil(trackInfo.wiki)
+            case .failure(let error):
+                XCTFail("It was expected to succeed, but it failed with error \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some%20Track&format=json&method=track.getInfo&artist=Some%20Artist&autocorrect=1&username=pepiro"
+            )
+        )
+    }
+
+    func test_getTrackInfo_by_mbid_no_username() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/track.getInfo_withMBID_noUsername",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "watiting for getTrackInfo")
+        let params = TrackInfoByMBIDParams(mbid: "someTrackMBID")
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getInfo(params: params) { result in
+            switch (result) {
+            case .success(let trackInfo):
+                XCTAssertEqual(trackInfo.name, "Some Track")
+                XCTAssertEqual(trackInfo.mbid!, "someTrackMBID")
+                XCTAssertEqual(trackInfo.url.absoluteString, "https://sometrack.com")
+                XCTAssertEqual(trackInfo.duration, 302000)
+                XCTAssertEqual(trackInfo.streamable, false)
+                XCTAssertEqual(trackInfo.listeners, 19)
+                XCTAssertEqual(trackInfo.playcount, 136)
+                XCTAssertEqual(trackInfo.artist.name, "Some Artist")
+                XCTAssertEqual(trackInfo.artist.url.absoluteString, "https://someartist.com")
+                XCTAssertEqual(trackInfo.album.artist, "Some Artist")
+                XCTAssertEqual(trackInfo.album.title, "Some Album")
+                XCTAssertEqual(trackInfo.album.url.absoluteString, "https://somealbum.com")
+
+                XCTAssertEqual(
+                    trackInfo.album.images.small?.absoluteString,
+                    "https://images.com/s.png"
+                )
+
+                XCTAssertEqual(
+                    trackInfo.album.images.medium?.absoluteString,
+                    "https://images.com/m.png"
+                )
+
+                XCTAssertEqual(
+                    trackInfo.album.images.large?.absoluteString,
+                    "https://images.com/l.png"
+                )
+
+                XCTAssertEqual(
+                    trackInfo.album.images.extraLarge?.absoluteString,
+                    "https://images.com/xl.png"
+                )
+
+                XCTAssertNil(trackInfo.album.images.mega)
+                XCTAssertNil(trackInfo.userLoved)
+                XCTAssertNil(trackInfo.userPlaycount)
+                XCTAssertEqual(trackInfo.topTags.count, 4)
+                XCTAssertNotNil(trackInfo.wiki)
+
+                var dateComponents = DateComponents()
+                dateComponents.calendar = Calendar.current
+                dateComponents.year = 2008
+                dateComponents.month = 7
+                dateComponents.day = 23
+                dateComponents.hour = 20
+                dateComponents.minute = 9
+                dateComponents.timeZone = TimeZone(secondsFromGMT: 0)
+
+                let publishedDate = Calendar.current.date(from: dateComponents)
+                XCTAssertEqual(trackInfo.wiki?.published, publishedDate)
+
+                XCTAssertEqual(trackInfo.wiki?.summary, "Some summary")
+                XCTAssertEqual(trackInfo.wiki?.content, "Some content")
+            case .failure(let error):
+                XCTFail("It was expected to succeed, but it failed with error \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?api_key=someAPIKey&format=json&method=track.getInfo&mbid=someTrackMBID&autocorrect=1"
+            )
+        )
+    }
+
+    func test_getTrackInfo_by_mbid_with_username() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/track.getInfo_withMBID_withUsername",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "watiting for getTrackInfo")
+        let params = TrackInfoByMBIDParams(mbid: "someTrackMBID", username: "pepiro")
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getInfo(params: params) { result in
+            switch (result) {
+            case .success(let trackInfo):
+                XCTAssertEqual(trackInfo.name, "Some Track")
+                XCTAssertEqual(trackInfo.mbid!, "someTrackMBID")
+                XCTAssertEqual(trackInfo.url.absoluteString, "https://sometrack.com")
+                XCTAssertEqual(trackInfo.duration, 302000)
+                XCTAssertEqual(trackInfo.streamable, false)
+                XCTAssertEqual(trackInfo.listeners, 19)
+                XCTAssertEqual(trackInfo.playcount, 136)
+                XCTAssertEqual(trackInfo.artist.name, "Some Artist")
+                XCTAssertEqual(trackInfo.artist.url.absoluteString, "https://someartist.com")
+                XCTAssertEqual(trackInfo.album.artist, "Some Artist")
+                XCTAssertEqual(trackInfo.album.title, "Some Album")
+                XCTAssertEqual(trackInfo.album.url.absoluteString, "https://somealbum.com")
+
+                XCTAssertEqual(
+                    trackInfo.album.images.small?.absoluteString,
+                    "https://images.com/s.png"
+                )
+
+                XCTAssertEqual(
+                    trackInfo.album.images.medium?.absoluteString,
+                    "https://images.com/m.png"
+                )
+
+                XCTAssertEqual(
+                    trackInfo.album.images.large?.absoluteString,
+                    "https://images.com/l.png"
+                )
+
+                XCTAssertEqual(
+                    trackInfo.album.images.extraLarge?.absoluteString,
+                    "https://images.com/xl.png"
+                )
+
+                XCTAssertNil(trackInfo.album.images.mega)
+                XCTAssertEqual(trackInfo.userLoved, false)
+                XCTAssertEqual(trackInfo.userPlaycount, 13)
+                XCTAssertEqual(trackInfo.topTags.count, 4)
+                XCTAssertNotNil(trackInfo.wiki)
+
+                var dateComponents = DateComponents()
+                dateComponents.calendar = Calendar.current
+                dateComponents.year = 2008
+                dateComponents.month = 7
+                dateComponents.day = 23
+                dateComponents.hour = 20
+                dateComponents.minute = 9
+                dateComponents.timeZone = TimeZone(secondsFromGMT: 0)
+                
+                let publishedDate = Calendar.current.date(from: dateComponents)
+                XCTAssertEqual(trackInfo.wiki?.published, publishedDate)
+
+                XCTAssertEqual(trackInfo.wiki?.summary, "Some summary")
+                XCTAssertEqual(trackInfo.wiki?.content, "Some content")
+            case .failure(let error):
+                XCTFail("It was expected to succeed, but it failed with error \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?api_key=someAPIKey&format=json&method=track.getInfo&mbid=someTrackMBID&autocorrect=1&username=pepiro"
+            )
+        )
+    }
+
 }

@@ -1,0 +1,68 @@
+{
+    "track": {
+        "mbid": "someTrackMBID",
+        "name": "Some Track",
+        "url": "https://sometrack.com",
+        "duration": "302000",
+        "streamable": {
+            "#text": "0",
+            "fulltrack": "0"
+        },
+        "listeners": "19",
+        "playcount": "136",
+        "artist": {
+            "mbid": "someArtistMBID",
+            "name": "Some Artist",
+            "url": "https://someartist.com"
+        },
+        "album": {
+            "mbid": "someAlbumMBID",
+            "artist": "Some Artist",
+            "title": "Some Album",
+            "url": "https://somealbum.com",
+            "image": [
+                {
+                    "#text": "https://images.com/s.png",
+                    "size": "small"
+                },
+                {
+                    "#text": "https://images.com/m.png",
+                    "size": "medium"
+                },
+                {
+                    "#text": "https://images.com/l.png",
+                    "size": "large"
+                },
+                {
+                    "#text": "https://images.com/xl.png",
+                    "size": "extralarge"
+                }
+            ]
+        },
+        "toptags": {
+            "tag": [
+                {
+                    "name": "tag1",
+                    "url": "https://tags.com/tag1"
+                },
+                {
+                    "name": "tag2",
+                    "url": "https://tags.com/tag2"
+                },
+                {
+                    "name": "tag3",
+                    "url": "https://tags.com/tag3"
+                },
+                {
+                    "name": "tag4",
+                    "url": "https://tags.com/tag4"
+                }
+            ]
+        },
+        "wiki": {
+            "published": "23 Jul 2008, 20:09",
+            "summary": "Some summary",
+            "content": "Some content"
+        }
+    }
+}
