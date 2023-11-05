@@ -93,6 +93,9 @@ fileprivate struct BoolWrapper: Decodable {
         if let value = try? container.decode(Bool.self) {
             self.value = value
             return
+        } else if let valueInt = try? container.decode(Int.self) {
+            self.value = valueInt != 0
+            return
         }
 
         guard
