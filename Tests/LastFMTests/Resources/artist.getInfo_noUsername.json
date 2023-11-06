@@ -1,0 +1,229 @@
+{
+    "artist": {
+        "name": "Some Artist",
+        "mbid": "some-mbid",
+        "url": "https://someartist.com",
+        "image": [
+            {
+                "#text": "https://images.com/s.png",
+                "size": "small"
+            },
+            {
+                "#text": "https://images.com/m.png",
+                "size": "medium"
+            },
+            {
+                "#text": "https://images.com/l.png",
+                "size": "large"
+            },
+            {
+                "#text": "https://images.com/e.png",
+                "size": "extralarge"
+            },
+            {
+                "#text": "https://images.com/mg.png",
+                "size": "mega"
+            },
+            {
+                "#text": "http://images.com/other.png",
+                "size": ""
+            }
+        ],
+        "streamable": "0",
+        "ontour": "1",
+        "stats": {
+            "listeners": "5065436",
+            "playcount": "258631203"
+        },
+        "similar": {
+            "artist": [
+                {
+                    "name": "Artist A",
+                    "url": "https://artists.com/artist-A",
+                    "image": [
+                        {
+                            "#text": "https://images.com/artist-A-sm.png",
+                            "size": "small"
+                        },
+                        {
+                            "#text": "https://images.com/artist-A-md.png",
+                            "size": "medium"
+                        },
+                        {
+                            "#text": "https://images.com/artist-A-lg.png",
+                            "size": "large"
+                        },
+                        {
+                            "#text": "https://images.com/artist-A-xl.png",
+                            "size": "extralarge"
+                        },
+                        {
+                            "#text": "https://images.com/artist-A-mg.png",
+                            "size": "mega"
+                        },
+                        {
+                            "#text": "https://images.com/artist-A-other.png",
+                            "size": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Artist B",
+                    "url": "https://artists.com/artist-B",
+                    "image": [
+                        {
+                            "#text": "https://images.com/artist-B-sm.png",
+                            "size": "small"
+                        },
+                        {
+                            "#text": "https://images.com/artist-B-md.png",
+                            "size": "medium"
+                        },
+                        {
+                            "#text": "https://images.com/artist-B-lg.png",
+                            "size": "large"
+                        },
+                        {
+                            "#text": "https://images.com/artist-B-xl.png",
+                            "size": "extralarge"
+                        },
+                        {
+                            "#text": "https://images.com/artist-B-mg.png",
+                            "size": "mega"
+                        },
+                        {
+                            "#text": "https://images.com/artist-B-other.png",
+                            "size": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Artist C",
+                    "url": "https://artists.com/artist-C",
+                    "image": [
+                        {
+                            "#text": "https://images.com/artist-C-sm.png",
+                            "size": "small"
+                        },
+                        {
+                            "#text": "https://images.com/artist-C-md.png",
+                            "size": "medium"
+                        },
+                        {
+                            "#text": "https://images.com/artist-C-lg.png",
+                            "size": "large"
+                        },
+                        {
+                            "#text": "https://images.com/artist-C-xl.png",
+                            "size": "extralarge"
+                        },
+                        {
+                            "#text": "https://images.com/artist-C-mg.png",
+                            "size": "mega"
+                        },
+                        {
+                            "#text": "https://images.com/artist-C-other.png",
+                            "size": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Artist D",
+                    "url": "https://artists.com/artist-D",
+                    "image": [
+                        {
+                            "#text": "https://images.com/artist-D-sm.png",
+                            "size": "small"
+                        },
+                        {
+                            "#text": "https://images.com/artist-D-md.png",
+                            "size": "medium"
+                        },
+                        {
+                            "#text": "https://images.com/artist-D-lg.png",
+                            "size": "large"
+                        },
+                        {
+                            "#text": "https://images.com/artist-D-xl.png",
+                            "size": "extralarge"
+                        },
+                        {
+                            "#text": "https://images.com/artist-D-mg.png",
+                            "size": "mega"
+                        },
+                        {
+                            "#text": "https://images.com/artist-D-other.png",
+                            "size": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Artist E",
+                    "url": "https://artists.com/artist-E",
+                    "image": [
+                        {
+                            "#text": "https://images.com/artist-E-sm.png",
+                            "size": "small"
+                        },
+                        {
+                            "#text": "https://images.com/artist-E-md.png",
+                            "size": "medium"
+                        },
+                        {
+                            "#text": "https://images.com/artist-E-lg.png",
+                            "size": "large"
+                        },
+                        {
+                            "#text": "https://images.com/artist-E-xl.png",
+                            "size": "extralarge"
+                        },
+                        {
+                            "#text": "https://images.com/artist-E-mg.png",
+                            "size": "mega"
+                        },
+                        {
+                            "#text": "https://images.com/artist-E-other.png",
+                            "size": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        "tags": {
+            "tag": [
+                {
+                    "name": "rock",
+                    "url": "https://tags.com/rock"
+                },
+                {
+                    "name": "alternative rock",
+                    "url": "https://tags.com/alternative-rock"
+                },
+                {
+                    "name": "Grunge",
+                    "url": "https://tags.com/Grunge"
+                },
+                {
+                    "name": "alternative",
+                    "url": "https://tags.com/alternative"
+                },
+                {
+                    "name": "seen live",
+                    "url": "https://tags.com/seen-live"
+                }
+            ]
+        },
+        "bio": {
+            "links": {
+                "link": {
+                    "#text": "",
+                    "rel": "original",
+                    "href": "https://wiki.com/some-artist"
+                }
+            },
+            "published": "10 Feb 2006, 19:13",
+            "summary": "Some summary.",
+            "content": "Some content."
+        }
+    }
+}
