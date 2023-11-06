@@ -378,4 +378,360 @@ class ArtistModuleTests: XCTestCase {
         )
     }
 
+    func test_getInfo_with_username() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/artist.getInfo_withUsername",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+
+        let params = ArtistGetInfoParams(
+            term: "Some Artist",
+            criteria: .artist,
+            lang: "en",
+            username: "pepiro"
+        )
+
+        let expectation = expectation(description: "waiting for getInfo")
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getInfo(params: params) { result in
+            switch (result) {
+            case .success(let artistInfo):
+                XCTAssertEqual(artistInfo.name, "Some Artist")
+                XCTAssertEqual(artistInfo.mbid, "some-mbid")
+                XCTAssertEqual(artistInfo.url.absoluteString, "https://someartist.com")
+
+                XCTAssertEqual(
+                    artistInfo.images.small?.absoluteString,
+                    "https://images.com/s.png"
+                )
+
+                XCTAssertEqual(
+                    artistInfo.images.medium?.absoluteString,
+                    "https://images.com/m.png"
+                )
+
+                XCTAssertEqual(
+                    artistInfo.images.large?.absoluteString,
+                    "https://images.com/l.png"
+                )
+
+                XCTAssertEqual(
+                    artistInfo.images.extraLarge?.absoluteString,
+                    "https://images.com/e.png"
+                )
+
+                XCTAssertEqual(
+                    artistInfo.images.mega?.absoluteString,
+                    "https://images.com/mg.png"
+                )
+
+                XCTAssertEqual(artistInfo.streamable, false)
+                XCTAssertEqual(artistInfo.onTour, true)
+                XCTAssertEqual(artistInfo.stats.listeners, 5065436)
+                XCTAssertEqual(artistInfo.stats.playcount, 258631203)
+                XCTAssertNotNil(artistInfo.stats.userPlaycount)
+                XCTAssertEqual(artistInfo.stats.userPlaycount, 3808)
+
+                XCTAssertEqual(artistInfo.similar.count, 5)
+                XCTAssertEqual(artistInfo.similar[0].name, "Artist A")
+                XCTAssertEqual(artistInfo.similar[0].url.absoluteString, "https://artists.com/artist-A")
+
+                XCTAssertEqual(
+                  artistInfo.similar[0].images.small?.absoluteString,
+                  "https://images.com/artist-A-sm.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[0].images.medium?.absoluteString,
+                  "https://images.com/artist-A-md.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[0].images.large?.absoluteString,
+                  "https://images.com/artist-A-lg.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[0].images.extraLarge?.absoluteString,
+                  "https://images.com/artist-A-xl.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[0].images.mega?.absoluteString,
+                  "https://images.com/artist-A-mg.png"
+                )
+
+                XCTAssertEqual(artistInfo.similar[1].name, "Artist B")
+                XCTAssertEqual(artistInfo.similar[1].url.absoluteString, "https://artists.com/artist-B")
+
+                XCTAssertEqual(
+                  artistInfo.similar[1].images.small?.absoluteString,
+                  "https://images.com/artist-B-sm.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[1].images.medium?.absoluteString,
+                  "https://images.com/artist-B-md.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[1].images.large?.absoluteString,
+                  "https://images.com/artist-B-lg.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[1].images.extraLarge?.absoluteString,
+                  "https://images.com/artist-B-xl.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[1].images.mega?.absoluteString,
+                  "https://images.com/artist-B-mg.png"
+                )
+
+                XCTAssertEqual(artistInfo.similar[2].name, "Artist C")
+                XCTAssertEqual(artistInfo.similar[2].url.absoluteString, "https://artists.com/artist-C")
+
+                XCTAssertEqual(
+                  artistInfo.similar[2].images.small?.absoluteString,
+                  "https://images.com/artist-C-sm.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[2].images.medium?.absoluteString,
+                  "https://images.com/artist-C-md.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[2].images.large?.absoluteString,
+                  "https://images.com/artist-C-lg.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[2].images.extraLarge?.absoluteString,
+                  "https://images.com/artist-C-xl.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[2].images.mega?.absoluteString,
+                  "https://images.com/artist-C-mg.png"
+                )
+
+                XCTAssertEqual(artistInfo.similar[3].name, "Artist D")
+                XCTAssertEqual(artistInfo.similar[3].url.absoluteString, "https://artists.com/artist-D")
+
+                XCTAssertEqual(
+                  artistInfo.similar[3].images.small?.absoluteString,
+                  "https://images.com/artist-D-sm.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[3].images.medium?.absoluteString,
+                  "https://images.com/artist-D-md.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[3].images.large?.absoluteString,
+                  "https://images.com/artist-D-lg.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[3].images.extraLarge?.absoluteString,
+                  "https://images.com/artist-D-xl.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[3].images.mega?.absoluteString,
+                  "https://images.com/artist-D-mg.png"
+                )
+
+                XCTAssertEqual(artistInfo.similar[4].name, "Artist E")
+                XCTAssertEqual(artistInfo.similar[4].url.absoluteString, "https://artists.com/artist-E")
+
+                XCTAssertEqual(
+                  artistInfo.similar[4].images.small?.absoluteString,
+                  "https://images.com/artist-E-sm.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[4].images.medium?.absoluteString,
+                  "https://images.com/artist-E-md.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[4].images.large?.absoluteString,
+                  "https://images.com/artist-E-lg.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[4].images.extraLarge?.absoluteString,
+                  "https://images.com/artist-E-xl.png"
+                )
+
+                XCTAssertEqual(
+                  artistInfo.similar[4].images.mega?.absoluteString,
+                  "https://images.com/artist-E-mg.png"
+                )
+
+                XCTAssertEqual(artistInfo.tags.count, 5)
+                XCTAssertEqual(artistInfo.tags[0].name, "rock")
+
+                XCTAssertEqual(
+                  artistInfo.tags[0].url.absoluteString,
+                  "https://tags.com/rock"
+                )
+
+                XCTAssertEqual(artistInfo.tags[1].name, "alternative rock")
+
+                XCTAssertEqual(
+                  artistInfo.tags[1].url.absoluteString,
+                  "https://tags.com/alternative-rock"
+                )
+
+                XCTAssertEqual(artistInfo.tags[2].name, "Grunge")
+
+                XCTAssertEqual(
+                  artistInfo.tags[2].url.absoluteString,
+                  "https://tags.com/Grunge"
+                )
+
+                XCTAssertEqual(artistInfo.tags[3].name, "alternative")
+
+                XCTAssertEqual(
+                  artistInfo.tags[3].url.absoluteString,
+                  "https://tags.com/alternative"
+                )
+
+                XCTAssertEqual(artistInfo.tags[4].name, "seen live")
+
+                XCTAssertEqual(
+                  artistInfo.tags[4].url.absoluteString,
+                  "https://tags.com/seen-live"
+                )
+
+                let dateComponents = DateComponents(
+                    calendar: Calendar.current,
+                    timeZone: TimeZone(secondsFromGMT: 0),
+                    year: 2006,
+                    month: 2,
+                    day: 10,
+                    hour: 19,
+                    minute: 13
+                )
+
+                let date = Calendar.current.date(from: dateComponents)
+
+                XCTAssertEqual(artistInfo.bio.published, date)
+                XCTAssertEqual(artistInfo.bio.summary, "Some summary.")
+                XCTAssertEqual(artistInfo.bio.content, "Some content.")
+            case .failure(let error):
+                XCTFail("It was expected to succeed, but it failed with error \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?format=json&username=pepiro&artist=Some%20Artist&api_key=someAPIKey&autocorrect=1&method=artist.getInfo&lang=en"
+            )
+        )
+    }
+
+    func test_getInfo_no_username() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/artist.getInfo_noUsername",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+
+        let params = ArtistGetInfoParams(
+            term: "Some Artist",
+            criteria: .artist,
+            lang: "es"
+        )
+
+        let expectation = expectation(description: "waiting for getInfo")
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getInfo(params: params) { result in
+            switch (result) {
+            case .success(let artistInfo):
+                XCTAssertNil(artistInfo.stats.userPlaycount)
+            case .failure(let error):
+                XCTFail("It was expected to succeed, but it failed with error \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?format=json&artist=Some%20Artist&api_key=someAPIKey&autocorrect=1&method=artist.getInfo&lang=es"
+            )
+        )
+    }
+
+    func test_getInfo_byMBID_with_username() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/artist.getInfo_withUsername",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+
+        let params = ArtistGetInfoParams(
+            term: "some-mbid",
+            criteria: .mbid,
+            lang: "pt",
+            username: "pepiro"
+        )
+
+        let expectation = expectation(description: "waiting for getInfo")
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getInfo(params: params) { result in
+            switch (result) {
+            case .success(let artistInfo):
+                XCTAssertNotNil(artistInfo.stats.userPlaycount)
+                XCTAssertEqual(artistInfo.stats.userPlaycount!, 3808)
+            case .failure(let error):
+                XCTFail("It was expected to succeed, but it failed with error \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?format=json&mbid=some-mbid&api_key=someAPIKey&autocorrect=1&method=artist.getInfo&username=pepiro&lang=pt"
+            )
+        )
+    }
+
 }
