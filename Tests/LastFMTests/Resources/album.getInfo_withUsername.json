@@ -1,0 +1,143 @@
+{
+    "album": {
+        "artist": "Various Artists",
+        "mbid": "some-artist-mbid",
+        "tags": {
+            "tag": [
+                {
+                    "url": "https://www.last.fm/tag/industrial+rock",
+                    "name": "industrial rock"
+                },
+                {
+                    "url": "https://www.last.fm/tag/industrial",
+                    "name": "industrial"
+                },
+                {
+                    "url": "https://www.last.fm/tag/rock",
+                    "name": "rock"
+                }
+            ]
+        },
+        "name": "Some Album Title",
+        "userplaycount": 832,
+        "image": [
+            {
+                "size": "small",
+                "#text": "https://images.com/artist/small.png"
+            },
+            {
+                "size": "medium",
+                "#text": "https://images.com/artist/medium.png"
+            },
+            {
+                "size": "large",
+                "#text": "https://images.com/artist/large.png"
+            },
+            {
+                "size": "extralarge",
+                "#text": "https://images.com/artist/extralarge.png"
+            },
+            {
+                "size": "mega",
+                "#text": "https://images.com/artist/mega.png"
+            }
+        ],
+        "tracks": {
+            "track": [
+                {
+                    "streamable": {
+                        "fulltrack": "0",
+                        "#text": "0"
+                    },
+                    "duration": 307,
+                    "url": "http://tracks.com/track-1",
+                    "name": "Track 1",
+                    "@attr": {
+                        "rank": 1
+                    },
+                    "artist": {
+                        "url": "https://artists.com/artist-1",
+                        "name": "Artist 1",
+                        "mbid": "artist-1-mbid"
+                    }
+                },
+                {
+                    "streamable": {
+                        "fulltrack": "0",
+                        "#text": "0"
+                    },
+                    "duration": 222,
+                    "url": "https://www.last.fm/music/Nine+Inch+Nails/With+Teeth/You+Know+What+You+Are%3Fhttp://tracks.com/track-2",
+                    "name": "Track 2",
+                    "@attr": {
+                        "rank": 2
+                    },
+                    "artist": {
+                        "url": "https://artists.com/artist-2",
+                        "name": "Artist 2",
+                        "mbid": "artist-2-mbid"
+                    }
+                },
+                {
+                    "streamable": {
+                        "fulltrack": "0",
+                        "#text": "0"
+                    },
+                    "duration": 187,
+                    "url": "http://tracks.com/track-3",
+                    "name": "Track 3",
+                    "@attr": {
+                        "rank": 3
+                    },
+                    "artist": {
+                        "url": "https://artists.com/artist-3",
+                        "name": "Artist 3",
+                        "mbid": "artist-3-mbid"
+                    }
+                },
+                {
+                    "streamable": {
+                        "fulltrack": "0",
+                        "#text": "0"
+                    },
+                    "duration": 211,
+                    "url": "http://tracks.com/track-4",
+                    "name": "Track 4",
+                    "@attr": {
+                        "rank": 4
+                    },
+                    "artist": {
+                        "url": "https://artists.com/artist-4",
+                        "name": "Artist 4",
+                        "mbid": "artist-4-mbid"
+                    }
+                },
+                {
+                    "streamable": {
+                        "fulltrack": "0",
+                        "#text": "0"
+                    },
+                    "duration": 222,
+                    "url": "http://tracks.com/track-5",
+                    "name": "Track 5",
+                    "@attr": {
+                        "rank": 5
+                    },
+                    "artist": {
+                        "url": "https://artists.com/artist-5",
+                        "name": "Artist 5",
+                        "mbid": "artist-5-mbid"
+                    }
+                }
+            ]
+        },
+        "listeners": "803026",
+        "playcount": "20522460",
+        "url": "https://albums.com/some-album",
+        "wiki": {
+            "published": "06 Jun 2023, 06:30",
+            "summary": "Some summary.",
+            "content": "Some content."
+        }
+    }
+}

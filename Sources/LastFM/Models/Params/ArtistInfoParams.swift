@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ArtistGetInfoParams: Params {
+public struct ArtistInfoParams: Params {
 
     public var term: String
     public var lang: String?

@@ -59,7 +59,7 @@ public struct ArtistModule {
     }
 
     public func getInfo(
-        params: ArtistGetInfoParams,
+        params: ArtistInfoParams,
         onCompletion: @escaping LastFM.OnCompletion<ArtistInfo>
     ) {
         let params = instance.normalizeParams(params: params, method: APIMethod.getInfo)
