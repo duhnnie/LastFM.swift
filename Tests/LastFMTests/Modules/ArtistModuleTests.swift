@@ -386,7 +386,7 @@ class ArtistModuleTests: XCTestCase {
 
         let fakeData = try Data(contentsOf: jsonURL)
 
-        let params = ArtistGetInfoParams(
+        let params = ArtistInfoParams(
             term: "Some Artist",
             criteria: .artist,
             lang: "en",
@@ -656,7 +656,7 @@ class ArtistModuleTests: XCTestCase {
 
         let fakeData = try Data(contentsOf: jsonURL)
 
-        let params = ArtistGetInfoParams(
+        let params = ArtistInfoParams(
             term: "Some Artist",
             criteria: .artist,
             lang: "es"
@@ -698,7 +698,7 @@ class ArtistModuleTests: XCTestCase {
 
         let fakeData = try Data(contentsOf: jsonURL)
 
-        let params = ArtistGetInfoParams(
+        let params = ArtistInfoParams(
             term: "some-mbid",
             criteria: .mbid,
             lang: "pt",
