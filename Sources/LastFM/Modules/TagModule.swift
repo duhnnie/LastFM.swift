@@ -6,6 +6,7 @@ public struct TagModule {
         case getTopTracks = "gettoptracks"
         case getTopArtists = "gettopartists"
         case getTopAlbums = "gettopalbums"
+        case getInfo = "getinfo"
 
         func getName() -> String {
             return "tag.\(self.rawValue)"
@@ -46,6 +47,26 @@ public struct TagModule {
         let params = instance.normalizeParams(params: params, method: APIMethod.getTopAlbums)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
+    public func getInfo(
+        name: String,
+        lang: String? = nil,
+        onCompletion: @escaping LastFM.OnCompletion<TagInfo>
+    ) {
+        var params = ["name": name]
+
+        if let lang = lang {
+            params["lang"] = lang
+        }
+
+        let normalizedParams = instance.normalizeParams(params: params, method: APIMethod.getInfo)
+
+        requester.getDataAndParse(
+            params: normalizedParams,
+            secure: false,
+            onCompletion: onCompletion
+        )
     }
     
 }
