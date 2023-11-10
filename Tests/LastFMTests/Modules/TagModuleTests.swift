@@ -182,4 +182,44 @@ class TagModuleTests: XCTestCase {
         )
     }
 
+    // getInfo
+
+    func test_getInfo() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/tag.getInfo",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "Waiting for getInfo")
+
+        apiClientMock.data = fakeData
+        apiClientMock.response = Constants.RESPONSE_200_OK
+
+        instance.getInfo(name: "indie", lang: "en") { result in
+            switch (result) {
+            case .success(let tagInfo):
+                XCTAssertEqual(tagInfo.name, "indie")
+                XCTAssertEqual(tagInfo.total, 2046784)
+                XCTAssertEqual(tagInfo.reach, 257873)
+                XCTAssertEqual(tagInfo.wiki.summary, "Indie tag summary.")
+                XCTAssertEqual(tagInfo.wiki.content, "Indie tag content.")
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it fail with error \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClientMock.getCalls.count, 1)
+        XCTAssertEqual(apiClientMock.getCalls[0].headers, nil)
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClientMock.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?method=tag.getinfo&format=json&name=indie&lang=en&api_key=someAPIKey"
+            )
+        )
+    }
+    
 }
