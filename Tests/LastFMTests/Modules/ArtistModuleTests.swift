@@ -40,18 +40,46 @@ class ArtistModuleTests: XCTestCase {
             limit: 5
         )
 
-        let expectedEntity = try JSONDecoder().decode(
-            CollectionPage<ArtistTopTrack>.self,
-            from: fakeData
-        )
-
         apiClient.data = fakeData
         apiClient.response = Constants.RESPONSE_200_OK
 
         instance.getTopTracks(params: params) { result in
             switch(result) {
-            case .success(let entity):
-                XCTAssertEqual(entity, expectedEntity)
+            case .success(let topTracks):
+                XCTAssertEqual(topTracks.pagination.total, 38)
+                XCTAssertEqual(topTracks.pagination.totalPages, 16)
+                XCTAssertEqual(topTracks.pagination.perPage, 2)
+                XCTAssertEqual(topTracks.pagination.page, 1)
+
+                XCTAssertEqual(topTracks.items[0].name, "Track 0")
+                XCTAssertEqual(topTracks.items[0].playcount, 23400)
+                XCTAssertEqual(topTracks.items[0].listeners, 30)
+                XCTAssertEqual(topTracks.items[0].mbid, "track-0-mbid")
+                XCTAssertEqual(topTracks.items[0].url.absoluteString, "https://tracks.com/track-0")
+                XCTAssertEqual(topTracks.items[0].streamable, false)
+                XCTAssertEqual(topTracks.items[0].artist.name, "Some Artist")
+                XCTAssertEqual(topTracks.items[0].artist.mbid, "some-artist-mbid")
+                XCTAssertEqual(topTracks.items[0].artist.url.absoluteString, "https://artists.com/some-artist")
+                XCTAssertEqual(topTracks.items[0].images.small?.absoluteString, "https://images.com/track-0-s.png")
+                XCTAssertEqual(topTracks.items[0].images.medium?.absoluteString, "https://images.com/track-0-m.png")
+                XCTAssertEqual(topTracks.items[0].images.large?.absoluteString, "https://images.com/track-0-l.png")
+                XCTAssertEqual(topTracks.items[0].images.extraLarge?.absoluteString, "https://images.com/track-0-xl.png")
+
+                XCTAssertEqual(topTracks.items[0].rank, 1)
+                XCTAssertEqual(topTracks.items[1].name, "Track 1")
+                XCTAssertEqual(topTracks.items[1].playcount, 23410)
+                XCTAssertEqual(topTracks.items[1].listeners, 31)
+                XCTAssertEqual(topTracks.items[1].mbid, "track-1-mbid")
+                XCTAssertEqual(topTracks.items[1].url.absoluteString, "https://tracks.com/track-1")
+                XCTAssertEqual(topTracks.items[1].streamable, false)
+                XCTAssertEqual(topTracks.items[1].artist.name, "Some Artist")
+                XCTAssertEqual(topTracks.items[1].artist.mbid, "some-artist-mbid")
+                XCTAssertEqual(topTracks.items[1].artist.url.absoluteString, "https://artists.com/some-artist")
+                XCTAssertEqual(topTracks.items[1].images.small?.absoluteString, "https://images.com/track-1-s.png")
+                XCTAssertEqual(topTracks.items[1].images.medium?.absoluteString, "https://images.com/track-1-m.png")
+                XCTAssertEqual(topTracks.items[1].images.large?.absoluteString, "https://images.com/track-1-l.png")
+                XCTAssertEqual(topTracks.items[1].images.extraLarge?.absoluteString, "https://images.com/track-1-xl.png")
+                XCTAssertEqual(topTracks.items[1].rank, 2)
             case .failure(let error):
                 XCTFail("Expected to succeed, but it failed with error \(error)")
             }
@@ -86,18 +114,46 @@ class ArtistModuleTests: XCTestCase {
             limit: 5
         )
 
-        let expectedEntity = try JSONDecoder().decode(
-            CollectionPage<ArtistTopTrack>.self,
-            from: fakeData
-        )
-
         apiClient.data = fakeData
         apiClient.response = Constants.RESPONSE_200_OK
 
         instance.getTopTracks(params: params) { result in
             switch(result) {
-            case .success(let entity):
-                XCTAssertEqual(entity, expectedEntity)
+            case .success(let topTracks):
+                XCTAssertEqual(topTracks.pagination.total, 38)
+                XCTAssertEqual(topTracks.pagination.totalPages, 16)
+                XCTAssertEqual(topTracks.pagination.perPage, 2)
+                XCTAssertEqual(topTracks.pagination.page, 1)
+
+                XCTAssertEqual(topTracks.items[0].name, "Track 0")
+                XCTAssertEqual(topTracks.items[0].playcount, 23400)
+                XCTAssertEqual(topTracks.items[0].listeners, 30)
+                XCTAssertNil(topTracks.items[0].mbid)
+                XCTAssertEqual(topTracks.items[0].url.absoluteString, "https://tracks.com/track-0")
+                XCTAssertEqual(topTracks.items[0].streamable, false)
+                XCTAssertEqual(topTracks.items[0].artist.name, "Some Artist")
+                XCTAssertNil(topTracks.items[0].artist.mbid)
+                XCTAssertEqual(topTracks.items[0].artist.url.absoluteString, "https://artists.com/some-artist")
+                XCTAssertEqual(topTracks.items[0].images.small?.absoluteString, "https://images.com/track-0-s.png")
+                XCTAssertEqual(topTracks.items[0].images.medium?.absoluteString, "https://images.com/track-0-m.png")
+                XCTAssertEqual(topTracks.items[0].images.large?.absoluteString, "https://images.com/track-0-l.png")
+                XCTAssertEqual(topTracks.items[0].images.extraLarge?.absoluteString, "https://images.com/track-0-xl.png")
+
+                XCTAssertEqual(topTracks.items[0].rank, 1)
+                XCTAssertEqual(topTracks.items[1].name, "Track 1")
+                XCTAssertEqual(topTracks.items[1].playcount, 23410)
+                XCTAssertEqual(topTracks.items[1].listeners, 31)
+                XCTAssertNil(topTracks.items[1].mbid)
+                XCTAssertEqual(topTracks.items[1].url.absoluteString, "https://tracks.com/track-1")
+                XCTAssertEqual(topTracks.items[1].streamable, false)
+                XCTAssertEqual(topTracks.items[1].artist.name, "Some Artist")
+                XCTAssertNil(topTracks.items[1].artist.mbid)
+                XCTAssertEqual(topTracks.items[1].artist.url.absoluteString, "https://artists.com/some-artist")
+                XCTAssertEqual(topTracks.items[1].images.small?.absoluteString, "https://images.com/track-1-s.png")
+                XCTAssertEqual(topTracks.items[1].images.medium?.absoluteString, "https://images.com/track-1-m.png")
+                XCTAssertEqual(topTracks.items[1].images.large?.absoluteString, "https://images.com/track-1-l.png")
+                XCTAssertEqual(topTracks.items[1].images.extraLarge?.absoluteString, "https://images.com/track-1-xl.png")
+                XCTAssertEqual(topTracks.items[1].rank, 2)
             case .failure(let error):
                 XCTFail("Expected to succeed, but it failed with error \(error)")
             }
