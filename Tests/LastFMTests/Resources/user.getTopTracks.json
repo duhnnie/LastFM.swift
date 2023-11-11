@@ -6,193 +6,82 @@
                     "fulltrack": "0",
                     "#text": "0"
                 },
-                "mbid": "0c73069c-5ff5-428a-9097-5e10cd1d6201",
-                "name": "One Point Perspective",
+                "mbid": "track-0-mbid",
+                "name": "Track 0",
                 "image": [
                     {
                         "size": "small",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        "#text": "https://images.com/artist-0-s.png"
                     },
                     {
                         "size": "medium",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        "#text": "https://images.com/artist-0-m.png"
                     },
                     {
                         "size": "large",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        "#text": "https://images.com/artist-0-l.png"
                     },
                     {
                         "size": "extralarge",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        "#text": "https://images.com/artist-0-xl.png"
                     }
                 ],
                 "artist": {
-                    "url": "https://www.last.fm/music/Arctic+Monkeys",
-                    "name": "Arctic Monkeys",
-                    "mbid": "ada7a83c-e3e1-40f1-93f9-3e73dbc9298a"
+                    "url": "https://artists.com/artist-0",
+                    "name": "Artist 0",
+                    "mbid": "artist-0-mbid"
                 },
-                "url": "https://www.last.fm/music/Arctic+Monkeys/_/One+Point+Perspective",
-                "duration": "209",
+                "url": "https://tracks.com/track-0",
+                "duration": "600",
                 "@attr": {
                     "rank": "1"
                 },
-                "playcount": "329"
+                "playcount": "20"
             },
             {
                 "streamable": {
                     "fulltrack": "0",
                     "#text": "0"
                 },
-                "mbid": "02098e9e-3cb7-3f6a-a840-15332de2b45f",
-                "name": "Warning",
+                "mbid": "track-1-mbid",
+                "name": "Track 1",
                 "image": [
                     {
                         "size": "small",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        "#text": "https://images.com/artist-1-s.png"
                     },
                     {
                         "size": "medium",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        "#text": "https://images.com/artist-1-m.png"
                     },
                     {
                         "size": "large",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        "#text": "https://images.com/artist-1-l.png"
                     },
                     {
                         "size": "extralarge",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                        "#text": "https://images.com/artist-1-xl.png"
                     }
                 ],
                 "artist": {
-                    "url": "https://www.last.fm/music/Incubus",
-                    "name": "Incubus",
-                    "mbid": ""
+                    "url": "https://artists.com/artist-1",
+                    "name": "Artist 1",
+                    "mbid": "artist-1-mbid"
                 },
-                "url": "https://www.last.fm/music/Incubus/_/Warning",
-                "duration": "282",
+                "url": "https://tracks.com/track-1",
+                "duration": "610",
                 "@attr": {
                     "rank": "2"
                 },
-                "playcount": "327"
-            },
-            {
-                "streamable": {
-                    "fulltrack": "0",
-                    "#text": "0"
-                },
-                "mbid": "0a3d52d0-652e-3fd8-bfaf-3d8093c2a361",
-                "name": "Why Cry",
-                "image": [
-                    {
-                        "size": "small",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
-                    },
-                    {
-                        "size": "medium",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
-                    },
-                    {
-                        "size": "large",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
-                    },
-                    {
-                        "size": "extralarge",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
-                    }
-                ],
-                "artist": {
-                    "url": "https://www.last.fm/music/The+Panic+Channel",
-                    "name": "The Panic Channel",
-                    "mbid": "1ab5659c-aa39-479e-8920-92eaa98999fe"
-                },
-                "url": "https://www.last.fm/music/The+Panic+Channel/_/Why+Cry",
-                "duration": "203",
-                "@attr": {
-                    "rank": "3"
-                },
-                "playcount": "267"
-            },
-            {
-                "streamable": {
-                    "fulltrack": "0",
-                    "#text": "0"
-                },
-                "mbid": "05fffb7d-c051-4667-8a6c-7c3228f3d542",
-                "name": "When You Die",
-                "image": [
-                    {
-                        "size": "small",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
-                    },
-                    {
-                        "size": "medium",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
-                    },
-                    {
-                        "size": "large",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
-                    },
-                    {
-                        "size": "extralarge",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
-                    }
-                ],
-                "artist": {
-                    "url": "https://www.last.fm/music/MGMT",
-                    "name": "MGMT",
-                    "mbid": "c485632c-b784-4ee9-8ea1-c5fb365681fc"
-                },
-                "url": "https://www.last.fm/music/MGMT/_/When+You+Die",
-                "duration": "258",
-                "@attr": {
-                    "rank": "4"
-                },
-                "playcount": "263"
-            },
-            {
-                "streamable": {
-                    "fulltrack": "0",
-                    "#text": "0"
-                },
-                "mbid": "31084584-2d49-331b-9e5b-c1929119f584",
-                "name": "Friends Of The Enemy",
-                "image": [
-                    {
-                        "size": "small",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
-                    },
-                    {
-                        "size": "medium",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
-                    },
-                    {
-                        "size": "large",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
-                    },
-                    {
-                        "size": "extralarge",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
-                    }
-                ],
-                "artist": {
-                    "url": "https://www.last.fm/music/No+Use+for+a+Name",
-                    "name": "No Use for a Name",
-                    "mbid": "d7bd0fad-2f06-4936-89ad-60c5b6ada3c1"
-                },
-                "url": "https://www.last.fm/music/No+Use+for+a+Name/_/Friends+Of+The+Enemy",
-                "duration": "206",
-                "@attr": {
-                    "rank": "5"
-                },
-                "playcount": "257"
+                "playcount": "21"
             }
         ],
         "@attr": {
             "user": "Duhnnie",
-            "totalPages": "11028",
+            "totalPages": "24",
             "page": "1",
-            "total": "55138",
-            "perPage": "5"
+            "total": "48",
+            "perPage": "2"
         }
     }
 }

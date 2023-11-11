@@ -7,7 +7,7 @@ public struct LovedTrack: Decodable, Equatable {
     public let images: LastFMImages
     public let url: URL
     public let date: Date
-    public let streamable: Bool
+    public let streamable: Streamable
 
     private enum CodingKeys: String, CodingKey {
         case mbid
@@ -18,10 +18,6 @@ public struct LovedTrack: Decodable, Equatable {
         case date
         case streamable
 
-        enum StreamableKeys: String, CodingKey {
-            case fulltrack
-        }
-
         enum DateKeys: String, CodingKey {
             case uts
         }
@@ -30,17 +26,11 @@ public struct LovedTrack: Decodable, Equatable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        let streamableContainer = try container.nestedContainer(
-            keyedBy: CodingKeys.StreamableKeys.self,
-            forKey: .streamable
-        )
-
         let dateContainer = try container.nestedContainer(
             keyedBy: CodingKeys.DateKeys.self,
             forKey: .date
         )
 
-        let streamableString = try streamableContainer.decode(String.self, forKey: .fulltrack)
         let utsString = try dateContainer.decode(String.self, forKey: .uts)
 
         self.mbid = try container.decode(String.self, forKey: .mbid)
@@ -48,7 +38,7 @@ public struct LovedTrack: Decodable, Equatable {
         self.artist = try container.decode(LastFMMBEntity.self, forKey: .artist)
         self.images = try container.decode(LastFMImages.self, forKey: .images)
         self.url = try container.decode(URL.self, forKey: .url)
-        self.streamable = streamableString == "1"
+        self.streamable = try container.decode(Streamable.self, forKey: .streamable)
 
         guard let uts = UInt(utsString) else {
             throw RuntimeError("No valid date")

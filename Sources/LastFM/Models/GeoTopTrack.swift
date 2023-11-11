@@ -8,7 +8,7 @@ public struct GeoTopTrack: Decodable, Equatable {
     public let images: LastFMImages
     public let duration: UInt
     public let url: URL
-    public let streamable: Bool
+    public let streamable: Streamable
     public let listeners: UInt
     public let rank: UInt
 
@@ -23,10 +23,6 @@ public struct GeoTopTrack: Decodable, Equatable {
         case listeners
         case attr = "@attr"
 
-        enum StreamableKeys: String, CodingKey {
-            case fulltrack
-        }
-
         enum AttrKeys: String, CodingKey {
             case rank
         }
@@ -35,11 +31,6 @@ public struct GeoTopTrack: Decodable, Equatable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        let streamableContainer = try container.nestedContainer(
-            keyedBy: CodingKeys.StreamableKeys.self,
-            forKey: .streamable
-        )
-
         let attrContainer = try container.nestedContainer(
             keyedBy: CodingKeys.AttrKeys.self,
             forKey: .attr
@@ -47,7 +38,6 @@ public struct GeoTopTrack: Decodable, Equatable {
 
         let durationString = try container.decode(String.self, forKey: .duration)
         let listenersString = try container.decode(String.self, forKey: .listeners)
-        let streamableString = try streamableContainer.decode(String.self, forKey: .fulltrack)
         let rankString = try attrContainer.decode(String.self, forKey: .rank)
 
         self.mbid = try container.decode(String.self, forKey: .mbid)
@@ -55,7 +45,7 @@ public struct GeoTopTrack: Decodable, Equatable {
         self.artist = try container.decode(LastFMMBEntity.self, forKey: .artist)
         self.images = try container.decode(LastFMImages.self, forKey: .images)
         self.url = try container.decode(URL.self, forKey: .url)
-        self.streamable = streamableString == "1"
+        self.streamable = try container.decode(Streamable.self, forKey: .streamable)
 
         guard
             let duration = UInt(durationString),

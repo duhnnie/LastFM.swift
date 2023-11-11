@@ -1,193 +1,84 @@
 {
-  "tracks": {
-    "track": [
-      {
-        "name": "All the Small Things",
-        "duration": "167",
-        "mbid": "f36d9818-019b-4379-ad13-5080feb9ad8a",
-        "url": "https://www.last.fm/music/blink-182/_/All+the+Small+Things",
-        "streamable": {
-          "#text": "0",
-          "fulltrack": "0"
+    "tracks": {
+      "track": [
+        {
+            "name": "Track 0",
+            "duration": "400",
+            "mbid": "track-0-mbid",
+            "url": "https://tracks.com/track-0",
+            "streamable": {
+                "#text": "0",
+                "fulltrack": "0"
+            },
+            "artist": {
+                "name": "Artist 0",
+                "mbid": "artist-0-mbid",
+                "url": "https://artists.com/artist-0"
+            },
+            "image": [
+                {
+                    "size": "small",
+                    "#text": "https://images.com/artist-0-s.png"
+                },
+                {
+                    "size": "medium",
+                    "#text": "https://images.com/artist-0-m.png"
+                },
+                {
+                    "size": "large",
+                    "#text": "https://images.com/artist-0-l.png"
+                }, {
+                    "size": "extralarge",
+                    "#text": "https://images.com/artist-0-xl.png"
+                }
+            ],
+            "@attr": {
+                "rank": "1"
+            }
         },
-        "artist": {
-          "name": "blink-182",
-          "mbid": "0743b15a-3c32-48c8-ad58-cb325350befa",
-          "url": "https://www.last.fm/music/blink-182"
-        },
-        "image": [
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "small"
-          },
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "medium"
-          },
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "large"
-          },
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "extralarge"
-          }
-        ],
-        "@attr": {
-          "rank": "1"
+        {
+            "name": "Track 1",
+            "duration": "410",
+            "mbid": "track-1-mbid",
+            "url": "https://tracks.com/track-1",
+            "streamable": {
+                "#text": "0",
+                "fulltrack": "0"
+            },
+            "artist": {
+                "name": "Artist 1",
+                "mbid": "artist-1-mbid",
+                "url": "https://artists.com/artist-1"
+            },
+            "image": [
+                {
+                    "size": "small",
+                    "#text": "https://images.com/artist-1-s.png"
+                },
+                {
+                    "size": "medium",
+                    "#text": "https://images.com/artist-1-m.png"
+                },
+                {
+                    "size": "large",
+                    "#text": "https://images.com/artist-1-l.png"
+                }, {
+                    "size": "extralarge",
+                    "#text": "https://images.com/artist-1-xl.png"
+                }
+            ],
+            "@attr": {
+                "rank": "2"
+            }
         }
-      },
-      {
-        "name": "Misery Business",
-        "duration": "211",
-        "mbid": "26bc1124-b228-401e-8f38-5cea1625d8c2",
-        "url": "https://www.last.fm/music/Paramore/_/Misery+Business",
-        "streamable": {
-          "#text": "0",
-          "fulltrack": "0"
-        },
-        "artist": {
-          "name": "Paramore",
-          "mbid": "728ea90d-279b-4201-a8c4-597830883150",
-          "url": "https://www.last.fm/music/Paramore"
-        },
-        "image": [
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "small"
-          },
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "medium"
-          },
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "large"
-          },
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "extralarge"
-          }
-        ],
-        "@attr": {
-          "rank": "2"
-        }
-      },
-      {
-        "name": "Basket Case",
-        "duration": "197",
-        "mbid": "1c398e28-a63d-4c25-813b-ef9a96aadacb",
-        "url": "https://www.last.fm/music/Green+Day/_/Basket+Case",
-        "streamable": {
-          "#text": "0",
-          "fulltrack": "0"
-        },
-        "artist": {
-          "name": "Green Day",
-          "mbid": "084308bd-1654-436f-ba03-df6697104e19",
-          "url": "https://www.last.fm/music/Green+Day"
-        },
-        "image": [
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "small"
-          },
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "medium"
-          },
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "large"
-          },
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "extralarge"
-          }
-        ],
-        "@attr": {
-          "rank": "3"
-        }
-      },
-      {
-        "name": "Boulevard of Broken Dreams",
-        "duration": "263",
-        "mbid": "5cc1db82-ac3f-4cf5-a5e4-3a7f0418afd8",
-        "url": "https://www.last.fm/music/Green+Day/_/Boulevard+of+Broken+Dreams",
-        "streamable": {
-          "#text": "0",
-          "fulltrack": "0"
-        },
-        "artist": {
-          "name": "Green Day",
-          "mbid": "084308bd-1654-436f-ba03-df6697104e19",
-          "url": "https://www.last.fm/music/Green+Day"
-        },
-        "image": [
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "small"
-          },
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "medium"
-          },
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "large"
-          },
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "extralarge"
-          }
-        ],
-        "@attr": {
-          "rank": "4"
-        }
-      },
-      {
-        "name": "American Idiot",
-        "duration": "272",
-        "mbid": "ce5f1c77-9ebe-4af6-8290-feaa06dfd269",
-        "url": "https://www.last.fm/music/Green+Day/_/American+Idiot",
-        "streamable": {
-          "#text": "0",
-          "fulltrack": "0"
-        },
-        "artist": {
-          "name": "Green Day",
-          "mbid": "084308bd-1654-436f-ba03-df6697104e19",
-          "url": "https://www.last.fm/music/Green+Day"
-        },
-        "image": [
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "small"
-          },
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "medium"
-          },
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "large"
-          },
-          {
-            "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
-            "size": "extralarge"
-          }
-        ],
-        "@attr": {
-          "rank": "5"
-        }
+      ],
+      "@attr": {
+        "tag": "Pop punk",
+        "page": "1",
+        "perPage": "2",
+        "totalPages": "12",
+        "total": "24"
       }
-    ],
-    "@attr": {
-      "tag": "Pop punk",
-      "page": "1",
-      "perPage": "5",
-      "totalPages": "4225",
-      "total": "21123"
     }
   }
-}
+

@@ -6,7 +6,7 @@ public struct TrackInfo: Decodable {
     public let mbid: String?
     public let url: URL
     public let duration: Int
-    public let streamable: Bool
+    public let streamable: Streamable
     public let listeners: Int
     public let playcount: Int
     public let artist: LastFMOptionalMBEntity
@@ -34,10 +34,6 @@ public struct TrackInfo: Decodable {
             case userPlaycount = "userplaycount"
             case userLoved = "userloved"
 
-            enum StreamableKeys: String, CodingKey {
-                case text = "#text"
-            }
-
             enum TopTagsKeys: String, CodingKey {
                 case tags = "tag"
             }
@@ -52,23 +48,16 @@ public struct TrackInfo: Decodable {
             forKey: .track
         )
 
-        let streamableContainer = try subcontainer.nestedContainer(
-            keyedBy: CodingKeys.TrackInfoKeys.StreamableKeys.self,
-            forKey: .streamable
-        )
-
         let topTagsContainer = try subcontainer.nestedContainer(
             keyedBy: CodingKeys.TrackInfoKeys.TopTagsKeys.self,
             forKey: .topTags
         )
 
-        let streamableString = try streamableContainer.decode(String.self, forKey: .text)
-
         self.name = try subcontainer.decode(String.self, forKey: .name)
         self.mbid = try subcontainer.decodeIfPresent(String.self, forKey: .mbid)
         self.url = try subcontainer.decode(URL.self, forKey: .url)
         self.duration = try subcontainer.decode(Int.self, forKey: .duration)
-        self.streamable = streamableString != "0"
+        self.streamable = try subcontainer.decode(Streamable.self, forKey: .streamable)
         self.listeners = try subcontainer.decode(Int.self, forKey: .listeners)
         self.playcount = try subcontainer.decode(Int.self, forKey: .playcount)
         self.artist = try subcontainer.decode(LastFMOptionalMBEntity.self, forKey: .artist)

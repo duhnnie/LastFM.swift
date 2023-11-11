@@ -40,18 +40,47 @@ class GeoModuleTests: XCTestCase {
             page: 1
         )
 
-        let expectedEntity = try JSONDecoder().decode(
-            CollectionPage<GeoTopTrack>.self,
-            from: fakeData
-        )
-
         apiClient.data = fakeData
         apiClient.response = Constants.RESPONSE_200_OK
 
         instance.getTopTracks(params: params) { result in
             switch(result) {
-            case .success(let entity):
-                XCTAssertEqual(entity, expectedEntity)
+            case .success(let topTracks):
+                XCTAssertEqual(topTracks.items.count, 2)
+                XCTAssertEqual(topTracks.items[0].name, "Track 0")
+                XCTAssertEqual(topTracks.items[0].duration, 100)
+                XCTAssertEqual(topTracks.items[0].listeners, 900)
+                XCTAssertEqual(topTracks.items[0].mbid, "track-0-mbid")
+                XCTAssertEqual(topTracks.items[0].url.absoluteString, "https://tracks.com/track-0")
+                XCTAssertEqual(topTracks.items[0].streamable, .noStreamable)
+                XCTAssertEqual(topTracks.items[0].artist.name, "Artist 0")
+                XCTAssertEqual(topTracks.items[0].artist.mbid, "artist-0-mbid")
+                XCTAssertEqual(topTracks.items[0].artist.url.absoluteString, "https://artist.com/artist-0")
+                XCTAssertEqual(topTracks.items[0].images.small?.absoluteString, "https://images.com/artist-0-s.png")
+                XCTAssertEqual(topTracks.items[0].images.medium?.absoluteString, "https://images.com/artist-0-m.png")
+                XCTAssertEqual(topTracks.items[0].images.large?.absoluteString, "https://images.com/artist-0-l.png")
+                XCTAssertEqual(topTracks.items[0].images.extraLarge?.absoluteString, "https://images.com/artist-0-xl.png")
+                XCTAssertEqual(topTracks.items[0].rank, 1)
+                XCTAssertEqual(topTracks.items[1].name, "Track 1")
+                XCTAssertEqual(topTracks.items[1].duration, 101)
+                XCTAssertEqual(topTracks.items[1].listeners, 910)
+                XCTAssertEqual(topTracks.items[1].mbid, "track-1-mbid")
+                XCTAssertEqual(topTracks.items[1].url.absoluteString, "https://tracks.com/track-1")
+                XCTAssertEqual(topTracks.items[1].streamable, .streamableFullTrack)
+                XCTAssertEqual(topTracks.items[1].artist.name, "Artist 1")
+                XCTAssertEqual(topTracks.items[1].artist.mbid, "artist-1-mbid")
+                XCTAssertEqual(topTracks.items[1].artist.url.absoluteString, "https://artist.com/artist-1")
+                XCTAssertEqual(topTracks.items[1].images.small?.absoluteString, "https://images.com/artist-1-s.png")
+                XCTAssertEqual(topTracks.items[1].images.medium?.absoluteString, "https://images.com/artist-1-m.png")
+                XCTAssertEqual(topTracks.items[1].images.large?.absoluteString, "https://images.com/artist-1-l.png")
+                XCTAssertEqual(topTracks.items[1].images.extraLarge?.absoluteString, "https://images.com/artist-1-xl.png")
+                XCTAssertEqual(topTracks.items[1].rank, 2)
+
+                XCTAssertEqual(topTracks.pagination.total, 500)
+                XCTAssertEqual(topTracks.pagination.totalPages, 100)
+                XCTAssertEqual(topTracks.pagination.perPage, 5)
+                XCTAssertEqual(topTracks.pagination.page, 1)
+
             case .failure(let error):
                 XCTFail("Expected to succeed, but it failed with error \(error)")
             }

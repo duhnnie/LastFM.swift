@@ -230,10 +230,6 @@ class UserTests: XCTestCase {
         )!
 
         let fakeData = try Data(contentsOf: jsonURL)
-        let expectedEntity = try JSONDecoder().decode(
-            CollectionPage<UserTopTrack>.self,
-            from: fakeData
-        )
 
         let params = UserTopTracksParams(
             user: "pepito",
@@ -249,8 +245,42 @@ class UserTests: XCTestCase {
 
         instance.getTopTracks(params: params) { result in
             switch (result) {
-            case .success(let entity):
-                XCTAssertEqual(expectedEntity, entity)
+            case .success(let topTracks):
+                XCTAssertEqual(topTracks.items.count, 2)
+                XCTAssertEqual(topTracks.pagination.total, 48)
+                XCTAssertEqual(topTracks.pagination.totalPages, 24)
+                XCTAssertEqual(topTracks.pagination.perPage, 2)
+                XCTAssertEqual(topTracks.pagination.page, 1)
+
+                XCTAssertEqual(topTracks.items[0].streamable, .noStreamable)
+                XCTAssertEqual(topTracks.items[0].mbid, "track-0-mbid")
+                XCTAssertEqual(topTracks.items[0].name, "Track 0")
+                XCTAssertEqual(topTracks.items[0].images.small?.absoluteString, "https://images.com/artist-0-s.png")
+                XCTAssertEqual(topTracks.items[0].images.medium?.absoluteString, "https://images.com/artist-0-m.png")
+                XCTAssertEqual(topTracks.items[0].images.large?.absoluteString, "https://images.com/artist-0-l.png")
+                XCTAssertEqual(topTracks.items[0].images.extraLarge?.absoluteString, "https://images.com/artist-0-xl.png")
+                XCTAssertEqual(topTracks.items[0].artist.url.absoluteString, "https://artists.com/artist-0")
+                XCTAssertEqual(topTracks.items[0].artist.name, "Artist 0")
+                XCTAssertEqual(topTracks.items[0].artist.mbid, "artist-0-mbid")
+                XCTAssertEqual(topTracks.items[0].url.absoluteString, "https://tracks.com/track-0")
+                XCTAssertEqual(topTracks.items[0].duration, 600)
+                XCTAssertEqual(topTracks.items[0].rank, 1)
+
+                XCTAssertEqual(topTracks.items[0].playcount, 20)
+                XCTAssertEqual(topTracks.items[1].streamable, .noStreamable)
+                XCTAssertEqual(topTracks.items[1].mbid, "track-1-mbid")
+                XCTAssertEqual(topTracks.items[1].name, "Track 1")
+                XCTAssertEqual(topTracks.items[1].images.small?.absoluteString, "https://images.com/artist-1-s.png")
+                XCTAssertEqual(topTracks.items[1].images.medium?.absoluteString, "https://images.com/artist-1-m.png")
+                XCTAssertEqual(topTracks.items[1].images.large?.absoluteString, "https://images.com/artist-1-l.png")
+                XCTAssertEqual(topTracks.items[1].images.extraLarge?.absoluteString, "https://images.com/artist-1-xl.png")
+                XCTAssertEqual(topTracks.items[1].artist.url.absoluteString, "https://artists.com/artist-1")
+                XCTAssertEqual(topTracks.items[1].artist.name, "Artist 1")
+                XCTAssertEqual(topTracks.items[1].artist.mbid, "artist-1-mbid")
+                XCTAssertEqual(topTracks.items[1].url.absoluteString, "https://tracks.com/track-1")
+                XCTAssertEqual(topTracks.items[1].duration, 610)
+                XCTAssertEqual(topTracks.items[1].rank, 2)
+                XCTAssertEqual(topTracks.items[1].playcount, 21)
             case .failure(let error):
                 XCTFail("Expected to be a success but got a failure with \(error)")
             }
@@ -379,18 +409,60 @@ class UserTests: XCTestCase {
         let params = LovedTracksParams(user: "someUser", limit: 5, page: 12)
         let expectation = expectation(description: "waiting for getLovedTracks")
 
-        let expectedEntity = try JSONDecoder().decode(
-            CollectionPage<LovedTrack>.self,
-            from: fakeData
-        )
-
         apiClientMock.data = fakeData
         apiClientMock.response = Constants.RESPONSE_200_OK
 
         instance.getLovedTracks(params: params) { result in
             switch(result) {
             case .success(let lovedTracks):
-                XCTAssertEqual(lovedTracks, expectedEntity)
+                XCTAssertEqual(lovedTracks.items[0].artist.url.absoluteString, "https://artists.com/artist-0")
+                XCTAssertEqual(lovedTracks.items[0].artist.name, "Artist 0")
+                XCTAssertEqual(lovedTracks.items[0].artist.mbid, "")
+
+                let dateComponents = DateComponents(
+                    calendar: Calendar.current,
+                    timeZone: TimeZone(secondsFromGMT: 0),
+                    year: 2023,
+                    month: 9,
+                    day: 20,
+                    hour: 1,
+                    minute: 26,
+                    second: 20
+                )
+
+                XCTAssertEqual(lovedTracks.items[0].date, Calendar.current.date(from: dateComponents))
+                XCTAssertEqual(lovedTracks.items[0].mbid, "artist-0-mbid")
+                XCTAssertEqual(lovedTracks.items[0].url.absoluteString, "https://tracks.com/track-0")
+                XCTAssertEqual(lovedTracks.items[0].name, "Track 0")
+                XCTAssertEqual(lovedTracks.items[0].images.small?.absoluteString, "https://images.com/artist-0-s.png")
+                XCTAssertEqual(lovedTracks.items[0].images.medium?.absoluteString, "https://images.com/artist-0-m.png")
+                XCTAssertEqual(lovedTracks.items[0].images.large?.absoluteString, "https://images.com/artist-0-l.png")
+                XCTAssertEqual(lovedTracks.items[0].images.extraLarge?.absoluteString, "https://images.com/artist-0-xl.png")
+                XCTAssertNil(lovedTracks.items[0].images.mega)
+                XCTAssertEqual(lovedTracks.items[1].artist.url.absoluteString, "https://artists.com/artist-1")
+                XCTAssertEqual(lovedTracks.items[1].artist.name, "Artist 1")
+                XCTAssertEqual(lovedTracks.items[1].artist.mbid, "")
+
+                let dateComponents2 = DateComponents(
+                    calendar: Calendar.current,
+                    timeZone: TimeZone(secondsFromGMT: 0),
+                    year: 2023,
+                    month: 10,
+                    day: 13,
+                    hour: 23,
+                    minute: 12,
+                    second: 42
+                )
+
+                XCTAssertEqual(lovedTracks.items[1].date, Calendar.current.date(from: dateComponents2))
+                XCTAssertEqual(lovedTracks.items[1].mbid, "artist-1-mbid")
+                XCTAssertEqual(lovedTracks.items[1].url.absoluteString, "https://tracks.com/track-1")
+                XCTAssertEqual(lovedTracks.items[1].name, "Track 1")
+                XCTAssertEqual(lovedTracks.items[1].images.small?.absoluteString, "https://images.com/artist-1-s.png")
+                XCTAssertEqual(lovedTracks.items[1].images.medium?.absoluteString, "https://images.com/artist-1-m.png")
+                XCTAssertEqual(lovedTracks.items[1].images.large?.absoluteString, "https://images.com/artist-1-l.png")
+                XCTAssertEqual(lovedTracks.items[1].images.extraLarge?.absoluteString, "https://images.com/artist-1-xl.png")
+                XCTAssertNil(lovedTracks.items[1].images.mega)
             case .failure(let error):
                 XCTFail("Expected to succeed, but it fail with error: \(error.localizedDescription)")
             }
