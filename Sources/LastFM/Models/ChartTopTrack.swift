@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ChartTopTrack: Decodable, Equatable {
+public struct ChartTopTrack: Decodable {
 
     public let mbid: String
     public let name: String

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ChartTopArtist: Decodable, Equatable {
+public struct ChartTopArtist: Decodable {
 
     public let mbid: String
     public let name: String
@@ -19,5 +19,5 @@ public struct ChartTopArtist: Decodable, Equatable {
         case playcount
         case streamable
     }
-    
+
 }

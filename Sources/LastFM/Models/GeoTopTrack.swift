@@ -1,6 +1,6 @@
 import Foundation
 
-public struct GeoTopTrack: Decodable, Equatable {
+public struct GeoTopTrack: Decodable {
 
     public let mbid: String
     public let name: String

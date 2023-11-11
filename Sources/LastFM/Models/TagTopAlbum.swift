@@ -1,6 +1,6 @@
 import Foundation
 
-public struct TagTopAlbum: Decodable, Equatable {
+public struct TagTopAlbum: Decodable {
 
     public let mbid: String
     public let name: String

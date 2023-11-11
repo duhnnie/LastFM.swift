@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ArtistSimilar: Decodable, Equatable {
+public struct ArtistSimilar: Decodable {
 
     public let mbid: String
     public let name: String

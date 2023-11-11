@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ScrobbleList: Decodable, Equatable {
+public struct ScrobbleList: Decodable {
 
     public let items: [ScrobbledTrack]
     public let accepted: UInt

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ArtistTopAlbum: Decodable, Equatable {
+public struct ArtistTopAlbum: Decodable {
     public let mbid: String
     public let name: String
     public let artist: LastFMMBEntity
@@ -16,5 +16,5 @@ public struct ArtistTopAlbum: Decodable, Equatable {
         case url
         case playcount
     }
-    
+
 }
