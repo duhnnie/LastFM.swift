@@ -1,6 +1,6 @@
 import Foundation
 
-public struct UserWeeklyTrackChart: Decodable, Equatable {
+public struct UserWeeklyTrackChart: Decodable {
     public let mbid: String
     public let name: String
     public let url: URL
@@ -39,5 +39,5 @@ public struct UserWeeklyTrackChart: Decodable, Equatable {
         self.playcount = try container.decode(UInt.self, forKey: .playcount)
         self.rank = try attrContainer.decode(UInt.self, forKey: .rank)
     }
-    
+
 }

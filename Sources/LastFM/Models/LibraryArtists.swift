@@ -1,6 +1,6 @@
 import Foundation
 
-public struct LibraryArtist: Decodable, Equatable {
+public struct LibraryArtist: Decodable {
     public let mbid: String
     public let name: String
     public let images: LastFMImages

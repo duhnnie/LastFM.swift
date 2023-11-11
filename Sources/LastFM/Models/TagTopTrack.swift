@@ -1,6 +1,6 @@
 import Foundation
 
-public struct TagTopTrack: Decodable, Equatable {
+public struct TagTopTrack: Decodable {
 
     public let mbid: String
     public let name: String
@@ -43,5 +43,5 @@ public struct TagTopTrack: Decodable, Equatable {
         self.duration = try container.decode(UInt.self, forKey: .duration)
         self.rank =  try rankContainer.decode(UInt.self, forKey: .rank)
     }
-    
+
 }

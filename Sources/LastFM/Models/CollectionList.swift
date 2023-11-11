@@ -1,6 +1,6 @@
 import Foundation
 
-public struct CollectionList<T: Decodable & Equatable>: Decodable, Equatable {
+public struct CollectionList<T: Decodable>: Decodable {
 
     public let items: [T]
 

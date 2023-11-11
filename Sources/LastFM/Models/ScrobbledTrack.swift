@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ScrobbledTrack: Decodable, Equatable {
+public struct ScrobbledTrack: Decodable {
 
     public enum IgnoredType: UInt8, Decodable {
         case NotIgnored = 0
@@ -11,7 +11,7 @@ public struct ScrobbledTrack: Decodable, Equatable {
         case DailyScrobbleLimitExceeded = 5
     }
 
-    public struct Property: Decodable, Equatable {
+    public struct Property: Decodable {
         public let text: String?
         public let corrected: Bool
 
