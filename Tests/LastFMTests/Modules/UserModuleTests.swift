@@ -97,21 +97,133 @@ class UserTests: XCTestCase {
 
         let fakeData = try Data(contentsOf: jsonURL)
         let expectation = expectation(description: "waiting for getRecentTracks")
-
-        let expectedEntity = try JSONDecoder().decode(
-            CollectionPage<RecentTrack>.self,
-            from: fakeData
-        )
-
-        let params = RecentTracksParams(user: "someUser", limit: 5, page: 1)
+        let params = RecentTracksParams(user: "someUser", limit: 2, page: 1)
 
         apiClientMock.data = fakeData
         apiClientMock.response = Constants.RESPONSE_200_OK
 
         instance.getRecentTracks(params: params) { result in
             switch(result) {
-            case .success(let entity):
-                XCTAssertEqual(entity, expectedEntity)
+            case .success(let recentTracks):
+                XCTAssertEqual(recentTracks.items.count, 3)
+                XCTAssertEqual(recentTracks.pagination.total, 60)
+                XCTAssertEqual(recentTracks.pagination.totalPages, 30)
+                XCTAssertEqual(recentTracks.pagination.page, 1)
+                XCTAssertEqual(recentTracks.pagination.perPage, 2)
+
+                XCTAssertEqual(recentTracks.items[0].artist.mbid, "95e1ead9-4d31-4808-a7ac-32c3614c116b")
+                XCTAssertEqual(recentTracks.items[0].artist.name, "The Killers")
+                XCTAssertEqual(recentTracks.items[0].streamable, false)
+
+                XCTAssertEqual(
+                  recentTracks.items[0].images.small?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/34s/d83c5d906703a8c8042285d0902d9cf4.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[0].images.medium?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/64s/d83c5d906703a8c8042285d0902d9cf4.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[0].images.large?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/174s/d83c5d906703a8c8042285d0902d9cf4.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[0].images.extraLarge?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/300x300/d83c5d906703a8c8042285d0902d9cf4.png"
+                )
+
+                XCTAssertNil(recentTracks.items[0].images.mega)
+                XCTAssertEqual(recentTracks.items[0].mbid, "")
+                XCTAssertEqual(recentTracks.items[0].album.mbid, "044ef3c8-6b25-4fac-8f88-5c982df90a72")
+                XCTAssertEqual(recentTracks.items[0].album.name, "Hot Fuss")
+                XCTAssertEqual(recentTracks.items[0].name, "Smile Like You Mean It")
+                XCTAssertEqual(recentTracks.items[0].url.absoluteString, "https://www.last.fm/music/The+Killers/_/Smile+Like+You+Mean+It")
+                XCTAssertEqual(recentTracks.items[0].nowPlaying, true)
+                XCTAssertNil(recentTracks.items[0].date)
+
+                XCTAssertEqual(recentTracks.items[1].artist.mbid, "e6de1f3b-6484-491c-88dd-6d619f142abc")
+                XCTAssertEqual(recentTracks.items[1].artist.name, "Hans Zimmer")
+                XCTAssertEqual(recentTracks.items[1].streamable, false)
+
+                XCTAssertEqual(
+                  recentTracks.items[1].images.small?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/34s/e27d852480cc782e8c0eb0e253245dc3.jpg"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[1].images.medium?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/64s/e27d852480cc782e8c0eb0e253245dc3.jpg"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[1].images.large?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/174s/e27d852480cc782e8c0eb0e253245dc3.jpg"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[1].images.extraLarge?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/300x300/e27d852480cc782e8c0eb0e253245dc3.jpg"
+                )
+
+                XCTAssertNil(recentTracks.items[1].images.mega)
+                XCTAssertEqual(recentTracks.items[1].mbid, "0268842d-7e27-4443-af74-a8bba51b08cd")
+                XCTAssertEqual(recentTracks.items[1].album.mbid, "20074beb-380c-4da5-8dcd-e1eb063f78ce")
+                XCTAssertEqual(recentTracks.items[1].album.name, "Interstellar")
+                XCTAssertEqual(recentTracks.items[1].name, "Mountains")
+                XCTAssertEqual(recentTracks.items[1].url.absoluteString, "https://www.last.fm/music/Hans+Zimmer/_/Mountains")
+                XCTAssertEqual(recentTracks.items[1].nowPlaying, false)
+
+                let dateComponents = DateComponents(
+                    calendar: Calendar.current,
+                    timeZone: TimeZone(secondsFromGMT: 0),
+                    year: 2023,
+                    month: 10,
+                    day: 15,
+                    hour: 14,
+                    minute: 51,
+                    second: 5
+                )
+
+                XCTAssertEqual(
+                    recentTracks.items[1].date,
+                    Calendar.current.date(from: dateComponents)
+                )
+
+                XCTAssertEqual(recentTracks.items[2].artist.mbid, "fbbad867-cff9-4974-9702-18bd252b04e7")
+                XCTAssertEqual(recentTracks.items[2].artist.name, "Damone")
+                XCTAssertEqual(recentTracks.items[2].streamable, false)
+
+                XCTAssertEqual(
+                  recentTracks.items[2].images.small?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/34s/a33900373fa946a0bbb48f8dcdda5904.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[2].images.medium?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/64s/a33900373fa946a0bbb48f8dcdda5904.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[2].images.large?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/174s/a33900373fa946a0bbb48f8dcdda5904.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[2].images.extraLarge?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/300x300/a33900373fa946a0bbb48f8dcdda5904.png"
+                )
+
+                XCTAssertNil(recentTracks.items[2].images.mega)
+                XCTAssertEqual(recentTracks.items[2].mbid, "4f6cb9fe-e59a-3d5f-bb14-cb4431eb3418")
+                XCTAssertEqual(recentTracks.items[2].album.mbid, "96130b06-fa9c-453d-b4e0-604685a6cc02")
+                XCTAssertEqual(recentTracks.items[2].album.name, "Out Here All Night")
+                XCTAssertEqual(recentTracks.items[2].name, "What We Came Here For")
+                XCTAssertEqual(recentTracks.items[2].url.absoluteString, "https://www.last.fm/music/Damone/_/What+We+Came+Here+For")
+                XCTAssertEqual(recentTracks.items[2].nowPlaying, false)
+                XCTAssertEqual(recentTracks.items[2].date, Date(timeIntervalSince1970: 1697381235))
             case .failure(_):
                 XCTFail("Expected to succeed but it failed")
             }
@@ -162,11 +274,6 @@ class UserTests: XCTestCase {
         let fakeData = try Data(contentsOf: jsonURL)
         let expectation = expectation(description: "waiting for getExtendedRecentTracks")
 
-        let expectedEntity = try JSONDecoder().decode(
-            CollectionPage<ExtendedRecentTrack>.self,
-            from: fakeData
-        )
-
         let params = RecentTracksParams(
             user: "Pepito",
             limit: 5,
@@ -180,8 +287,197 @@ class UserTests: XCTestCase {
 
         instance.getExtendedRecentTracks(params: params) { result in
             switch(result) {
-            case .success(let entity):
-                XCTAssertEqual(entity, expectedEntity)
+            case .success(let recentTracks):
+                XCTAssertEqual(recentTracks.items[0].artist.url.absoluteString, "https://www.last.fm/music/Mew")
+                XCTAssertEqual(recentTracks.items[0].artist.name, "Mew")
+
+                XCTAssertEqual(
+                  recentTracks.items[0].artist.images.small?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[0].artist.images.medium?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[0].artist.images.large?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[0].artist.images.extraLarge?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(recentTracks.items[0].mbid, "1e8cf157-9f5f-3e7c-ac82-c59259970a92")
+                XCTAssertEqual(recentTracks.items[0].name, "Symmetry")
+
+                XCTAssertEqual(
+                  recentTracks.items[0].images.small?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/34s/87480021191328af5dc130dd879d8bd2.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[0].images.medium?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/64s/87480021191328af5dc130dd879d8bd2.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[0].images.large?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/174s/87480021191328af5dc130dd879d8bd2.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[0].images.extraLarge?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/300x300/87480021191328af5dc130dd879d8bd2.png"
+                )
+
+                XCTAssertEqual(recentTracks.items[0].streamable, false)
+                XCTAssertEqual(recentTracks.items[0].album.mbid, "17486085-c26f-3e0e-a8af-e5d91dece258")
+                XCTAssertEqual(recentTracks.items[0].album.name, "Half the World Is Watching Me")
+
+                XCTAssertEqual(
+                  recentTracks.items[0].url.absoluteString,
+                  "https://www.last.fm/music/Mew/_/Symmetry"
+                )
+
+                XCTAssertEqual(recentTracks.items[0].nowPlaying, true)
+                XCTAssertEqual(recentTracks.items[0].loved, true)
+
+                XCTAssertEqual(recentTracks.items[1].artist.url.absoluteString, "https://www.last.fm/music/Nine+Inch+Nails")
+                XCTAssertEqual(recentTracks.items[1].artist.name, "Nine Inch Nails")
+
+                XCTAssertEqual(
+                  recentTracks.items[1].artist.images.small?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[1].artist.images.medium?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[1].artist.images.large?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[1].artist.images.extraLarge?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                let dateComponents = DateComponents(
+                    calendar: Calendar.current,
+                    timeZone: TimeZone(secondsFromGMT: 0),
+                    year: 2023,
+                    month: 10,
+                    day: 15,
+                    hour: 15,
+                    minute: 15,
+                    second: 18
+                )
+
+                XCTAssertEqual(
+                    recentTracks.items[1].date,
+                    Calendar.current.date(from: dateComponents)
+                )
+
+                XCTAssertEqual(recentTracks.items[1].mbid, "3a1b35a6-5291-393b-a6ba-7afdfabf22b1")
+                XCTAssertEqual(recentTracks.items[1].name, "Echoplex")
+
+                XCTAssertEqual(
+                  recentTracks.items[1].images.small?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/34s/86bf0aab05704d2e880dc37384485c32.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[1].images.medium?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/64s/86bf0aab05704d2e880dc37384485c32.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[1].images.large?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/174s/86bf0aab05704d2e880dc37384485c32.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[1].images.extraLarge?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/300x300/86bf0aab05704d2e880dc37384485c32.png"
+                )
+
+                XCTAssertEqual(recentTracks.items[1].streamable, false)
+                XCTAssertEqual(recentTracks.items[1].album.mbid, "12b57d46-a192-499e-a91f-7da66790a1c1")
+                XCTAssertEqual(recentTracks.items[1].album.name, "The Slip")
+
+                XCTAssertEqual(
+                  recentTracks.items[1].url.absoluteString,
+                  "https://www.last.fm/music/Nine+Inch+Nails/_/Echoplex"
+                )
+
+                XCTAssertEqual(recentTracks.items[1].nowPlaying, false)
+                XCTAssertEqual(recentTracks.items[1].loved, true)
+
+                XCTAssertEqual(recentTracks.items[2].artist.url.absoluteString, "https://www.last.fm/music/Tripping+Daisy")
+                XCTAssertEqual(recentTracks.items[2].artist.name, "Tripping Daisy")
+
+                XCTAssertEqual(
+                  recentTracks.items[2].artist.images.small?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[2].artist.images.medium?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[2].artist.images.large?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[2].artist.images.extraLarge?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
+                )
+
+                XCTAssertEqual(recentTracks.items[2].date, Date(timeIntervalSince1970: 1697382463))
+                XCTAssertEqual(recentTracks.items[2].mbid, "13b0034d-b4fe-4bb2-aca3-bd2498d222d4")
+                XCTAssertEqual(recentTracks.items[2].name, "Raindrop")
+
+                XCTAssertEqual(
+                  recentTracks.items[2].images.small?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/34s/cf8db55462804578b1e6d0c5c99b6409.jpg"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[2].images.medium?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/64s/cf8db55462804578b1e6d0c5c99b6409.jpg"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[2].images.large?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/174s/cf8db55462804578b1e6d0c5c99b6409.jpg"
+                )
+
+                XCTAssertEqual(
+                  recentTracks.items[2].images.extraLarge?.absoluteString,
+                  "https://lastfm.freetls.fastly.net/i/u/300x300/cf8db55462804578b1e6d0c5c99b6409.jpg"
+                )
+
+                XCTAssertEqual(recentTracks.items[2].streamable, false)
+                XCTAssertEqual(recentTracks.items[2].album.mbid, "6233a746-932e-38d0-9dea-073be3ce1606")
+                XCTAssertEqual(recentTracks.items[2].album.name, "I Am An Elastic Firecracker")
+
+                XCTAssertEqual(
+                  recentTracks.items[2].url.absoluteString,
+                  "https://www.last.fm/music/Tripping+Daisy/_/Raindrop"
+                )
+
+                XCTAssertEqual(recentTracks.items[2].nowPlaying, false)
+                XCTAssertEqual(recentTracks.items[2].loved, false)
             case .failure(_):
                 XCTFail("It was expected to fail, but it succeeded instead")
             }
@@ -343,11 +639,6 @@ class UserTests: XCTestCase {
         let fakeData = try Data(contentsOf: jsonURL)
         let params = UserWeeklyChartParams(user: "user", from: 123412, to: 53452)
 
-        let expectedEntity = try JSONDecoder().decode(
-            CollectionList<UserWeeklyTrackChart>.self,
-            from: fakeData
-        )
-
         apiClientMock.data = fakeData
         apiClientMock.response = Constants.RESPONSE_200_OK
 
@@ -355,8 +646,30 @@ class UserTests: XCTestCase {
 
         instance.getWeeklyTrackChart(params: params) { result in
             switch (result) {
-            case .success(let entity):
-                XCTAssertEqual(entity, expectedEntity)
+            case .success(let tracks):
+                XCTAssertEqual(tracks.items.count, 2)
+
+                XCTAssertEqual(tracks.items[0].artist.mbid, "artist-0-mbid")
+                XCTAssertEqual(tracks.items[0].artist.name, "Artist 0")
+                XCTAssertEqual(tracks.items[0].images.small?.absoluteString, "https://images.com/track-0-s.png")
+                XCTAssertEqual(tracks.items[0].images.medium?.absoluteString, "https://images.com/track-0-m.png")
+                XCTAssertEqual(tracks.items[0].images.large?.absoluteString, "https://images.com/track-0-l.png")
+                XCTAssertEqual(tracks.items[0].mbid, "track-0-mbid")
+                XCTAssertEqual(tracks.items[0].url.absoluteString, "https://tracks.com/track-0")
+                XCTAssertEqual(tracks.items[0].name, "Track 0")
+                XCTAssertEqual(tracks.items[0].rank, 1)
+                XCTAssertEqual(tracks.items[0].playcount, 4500)
+
+                XCTAssertEqual(tracks.items[1].artist.mbid, "artist-1-mbid")
+                XCTAssertEqual(tracks.items[1].artist.name, "Artist 1")
+                XCTAssertEqual(tracks.items[1].images.small?.absoluteString, "https://images.com/track-1-s.png")
+                XCTAssertEqual(tracks.items[1].images.medium?.absoluteString, "https://images.com/track-1-m.png")
+                XCTAssertEqual(tracks.items[1].images.large?.absoluteString, "https://images.com/track-1-l.png")
+                XCTAssertEqual(tracks.items[1].mbid, "track-1-mbid")
+                XCTAssertEqual(tracks.items[1].url.absoluteString, "https://tracks.com/track-1")
+                XCTAssertEqual(tracks.items[1].name, "Track 1")
+                XCTAssertEqual(tracks.items[1].rank, 2)
+                XCTAssertEqual(tracks.items[1].playcount, 4510)
             case .failure(let error):
                 XCTFail("Expected to be a success but got a failure with \(error)")
             }
@@ -509,18 +822,41 @@ class UserTests: XCTestCase {
         let params = UserTopArtistsParams(user: "someUser", limit: 5, page: 12)
         let expectation = expectation(description: "waiting for getTopArtists")
 
-        let expectedEntity = try JSONDecoder().decode(
-            CollectionPage<UserTopArtist>.self,
-            from: fakeData
-        )
-
         apiClientMock.data = fakeData
         apiClientMock.response = Constants.RESPONSE_200_OK
 
         instance.getTopArtists(params: params) { result in
             switch(result) {
-            case .success(let entity):
-                XCTAssertEqual(entity, expectedEntity)
+            case .success(let artists):
+                XCTAssertEqual(artists.items.count, 2)
+                XCTAssertEqual(artists.pagination.totalPages, 10)
+                XCTAssertEqual(artists.pagination.page, 1)
+                XCTAssertEqual(artists.pagination.total, 20)
+                XCTAssertEqual(artists.pagination.perPage, 2)
+
+                XCTAssertEqual(artists.items[0].streamable, false)
+                XCTAssertEqual(artists.items[0].images.small?.absoluteString, "https://images.com/image-0-s.png")
+                XCTAssertEqual(artists.items[0].images.medium?.absoluteString, "https://images.com/image-0-m.png")
+                XCTAssertEqual(artists.items[0].images.large?.absoluteString, "https://images.com/image-0-l.png")
+                XCTAssertEqual(artists.items[0].images.extraLarge?.absoluteString, "https://images.com/image-0-xl.png")
+                XCTAssertEqual(artists.items[0].images.mega?.absoluteString, "https://images.com/image-0-mg.png")
+                XCTAssertEqual(artists.items[0].mbid, "artist-0-mbid")
+                XCTAssertEqual(artists.items[0].url.absoluteString, "https://artists.com/artist-0")
+                XCTAssertEqual(artists.items[0].playcount, 3400)
+                XCTAssertEqual(artists.items[0].rank, 1)
+                XCTAssertEqual(artists.items[0].name, "Artist 0")
+
+                XCTAssertEqual(artists.items[1].streamable, false)
+                XCTAssertEqual(artists.items[1].images.small?.absoluteString, "https://images.com/image-1-s.png")
+                XCTAssertEqual(artists.items[1].images.medium?.absoluteString, "https://images.com/image-1-m.png")
+                XCTAssertEqual(artists.items[1].images.large?.absoluteString, "https://images.com/image-1-l.png")
+                XCTAssertEqual(artists.items[1].images.extraLarge?.absoluteString, "https://images.com/image-1-xl.png")
+                XCTAssertEqual(artists.items[1].images.mega?.absoluteString, "https://images.com/image-1-mg.png")
+                XCTAssertEqual(artists.items[1].mbid, "artist-1-mbid")
+                XCTAssertEqual(artists.items[1].url.absoluteString, "https://artists.com/artist-1")
+                XCTAssertEqual(artists.items[1].playcount, 3410)
+                XCTAssertEqual(artists.items[1].rank, 2)
+                XCTAssertEqual(artists.items[1].name, "Artist 1")
             case .failure(let error):
                 XCTFail("Expected to succeed, but it fail with error: \(error.localizedDescription)")
             }
@@ -570,11 +906,6 @@ class UserTests: XCTestCase {
         let fakeData = try Data(contentsOf: jsonURL)
         let params = UserWeeklyChartParams(user: "user", from: 123412, to: 53452)
 
-        let expectedEntity = try JSONDecoder().decode(
-            CollectionList<UserWeeklyArtistChart>.self,
-            from: fakeData
-        )
-
         apiClientMock.data = fakeData
         apiClientMock.response = Constants.RESPONSE_200_OK
 
@@ -582,8 +913,16 @@ class UserTests: XCTestCase {
 
         instance.getWeeklyArtistChart(params: params) { result in
             switch (result) {
-            case .success(let entity):
-                XCTAssertEqual(entity, expectedEntity)
+            case .success(let artists):
+                XCTAssertEqual(artists.items[0].mbid, "artist-0-mbid")
+                XCTAssertEqual(artists.items[0].url.absoluteString, "https://artists.com/artist-0")
+                XCTAssertEqual(artists.items[0].rank, 1)
+                XCTAssertEqual(artists.items[0].playcount, 7600)
+
+                XCTAssertEqual(artists.items[1].mbid, "artist-1-mbid")
+                XCTAssertEqual(artists.items[1].url.absoluteString, "https://artists.com/artist-1")
+                XCTAssertEqual(artists.items[1].rank, 2)
+                XCTAssertEqual(artists.items[1].playcount, 7610)
             case .failure(let error):
                 XCTFail("Expected to be a success but got a failure with \(error)")
             }

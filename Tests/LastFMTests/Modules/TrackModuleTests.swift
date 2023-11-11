@@ -27,7 +27,6 @@ class TrackModuleTests: XCTestCase {
     func test_scrobble_success() throws {
         let jsonURL = Bundle.module.url(forResource: "Resources/track.scrobble", withExtension: "json")!
         let fakeData = try Data(contentsOf: jsonURL)
-        let expectedEntity = try JSONDecoder().decode(ScrobbleList.self, from: fakeData)
 
         let track = ScrobbleParamItem(
             artist: "Pink Floyd",
@@ -46,8 +45,21 @@ class TrackModuleTests: XCTestCase {
 
         try instance.scrobble(params: params) { result in
             switch(result) {
-            case .success(let entity):
-                XCTAssertEqual(entity, expectedEntity)
+            case .success(let scrobble):
+                XCTAssertEqual(scrobble.accepted, 1)
+                XCTAssertEqual(scrobble.ignored, 0)
+                XCTAssertEqual(scrobble.items.count, 1)
+
+                XCTAssertEqual(scrobble.items[0].artist.text, "Pink Floyd")
+                XCTAssertEqual(scrobble.items[0].artist.corrected, false)
+                XCTAssertEqual(scrobble.items[0].albumArtist.text, "Pink Floyd")
+                XCTAssertEqual(scrobble.items[0].albumArtist.corrected, false)
+                XCTAssertEqual(scrobble.items[0].album.text, "The Wall")
+                XCTAssertEqual(scrobble.items[0].album.corrected, false)
+                XCTAssertEqual(scrobble.items[0].track.text, "Comfortably Numb")
+                XCTAssertEqual(scrobble.items[0].track.corrected, false)
+                XCTAssertEqual(scrobble.items[0].ignored, .NotIgnored)
+                XCTAssertEqual(scrobble.items[0].timestamp, 1697838599)
             case .failure(_):
                 XCTFail("Expected to succeed, but it failed")
             }
@@ -80,7 +92,6 @@ class TrackModuleTests: XCTestCase {
     func test_multiple_scrobble_success() throws {
         let jsonURL = Bundle.module.url(forResource: "Resources/track.multipleScrobble", withExtension: "json")!
         let fakeData = try Data(contentsOf: jsonURL)
-        let expectedEntity = try JSONDecoder().decode(ScrobbleList.self, from: fakeData)
         var params = ScrobbleParams(sessionKey: "someKey")
 
         params.addItem(item: ScrobbleParamItem(
@@ -127,8 +138,65 @@ class TrackModuleTests: XCTestCase {
 
         try instance.scrobble(params: params) { result in
             switch(result) {
-            case .success(let entity):
-                XCTAssertEqual(entity, expectedEntity)
+            case .success(let scrobbles):
+                XCTAssertEqual(scrobbles.items.count, 5)
+                XCTAssertEqual(scrobbles.accepted, 5)
+                XCTAssertEqual(scrobbles.ignored, 0)
+
+                XCTAssertEqual(scrobbles.items[0].artist.text, "+44")
+                XCTAssertEqual(scrobbles.items[0].artist.corrected, false)
+                XCTAssertEqual(scrobbles.items[0].album.text, "When Your Heart Stops Beating")
+                XCTAssertEqual(scrobbles.items[0].album.corrected, false)
+                XCTAssertEqual(scrobbles.items[0].track.text, "Cliff Diving")
+                XCTAssertEqual(scrobbles.items[0].track.corrected, false)
+                XCTAssertEqual(scrobbles.items[0].ignored, .NotIgnored)
+                XCTAssertEqual(scrobbles.items[0].albumArtist.text, "+44")
+                XCTAssertEqual(scrobbles.items[0].albumArtist.corrected, false)
+                XCTAssertEqual(scrobbles.items[0].timestamp, 1697843437)
+
+                XCTAssertEqual(scrobbles.items[1].artist.text, "Broken Social Scene")
+                XCTAssertEqual(scrobbles.items[1].artist.corrected, false)
+                XCTAssertEqual(scrobbles.items[1].album.text, "You Forgot It In People")
+                XCTAssertEqual(scrobbles.items[1].album.corrected, false)
+                XCTAssertEqual(scrobbles.items[1].track.text, "Cause = Time")
+                XCTAssertEqual(scrobbles.items[1].track.corrected, false)
+                XCTAssertEqual(scrobbles.items[1].ignored, .NotIgnored)
+                XCTAssertEqual(scrobbles.items[1].albumArtist.text, "Broken Social Scene")
+                XCTAssertEqual(scrobbles.items[1].albumArtist.corrected, false)
+                XCTAssertEqual(scrobbles.items[1].timestamp, 1697843377)
+
+                XCTAssertEqual(scrobbles.items[2].artist.text, "Nine Inch Nails")
+                XCTAssertEqual(scrobbles.items[2].artist.corrected, false)
+                XCTAssertEqual(scrobbles.items[2].album.text, "Not The Actual Events")
+                XCTAssertEqual(scrobbles.items[2].album.corrected, false)
+                XCTAssertEqual(scrobbles.items[2].track.text, "Branches / Bones")
+                XCTAssertEqual(scrobbles.items[2].track.corrected, false)
+                XCTAssertEqual(scrobbles.items[2].ignored, .NotIgnored)
+                XCTAssertEqual(scrobbles.items[2].albumArtist.text, "Nine Inch Nails")
+                XCTAssertEqual(scrobbles.items[2].albumArtist.corrected, false)
+                XCTAssertEqual(scrobbles.items[2].timestamp, 1697843317)
+
+                XCTAssertEqual(scrobbles.items[3].artist.text, "Llegas")
+                XCTAssertEqual(scrobbles.items[3].artist.corrected, false)
+                XCTAssertEqual(scrobbles.items[3].album.text, "#VieneElSol")
+                XCTAssertEqual(scrobbles.items[3].album.corrected, false)
+                XCTAssertEqual(scrobbles.items[3].track.text, "Viene El Sol")
+                XCTAssertEqual(scrobbles.items[3].track.corrected, false)
+                XCTAssertEqual(scrobbles.items[3].ignored, .NotIgnored)
+                XCTAssertEqual(scrobbles.items[3].albumArtist.text, "Llegas")
+                XCTAssertEqual(scrobbles.items[3].albumArtist.corrected, false)
+                XCTAssertEqual(scrobbles.items[3].timestamp, 1697843257)
+
+                XCTAssertEqual(scrobbles.items[4].artist.text, "Foo Fighters")
+                XCTAssertEqual(scrobbles.items[4].artist.corrected, false)
+                XCTAssertEqual(scrobbles.items[4].album.text, "Wasting Light")
+                XCTAssertEqual(scrobbles.items[4].album.corrected, false)
+                XCTAssertEqual(scrobbles.items[4].track.text, "Back & Forth")
+                XCTAssertEqual(scrobbles.items[4].track.corrected, false)
+                XCTAssertEqual(scrobbles.items[4].ignored, .NotIgnored)
+                XCTAssertEqual(scrobbles.items[4].albumArtist.text, "Foo Fighters")
+                XCTAssertEqual(scrobbles.items[4].albumArtist.corrected, false)
+                XCTAssertEqual(scrobbles.items[4].timestamp, 1697843197)
             case .failure(_):
                 XCTFail("Expected to succeed, but it failed")
             }

@@ -114,62 +114,6 @@
             },
             {
                 "artist": {
-                    "url": "https://www.last.fm/music/Damone",
-                    "name": "Damone",
-                    "image": [
-                        {
-                            "size": "small",
-                            "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
-                        },
-                        {
-                            "size": "medium",
-                            "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
-                        },
-                        {
-                            "size": "large",
-                            "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
-                        },
-                        {
-                            "size": "extralarge",
-                            "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
-                        }
-                    ],
-                    "mbid": ""
-                },
-                "date": {
-                    "uts": "1697382636",
-                    "#text": "15 Oct 2023, 15:10"
-                },
-                "mbid": "e127f548-3ac4-3c9e-8643-5dd764201553",
-                "name": "On My Mind",
-                "image": [
-                    {
-                        "size": "small",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/223fcfc78a9f3060ac7f45d0785bf62a.jpg"
-                    },
-                    {
-                        "size": "medium",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/223fcfc78a9f3060ac7f45d0785bf62a.jpg"
-                    },
-                    {
-                        "size": "large",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/223fcfc78a9f3060ac7f45d0785bf62a.jpg"
-                    },
-                    {
-                        "size": "extralarge",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/223fcfc78a9f3060ac7f45d0785bf62a.jpg"
-                    }
-                ],
-                "url": "https://www.last.fm/music/Damone/_/On+My+Mind",
-                "streamable": "0",
-                "album": {
-                    "mbid": "0f48becf-15a6-480f-9a70-0bd4e9f4d280",
-                    "#text": "From the Attic"
-                },
-                "loved": "1"
-            },
-            {
-                "artist": {
                     "url": "https://www.last.fm/music/Tripping+Daisy",
                     "name": "Tripping Daisy",
                     "image": [
@@ -222,127 +166,15 @@
                     "mbid": "6233a746-932e-38d0-9dea-073be3ce1606",
                     "#text": "I Am An Elastic Firecracker"
                 },
-                "loved": "1"
-            },
-            {
-                "artist": {
-                    "url": "https://www.last.fm/music/NOFX",
-                    "name": "NOFX",
-                    "image": [
-                        {
-                            "size": "small",
-                            "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
-                        },
-                        {
-                            "size": "medium",
-                            "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
-                        },
-                        {
-                            "size": "large",
-                            "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
-                        },
-                        {
-                            "size": "extralarge",
-                            "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
-                        }
-                    ],
-                    "mbid": ""
-                },
-                "date": {
-                    "uts": "1697382157",
-                    "#text": "15 Oct 2023, 15:02"
-                },
-                "mbid": "0ae832d9-25c5-3511-8636-30afb10140b2",
-                "name": "Theme From a NOFX Album",
-                "image": [
-                    {
-                        "size": "small",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/930c2ba144454634c625f1dc00062976.png"
-                    },
-                    {
-                        "size": "medium",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/930c2ba144454634c625f1dc00062976.png"
-                    },
-                    {
-                        "size": "large",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/930c2ba144454634c625f1dc00062976.png"
-                    },
-                    {
-                        "size": "extralarge",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/930c2ba144454634c625f1dc00062976.png"
-                    }
-                ],
-                "url": "https://www.last.fm/music/NOFX/_/Theme+From+a+NOFX+Album",
-                "streamable": "0",
-                "album": {
-                    "mbid": "2e2299dd-6551-4c8e-af60-5282d26bd115",
-                    "#text": "Pump Up the Valuum"
-                },
-                "loved": "1"
-            },
-            {
-                "artist": {
-                    "url": "https://www.last.fm/music/John+Mayer",
-                    "name": "John Mayer",
-                    "image": [
-                        {
-                            "size": "small",
-                            "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
-                        },
-                        {
-                            "size": "medium",
-                            "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
-                        },
-                        {
-                            "size": "large",
-                            "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
-                        },
-                        {
-                            "size": "extralarge",
-                            "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
-                        }
-                    ],
-                    "mbid": ""
-                },
-                "date": {
-                    "uts": "1697381919",
-                    "#text": "15 Oct 2023, 14:58"
-                },
-                "mbid": "0079848f-0ca1-406f-abfc-2aa8c8652d4e",
-                "name": "Daughters",
-                "image": [
-                    {
-                        "size": "small",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/1d1b6e18660632d6dae3f5e7c8b6312e.jpg"
-                    },
-                    {
-                        "size": "medium",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/1d1b6e18660632d6dae3f5e7c8b6312e.jpg"
-                    },
-                    {
-                        "size": "large",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/1d1b6e18660632d6dae3f5e7c8b6312e.jpg"
-                    },
-                    {
-                        "size": "extralarge",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/1d1b6e18660632d6dae3f5e7c8b6312e.jpg"
-                    }
-                ],
-                "url": "https://www.last.fm/music/John+Mayer/_/Daughters",
-                "streamable": "0",
-                "album": {
-                    "mbid": "045fef10-96f0-4e6c-93f8-06b6b8685e81",
-                    "#text": "Heavier Things"
-                },
-                "loved": "1"
+                "loved": "0"
             }
         ],
         "@attr": {
             "user": "Duhnnie",
-            "totalPages": "69260",
+            "totalPages": "100",
             "page": "1",
-            "perPage": "5",
-            "total": "346297"
+            "perPage": "2",
+            "total": "200"
         }
     }
 }

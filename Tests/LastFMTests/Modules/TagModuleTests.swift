@@ -113,7 +113,6 @@ class TagModuleTests: XCTestCase {
         )!
 
         let fakeData = try Data(contentsOf: jsonURL)
-        let expectedEntity = try JSONDecoder().decode(CollectionPage<TagTopArtist>.self, from: fakeData)
         let params = TagTopArtistsParams(tag: "Progressive", limit: 5, page: 1)
         let expectation = expectation(description: "waiting for getTopArtists")
 
@@ -122,8 +121,34 @@ class TagModuleTests: XCTestCase {
 
         instance.getTopArtists(params: params) { result in
             switch(result) {
-            case .success(let list):
-                XCTAssertEqual(list, expectedEntity)
+            case .success(let topArtists):
+                XCTAssertEqual(topArtists.items.count, 2)
+                XCTAssertEqual(topArtists.pagination.page, 1)
+                XCTAssertEqual(topArtists.pagination.perPage, 2)
+                XCTAssertEqual(topArtists.pagination.total, 100)
+                XCTAssertEqual(topArtists.pagination.totalPages, 50)
+
+                XCTAssertEqual(topArtists.items[0].name, "Artist 0")
+                XCTAssertEqual(topArtists.items[0].mbid, "artist-0-mbid")
+                XCTAssertEqual(topArtists.items[0].url.absoluteString, "https://artists.com/artist-0")
+                XCTAssertEqual(topArtists.items[0].streamable, false)
+                XCTAssertEqual(topArtists.items[0].images.small?.absoluteString, "https://images.com/artist-0-s.png")
+                XCTAssertEqual(topArtists.items[0].images.medium?.absoluteString, "https://images.com/artist-0-m.png")
+                XCTAssertEqual(topArtists.items[0].images.large?.absoluteString, "https://images.com/artist-0-l.png")
+                XCTAssertEqual(topArtists.items[0].images.extraLarge?.absoluteString, "https://images.com/artist-0-xl.png")
+                XCTAssertEqual(topArtists.items[0].images.mega?.absoluteString, "https://images.com/artist-0-mg.png")
+                XCTAssertEqual(topArtists.items[0].rank, 1)
+
+                XCTAssertEqual(topArtists.items[1].name, "Artist 1")
+                XCTAssertNil(topArtists.items[1].mbid)
+                XCTAssertEqual(topArtists.items[1].url.absoluteString, "https://artists.com/artist-1")
+                XCTAssertEqual(topArtists.items[1].streamable, false)
+                XCTAssertEqual(topArtists.items[1].images.small?.absoluteString, "https://images.com/artist-1-s.png")
+                XCTAssertEqual(topArtists.items[1].images.medium?.absoluteString, "https://images.com/artist-1-m.png")
+                XCTAssertEqual(topArtists.items[1].images.large?.absoluteString, "https://images.com/artist-1-l.png")
+                XCTAssertEqual(topArtists.items[1].images.extraLarge?.absoluteString, "https://images.com/artist-1-xl.png")
+                XCTAssertEqual(topArtists.items[1].images.mega?.absoluteString, "https://images.com/artist-1-mg.png")
+                XCTAssertEqual(topArtists.items[1].rank, 2)
             case .failure(let error):
                 XCTFail("Expected to fail. Got \"\(error.localizedDescription)\" error instead")
             }

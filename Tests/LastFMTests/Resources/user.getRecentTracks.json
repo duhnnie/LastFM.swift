@@ -107,122 +107,14 @@
                     "uts": "1697381235",
                     "#text": "15 Oct 2023, 14:47"
                 }
-            },
-            {
-                "artist": {
-                    "mbid": "67f66c07-6e61-4026-ade5-7e782fad3a5d",
-                    "#text": "Foo Fighters"
-                },
-                "streamable": "0",
-                "image": [
-                    {
-                        "size": "small",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/c2ecd547171fc923b5b32718a8e8780a.jpg"
-                    },
-                    {
-                        "size": "medium",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/c2ecd547171fc923b5b32718a8e8780a.jpg"
-                    },
-                    {
-                        "size": "large",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/c2ecd547171fc923b5b32718a8e8780a.jpg"
-                    },
-                    {
-                        "size": "extralarge",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/c2ecd547171fc923b5b32718a8e8780a.jpg"
-                    }
-                ],
-                "mbid": "d2956701-cdc8-4bed-acaa-14aea6ce8319",
-                "album": {
-                    "mbid": "02084fd8-5bce-3495-9e9f-86261dcb59a2",
-                    "#text": "The Colour and the Shape"
-                },
-                "name": "February Stars",
-                "url": "https://www.last.fm/music/Foo+Fighters/_/February+Stars",
-                "date": {
-                    "uts": "1697380812",
-                    "#text": "15 Oct 2023, 14:40"
-                }
-            },
-            {
-                "artist": {
-                    "mbid": "7c7f9c94-dee8-4903-892b-6cf44652e2de",
-                    "#text": "Tears for Fears"
-                },
-                "streamable": "0",
-                "image": [
-                    {
-                        "size": "small",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/f3668f68387d4336c3a797a66196f851.png"
-                    },
-                    {
-                        "size": "medium",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/f3668f68387d4336c3a797a66196f851.png"
-                    },
-                    {
-                        "size": "large",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/f3668f68387d4336c3a797a66196f851.png"
-                    },
-                    {
-                        "size": "extralarge",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/f3668f68387d4336c3a797a66196f851.png"
-                    }
-                ],
-                "mbid": "",
-                "album": {
-                    "mbid": "16de0b2c-e92d-42c6-9d67-74cebcfac08f",
-                    "#text": "Songs from the Big Chair"
-                },
-                "name": "Head Over Heels",
-                "url": "https://www.last.fm/music/Tears+for+Fears/_/Head+Over+Heels",
-                "date": {
-                    "uts": "1697380555",
-                    "#text": "15 Oct 2023, 14:35"
-                }
-            },
-            {
-                "artist": {
-                    "mbid": "8c32bb01-58a3-453b-8050-8c0620edb0e5",
-                    "#text": "Stone Temple Pilots"
-                },
-                "streamable": "0",
-                "image": [
-                    {
-                        "size": "small",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/c1dd25f6e16c6b047675a816bdc323cb.jpg"
-                    },
-                    {
-                        "size": "medium",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/c1dd25f6e16c6b047675a816bdc323cb.jpg"
-                    },
-                    {
-                        "size": "large",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/c1dd25f6e16c6b047675a816bdc323cb.jpg"
-                    },
-                    {
-                        "size": "extralarge",
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/c1dd25f6e16c6b047675a816bdc323cb.jpg"
-                    }
-                ],
-                "mbid": "6dfcbd0b-de08-468a-8003-e69eed22cdfe",
-                "album": {
-                    "mbid": "01ad1808-59c1-46c7-90ce-eda16ec4b121",
-                    "#text": "Core"
-                },
-                "name": "Crackerman",
-                "url": "https://www.last.fm/music/Stone+Temple+Pilots/_/Crackerman",
-                "date": {
-                    "uts": "1697380360",
-                    "#text": "15 Oct 2023, 14:32"
-                }
             }
         ],
         "@attr": {
             "user": "Duhnnie",
-            "totalPages": "69259",
+            "totalPages": "30",
             "page": "1",
-            "perPage": "5",
-            "total": "346291"
+            "perPage": "2",
+            "total": "60"
         }
     }
 }

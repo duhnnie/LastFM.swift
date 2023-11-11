@@ -2,30 +2,30 @@
     "toptracks": {
         "track": [
             {
-                "name": "Olor a Gas",
-                "playcount": "7",
-                "listeners": "2",
-                "url": "https://www.last.fm/music/Cafe+Tacuva/_/Olor+a+Gas",
+                "name": "Track 0",
+                "playcount": "23400",
+                "listeners": "30",
+                "url": "https://tracks.com/track-0",
                 "streamable": "0",
                 "artist": {
-                    "name": "Cafe Tacuva",
-                    "url": "https://www.last.fm/music/Cafe+Tacuva"
+                    "name": "Some Artist",
+                    "url": "https://artists.com/some-artist"
                 },
                 "image": [
                     {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "#text": "https://images.com/track-0-s.png",
                         "size": "small"
                     },
                     {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "#text": "https://images.com/track-0-m.png",
                         "size": "medium"
                     },
                     {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "#text": "https://images.com/track-0-l.png",
                         "size": "large"
                     },
                     {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "#text": "https://images.com/track-0-xl.png",
                         "size": "extralarge"
                     }
                 ],
@@ -34,140 +34,44 @@
                 }
             },
             {
-                "name": "Eres",
-                "playcount": "6",
-                "listeners": "2",
-                "url": "https://www.last.fm/music/Cafe+Tacuva/_/Eres",
+                "name": "Track 1",
+                "playcount": "23410",
+                "listeners": "31",
+                "url": "https://tracks.com/track-1",
                 "streamable": "0",
                 "artist": {
-                    "name": "Cafe Tacuva",
-                    "url": "https://www.last.fm/music/Cafe+Tacuva"
+                    "name": "Some Artist",
+                    "url": "https://artists.com/some-artist"
                 },
                 "image": [
                     {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "#text": "https://images.com/track-1-s.png",
                         "size": "small"
                     },
                     {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "#text": "https://images.com/track-1-m.png",
                         "size": "medium"
                     },
                     {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "#text": "https://images.com/track-1-l.png",
                         "size": "large"
                     },
                     {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
+                        "#text": "https://images.com/track-1-xl.png",
                         "size": "extralarge"
                     }
                 ],
                 "@attr": {
                     "rank": "2"
                 }
-            },
-            {
-                "name": "mediodía",
-                "playcount": "2",
-                "listeners": "1",
-                "url": "https://www.last.fm/music/Cafe+Tacuva/_/mediod%C3%ADa",
-                "streamable": "0",
-                "artist": {
-                    "name": "Cafe Tacuva",
-                    "url": "https://www.last.fm/music/Cafe+Tacuva"
-                },
-                "image": [
-                    {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
-                        "size": "small"
-                    },
-                    {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
-                        "size": "medium"
-                    },
-                    {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
-                        "size": "large"
-                    },
-                    {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
-                        "size": "extralarge"
-                    }
-                ],
-                "@attr": {
-                    "rank": "3"
-                }
-            },
-            {
-                "name": "Cierto o falso",
-                "playcount": "1",
-                "listeners": "1",
-                "url": "https://www.last.fm/music/Cafe+Tacuva/_/Cierto+o+falso",
-                "streamable": "0",
-                "artist": {
-                    "name": "Cafe Tacuva",
-                    "url": "https://www.last.fm/music/Cafe+Tacuva"
-                },
-                "image": [
-                    {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
-                        "size": "small"
-                    },
-                    {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
-                        "size": "medium"
-                    },
-                    {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
-                        "size": "large"
-                    },
-                    {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
-                        "size": "extralarge"
-                    }
-                ],
-                "@attr": {
-                    "rank": "4"
-                }
-            },
-            {
-                "name": "Gracias",
-                "playcount": "1",
-                "listeners": "1",
-                "url": "https://www.last.fm/music/Cafe+Tacuva/_/Gracias",
-                "streamable": "0",
-                "artist": {
-                    "name": "Cafe Tacuva",
-                    "url": "https://www.last.fm/music/Cafe+Tacuva"
-                },
-                "image": [
-                    {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
-                        "size": "small"
-                    },
-                    {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png",
-                        "size": "medium"
-                    },
-                    {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png",
-                        "size": "large"
-                    },
-                    {
-                        "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png",
-                        "size": "extralarge"
-                    }
-                ],
-                "@attr": {
-                    "rank": "5"
-                }
             }
         ],
         "@attr": {
-            "artist": "Cafe Tacuva",
+            "artist": "Some Artist",
             "page": "1",
-            "perPage": "5",
-            "totalPages": "3",
-            "total": "15"
+            "perPage": "2",
+            "totalPages": "16",
+            "total": "38"
         }
     }
 }
