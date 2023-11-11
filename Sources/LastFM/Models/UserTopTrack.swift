@@ -8,7 +8,7 @@ public struct UserTopTrack: Decodable, Equatable {
     public let url: URL
     public let duration: UInt
     public let playcount: UInt
-    public let streamable: Bool
+    public let streamable: Streamable
     public let rank: UInt
 
     private enum CodingKeys: String, CodingKey {
@@ -21,10 +21,6 @@ public struct UserTopTrack: Decodable, Equatable {
         case playcount
         case streamable
         case attr = "@attr"
-
-        enum StreamableKeys: String, CodingKey {
-            case fulltrack
-        }
 
         enum AttrKeys: String, CodingKey {
             case rank
@@ -39,6 +35,7 @@ public struct UserTopTrack: Decodable, Equatable {
         self.images = try container.decode(LastFMImages.self, forKey: CodingKeys.images)
         self.artist = try container.decode(LastFMMBEntity.self, forKey: CodingKeys.artist)
         self.url = try container.decode(URL.self, forKey: .url)
+        self.streamable = try container.decode(Streamable.self, forKey: .streamable)
 
         let attrContainer = try container.nestedContainer(keyedBy: CodingKeys.AttrKeys.self, forKey: CodingKeys.attr)
         let rankString = try attrContainer.decode(String.self, forKey: CodingKeys.AttrKeys.rank)
@@ -56,9 +53,5 @@ public struct UserTopTrack: Decodable, Equatable {
         self.rank = rank
         self.duration = duration
         self.playcount = playcount
-
-        let streamableContainer = try container.nestedContainer(keyedBy: CodingKeys.StreamableKeys.self, forKey: CodingKeys.streamable)
-        let streamableString = try streamableContainer.decode(String.self, forKey: CodingKeys.StreamableKeys.fulltrack)
-        self.streamable = streamableString == "1" ? true : false
     }
 }
