@@ -16,24 +16,10 @@ public struct SearchResults<T: Decodable>: Decodable {
                 forKey: .query
             )
 
-            let startPageString = try openQueryContainer.decode(String.self, forKey: .startPage)
-            let totalResultsString = try container.decode(String.self, forKey: .totalResults)
-            let startIndexString = try container.decode(String.self, forKey: .startIndex)
-            let itemsPerPageString = try container.decode(String.self, forKey: .itemsPerPage)
-
-            guard
-                let startPage = UInt(startPageString),
-                let totalResults = UInt(totalResultsString),
-                let startIndex = UInt(startIndexString),
-                let itemsPerPage = UInt(itemsPerPageString)
-            else {
-                throw RuntimeError("Can't decode startPage, totalResults, startIndex or itemsPerPage")
-            }
-
-            self.startPage = startPage
-            self.totalResults = totalResults
-            self.startIndex = startIndex
-            self.itemsPerPage = itemsPerPage
+            self.startPage = try openQueryContainer.decode(UInt.self, forKey: .startPage)
+            self.totalResults = try container.decode(UInt.self, forKey: .totalResults)
+            self.startIndex = try container.decode(UInt.self, forKey: .startIndex)
+            self.itemsPerPage = try container.decode(UInt.self, forKey: .itemsPerPage)
         }
     }
 

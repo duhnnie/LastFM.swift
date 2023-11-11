@@ -25,6 +25,31 @@ fileprivate struct UIntWrapper: Decodable {
 
 }
 
+fileprivate struct UInt8Wrapper: Decodable {
+
+    let value: UInt8
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+
+        if let value = try? container.decode(UInt8.self) {
+            self.value = value
+            return
+        }
+
+        guard
+            let valueString = try? container.decode(String.self),
+            let value = UInt8(valueString)
+        else {
+            let context = DecodingError.Context(codingPath: container.codingPath, debugDescription: "UInt8 format was not parseable.")
+            throw DecodingError.dataCorrupted(context)
+        }
+
+        self.value = value
+    }
+
+}
+
 fileprivate struct IntWrapper: Decodable {
 
     let value: Int
@@ -120,6 +145,10 @@ internal extension KeyedDecodingContainer {
         return try self.decode(UIntWrapper.self, forKey: key).value
     }
 
+    func decode(_ type: UInt8.Type, forKey key: K) throws -> UInt8 {
+        return try self.decode(UInt8Wrapper.self, forKey: key).value
+    }
+
     func decode(_ type: Int.Type, forKey key: K) throws -> Int {
         return try self.decode(IntWrapper.self, forKey: key).value
     }
@@ -143,6 +172,16 @@ internal extension KeyedDecodingContainer {
     }
 
     func decodeIfPresent(_ type: UInt.Type, forKey key: K) throws -> UInt? {
+        guard
+            (self.allKeys.contains { $0.stringValue == key.stringValue })
+        else {
+            return nil
+        }
+
+        return try decode(type, forKey: key)
+    }
+
+    func decodeIfPresent(_ type: UInt8.Type, forKey key: K) throws -> UInt8? {
         guard
             (self.allKeys.contains { $0.stringValue == key.stringValue })
         else {

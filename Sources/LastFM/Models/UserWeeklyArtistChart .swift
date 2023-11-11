@@ -31,24 +31,13 @@ public struct UserWeeklyTrackChart: Decodable, Equatable {
             forKey: .attr
         )
 
-        let playcountString = try container.decode(String.self, forKey: .playcount)
-        let rankString = try attrContainer.decode(String.self, forKey: .rank)
-
         self.mbid = try container.decode(String.self, forKey: .mbid)
         self.name = try container.decode(String.self, forKey: .name)
         self.url = try container.decode(URL.self, forKey: .url)
         self.artist = try container.decode(MBEntity.self, forKey: .artist)
         self.images = try container.decode(LastFMImages.self, forKey: .images)
-
-        guard let playcount = UInt(playcountString) else {
-            throw RuntimeError("Invalid playcount.")
-        }
-
-        guard let rank = UInt(rankString) else {
-            throw RuntimeError("Invalid rank.")
-        }
-
-        self.playcount = playcount
-        self.rank = rank
+        self.playcount = try container.decode(UInt.self, forKey: .playcount)
+        self.rank = try attrContainer.decode(UInt.self, forKey: .rank)
     }
+    
 }

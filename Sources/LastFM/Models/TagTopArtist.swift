@@ -29,17 +29,11 @@ public struct TagTopArtist: Decodable, Equatable {
         self.name = try container.decode(String.self, forKey: CodingKeys.name)
         self.images = try container.decode(LastFMImages.self, forKey: CodingKeys.images)
         self.url = try container.decode(URL.self, forKey: .url)
+        self.streamable = try container.decode(Bool.self, forKey: CodingKeys.streamable)
 
         let attrContainer = try container.nestedContainer(keyedBy: CodingKeys.AttrKeys.self, forKey: CodingKeys.attr)
-        let rankString = try attrContainer.decode(String.self, forKey: CodingKeys.AttrKeys.rank)
-        let streamableString = try container.decode(String.self, forKey: CodingKeys.streamable)
 
-        guard let rank = UInt(rankString) else {
-            throw RuntimeError("Can't parse rank or playcount")
-        }
-
-        self.rank = rank
-        self.streamable = streamableString == "1" ? true : false
+        self.rank = try attrContainer.decode(UInt.self, forKey: CodingKeys.AttrKeys.rank)
     }
     
 }

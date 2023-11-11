@@ -34,38 +34,37 @@ public struct RecentTrack: Decodable, Equatable {
 
     public init (from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let streamableString = try container.decode(String.self, forKey: .streamable)
 
         self.name = try container.decode(String.self, forKey: .name)
         self.artist = try container.decode(MBEntity.self, forKey: .artist)
         self.album = try container.decode(MBEntity.self, forKey: .album)
         self.mbid = try container.decode(String.self, forKey: .mbid)
         self.url = try container.decode(URL.self, forKey: .url)
-        self.streamable = streamableString == "1"
+        self.streamable = try container.decode(Bool.self, forKey: .streamable)
 
         self.images = try container.decode(LastFMImages.self, forKey: .images)
 
-        do {
-            let attrContainer = try container.nestedContainer(keyedBy: CodingKeys.AttrKeys.self, forKey: .attr)
-
-            let nowplayingString = try attrContainer.decodeIfPresent(String.self, forKey: CodingKeys.AttrKeys.nowplaying)
-            self.nowPlaying = nowplayingString == "true"
-        } catch {
+        if let attrContainer = try? container.nestedContainer(keyedBy: CodingKeys.AttrKeys.self, forKey: .attr) {
+            self.nowPlaying = try attrContainer.decode(
+                Bool.self,
+                forKey: .nowplaying
+            )
+        } else {
             self.nowPlaying = false
         }
 
-        guard
-            let dateContainer = try? container.nestedContainer(keyedBy: CodingKeys.DateKeys.self, forKey: CodingKeys.date),
-            let utsString = try dateContainer.decodeIfPresent(String.self, forKey: CodingKeys.DateKeys.uts)
-        else {
+        if let dateContainer = try? container.nestedContainer(
+            keyedBy: CodingKeys.DateKeys.self,
+            forKey: CodingKeys.date
+        ) {
+            let uts = try dateContainer.decode(
+                Int.self,
+                forKey: CodingKeys.DateKeys.uts
+            )
+
+            self.date = Date(timeIntervalSince1970: Double(uts))
+        } else {
             self.date = nil
-            return
         }
-
-        guard let uts = Int(utsString) else {
-            throw RuntimeError("No valid date")
-        }
-
-        self.date = Date(timeIntervalSince1970: Double(uts))
     }
 }

@@ -66,19 +66,17 @@ public struct ScrobbledTrack: Decodable, Equatable {
         self.album = try container.decode(Property.self, forKey: .album)
         self.track = try container.decode(Property.self, forKey: .track)
         self.albumArtist = try container.decode(Property.self, forKey: .albumArtist)
+        self.timestamp = try container.decode(UInt.self, forKey: .timestamp)
 
-        let timestampString = try container.decode(String.self, forKey: .timestamp)
-        let ignoredString = try ignoredContainer.decode(String.self, forKey: .code)
+        let ignoredCode = try ignoredContainer.decode(UInt8.self, forKey: .code)
 
         guard
-            let timestamp = UInt(timestampString),
-            let ignoredCode = UInt8(ignoredString),
             let ignored = IgnoredType(rawValue: ignoredCode)
         else {
-            throw RuntimeError("Invalid timestamp or ignoredMessage.code")
+            throw RuntimeError("Invalid ignoredMessage.code")
         }
 
-        self.timestamp = timestamp
+
         self.ignored = ignored
     }
 

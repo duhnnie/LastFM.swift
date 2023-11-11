@@ -7,27 +7,18 @@ public struct CollectionPage<T: Decodable & Equatable>: Decodable, Equatable {
             case totalPages, page, perPage, total
         }
 
-        public let totalPages: Int
-        public let page: Int
-        public let perPage: Int
-        public let total: Int
+        public let totalPages: UInt
+        public let page: UInt
+        public let perPage: UInt
+        public let total: UInt
 
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
 
-            guard
-                let totalPages = try? Int(container.decode(String.self, forKey: .totalPages)),
-                let page = try? Int(container.decode(String.self, forKey: .page)),
-                let perPage = try? Int(container.decode(String.self, forKey: .perPage)),
-                let total = try? Int(container.decode(String.self, forKey: .total))
-            else {
-                throw RuntimeError("Error at decoding pagination members.")
-            }
-
-            self.totalPages = totalPages
-            self.page = page
-            self.perPage = perPage
-            self.total = total
+            self.totalPages = try container.decode(UInt.self, forKey: .totalPages)
+            self.page = try container.decode(UInt.self, forKey: .page)
+            self.perPage = try container.decode(UInt.self, forKey: .perPage)
+            self.total = try container.decode(UInt.self, forKey: .total)
         }
     }
 

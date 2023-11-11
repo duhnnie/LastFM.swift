@@ -28,14 +28,11 @@ public struct TagTopTrack: Decodable, Equatable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let durationString = try container.decode(String.self, forKey: .duration)
 
         let rankContainer = try container.nestedContainer(
             keyedBy: CodingKeys.AttrKeys.self,
             forKey: .attr
         )
-
-        let rankString =  try rankContainer.decode(String.self, forKey: .rank)
 
         self.mbid = try container.decode(String.self, forKey: .mbid)
         self.name = try container.decode(String.self, forKey: .name)
@@ -43,16 +40,8 @@ public struct TagTopTrack: Decodable, Equatable {
         self.images = try container.decode(LastFMImages.self, forKey: .images)
         self.url = try container.decode(URL.self, forKey: .url)
         self.streamable = try container.decode(Streamable.self, forKey: .streamable)
-
-        guard
-            let duration = UInt(durationString),
-            let rank = UInt(rankString)
-        else {
-            throw RuntimeError("Invalid duration or rank")
-        }
-
-        self.duration = duration
-        self.rank = rank
+        self.duration = try container.decode(UInt.self, forKey: .duration)
+        self.rank =  try rankContainer.decode(UInt.self, forKey: .rank)
     }
     
 }

@@ -29,20 +29,14 @@ public struct UserWeeklyAlbumChart: Decodable, Equatable {
         self.name = try container.decode(String.self, forKey: CodingKeys.name)
         self.artist = try container.decode(MBEntity.self, forKey: CodingKeys.artist)
         self.url = try container.decode(URL.self, forKey: .url)
+        self.playcount = try container.decode(UInt.self, forKey: CodingKeys.playcount)
 
-        let attrContainer = try container.nestedContainer(keyedBy: CodingKeys.AttrKeys.self, forKey: CodingKeys.attr)
-        let rankString = try attrContainer.decode(String.self, forKey: CodingKeys.AttrKeys.rank)
-        let playcountString = try container.decode(String.self, forKey: CodingKeys.playcount)
+        let attrContainer = try container.nestedContainer(
+            keyedBy: CodingKeys.AttrKeys.self,
+            forKey: CodingKeys.attr
+        )
 
-        guard
-            let rank = UInt(rankString),
-            let playcount = UInt(playcountString)
-        else {
-            throw RuntimeError("Can't parse rank or playcount")
-        }
-
-        self.rank = rank
-        self.playcount = playcount
+        self.rank = try attrContainer.decode(UInt.self, forKey: CodingKeys.AttrKeys.rank)
     }
 
 }
