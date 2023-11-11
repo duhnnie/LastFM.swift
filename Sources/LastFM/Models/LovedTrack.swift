@@ -31,7 +31,7 @@ public struct LovedTrack: Decodable, Equatable {
             forKey: .date
         )
 
-        let utsString = try dateContainer.decode(String.self, forKey: .uts)
+        let uts = try dateContainer.decode(UInt.self, forKey: .uts)
 
         self.mbid = try container.decode(String.self, forKey: .mbid)
         self.name = try container.decode(String.self, forKey: .name)
@@ -39,11 +39,6 @@ public struct LovedTrack: Decodable, Equatable {
         self.images = try container.decode(LastFMImages.self, forKey: .images)
         self.url = try container.decode(URL.self, forKey: .url)
         self.streamable = try container.decode(Streamable.self, forKey: .streamable)
-
-        guard let uts = UInt(utsString) else {
-            throw RuntimeError("No valid date")
-        }
-
         self.date = Date(timeIntervalSince1970: Double(uts))
     }
 }

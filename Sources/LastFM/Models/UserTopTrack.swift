@@ -36,22 +36,15 @@ public struct UserTopTrack: Decodable, Equatable {
         self.artist = try container.decode(LastFMMBEntity.self, forKey: CodingKeys.artist)
         self.url = try container.decode(URL.self, forKey: .url)
         self.streamable = try container.decode(Streamable.self, forKey: .streamable)
+        self.duration = try container.decode(UInt.self, forKey: CodingKeys.duration)
+        self.playcount = try container.decode(UInt.self, forKey: CodingKeys.playcount)
 
-        let attrContainer = try container.nestedContainer(keyedBy: CodingKeys.AttrKeys.self, forKey: CodingKeys.attr)
-        let rankString = try attrContainer.decode(String.self, forKey: CodingKeys.AttrKeys.rank)
-        let durationString = try container.decode(String.self, forKey: CodingKeys.duration)
-        let playcountString = try container.decode(String.self, forKey: CodingKeys.playcount)
+        let attrContainer = try container.nestedContainer(
+            keyedBy: CodingKeys.AttrKeys.self,
+            forKey: CodingKeys.attr
+        )
 
-        guard
-            let rank = UInt(rankString),
-            let duration = UInt(durationString),
-            let playcount = UInt(playcountString)
-        else {
-            throw RuntimeError("Can't parse rank, duration or playcount")
-        }
-
-        self.rank = rank
-        self.duration = duration
-        self.playcount = playcount
+        self.rank = try attrContainer.decode(UInt.self, forKey: CodingKeys.AttrKeys.rank)
     }
+    
 }

@@ -32,13 +32,7 @@ public struct TagTopAlbum: Decodable, Equatable {
         self.url = try container.decode(URL.self, forKey: .url)
 
         let attrContainer = try container.nestedContainer(keyedBy: CodingKeys.AttrKeys.self, forKey: CodingKeys.attr)
-        let rankString = try attrContainer.decode(String.self, forKey: CodingKeys.AttrKeys.rank)
-
-        guard let rank = UInt(rankString) else {
-            throw RuntimeError("Can't parse rank")
-        }
-
-        self.rank = rank
+        self.rank = try attrContainer.decode(UInt.self, forKey: CodingKeys.AttrKeys.rank)
     }
 
 }

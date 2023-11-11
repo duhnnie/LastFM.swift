@@ -7,11 +7,11 @@ public struct UserInfo: Decodable {
     public let subscriber: Bool
     public let realname: String
     public let bootsrap: Bool
-    public let playcount: Int
-    public let artistCount: Int
-    public let playlists: Int
-    public let trackCount: Int
-    public let albumCount: Int
+    public let playcount: UInt
+    public let artistCount: UInt
+    public let playlists: UInt
+    public let trackCount: UInt
+    public let albumCount: UInt
     public let images: LastFMImages
     public let registered: Date
     public let country: String
@@ -55,17 +55,6 @@ public struct UserInfo: Decodable {
             forKey: .registered
         )
 
-        let ageString = try container.decode(String.self, forKey: .age)
-        let subscriberString = try container.decode(String.self, forKey: .subscriber)
-        let bootstrapString = try container.decode(String.self, forKey: .bootstrap)
-        let playcountString = try container.decode(String.self, forKey: .playcount)
-        let artistCountString = try container.decode(String.self, forKey: .artistCount)
-        let playlistsString = try container.decode(String.self, forKey: .playlists)
-        let trackCountString = try container.decode(String.self, forKey: .trackCount)
-        let albumCountString = try container.decode(String.self, forKey: .albumCount)
-        let urlString = try container.decode(String.self, forKey: .url)
-        let registeredDouble = try registeredContainer.decode(Double.self, forKey: .text)
-
         self.name = try container.decode(String.self, forKey: .name)
         self.realname = try container.decode(String.self, forKey: .realname)
         self.images = try container.decode(LastFMImages.self, forKey: .images)
@@ -73,28 +62,19 @@ public struct UserInfo: Decodable {
         self.gender = try container.decode(String.self, forKey: .gender)
         self.type = try container.decode(String.self, forKey: .type)
 
-        guard
-            let age = UInt(ageString),
-            let playcount = Int(playcountString),
-            let artistCount = Int(artistCountString),
-            let playlists = Int(playlistsString),
-            let trackCount = Int(trackCountString),
-            let albumCount = Int(albumCountString),
-            let url = URL(string: urlString)
-        else {
-            throw RuntimeError("Can't parse all properties")
-        }
+        self.age = try container.decode(UInt.self, forKey: .age)
+        self.subscriber = try container.decode(Bool.self, forKey: .subscriber)
+        self.bootsrap = try container.decode(Bool.self, forKey: .bootstrap)
+        self.playcount = try container.decode(UInt.self, forKey: .playcount)
+        self.artistCount = try container.decode(UInt.self, forKey: .artistCount)
+        self.playlists = try container.decode(UInt.self, forKey: .playlists)
+        self.trackCount = try container.decode(UInt.self, forKey: .trackCount)
+        self.albumCount = try container.decode(UInt.self, forKey: .albumCount)
+        self.url = try container.decode(URL.self, forKey: .url)
 
-        self.age = age
-        self.subscriber = subscriberString == "1"
-        self.bootsrap = bootstrapString == "1"
-        self.playcount = playcount
-        self.artistCount = artistCount
-        self.playlists = playlists
-        self.trackCount = trackCount
-        self.albumCount = albumCount
+        let registeredDouble = try registeredContainer.decode(Double.self, forKey: .text)
+
         self.registered = Date(timeIntervalSince1970: registeredDouble)
-        self.url = url
     }
 
 }

@@ -29,10 +29,9 @@ public struct TrackPlayingNow: Decodable {
         self.track = try container.decode(ScrobbledTrack.Property.self, forKey: .track)
         self.albumArtist = try container.decode(ScrobbledTrack.Property.self, forKey: .albumArtist)
 
-        let ignoredString = try ignoredContainer.decode(String.self, forKey: .code)
+        let ignoredCode = try ignoredContainer.decode(UInt8.self, forKey: .code)
 
         guard
-            let ignoredCode = UInt8(ignoredString),
             let ignored = ScrobbledTrack.IgnoredType(rawValue: ignoredCode)
         else {
             throw RuntimeError("Invalid ignoredMessage.code")
