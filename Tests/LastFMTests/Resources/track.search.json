@@ -1,0 +1,69 @@
+{
+    "results": {
+        "opensearch:Query": {
+            "#text": "",
+            "role": "request",
+            "startPage": "1"
+        },
+        "opensearch:totalResults": "2",
+        "opensearch:startIndex": "0",
+        "opensearch:itemsPerPage": "30",
+        "trackmatches": {
+            "track": [
+                {
+                    "name": "Track 0",
+                    "artist": "Artist 0",
+                    "url": "https://tracks.com/track-0",
+                    "streamable": "FIXME",
+                    "listeners": "870",
+                    "image": [
+                        {
+                            "size": "small",
+                            "#text": "https://images.com/image-0-s.png"
+                        },
+                        {
+                            "size": "medium",
+                            "#text": "https://images.com/image-0-m.png"
+                        },
+                        {
+                            "size": "large",
+                            "#text": "https://images.com/image-0-l.png"
+                        },
+                        {
+                            "size": "extralarge",
+                            "#text": "https://images.com/image-0-xl.png"
+                        }
+                    ],
+                    "mbid": "track-0-mbid"
+                },
+                {
+                    "name": "Track 1",
+                    "artist": "Artist 1",
+                    "url": "https://tracks.com/track-1",
+                    "streamable": "FIXME",
+                    "listeners": "871",
+                    "image": [
+                        {
+                            "size": "small",
+                            "#text": "https://images.com/image-1-s.png"
+                        },
+                        {
+                            "size": "medium",
+                            "#text": "https://images.com/image-1-m.png"
+                        },
+                        {
+                            "size": "large",
+                            "#text": "https://images.com/image-1-l.png"
+                        },
+                        {
+                            "size": "extralarge",
+                            "#text": "https://images.com/image-1-xl.png"
+                        }
+                    ],
+                    "mbid": "track-1-mbid"
+                }
+            ]
+        },
+        "@attr": {}
+    }
+}

@@ -769,4 +769,73 @@ class TrackModuleTests: XCTestCase {
         )
     }
 
+    func test_search_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/track.search",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "Waiting for search()")
+
+        let params = TrackSearchParams(
+            track: "Some Track",
+            artist: "Some Artist",
+            page: 12,
+            limit: 5
+        )
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.search(params: params) { result in
+            switch (result) {
+            case .success(let tracksResult):
+                XCTAssertEqual(tracksResult.pagination.itemsPerPage, 30)
+                XCTAssertEqual(tracksResult.pagination.startIndex, 0)
+                XCTAssertEqual(tracksResult.pagination.totalResults, 2)
+                XCTAssertEqual(tracksResult.pagination.startPage, 1)
+
+                XCTAssertEqual(tracksResult.items[0].name, "Track 0")
+                XCTAssertEqual(tracksResult.items[0].artist, "Artist 0")
+                XCTAssertEqual(tracksResult.items[0].url.absoluteString, "https://tracks.com/track-0")
+                XCTAssertEqual(tracksResult.items[0].streamable, "FIXME")
+                XCTAssertEqual(tracksResult.items[0].listeners, 870)
+                XCTAssertEqual(tracksResult.items[0].image.small?.absoluteString, "https://images.com/image-0-s.png")
+                XCTAssertEqual(tracksResult.items[0].image.medium?.absoluteString, "https://images.com/image-0-m.png")
+                XCTAssertEqual(tracksResult.items[0].image.large?.absoluteString, "https://images.com/image-0-l.png")
+                XCTAssertEqual(tracksResult.items[0].image.extraLarge?.absoluteString, "https://images.com/image-0-xl.png")
+                XCTAssertNil(tracksResult.items[0].image.mega)
+                XCTAssertEqual(tracksResult.items[0].mbid, "track-0-mbid")
+
+                XCTAssertEqual(tracksResult.items[1].name, "Track 1")
+                XCTAssertEqual(tracksResult.items[1].artist, "Artist 1")
+                XCTAssertEqual(tracksResult.items[1].url.absoluteString, "https://tracks.com/track-1")
+                XCTAssertEqual(tracksResult.items[1].streamable, "FIXME")
+                XCTAssertEqual(tracksResult.items[1].listeners, 871)
+                XCTAssertEqual(tracksResult.items[1].image.small?.absoluteString, "https://images.com/image-1-s.png")
+                XCTAssertEqual(tracksResult.items[1].image.medium?.absoluteString, "https://images.com/image-1-m.png")
+                XCTAssertEqual(tracksResult.items[1].image.large?.absoluteString, "https://images.com/image-1-l.png")
+                XCTAssertEqual(tracksResult.items[1].image.extraLarge?.absoluteString, "https://images.com/image-1-xl.png")
+                XCTAssertNil(tracksResult.items[1].image.mega)
+                XCTAssertEqual(tracksResult.items[1].mbid, "track-1-mbid")
+            case .failure(let error):
+                XCTFail("It was expected to succeed, but it fail. Error: \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?limit=5&method=track.search&artist=Some%20Artist&track=Some%20Track&api_key=someAPIKey&format=json&page=12"
+            )
+        )
+    }
+
 }
