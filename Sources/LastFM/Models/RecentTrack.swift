@@ -2,6 +2,7 @@ import Foundation
 
 // NOTE: this could be also URLMusicBrainzEntity
 public struct RecentTrack: Decodable {
+
     public let name: String
     public let artist: MBEntity
     public let album: MBEntity
@@ -67,4 +68,5 @@ public struct RecentTrack: Decodable {
             self.date = nil
         }
     }
+
 }

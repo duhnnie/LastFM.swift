@@ -1,6 +1,7 @@
 import Foundation
 
 public struct LovedTrack: Decodable {
+
     public let mbid: String
     public let name: String
     public let artist: LastFMMBEntity
@@ -41,4 +42,5 @@ public struct LovedTrack: Decodable {
         self.streamable = try container.decode(Streamable.self, forKey: .streamable)
         self.date = Date(timeIntervalSince1970: Double(uts))
     }
+
 }
