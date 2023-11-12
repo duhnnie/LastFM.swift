@@ -9,6 +9,7 @@ public struct TrackModule {
         case unlove
         case updateNowPlaying
         case getInfo
+        case search
 
         func getName() -> String {
             return "track.\(self.rawValue)"
@@ -97,4 +98,14 @@ public struct TrackModule {
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
+
+    public func search(
+        params: TrackSearchParams,
+        onCompletion: @escaping LastFM.OnCompletion<SearchResults<TrackSearchResult>>
+    ) {
+        let params = instance.normalizeParams(params: params, method: APIMethod.search)
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
 }
