@@ -1150,5 +1150,89 @@ class UserTests: XCTestCase {
             )
         )
     }
+
+    func test_getFriends_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/user.getFriends",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let params = UserFriendsParams(user: "pepiro", limit: 2, page: 1)
+        let expectation = expectation(description: "Waiting for getFriends()")
+
+        apiClientMock.response = Constants.RESPONSE_200_OK
+        apiClientMock.data = fakeData
+
+        instance.getFriends(params: params) { result in
+            switch (result) {
+            case .success(let friends):
+                XCTAssertEqual(friends.items.count, 2)
+                XCTAssertEqual(friends.pagination.page, 1)
+                XCTAssertEqual(friends.pagination.perPage, 2)
+                XCTAssertEqual(friends.pagination.total, 26)
+                XCTAssertEqual(friends.pagination.totalPages, 13)
+
+                XCTAssertEqual(friends.items[0].name, "User 0")
+                XCTAssertEqual(friends.items[0].url.absoluteString, "https://users.com/user-0")
+                XCTAssertEqual(friends.items[0].country, "Country 0")
+                XCTAssertEqual(friends.items[0].playlists, 0)
+                XCTAssertEqual(friends.items[0].playcount, 2300)
+                XCTAssertEqual(friends.items[0].images.small?.absoluteString, "https://images.com/user-0-s.png")
+                XCTAssertEqual(friends.items[0].images.medium?.absoluteString, "https://images.com/user-0-m.png")
+                XCTAssertEqual(friends.items[0].images.large?.absoluteString, "https://images.com/user-0-l.png")
+                XCTAssertEqual(friends.items[0].images.extraLarge?.absoluteString, "https://images.com/user-0-xl.png")
+                XCTAssertNil(friends.items[0].images.mega)
+
+                let dateComponents = DateComponents(
+                    calendar: Calendar.current,
+                    timeZone: TimeZone(secondsFromGMT: 0),
+                    year: 2014,
+                    month: 12,
+                    day: 16,
+                    hour: 23,
+                    minute: 20,
+                    second: 58
+                )
+
+                XCTAssertEqual(friends.items[0].registered, Calendar.current.date(from: dateComponents))
+                XCTAssertEqual(friends.items[0].realname, "User 0 realname")
+                XCTAssertEqual(friends.items[0].subscriber, false)
+                XCTAssertFalse(friends.items[0].bootstrap)
+                XCTAssertEqual(friends.items[0].type, "user")
+
+                XCTAssertEqual(friends.items[1].name, "User 1")
+                XCTAssertEqual(friends.items[1].url.absoluteString, "https://users.com/user-1")
+                XCTAssertEqual(friends.items[1].country, "Country 1")
+                XCTAssertEqual(friends.items[1].playlists, 1)
+                XCTAssertEqual(friends.items[1].playcount, 2310)
+                XCTAssertEqual(friends.items[1].images.small?.absoluteString, "https://images.com/user-1-s.png")
+                XCTAssertEqual(friends.items[1].images.medium?.absoluteString, "https://images.com/user-1-m.png")
+                XCTAssertEqual(friends.items[1].images.large?.absoluteString, "https://images.com/user-1-l.png")
+                XCTAssertEqual(friends.items[1].images.extraLarge?.absoluteString, "https://images.com/user-1-xl.png")
+                XCTAssertNil(friends.items[0].images.mega)
+                XCTAssertEqual(friends.items[1].registered, Date(timeIntervalSince1970: 1588410855))
+                XCTAssertEqual(friends.items[1].realname, "User 1 realname")
+                XCTAssertEqual(friends.items[1].subscriber, true)
+                XCTAssertFalse(friends.items[1].bootstrap)
+                XCTAssertEqual(friends.items[1].type, "subscriber")
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it failed, error: \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClientMock.getCalls.count, 1)
+        XCTAssertEqual(apiClientMock.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                "http://ws.audioscrobbler.com/2.0?method=user.getfriends&format=json&api_key=someAPIKey&page=1&user=pepiro&limit=2",
+                apiClientMock.getCalls[0].url.absoluteString
+            )
+        )
+    }
     
 }
