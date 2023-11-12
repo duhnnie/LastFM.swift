@@ -1,0 +1,79 @@
+{
+    "friends": {
+        "@attr": {
+            "perPage": "2",
+            "totalPages": "13",
+            "page": "1",
+            "total": "26",
+            "user": "pepiro"
+        },
+        "user": [
+            {
+                "name": "User 0",
+                "url": "https://users.com/user-0",
+                "country": "Country 0",
+                "playlists": "0",
+                "playcount": "2300",
+                "image": [
+                    {
+                        "size": "small",
+                        "#text": "https://images.com/user-0-s.png"
+                    },
+                    {
+                        "size": "medium",
+                        "#text": "https://images.com/user-0-m.png"
+                    },
+                    {
+                        "size": "large",
+                        "#text": "https://images.com/user-0-l.png"
+                    },
+                    {
+                        "size": "extralarge",
+                        "#text": "https://images.com/user-0-xl.png"
+                    }
+                ],
+                "registered": {
+                    "unixtime": "1418772058",
+                    "#text": "2014-12-16 23:20"
+                },
+                "realname": "User 0 realname",
+                "subscriber": "0",
+                "bootstrap": "0",
+                "type": "user"
+            },
+            {
+                "name": "User 1",
+                "url": "https://users.com/user-1",
+                "country": "Country 1",
+                "playlists": "1",
+                "playcount": "2310",
+                "image": [
+                    {
+                        "size": "small",
+                        "#text": "https://images.com/user-1-s.png"
+                    },
+                    {
+                        "size": "medium",
+                        "#text": "https://images.com/user-1-m.png"
+                    },
+                    {
+                        "size": "large",
+                        "#text": "https://images.com/user-1-l.png"
+                    },
+                    {
+                        "size": "extralarge",
+                        "#text": "https://images.com/user-1-xl.png"
+                    }
+                ],
+                "registered": {
+                    "unixtime": "1588410855",
+                    "#text": "2020-05-02 09:14"
+                },
+                "realname": "User 1 realname",
+                "subscriber": "1",
+                "bootstrap": "0",
+                "type": "subscriber"
+            }
+        ]
+    }
+}
