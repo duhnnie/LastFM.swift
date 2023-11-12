@@ -23,7 +23,6 @@ public struct CollectionPage<T: Decodable>: Decodable {
     }
 
     enum InnerCodingKeys: String, CodingKey {
-        case items = "track"
         case pagination = "@attr"
     }
 
