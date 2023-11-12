@@ -21,30 +21,7 @@ public struct GeoTopTrack: Decodable {
         case url
         case streamable
         case listeners
-        case attr = "@attr"
-
-        enum AttrKeys: String, CodingKey {
-            case rank
-        }
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        let attrContainer = try container.nestedContainer(
-            keyedBy: CodingKeys.AttrKeys.self,
-            forKey: .attr
-        )
-
-        self.mbid = try container.decode(String.self, forKey: .mbid)
-        self.name = try container.decode(String.self, forKey: .name)
-        self.artist = try container.decode(LastFMMBEntity.self, forKey: .artist)
-        self.images = try container.decode(LastFMImages.self, forKey: .images)
-        self.url = try container.decode(URL.self, forKey: .url)
-        self.streamable = try container.decode(Streamable.self, forKey: .streamable)
-        self.duration = try container.decode(UInt.self, forKey: .duration)
-        self.listeners = try container.decode(UInt.self, forKey: .listeners)
-        self.rank = try attrContainer.decode(UInt.self, forKey: .rank)
+        case rank = "@attr"
     }
 
 }
