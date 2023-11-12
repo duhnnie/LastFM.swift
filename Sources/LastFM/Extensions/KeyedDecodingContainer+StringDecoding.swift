@@ -150,6 +150,33 @@ fileprivate struct BoolWrapper: Decodable {
 
 }
 
+fileprivate struct DateWrapper: Decodable {
+
+    private enum CodingKeys: String, CodingKey {
+        case unixtime
+    }
+
+    let value: Date
+
+    init(from decoder: Decoder) throws {
+        // thanks https://stackoverflow.com/questions/48818583/how-to-extend-codable-functionality-of-date-and-other-built-in-types
+
+        if
+            let timeContainer = try? decoder.container(keyedBy: CodingKeys.self),
+            let timestampString = try? timeContainer.decode(String.self, forKey: .unixtime),
+            let timestamp = Double(timestampString)
+        {
+            self.value = Date(timeIntervalSince1970: timestamp)
+            return
+        }
+
+        let container = try decoder.singleValueContainer()
+        let timestamp = try container.decode(Double.self)
+        self.value = Date(timeIntervalSinceReferenceDate: timestamp)
+    }
+
+}
+
 internal extension KeyedDecodingContainer {
 
     func decode(_ type: UInt.Type, forKey key: K) throws -> UInt {
@@ -170,6 +197,10 @@ internal extension KeyedDecodingContainer {
 
     func decode(_ type: Bool.Type, forKey key: K) throws -> Bool {
         return try self.decode(BoolWrapper.self, forKey: key).value
+    }
+
+    func decode(_ type: Date.Type, forKey key: K) throws -> Date {
+        return try self.decode(DateWrapper.self, forKey: key).value
     }
 
     func decodeIfPresent(_ type: Int.Type, forKey key: K) throws -> Int? {
@@ -213,6 +244,16 @@ internal extension KeyedDecodingContainer {
     }
 
     func decodeIfPresent(_ type: Bool.Type, forKey key: K) throws -> Bool? {
+        guard
+            (self.allKeys.contains { $0.stringValue == key.stringValue })
+        else {
+            return nil
+        }
+
+        return try decode(type, forKey: key)
+    }
+
+    func decodeIfPresent(_ type: Date.Type, forKey key: K) throws -> Date? {
         guard
             (self.allKeys.contains { $0.stringValue == key.stringValue })
         else {

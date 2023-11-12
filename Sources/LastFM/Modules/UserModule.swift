@@ -127,4 +127,13 @@ public struct UserModule {
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
 
+    public func getFriends(
+        params: UserFriendsParams,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<UserPublicInfo>>
+    ) {
+        let params = instance.normalizeParams(params: params, method: APIMethod.getFriends)
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
 }
