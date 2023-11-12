@@ -503,11 +503,11 @@ class TrackModuleTests: XCTestCase {
                 XCTAssertEqual(trackInfo.album.artist, "Some Artist")
                 XCTAssertEqual(trackInfo.album.title, "Some Album")
                 XCTAssertEqual(trackInfo.album.url.absoluteString, "https://somealbum.com")
-                XCTAssertNil(trackInfo.album.images.small)
-                XCTAssertNil(trackInfo.album.images.medium)
-                XCTAssertNil(trackInfo.album.images.large)
-                XCTAssertNil(trackInfo.album.images.extraLarge)
-                XCTAssertNil(trackInfo.album.images.mega)
+                XCTAssertNil(trackInfo.album.image.small)
+                XCTAssertNil(trackInfo.album.image.medium)
+                XCTAssertNil(trackInfo.album.image.large)
+                XCTAssertNil(trackInfo.album.image.extraLarge)
+                XCTAssertNil(trackInfo.album.image.mega)
                 XCTAssertNil(trackInfo.userLoved)
                 XCTAssertNil(trackInfo.userPlaycount)
                 XCTAssertEqual(trackInfo.topTags.count, 0)
@@ -565,11 +565,11 @@ class TrackModuleTests: XCTestCase {
                 XCTAssertEqual(trackInfo.album.artist, "Some Artist")
                 XCTAssertEqual(trackInfo.album.title, "Some Album")
                 XCTAssertEqual(trackInfo.album.url.absoluteString, "https://somealbum.com")
-                XCTAssertNil(trackInfo.album.images.small)
-                XCTAssertNil(trackInfo.album.images.medium)
-                XCTAssertNil(trackInfo.album.images.large)
-                XCTAssertNil(trackInfo.album.images.extraLarge)
-                XCTAssertNil(trackInfo.album.images.mega)
+                XCTAssertNil(trackInfo.album.image.small)
+                XCTAssertNil(trackInfo.album.image.medium)
+                XCTAssertNil(trackInfo.album.image.large)
+                XCTAssertNil(trackInfo.album.image.extraLarge)
+                XCTAssertNil(trackInfo.album.image.mega)
                 XCTAssertEqual(trackInfo.userLoved, true)
                 XCTAssertEqual(trackInfo.userPlaycount, 48)
                 XCTAssertEqual(trackInfo.topTags.count, 0)
@@ -623,26 +623,26 @@ class TrackModuleTests: XCTestCase {
                 XCTAssertEqual(trackInfo.album.url.absoluteString, "https://somealbum.com")
 
                 XCTAssertEqual(
-                    trackInfo.album.images.small?.absoluteString,
+                    trackInfo.album.image.small?.absoluteString,
                     "https://images.com/s.png"
                 )
 
                 XCTAssertEqual(
-                    trackInfo.album.images.medium?.absoluteString,
+                    trackInfo.album.image.medium?.absoluteString,
                     "https://images.com/m.png"
                 )
 
                 XCTAssertEqual(
-                    trackInfo.album.images.large?.absoluteString,
+                    trackInfo.album.image.large?.absoluteString,
                     "https://images.com/l.png"
                 )
 
                 XCTAssertEqual(
-                    trackInfo.album.images.extraLarge?.absoluteString,
+                    trackInfo.album.image.extraLarge?.absoluteString,
                     "https://images.com/xl.png"
                 )
 
-                XCTAssertNil(trackInfo.album.images.mega)
+                XCTAssertNil(trackInfo.album.image.mega)
                 XCTAssertNil(trackInfo.userLoved)
                 XCTAssertNil(trackInfo.userPlaycount)
                 XCTAssertEqual(trackInfo.topTags.count, 4)
@@ -711,26 +711,26 @@ class TrackModuleTests: XCTestCase {
                 XCTAssertEqual(trackInfo.album.url.absoluteString, "https://somealbum.com")
 
                 XCTAssertEqual(
-                    trackInfo.album.images.small?.absoluteString,
+                    trackInfo.album.image.small?.absoluteString,
                     "https://images.com/s.png"
                 )
 
                 XCTAssertEqual(
-                    trackInfo.album.images.medium?.absoluteString,
+                    trackInfo.album.image.medium?.absoluteString,
                     "https://images.com/m.png"
                 )
 
                 XCTAssertEqual(
-                    trackInfo.album.images.large?.absoluteString,
+                    trackInfo.album.image.large?.absoluteString,
                     "https://images.com/l.png"
                 )
 
                 XCTAssertEqual(
-                    trackInfo.album.images.extraLarge?.absoluteString,
+                    trackInfo.album.image.extraLarge?.absoluteString,
                     "https://images.com/xl.png"
                 )
 
-                XCTAssertNil(trackInfo.album.images.mega)
+                XCTAssertNil(trackInfo.album.image.mega)
                 XCTAssertEqual(trackInfo.userLoved, false)
                 XCTAssertEqual(trackInfo.userPlaycount, 13)
                 XCTAssertEqual(trackInfo.topTags.count, 4)

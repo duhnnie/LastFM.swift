@@ -44,27 +44,27 @@ class LibraryModuleTests: XCTestCase {
                 XCTAssertEqual(lovedTracks.items[0].tagcount, 0)
 
                 XCTAssertEqual(
-                    lovedTracks.items[0].images.small!.absoluteString,
+                    lovedTracks.items[0].image.small!.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
                 XCTAssertEqual(
-                    lovedTracks.items[0].images.medium!.absoluteString,
+                    lovedTracks.items[0].image.medium!.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
                 XCTAssertEqual(
-                    lovedTracks.items[0].images.large!.absoluteString,
+                    lovedTracks.items[0].image.large!.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
                 XCTAssertEqual(
-                    lovedTracks.items[0].images.extraLarge!.absoluteString,
+                    lovedTracks.items[0].image.extraLarge!.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
                 XCTAssertEqual(
-                    lovedTracks.items[0].images.mega!.absoluteString,
+                    lovedTracks.items[0].image.mega!.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 

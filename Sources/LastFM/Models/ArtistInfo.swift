@@ -5,7 +5,7 @@ public struct ArtistInfo: Decodable {
     public let name: String
     public let mbid: String?
     public let url: URL
-    public let images: LastFMImages
+    public let image: LastFMImages
     public let streamable: Bool
     public let onTour: Bool
     public let stats: ArtistInfoStats
@@ -20,7 +20,7 @@ public struct ArtistInfo: Decodable {
             case name
             case mbid
             case url
-            case images = "image"
+            case image
             case streamable
             case onTour = "ontour"
             case stats
@@ -60,7 +60,7 @@ public struct ArtistInfo: Decodable {
         self.name = try container.decode(String.self, forKey: .name)
         self.mbid = try container.decodeIfPresent(String.self, forKey: .mbid)
         self.url = try container.decode(URL.self, forKey: .url)
-        self.images = try container.decode(LastFMImages.self, forKey: .images)
+        self.image = try container.decode(LastFMImages.self, forKey: .image)
         self.streamable = try container.decode(Bool.self, forKey: .streamable)
         self.onTour = try container.decode(Bool.self, forKey: .onTour)
         self.stats = try container.decode(ArtistInfoStats.self, forKey: .stats)

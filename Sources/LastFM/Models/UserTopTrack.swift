@@ -5,7 +5,7 @@ public struct UserTopTrack: Decodable {
     public let mbid: String
     public let name: String
     public let artist: LastFMMBEntity
-    public let images: LastFMImages
+    public let image: LastFMImages
     public let url: URL
     public let duration: UInt
     public let playcount: UInt
@@ -16,7 +16,7 @@ public struct UserTopTrack: Decodable {
         case mbid
         case name
         case artist
-        case images = "image"
+        case image
         case url
         case duration
         case playcount

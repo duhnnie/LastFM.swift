@@ -6,7 +6,7 @@ public struct AlbumInfo: Decodable {
     public let artist: String
     public let tags: [LastFMEntity]
     public let name: String
-    public let images: LastFMImages
+    public let image: LastFMImages
     public let tracks: [AlbumInfoTrack]?
     public let url: URL
     public let listeners: Int
@@ -23,7 +23,7 @@ public struct AlbumInfo: Decodable {
         case artist
         case tags
         case name
-        case images = "image"
+        case image
         case tracks
         case url
         case listeners
@@ -62,7 +62,7 @@ public struct AlbumInfo: Decodable {
         self.artist = try container.decode(String.self, forKey: .artist)
         self.tags = try tagsContainer.decode([LastFMEntity].self, forKey: .tag)
         self.name = try container.decode(String.self, forKey: .name)
-        self.images = try container.decode(LastFMImages.self, forKey: .images)
+        self.image = try container.decode(LastFMImages.self, forKey: .image)
         self.tracks = try trackContainer.decodeIfPresent([AlbumInfoTrack].self, forKey: .track)
         self.url = try container.decode(URL.self, forKey: .url)
         self.listeners = try container.decode(Int.self, forKey: .listeners)

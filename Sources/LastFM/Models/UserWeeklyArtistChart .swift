@@ -6,7 +6,7 @@ public struct UserWeeklyTrackChart: Decodable {
     public let name: String
     public let url: URL
     public let artist: MBEntity
-    public let images: LastFMImages
+    public let image: LastFMImages
     public let playcount: UInt
     public let rank: UInt
 
@@ -15,7 +15,7 @@ public struct UserWeeklyTrackChart: Decodable {
         case name
         case url
         case artist
-        case images = "image"
+        case image
         case playcount
         case rank = "@attr"
     }

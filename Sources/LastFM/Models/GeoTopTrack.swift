@@ -5,7 +5,7 @@ public struct GeoTopTrack: Decodable {
     public let mbid: String
     public let name: String
     public let artist: LastFMMBEntity
-    public let images: LastFMImages
+    public let image: LastFMImages
     public let duration: UInt
     public let url: URL
     public let streamable: Streamable
@@ -16,7 +16,7 @@ public struct GeoTopTrack: Decodable {
         case mbid
         case name
         case artist
-        case images = "image"
+        case image
         case duration
         case url
         case streamable
