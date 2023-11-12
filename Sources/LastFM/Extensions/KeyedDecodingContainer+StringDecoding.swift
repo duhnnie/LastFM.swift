@@ -1,26 +1,37 @@
 import Foundation
 
+fileprivate enum RankKeys: String, CodingKey {
+    case rank
+}
+
 fileprivate struct UIntWrapper: Decodable {
 
     let value: UInt
 
     init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-
-        if let value = try? container.decode(UInt.self) {
-            self.value = value
-            return
+        if let container = try? decoder.singleValueContainer() {
+            if let value = try? container.decode(UInt.self) {
+                self.value = value
+                return
+            } else if
+                let valueString = try? container.decode(String.self),
+                let value = UInt(valueString)
+            {
+                self.value = value
+                return
+            }
         }
 
-        guard
-            let valueString = try? container.decode(String.self),
-            let value = UInt(valueString)
-        else {
-            let context = DecodingError.Context(codingPath: container.codingPath, debugDescription: "UInt format was not parseable.")
+        guard let rankContainer = try? decoder.container(keyedBy: RankKeys.self) else {
+            let context = DecodingError.Context(
+                codingPath: decoder.codingPath,
+                debugDescription: "UInt format was not parseable."
+            )
+            
             throw DecodingError.dataCorrupted(context)
         }
 
-        self.value = value
+        self.value = try rankContainer.decode(UInt.self, forKey: .rank)
     }
 
 }
