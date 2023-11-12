@@ -59,27 +59,27 @@ class AlbumModuleTests: XCTestCase {
                 XCTAssertEqual(albumInfo.userPlaycount, 832)
 
                 XCTAssertEqual(
-                    albumInfo.images.small?.absoluteString,
+                    albumInfo.image.small?.absoluteString,
                     "https://images.com/artist/small.png"
                 )
 
                 XCTAssertEqual(
-                    albumInfo.images.medium?.absoluteString,
+                    albumInfo.image.medium?.absoluteString,
                     "https://images.com/artist/medium.png"
                 )
 
                 XCTAssertEqual(
-                    albumInfo.images.large?.absoluteString,
+                    albumInfo.image.large?.absoluteString,
                     "https://images.com/artist/large.png"
                 )
 
                 XCTAssertEqual(
-                    albumInfo.images.extraLarge?.absoluteString,
+                    albumInfo.image.extraLarge?.absoluteString,
                     "https://images.com/artist/extralarge.png"
                 )
 
                 XCTAssertEqual(
-                    albumInfo.images.mega?.absoluteString,
+                    albumInfo.image.mega?.absoluteString,
                     "https://images.com/artist/mega.png"
                 )
 

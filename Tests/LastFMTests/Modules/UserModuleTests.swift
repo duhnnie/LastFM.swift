@@ -116,26 +116,26 @@ class UserTests: XCTestCase {
                 XCTAssertEqual(recentTracks.items[0].streamable, false)
 
                 XCTAssertEqual(
-                  recentTracks.items[0].images.small?.absoluteString,
+                  recentTracks.items[0].image.small?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/34s/d83c5d906703a8c8042285d0902d9cf4.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[0].images.medium?.absoluteString,
+                  recentTracks.items[0].image.medium?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/64s/d83c5d906703a8c8042285d0902d9cf4.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[0].images.large?.absoluteString,
+                  recentTracks.items[0].image.large?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/174s/d83c5d906703a8c8042285d0902d9cf4.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[0].images.extraLarge?.absoluteString,
+                  recentTracks.items[0].image.extraLarge?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/300x300/d83c5d906703a8c8042285d0902d9cf4.png"
                 )
 
-                XCTAssertNil(recentTracks.items[0].images.mega)
+                XCTAssertNil(recentTracks.items[0].image.mega)
                 XCTAssertEqual(recentTracks.items[0].mbid, "")
                 XCTAssertEqual(recentTracks.items[0].album.mbid, "044ef3c8-6b25-4fac-8f88-5c982df90a72")
                 XCTAssertEqual(recentTracks.items[0].album.name, "Hot Fuss")
@@ -149,26 +149,26 @@ class UserTests: XCTestCase {
                 XCTAssertEqual(recentTracks.items[1].streamable, false)
 
                 XCTAssertEqual(
-                  recentTracks.items[1].images.small?.absoluteString,
+                  recentTracks.items[1].image.small?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/34s/e27d852480cc782e8c0eb0e253245dc3.jpg"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[1].images.medium?.absoluteString,
+                  recentTracks.items[1].image.medium?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/64s/e27d852480cc782e8c0eb0e253245dc3.jpg"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[1].images.large?.absoluteString,
+                  recentTracks.items[1].image.large?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/174s/e27d852480cc782e8c0eb0e253245dc3.jpg"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[1].images.extraLarge?.absoluteString,
+                  recentTracks.items[1].image.extraLarge?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/300x300/e27d852480cc782e8c0eb0e253245dc3.jpg"
                 )
 
-                XCTAssertNil(recentTracks.items[1].images.mega)
+                XCTAssertNil(recentTracks.items[1].image.mega)
                 XCTAssertEqual(recentTracks.items[1].mbid, "0268842d-7e27-4443-af74-a8bba51b08cd")
                 XCTAssertEqual(recentTracks.items[1].album.mbid, "20074beb-380c-4da5-8dcd-e1eb063f78ce")
                 XCTAssertEqual(recentTracks.items[1].album.name, "Interstellar")
@@ -197,26 +197,26 @@ class UserTests: XCTestCase {
                 XCTAssertEqual(recentTracks.items[2].streamable, false)
 
                 XCTAssertEqual(
-                  recentTracks.items[2].images.small?.absoluteString,
+                  recentTracks.items[2].image.small?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/34s/a33900373fa946a0bbb48f8dcdda5904.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[2].images.medium?.absoluteString,
+                  recentTracks.items[2].image.medium?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/64s/a33900373fa946a0bbb48f8dcdda5904.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[2].images.large?.absoluteString,
+                  recentTracks.items[2].image.large?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/174s/a33900373fa946a0bbb48f8dcdda5904.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[2].images.extraLarge?.absoluteString,
+                  recentTracks.items[2].image.extraLarge?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/300x300/a33900373fa946a0bbb48f8dcdda5904.png"
                 )
 
-                XCTAssertNil(recentTracks.items[2].images.mega)
+                XCTAssertNil(recentTracks.items[2].image.mega)
                 XCTAssertEqual(recentTracks.items[2].mbid, "4f6cb9fe-e59a-3d5f-bb14-cb4431eb3418")
                 XCTAssertEqual(recentTracks.items[2].album.mbid, "96130b06-fa9c-453d-b4e0-604685a6cc02")
                 XCTAssertEqual(recentTracks.items[2].album.name, "Out Here All Night")
@@ -292,22 +292,22 @@ class UserTests: XCTestCase {
                 XCTAssertEqual(recentTracks.items[0].artist.name, "Mew")
 
                 XCTAssertEqual(
-                  recentTracks.items[0].artist.images.small?.absoluteString,
+                  recentTracks.items[0].artist.image.small?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[0].artist.images.medium?.absoluteString,
+                  recentTracks.items[0].artist.image.medium?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[0].artist.images.large?.absoluteString,
+                  recentTracks.items[0].artist.image.large?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[0].artist.images.extraLarge?.absoluteString,
+                  recentTracks.items[0].artist.image.extraLarge?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
@@ -315,22 +315,22 @@ class UserTests: XCTestCase {
                 XCTAssertEqual(recentTracks.items[0].name, "Symmetry")
 
                 XCTAssertEqual(
-                  recentTracks.items[0].images.small?.absoluteString,
+                  recentTracks.items[0].image.small?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/34s/87480021191328af5dc130dd879d8bd2.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[0].images.medium?.absoluteString,
+                  recentTracks.items[0].image.medium?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/64s/87480021191328af5dc130dd879d8bd2.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[0].images.large?.absoluteString,
+                  recentTracks.items[0].image.large?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/174s/87480021191328af5dc130dd879d8bd2.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[0].images.extraLarge?.absoluteString,
+                  recentTracks.items[0].image.extraLarge?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/300x300/87480021191328af5dc130dd879d8bd2.png"
                 )
 
@@ -350,22 +350,22 @@ class UserTests: XCTestCase {
                 XCTAssertEqual(recentTracks.items[1].artist.name, "Nine Inch Nails")
 
                 XCTAssertEqual(
-                  recentTracks.items[1].artist.images.small?.absoluteString,
+                  recentTracks.items[1].artist.image.small?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[1].artist.images.medium?.absoluteString,
+                  recentTracks.items[1].artist.image.medium?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[1].artist.images.large?.absoluteString,
+                  recentTracks.items[1].artist.image.large?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[1].artist.images.extraLarge?.absoluteString,
+                  recentTracks.items[1].artist.image.extraLarge?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
@@ -389,22 +389,22 @@ class UserTests: XCTestCase {
                 XCTAssertEqual(recentTracks.items[1].name, "Echoplex")
 
                 XCTAssertEqual(
-                  recentTracks.items[1].images.small?.absoluteString,
+                  recentTracks.items[1].image.small?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/34s/86bf0aab05704d2e880dc37384485c32.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[1].images.medium?.absoluteString,
+                  recentTracks.items[1].image.medium?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/64s/86bf0aab05704d2e880dc37384485c32.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[1].images.large?.absoluteString,
+                  recentTracks.items[1].image.large?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/174s/86bf0aab05704d2e880dc37384485c32.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[1].images.extraLarge?.absoluteString,
+                  recentTracks.items[1].image.extraLarge?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/300x300/86bf0aab05704d2e880dc37384485c32.png"
                 )
 
@@ -424,22 +424,22 @@ class UserTests: XCTestCase {
                 XCTAssertEqual(recentTracks.items[2].artist.name, "Tripping Daisy")
 
                 XCTAssertEqual(
-                  recentTracks.items[2].artist.images.small?.absoluteString,
+                  recentTracks.items[2].artist.image.small?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[2].artist.images.medium?.absoluteString,
+                  recentTracks.items[2].artist.image.medium?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[2].artist.images.large?.absoluteString,
+                  recentTracks.items[2].artist.image.large?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[2].artist.images.extraLarge?.absoluteString,
+                  recentTracks.items[2].artist.image.extraLarge?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
@@ -448,22 +448,22 @@ class UserTests: XCTestCase {
                 XCTAssertEqual(recentTracks.items[2].name, "Raindrop")
 
                 XCTAssertEqual(
-                  recentTracks.items[2].images.small?.absoluteString,
+                  recentTracks.items[2].image.small?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/34s/cf8db55462804578b1e6d0c5c99b6409.jpg"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[2].images.medium?.absoluteString,
+                  recentTracks.items[2].image.medium?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/64s/cf8db55462804578b1e6d0c5c99b6409.jpg"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[2].images.large?.absoluteString,
+                  recentTracks.items[2].image.large?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/174s/cf8db55462804578b1e6d0c5c99b6409.jpg"
                 )
 
                 XCTAssertEqual(
-                  recentTracks.items[2].images.extraLarge?.absoluteString,
+                  recentTracks.items[2].image.extraLarge?.absoluteString,
                   "https://lastfm.freetls.fastly.net/i/u/300x300/cf8db55462804578b1e6d0c5c99b6409.jpg"
                 )
 
@@ -551,10 +551,10 @@ class UserTests: XCTestCase {
                 XCTAssertEqual(topTracks.items[0].streamable, .noStreamable)
                 XCTAssertEqual(topTracks.items[0].mbid, "track-0-mbid")
                 XCTAssertEqual(topTracks.items[0].name, "Track 0")
-                XCTAssertEqual(topTracks.items[0].images.small?.absoluteString, "https://images.com/artist-0-s.png")
-                XCTAssertEqual(topTracks.items[0].images.medium?.absoluteString, "https://images.com/artist-0-m.png")
-                XCTAssertEqual(topTracks.items[0].images.large?.absoluteString, "https://images.com/artist-0-l.png")
-                XCTAssertEqual(topTracks.items[0].images.extraLarge?.absoluteString, "https://images.com/artist-0-xl.png")
+                XCTAssertEqual(topTracks.items[0].image.small?.absoluteString, "https://images.com/artist-0-s.png")
+                XCTAssertEqual(topTracks.items[0].image.medium?.absoluteString, "https://images.com/artist-0-m.png")
+                XCTAssertEqual(topTracks.items[0].image.large?.absoluteString, "https://images.com/artist-0-l.png")
+                XCTAssertEqual(topTracks.items[0].image.extraLarge?.absoluteString, "https://images.com/artist-0-xl.png")
                 XCTAssertEqual(topTracks.items[0].artist.url.absoluteString, "https://artists.com/artist-0")
                 XCTAssertEqual(topTracks.items[0].artist.name, "Artist 0")
                 XCTAssertEqual(topTracks.items[0].artist.mbid, "artist-0-mbid")
@@ -566,10 +566,10 @@ class UserTests: XCTestCase {
                 XCTAssertEqual(topTracks.items[1].streamable, .noStreamable)
                 XCTAssertEqual(topTracks.items[1].mbid, "track-1-mbid")
                 XCTAssertEqual(topTracks.items[1].name, "Track 1")
-                XCTAssertEqual(topTracks.items[1].images.small?.absoluteString, "https://images.com/artist-1-s.png")
-                XCTAssertEqual(topTracks.items[1].images.medium?.absoluteString, "https://images.com/artist-1-m.png")
-                XCTAssertEqual(topTracks.items[1].images.large?.absoluteString, "https://images.com/artist-1-l.png")
-                XCTAssertEqual(topTracks.items[1].images.extraLarge?.absoluteString, "https://images.com/artist-1-xl.png")
+                XCTAssertEqual(topTracks.items[1].image.small?.absoluteString, "https://images.com/artist-1-s.png")
+                XCTAssertEqual(topTracks.items[1].image.medium?.absoluteString, "https://images.com/artist-1-m.png")
+                XCTAssertEqual(topTracks.items[1].image.large?.absoluteString, "https://images.com/artist-1-l.png")
+                XCTAssertEqual(topTracks.items[1].image.extraLarge?.absoluteString, "https://images.com/artist-1-xl.png")
                 XCTAssertEqual(topTracks.items[1].artist.url.absoluteString, "https://artists.com/artist-1")
                 XCTAssertEqual(topTracks.items[1].artist.name, "Artist 1")
                 XCTAssertEqual(topTracks.items[1].artist.mbid, "artist-1-mbid")
@@ -651,9 +651,9 @@ class UserTests: XCTestCase {
 
                 XCTAssertEqual(tracks.items[0].artist.mbid, "artist-0-mbid")
                 XCTAssertEqual(tracks.items[0].artist.name, "Artist 0")
-                XCTAssertEqual(tracks.items[0].images.small?.absoluteString, "https://images.com/track-0-s.png")
-                XCTAssertEqual(tracks.items[0].images.medium?.absoluteString, "https://images.com/track-0-m.png")
-                XCTAssertEqual(tracks.items[0].images.large?.absoluteString, "https://images.com/track-0-l.png")
+                XCTAssertEqual(tracks.items[0].image.small?.absoluteString, "https://images.com/track-0-s.png")
+                XCTAssertEqual(tracks.items[0].image.medium?.absoluteString, "https://images.com/track-0-m.png")
+                XCTAssertEqual(tracks.items[0].image.large?.absoluteString, "https://images.com/track-0-l.png")
                 XCTAssertEqual(tracks.items[0].mbid, "track-0-mbid")
                 XCTAssertEqual(tracks.items[0].url.absoluteString, "https://tracks.com/track-0")
                 XCTAssertEqual(tracks.items[0].name, "Track 0")
@@ -662,9 +662,9 @@ class UserTests: XCTestCase {
 
                 XCTAssertEqual(tracks.items[1].artist.mbid, "artist-1-mbid")
                 XCTAssertEqual(tracks.items[1].artist.name, "Artist 1")
-                XCTAssertEqual(tracks.items[1].images.small?.absoluteString, "https://images.com/track-1-s.png")
-                XCTAssertEqual(tracks.items[1].images.medium?.absoluteString, "https://images.com/track-1-m.png")
-                XCTAssertEqual(tracks.items[1].images.large?.absoluteString, "https://images.com/track-1-l.png")
+                XCTAssertEqual(tracks.items[1].image.small?.absoluteString, "https://images.com/track-1-s.png")
+                XCTAssertEqual(tracks.items[1].image.medium?.absoluteString, "https://images.com/track-1-m.png")
+                XCTAssertEqual(tracks.items[1].image.large?.absoluteString, "https://images.com/track-1-l.png")
                 XCTAssertEqual(tracks.items[1].mbid, "track-1-mbid")
                 XCTAssertEqual(tracks.items[1].url.absoluteString, "https://tracks.com/track-1")
                 XCTAssertEqual(tracks.items[1].name, "Track 1")
@@ -747,11 +747,11 @@ class UserTests: XCTestCase {
                 XCTAssertEqual(lovedTracks.items[0].mbid, "artist-0-mbid")
                 XCTAssertEqual(lovedTracks.items[0].url.absoluteString, "https://tracks.com/track-0")
                 XCTAssertEqual(lovedTracks.items[0].name, "Track 0")
-                XCTAssertEqual(lovedTracks.items[0].images.small?.absoluteString, "https://images.com/artist-0-s.png")
-                XCTAssertEqual(lovedTracks.items[0].images.medium?.absoluteString, "https://images.com/artist-0-m.png")
-                XCTAssertEqual(lovedTracks.items[0].images.large?.absoluteString, "https://images.com/artist-0-l.png")
-                XCTAssertEqual(lovedTracks.items[0].images.extraLarge?.absoluteString, "https://images.com/artist-0-xl.png")
-                XCTAssertNil(lovedTracks.items[0].images.mega)
+                XCTAssertEqual(lovedTracks.items[0].image.small?.absoluteString, "https://images.com/artist-0-s.png")
+                XCTAssertEqual(lovedTracks.items[0].image.medium?.absoluteString, "https://images.com/artist-0-m.png")
+                XCTAssertEqual(lovedTracks.items[0].image.large?.absoluteString, "https://images.com/artist-0-l.png")
+                XCTAssertEqual(lovedTracks.items[0].image.extraLarge?.absoluteString, "https://images.com/artist-0-xl.png")
+                XCTAssertNil(lovedTracks.items[0].image.mega)
                 XCTAssertEqual(lovedTracks.items[1].artist.url.absoluteString, "https://artists.com/artist-1")
                 XCTAssertEqual(lovedTracks.items[1].artist.name, "Artist 1")
                 XCTAssertEqual(lovedTracks.items[1].artist.mbid, "")
@@ -771,11 +771,11 @@ class UserTests: XCTestCase {
                 XCTAssertEqual(lovedTracks.items[1].mbid, "artist-1-mbid")
                 XCTAssertEqual(lovedTracks.items[1].url.absoluteString, "https://tracks.com/track-1")
                 XCTAssertEqual(lovedTracks.items[1].name, "Track 1")
-                XCTAssertEqual(lovedTracks.items[1].images.small?.absoluteString, "https://images.com/artist-1-s.png")
-                XCTAssertEqual(lovedTracks.items[1].images.medium?.absoluteString, "https://images.com/artist-1-m.png")
-                XCTAssertEqual(lovedTracks.items[1].images.large?.absoluteString, "https://images.com/artist-1-l.png")
-                XCTAssertEqual(lovedTracks.items[1].images.extraLarge?.absoluteString, "https://images.com/artist-1-xl.png")
-                XCTAssertNil(lovedTracks.items[1].images.mega)
+                XCTAssertEqual(lovedTracks.items[1].image.small?.absoluteString, "https://images.com/artist-1-s.png")
+                XCTAssertEqual(lovedTracks.items[1].image.medium?.absoluteString, "https://images.com/artist-1-m.png")
+                XCTAssertEqual(lovedTracks.items[1].image.large?.absoluteString, "https://images.com/artist-1-l.png")
+                XCTAssertEqual(lovedTracks.items[1].image.extraLarge?.absoluteString, "https://images.com/artist-1-xl.png")
+                XCTAssertNil(lovedTracks.items[1].image.mega)
             case .failure(let error):
                 XCTFail("Expected to succeed, but it fail with error: \(error.localizedDescription)")
             }
@@ -835,11 +835,11 @@ class UserTests: XCTestCase {
                 XCTAssertEqual(artists.pagination.perPage, 2)
 
                 XCTAssertEqual(artists.items[0].streamable, false)
-                XCTAssertEqual(artists.items[0].images.small?.absoluteString, "https://images.com/image-0-s.png")
-                XCTAssertEqual(artists.items[0].images.medium?.absoluteString, "https://images.com/image-0-m.png")
-                XCTAssertEqual(artists.items[0].images.large?.absoluteString, "https://images.com/image-0-l.png")
-                XCTAssertEqual(artists.items[0].images.extraLarge?.absoluteString, "https://images.com/image-0-xl.png")
-                XCTAssertEqual(artists.items[0].images.mega?.absoluteString, "https://images.com/image-0-mg.png")
+                XCTAssertEqual(artists.items[0].image.small?.absoluteString, "https://images.com/image-0-s.png")
+                XCTAssertEqual(artists.items[0].image.medium?.absoluteString, "https://images.com/image-0-m.png")
+                XCTAssertEqual(artists.items[0].image.large?.absoluteString, "https://images.com/image-0-l.png")
+                XCTAssertEqual(artists.items[0].image.extraLarge?.absoluteString, "https://images.com/image-0-xl.png")
+                XCTAssertEqual(artists.items[0].image.mega?.absoluteString, "https://images.com/image-0-mg.png")
                 XCTAssertEqual(artists.items[0].mbid, "artist-0-mbid")
                 XCTAssertEqual(artists.items[0].url.absoluteString, "https://artists.com/artist-0")
                 XCTAssertEqual(artists.items[0].playcount, 3400)
@@ -847,11 +847,11 @@ class UserTests: XCTestCase {
                 XCTAssertEqual(artists.items[0].name, "Artist 0")
 
                 XCTAssertEqual(artists.items[1].streamable, false)
-                XCTAssertEqual(artists.items[1].images.small?.absoluteString, "https://images.com/image-1-s.png")
-                XCTAssertEqual(artists.items[1].images.medium?.absoluteString, "https://images.com/image-1-m.png")
-                XCTAssertEqual(artists.items[1].images.large?.absoluteString, "https://images.com/image-1-l.png")
-                XCTAssertEqual(artists.items[1].images.extraLarge?.absoluteString, "https://images.com/image-1-xl.png")
-                XCTAssertEqual(artists.items[1].images.mega?.absoluteString, "https://images.com/image-1-mg.png")
+                XCTAssertEqual(artists.items[1].image.small?.absoluteString, "https://images.com/image-1-s.png")
+                XCTAssertEqual(artists.items[1].image.medium?.absoluteString, "https://images.com/image-1-m.png")
+                XCTAssertEqual(artists.items[1].image.large?.absoluteString, "https://images.com/image-1-l.png")
+                XCTAssertEqual(artists.items[1].image.extraLarge?.absoluteString, "https://images.com/image-1-xl.png")
+                XCTAssertEqual(artists.items[1].image.mega?.absoluteString, "https://images.com/image-1-mg.png")
                 XCTAssertEqual(artists.items[1].mbid, "artist-1-mbid")
                 XCTAssertEqual(artists.items[1].url.absoluteString, "https://artists.com/artist-1")
                 XCTAssertEqual(artists.items[1].playcount, 3410)
@@ -972,26 +972,26 @@ class UserTests: XCTestCase {
                 )
 
                 XCTAssertEqual(
-                    entity.items[0].images.small!.absoluteString,
+                    entity.items[0].image.small!.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/34s/baad825eec21da267b92599dc9ed2f66.jpg"
                 )
 
                 XCTAssertEqual(
-                    entity.items[0].images.medium!.absoluteString,
+                    entity.items[0].image.medium!.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/64s/baad825eec21da267b92599dc9ed2f66.jpg"
                 )
 
                 XCTAssertEqual(
-                    entity.items[0].images.large!.absoluteString,
+                    entity.items[0].image.large!.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/174s/baad825eec21da267b92599dc9ed2f66.jpg"
                 )
 
                 XCTAssertEqual(
-                    entity.items[0].images.extraLarge!.absoluteString,
+                    entity.items[0].image.extraLarge!.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/300x300/baad825eec21da267b92599dc9ed2f66.jpg"
                 )
 
-                XCTAssertNil(entity.items[0].images.mega)
+                XCTAssertNil(entity.items[0].image.mega)
                 XCTAssertEqual(entity.pagination.page, 1)
                 XCTAssertEqual(entity.pagination.perPage, 5)
                 XCTAssertEqual(entity.pagination.total, 30448)
@@ -1101,26 +1101,26 @@ class UserTests: XCTestCase {
                 XCTAssertEqual(userInfo.albumCount, 30492)
 
                 XCTAssertEqual(
-                    userInfo.images.small?.absoluteString,
+                    userInfo.image.small?.absoluteString,
                     "https://images.com/pepito-small.png"
                 )
 
                 XCTAssertEqual(
-                    userInfo.images.medium?.absoluteString,
+                    userInfo.image.medium?.absoluteString,
                     "https://images.com/pepito-medium.png"
                 )
 
                 XCTAssertEqual(
-                    userInfo.images.large?.absoluteString,
+                    userInfo.image.large?.absoluteString,
                     "https://images.com/pepito-large.png"
                 )
 
                 XCTAssertEqual(
-                    userInfo.images.extraLarge?.absoluteString,
+                    userInfo.image.extraLarge?.absoluteString,
                     "https://images.com/pepito-extralarge.png"
                 )
 
-                XCTAssertNil(userInfo.images.mega)
+                XCTAssertNil(userInfo.image.mega)
 
                 var dateComponents = DateComponents()
                 dateComponents.year = 2011
@@ -1178,11 +1178,11 @@ class UserTests: XCTestCase {
                 XCTAssertEqual(friends.items[0].country, "Country 0")
                 XCTAssertEqual(friends.items[0].playlists, 0)
                 XCTAssertEqual(friends.items[0].playcount, 2300)
-                XCTAssertEqual(friends.items[0].images.small?.absoluteString, "https://images.com/user-0-s.png")
-                XCTAssertEqual(friends.items[0].images.medium?.absoluteString, "https://images.com/user-0-m.png")
-                XCTAssertEqual(friends.items[0].images.large?.absoluteString, "https://images.com/user-0-l.png")
-                XCTAssertEqual(friends.items[0].images.extraLarge?.absoluteString, "https://images.com/user-0-xl.png")
-                XCTAssertNil(friends.items[0].images.mega)
+                XCTAssertEqual(friends.items[0].image.small?.absoluteString, "https://images.com/user-0-s.png")
+                XCTAssertEqual(friends.items[0].image.medium?.absoluteString, "https://images.com/user-0-m.png")
+                XCTAssertEqual(friends.items[0].image.large?.absoluteString, "https://images.com/user-0-l.png")
+                XCTAssertEqual(friends.items[0].image.extraLarge?.absoluteString, "https://images.com/user-0-xl.png")
+                XCTAssertNil(friends.items[0].image.mega)
 
                 let dateComponents = DateComponents(
                     calendar: Calendar.current,
@@ -1206,11 +1206,11 @@ class UserTests: XCTestCase {
                 XCTAssertEqual(friends.items[1].country, "Country 1")
                 XCTAssertEqual(friends.items[1].playlists, 1)
                 XCTAssertEqual(friends.items[1].playcount, 2310)
-                XCTAssertEqual(friends.items[1].images.small?.absoluteString, "https://images.com/user-1-s.png")
-                XCTAssertEqual(friends.items[1].images.medium?.absoluteString, "https://images.com/user-1-m.png")
-                XCTAssertEqual(friends.items[1].images.large?.absoluteString, "https://images.com/user-1-l.png")
-                XCTAssertEqual(friends.items[1].images.extraLarge?.absoluteString, "https://images.com/user-1-xl.png")
-                XCTAssertNil(friends.items[0].images.mega)
+                XCTAssertEqual(friends.items[1].image.small?.absoluteString, "https://images.com/user-1-s.png")
+                XCTAssertEqual(friends.items[1].image.medium?.absoluteString, "https://images.com/user-1-m.png")
+                XCTAssertEqual(friends.items[1].image.large?.absoluteString, "https://images.com/user-1-l.png")
+                XCTAssertEqual(friends.items[1].image.extraLarge?.absoluteString, "https://images.com/user-1-xl.png")
+                XCTAssertNil(friends.items[0].image.mega)
                 XCTAssertEqual(friends.items[1].registered, Date(timeIntervalSince1970: 1588410855))
                 XCTAssertEqual(friends.items[1].realname, "User 1 realname")
                 XCTAssertEqual(friends.items[1].subscriber, true)

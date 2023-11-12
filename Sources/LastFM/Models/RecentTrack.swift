@@ -8,7 +8,7 @@ public struct RecentTrack: Decodable {
     public let album: MBEntity
     public let mbid: String
     public let url: URL
-    public let images: LastFMImages
+    public let image: LastFMImages
     public let date: Date?
     public let nowPlaying: Bool
     public let streamable: Bool
@@ -21,7 +21,7 @@ public struct RecentTrack: Decodable {
         case url
         case date
         case streamable
-        case images = "image"
+        case image
         case attr = "@attr"
 
         enum AttrKeys: String, CodingKey {
@@ -43,7 +43,7 @@ public struct RecentTrack: Decodable {
         self.url = try container.decode(URL.self, forKey: .url)
         self.streamable = try container.decode(Bool.self, forKey: .streamable)
 
-        self.images = try container.decode(LastFMImages.self, forKey: .images)
+        self.image = try container.decode(LastFMImages.self, forKey: .image)
 
         if let attrContainer = try? container.nestedContainer(keyedBy: CodingKeys.AttrKeys.self, forKey: .attr) {
             self.nowPlaying = try attrContainer.decode(

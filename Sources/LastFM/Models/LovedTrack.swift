@@ -5,7 +5,7 @@ public struct LovedTrack: Decodable {
     public let mbid: String
     public let name: String
     public let artist: LastFMMBEntity
-    public let images: LastFMImages
+    public let image: LastFMImages
     public let url: URL
     public let date: Date
     public let streamable: Streamable
@@ -14,7 +14,7 @@ public struct LovedTrack: Decodable {
         case mbid
         case name
         case artist
-        case images = "image"
+        case image
         case url
         case date
         case streamable
@@ -37,7 +37,7 @@ public struct LovedTrack: Decodable {
         self.mbid = try container.decode(String.self, forKey: .mbid)
         self.name = try container.decode(String.self, forKey: .name)
         self.artist = try container.decode(LastFMMBEntity.self, forKey: .artist)
-        self.images = try container.decode(LastFMImages.self, forKey: .images)
+        self.image = try container.decode(LastFMImages.self, forKey: .image)
         self.url = try container.decode(URL.self, forKey: .url)
         self.streamable = try container.decode(Streamable.self, forKey: .streamable)
         self.date = Date(timeIntervalSince1970: Double(uts))

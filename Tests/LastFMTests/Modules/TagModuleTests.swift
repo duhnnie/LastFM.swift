@@ -51,10 +51,10 @@ class TagModuleTests: XCTestCase {
                 XCTAssertEqual(topTracks.items[0].artist.name, "Artist 0")
                 XCTAssertEqual(topTracks.items[0].artist.mbid, "artist-0-mbid")
                 XCTAssertEqual(topTracks.items[0].artist.url.absoluteString, "https://artists.com/artist-0")
-                XCTAssertEqual(topTracks.items[0].images.small?.absoluteString, "https://images.com/artist-0-s.png")
-                XCTAssertEqual(topTracks.items[0].images.medium?.absoluteString, "https://images.com/artist-0-m.png")
-                XCTAssertEqual(topTracks.items[0].images.large?.absoluteString, "https://images.com/artist-0-l.png")
-                XCTAssertEqual(topTracks.items[0].images.extraLarge?.absoluteString, "https://images.com/artist-0-xl.png")
+                XCTAssertEqual(topTracks.items[0].image.small?.absoluteString, "https://images.com/artist-0-s.png")
+                XCTAssertEqual(topTracks.items[0].image.medium?.absoluteString, "https://images.com/artist-0-m.png")
+                XCTAssertEqual(topTracks.items[0].image.large?.absoluteString, "https://images.com/artist-0-l.png")
+                XCTAssertEqual(topTracks.items[0].image.extraLarge?.absoluteString, "https://images.com/artist-0-xl.png")
                 XCTAssertEqual(topTracks.items[0].rank, 1)
 
                 XCTAssertEqual(topTracks.items[1].name, "Track 1")
@@ -65,10 +65,10 @@ class TagModuleTests: XCTestCase {
                 XCTAssertEqual(topTracks.items[1].artist.name, "Artist 1")
                 XCTAssertEqual(topTracks.items[1].artist.mbid, "artist-1-mbid")
                 XCTAssertEqual(topTracks.items[1].artist.url.absoluteString, "https://artists.com/artist-1")
-                XCTAssertEqual(topTracks.items[1].images.small?.absoluteString, "https://images.com/artist-1-s.png")
-                XCTAssertEqual(topTracks.items[1].images.medium?.absoluteString, "https://images.com/artist-1-m.png")
-                XCTAssertEqual(topTracks.items[1].images.large?.absoluteString, "https://images.com/artist-1-l.png")
-                XCTAssertEqual(topTracks.items[1].images.extraLarge?.absoluteString, "https://images.com/artist-1-xl.png")
+                XCTAssertEqual(topTracks.items[1].image.small?.absoluteString, "https://images.com/artist-1-s.png")
+                XCTAssertEqual(topTracks.items[1].image.medium?.absoluteString, "https://images.com/artist-1-m.png")
+                XCTAssertEqual(topTracks.items[1].image.large?.absoluteString, "https://images.com/artist-1-l.png")
+                XCTAssertEqual(topTracks.items[1].image.extraLarge?.absoluteString, "https://images.com/artist-1-xl.png")
                 XCTAssertEqual(topTracks.items[1].rank, 2)
             case .failure(let error):
                 XCTFail("Expected to fail. Got \"\(error.localizedDescription)\" error instead")
@@ -132,22 +132,22 @@ class TagModuleTests: XCTestCase {
                 XCTAssertEqual(topArtists.items[0].mbid, "artist-0-mbid")
                 XCTAssertEqual(topArtists.items[0].url.absoluteString, "https://artists.com/artist-0")
                 XCTAssertEqual(topArtists.items[0].streamable, false)
-                XCTAssertEqual(topArtists.items[0].images.small?.absoluteString, "https://images.com/artist-0-s.png")
-                XCTAssertEqual(topArtists.items[0].images.medium?.absoluteString, "https://images.com/artist-0-m.png")
-                XCTAssertEqual(topArtists.items[0].images.large?.absoluteString, "https://images.com/artist-0-l.png")
-                XCTAssertEqual(topArtists.items[0].images.extraLarge?.absoluteString, "https://images.com/artist-0-xl.png")
-                XCTAssertEqual(topArtists.items[0].images.mega?.absoluteString, "https://images.com/artist-0-mg.png")
+                XCTAssertEqual(topArtists.items[0].image.small?.absoluteString, "https://images.com/artist-0-s.png")
+                XCTAssertEqual(topArtists.items[0].image.medium?.absoluteString, "https://images.com/artist-0-m.png")
+                XCTAssertEqual(topArtists.items[0].image.large?.absoluteString, "https://images.com/artist-0-l.png")
+                XCTAssertEqual(topArtists.items[0].image.extraLarge?.absoluteString, "https://images.com/artist-0-xl.png")
+                XCTAssertEqual(topArtists.items[0].image.mega?.absoluteString, "https://images.com/artist-0-mg.png")
                 XCTAssertEqual(topArtists.items[0].rank, 1)
 
                 XCTAssertEqual(topArtists.items[1].name, "Artist 1")
                 XCTAssertNil(topArtists.items[1].mbid)
                 XCTAssertEqual(topArtists.items[1].url.absoluteString, "https://artists.com/artist-1")
                 XCTAssertEqual(topArtists.items[1].streamable, false)
-                XCTAssertEqual(topArtists.items[1].images.small?.absoluteString, "https://images.com/artist-1-s.png")
-                XCTAssertEqual(topArtists.items[1].images.medium?.absoluteString, "https://images.com/artist-1-m.png")
-                XCTAssertEqual(topArtists.items[1].images.large?.absoluteString, "https://images.com/artist-1-l.png")
-                XCTAssertEqual(topArtists.items[1].images.extraLarge?.absoluteString, "https://images.com/artist-1-xl.png")
-                XCTAssertEqual(topArtists.items[1].images.mega?.absoluteString, "https://images.com/artist-1-mg.png")
+                XCTAssertEqual(topArtists.items[1].image.small?.absoluteString, "https://images.com/artist-1-s.png")
+                XCTAssertEqual(topArtists.items[1].image.medium?.absoluteString, "https://images.com/artist-1-m.png")
+                XCTAssertEqual(topArtists.items[1].image.large?.absoluteString, "https://images.com/artist-1-l.png")
+                XCTAssertEqual(topArtists.items[1].image.extraLarge?.absoluteString, "https://images.com/artist-1-xl.png")
+                XCTAssertEqual(topArtists.items[1].image.mega?.absoluteString, "https://images.com/artist-1-mg.png")
                 XCTAssertEqual(topArtists.items[1].rank, 2)
             case .failure(let error):
                 XCTFail("Expected to fail. Got \"\(error.localizedDescription)\" error instead")
@@ -195,26 +195,26 @@ class TagModuleTests: XCTestCase {
                 )
 
                 XCTAssertEqual(
-                    entity.items[0].images.small!.absoluteString,
+                    entity.items[0].image.small!.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/34s/c403c8620830e646a8f9eabcadb8c8a7.png"
                 )
 
                 XCTAssertEqual(
-                    entity.items[0].images.medium!.absoluteString,
+                    entity.items[0].image.medium!.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/64s/c403c8620830e646a8f9eabcadb8c8a7.png"
                 )
 
                 XCTAssertEqual(
-                    entity.items[0].images.large!.absoluteString,
+                    entity.items[0].image.large!.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/174s/c403c8620830e646a8f9eabcadb8c8a7.png"
                 )
 
                 XCTAssertEqual(
-                    entity.items[0].images.extraLarge!.absoluteString,
+                    entity.items[0].image.extraLarge!.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/300x300/c403c8620830e646a8f9eabcadb8c8a7.png"
                 )
 
-                XCTAssertNil(entity.items[0].images.mega)
+                XCTAssertNil(entity.items[0].image.mega)
                 XCTAssertEqual(entity.items[0].rank, 1)
                 XCTAssertEqual(entity.pagination.page, 1)
                 XCTAssertEqual(entity.pagination.perPage, 5)

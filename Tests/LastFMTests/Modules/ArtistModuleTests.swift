@@ -60,10 +60,10 @@ class ArtistModuleTests: XCTestCase {
                 XCTAssertEqual(topTracks.items[0].artist.name, "Some Artist")
                 XCTAssertEqual(topTracks.items[0].artist.mbid, "some-artist-mbid")
                 XCTAssertEqual(topTracks.items[0].artist.url.absoluteString, "https://artists.com/some-artist")
-                XCTAssertEqual(topTracks.items[0].images.small?.absoluteString, "https://images.com/track-0-s.png")
-                XCTAssertEqual(topTracks.items[0].images.medium?.absoluteString, "https://images.com/track-0-m.png")
-                XCTAssertEqual(topTracks.items[0].images.large?.absoluteString, "https://images.com/track-0-l.png")
-                XCTAssertEqual(topTracks.items[0].images.extraLarge?.absoluteString, "https://images.com/track-0-xl.png")
+                XCTAssertEqual(topTracks.items[0].image.small?.absoluteString, "https://images.com/track-0-s.png")
+                XCTAssertEqual(topTracks.items[0].image.medium?.absoluteString, "https://images.com/track-0-m.png")
+                XCTAssertEqual(topTracks.items[0].image.large?.absoluteString, "https://images.com/track-0-l.png")
+                XCTAssertEqual(topTracks.items[0].image.extraLarge?.absoluteString, "https://images.com/track-0-xl.png")
 
                 XCTAssertEqual(topTracks.items[0].rank, 1)
                 XCTAssertEqual(topTracks.items[1].name, "Track 1")
@@ -75,10 +75,10 @@ class ArtistModuleTests: XCTestCase {
                 XCTAssertEqual(topTracks.items[1].artist.name, "Some Artist")
                 XCTAssertEqual(topTracks.items[1].artist.mbid, "some-artist-mbid")
                 XCTAssertEqual(topTracks.items[1].artist.url.absoluteString, "https://artists.com/some-artist")
-                XCTAssertEqual(topTracks.items[1].images.small?.absoluteString, "https://images.com/track-1-s.png")
-                XCTAssertEqual(topTracks.items[1].images.medium?.absoluteString, "https://images.com/track-1-m.png")
-                XCTAssertEqual(topTracks.items[1].images.large?.absoluteString, "https://images.com/track-1-l.png")
-                XCTAssertEqual(topTracks.items[1].images.extraLarge?.absoluteString, "https://images.com/track-1-xl.png")
+                XCTAssertEqual(topTracks.items[1].image.small?.absoluteString, "https://images.com/track-1-s.png")
+                XCTAssertEqual(topTracks.items[1].image.medium?.absoluteString, "https://images.com/track-1-m.png")
+                XCTAssertEqual(topTracks.items[1].image.large?.absoluteString, "https://images.com/track-1-l.png")
+                XCTAssertEqual(topTracks.items[1].image.extraLarge?.absoluteString, "https://images.com/track-1-xl.png")
                 XCTAssertEqual(topTracks.items[1].rank, 2)
             case .failure(let error):
                 XCTFail("Expected to succeed, but it failed with error \(error)")
@@ -134,10 +134,10 @@ class ArtistModuleTests: XCTestCase {
                 XCTAssertEqual(topTracks.items[0].artist.name, "Some Artist")
                 XCTAssertNil(topTracks.items[0].artist.mbid)
                 XCTAssertEqual(topTracks.items[0].artist.url.absoluteString, "https://artists.com/some-artist")
-                XCTAssertEqual(topTracks.items[0].images.small?.absoluteString, "https://images.com/track-0-s.png")
-                XCTAssertEqual(topTracks.items[0].images.medium?.absoluteString, "https://images.com/track-0-m.png")
-                XCTAssertEqual(topTracks.items[0].images.large?.absoluteString, "https://images.com/track-0-l.png")
-                XCTAssertEqual(topTracks.items[0].images.extraLarge?.absoluteString, "https://images.com/track-0-xl.png")
+                XCTAssertEqual(topTracks.items[0].image.small?.absoluteString, "https://images.com/track-0-s.png")
+                XCTAssertEqual(topTracks.items[0].image.medium?.absoluteString, "https://images.com/track-0-m.png")
+                XCTAssertEqual(topTracks.items[0].image.large?.absoluteString, "https://images.com/track-0-l.png")
+                XCTAssertEqual(topTracks.items[0].image.extraLarge?.absoluteString, "https://images.com/track-0-xl.png")
 
                 XCTAssertEqual(topTracks.items[0].rank, 1)
                 XCTAssertEqual(topTracks.items[1].name, "Track 1")
@@ -149,10 +149,10 @@ class ArtistModuleTests: XCTestCase {
                 XCTAssertEqual(topTracks.items[1].artist.name, "Some Artist")
                 XCTAssertNil(topTracks.items[1].artist.mbid)
                 XCTAssertEqual(topTracks.items[1].artist.url.absoluteString, "https://artists.com/some-artist")
-                XCTAssertEqual(topTracks.items[1].images.small?.absoluteString, "https://images.com/track-1-s.png")
-                XCTAssertEqual(topTracks.items[1].images.medium?.absoluteString, "https://images.com/track-1-m.png")
-                XCTAssertEqual(topTracks.items[1].images.large?.absoluteString, "https://images.com/track-1-l.png")
-                XCTAssertEqual(topTracks.items[1].images.extraLarge?.absoluteString, "https://images.com/track-1-xl.png")
+                XCTAssertEqual(topTracks.items[1].image.small?.absoluteString, "https://images.com/track-1-s.png")
+                XCTAssertEqual(topTracks.items[1].image.medium?.absoluteString, "https://images.com/track-1-m.png")
+                XCTAssertEqual(topTracks.items[1].image.large?.absoluteString, "https://images.com/track-1-l.png")
+                XCTAssertEqual(topTracks.items[1].image.extraLarge?.absoluteString, "https://images.com/track-1-xl.png")
                 XCTAssertEqual(topTracks.items[1].rank, 2)
             case .failure(let error):
                 XCTFail("Expected to succeed, but it failed with error \(error)")
@@ -244,27 +244,27 @@ class ArtistModuleTests: XCTestCase {
                 )
 
                 XCTAssertEqual(
-                    similarArtist.items[1].images.small!.absoluteString,
+                    similarArtist.items[1].image.small!.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
                 XCTAssertEqual(
-                    similarArtist.items[1].images.medium!.absoluteString,
+                    similarArtist.items[1].image.medium!.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/64s/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
                 XCTAssertEqual(
-                    similarArtist.items[1].images.large!.absoluteString,
+                    similarArtist.items[1].image.large!.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
                 XCTAssertEqual(
-                    similarArtist.items[1].images.extraLarge!.absoluteString,
+                    similarArtist.items[1].image.extraLarge!.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
                 XCTAssertEqual(
-                    similarArtist.items[1].images.mega!.absoluteString,
+                    similarArtist.items[1].image.mega!.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png"
                 )
 
@@ -318,11 +318,11 @@ class ArtistModuleTests: XCTestCase {
                 )
 
                 XCTAssertEqual(searchResults.items[3].streamable, false)
-                XCTAssertNil(searchResults.items[3].images.small)
-                XCTAssertNil(searchResults.items[3].images.medium)
-                XCTAssertNil(searchResults.items[3].images.large)
-                XCTAssertNil(searchResults.items[3].images.extraLarge)
-                XCTAssertNil(searchResults.items[3].images.mega)
+                XCTAssertNil(searchResults.items[3].image.small)
+                XCTAssertNil(searchResults.items[3].image.medium)
+                XCTAssertNil(searchResults.items[3].image.large)
+                XCTAssertNil(searchResults.items[3].image.extraLarge)
+                XCTAssertNil(searchResults.items[3].image.mega)
 
                 XCTAssertEqual(searchResults.pagination.startPage, 1)
                 XCTAssertEqual(searchResults.pagination.totalResults, 31)
@@ -396,26 +396,26 @@ class ArtistModuleTests: XCTestCase {
                 )
 
                 XCTAssertEqual(
-                    topAlbums.items[1].images.small?.absoluteString,
+                    topAlbums.items[1].image.small?.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/34s/a3ee30ac1c7c4176be8757ab8b8be5ce.png"
                 )
 
                 XCTAssertEqual(
-                    topAlbums.items[1].images.medium?.absoluteString,
+                    topAlbums.items[1].image.medium?.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/64s/a3ee30ac1c7c4176be8757ab8b8be5ce.png"
                 )
 
                 XCTAssertEqual(
-                    topAlbums.items[1].images.large?.absoluteString,
+                    topAlbums.items[1].image.large?.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/174s/a3ee30ac1c7c4176be8757ab8b8be5ce.png"
                 )
 
                 XCTAssertEqual(
-                    topAlbums.items[1].images.extraLarge?.absoluteString,
+                    topAlbums.items[1].image.extraLarge?.absoluteString,
                     "https://lastfm.freetls.fastly.net/i/u/300x300/a3ee30ac1c7c4176be8757ab8b8be5ce.png"
                 )
 
-                XCTAssertNil(topAlbums.items[1].images.mega)
+                XCTAssertNil(topAlbums.items[1].image.mega)
             case .failure(let error):
                 XCTFail("Expected to succeed, but it failed with error \(error.localizedDescription)")
             }
@@ -462,27 +462,27 @@ class ArtistModuleTests: XCTestCase {
                 XCTAssertEqual(artistInfo.url.absoluteString, "https://someartist.com")
 
                 XCTAssertEqual(
-                    artistInfo.images.small?.absoluteString,
+                    artistInfo.image.small?.absoluteString,
                     "https://images.com/s.png"
                 )
 
                 XCTAssertEqual(
-                    artistInfo.images.medium?.absoluteString,
+                    artistInfo.image.medium?.absoluteString,
                     "https://images.com/m.png"
                 )
 
                 XCTAssertEqual(
-                    artistInfo.images.large?.absoluteString,
+                    artistInfo.image.large?.absoluteString,
                     "https://images.com/l.png"
                 )
 
                 XCTAssertEqual(
-                    artistInfo.images.extraLarge?.absoluteString,
+                    artistInfo.image.extraLarge?.absoluteString,
                     "https://images.com/e.png"
                 )
 
                 XCTAssertEqual(
-                    artistInfo.images.mega?.absoluteString,
+                    artistInfo.image.mega?.absoluteString,
                     "https://images.com/mg.png"
                 )
 
@@ -498,27 +498,27 @@ class ArtistModuleTests: XCTestCase {
                 XCTAssertEqual(artistInfo.similar[0].url.absoluteString, "https://artists.com/artist-A")
 
                 XCTAssertEqual(
-                  artistInfo.similar[0].images.small?.absoluteString,
+                  artistInfo.similar[0].image.small?.absoluteString,
                   "https://images.com/artist-A-sm.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[0].images.medium?.absoluteString,
+                  artistInfo.similar[0].image.medium?.absoluteString,
                   "https://images.com/artist-A-md.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[0].images.large?.absoluteString,
+                  artistInfo.similar[0].image.large?.absoluteString,
                   "https://images.com/artist-A-lg.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[0].images.extraLarge?.absoluteString,
+                  artistInfo.similar[0].image.extraLarge?.absoluteString,
                   "https://images.com/artist-A-xl.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[0].images.mega?.absoluteString,
+                  artistInfo.similar[0].image.mega?.absoluteString,
                   "https://images.com/artist-A-mg.png"
                 )
 
@@ -526,27 +526,27 @@ class ArtistModuleTests: XCTestCase {
                 XCTAssertEqual(artistInfo.similar[1].url.absoluteString, "https://artists.com/artist-B")
 
                 XCTAssertEqual(
-                  artistInfo.similar[1].images.small?.absoluteString,
+                  artistInfo.similar[1].image.small?.absoluteString,
                   "https://images.com/artist-B-sm.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[1].images.medium?.absoluteString,
+                  artistInfo.similar[1].image.medium?.absoluteString,
                   "https://images.com/artist-B-md.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[1].images.large?.absoluteString,
+                  artistInfo.similar[1].image.large?.absoluteString,
                   "https://images.com/artist-B-lg.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[1].images.extraLarge?.absoluteString,
+                  artistInfo.similar[1].image.extraLarge?.absoluteString,
                   "https://images.com/artist-B-xl.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[1].images.mega?.absoluteString,
+                  artistInfo.similar[1].image.mega?.absoluteString,
                   "https://images.com/artist-B-mg.png"
                 )
 
@@ -554,27 +554,27 @@ class ArtistModuleTests: XCTestCase {
                 XCTAssertEqual(artistInfo.similar[2].url.absoluteString, "https://artists.com/artist-C")
 
                 XCTAssertEqual(
-                  artistInfo.similar[2].images.small?.absoluteString,
+                  artistInfo.similar[2].image.small?.absoluteString,
                   "https://images.com/artist-C-sm.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[2].images.medium?.absoluteString,
+                  artistInfo.similar[2].image.medium?.absoluteString,
                   "https://images.com/artist-C-md.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[2].images.large?.absoluteString,
+                  artistInfo.similar[2].image.large?.absoluteString,
                   "https://images.com/artist-C-lg.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[2].images.extraLarge?.absoluteString,
+                  artistInfo.similar[2].image.extraLarge?.absoluteString,
                   "https://images.com/artist-C-xl.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[2].images.mega?.absoluteString,
+                  artistInfo.similar[2].image.mega?.absoluteString,
                   "https://images.com/artist-C-mg.png"
                 )
 
@@ -582,27 +582,27 @@ class ArtistModuleTests: XCTestCase {
                 XCTAssertEqual(artistInfo.similar[3].url.absoluteString, "https://artists.com/artist-D")
 
                 XCTAssertEqual(
-                  artistInfo.similar[3].images.small?.absoluteString,
+                  artistInfo.similar[3].image.small?.absoluteString,
                   "https://images.com/artist-D-sm.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[3].images.medium?.absoluteString,
+                  artistInfo.similar[3].image.medium?.absoluteString,
                   "https://images.com/artist-D-md.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[3].images.large?.absoluteString,
+                  artistInfo.similar[3].image.large?.absoluteString,
                   "https://images.com/artist-D-lg.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[3].images.extraLarge?.absoluteString,
+                  artistInfo.similar[3].image.extraLarge?.absoluteString,
                   "https://images.com/artist-D-xl.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[3].images.mega?.absoluteString,
+                  artistInfo.similar[3].image.mega?.absoluteString,
                   "https://images.com/artist-D-mg.png"
                 )
 
@@ -610,27 +610,27 @@ class ArtistModuleTests: XCTestCase {
                 XCTAssertEqual(artistInfo.similar[4].url.absoluteString, "https://artists.com/artist-E")
 
                 XCTAssertEqual(
-                  artistInfo.similar[4].images.small?.absoluteString,
+                  artistInfo.similar[4].image.small?.absoluteString,
                   "https://images.com/artist-E-sm.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[4].images.medium?.absoluteString,
+                  artistInfo.similar[4].image.medium?.absoluteString,
                   "https://images.com/artist-E-md.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[4].images.large?.absoluteString,
+                  artistInfo.similar[4].image.large?.absoluteString,
                   "https://images.com/artist-E-lg.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[4].images.extraLarge?.absoluteString,
+                  artistInfo.similar[4].image.extraLarge?.absoluteString,
                   "https://images.com/artist-E-xl.png"
                 )
 
                 XCTAssertEqual(
-                  artistInfo.similar[4].images.mega?.absoluteString,
+                  artistInfo.similar[4].image.mega?.absoluteString,
                   "https://images.com/artist-E-mg.png"
                 )
 

@@ -12,7 +12,7 @@ public struct UserInfo: Decodable {
     public let playlists: UInt
     public let trackCount: UInt
     public let albumCount: UInt
-    public let images: LastFMImages
+    public let image: LastFMImages
     public let registered: Date
     public let country: String
     public let gender: String
@@ -34,7 +34,7 @@ public struct UserInfo: Decodable {
         case playlists
         case trackCount = "track_count"
         case albumCount = "album_count"
-        case images = "image"
+        case image
         case registered
         case country
         case gender
@@ -57,7 +57,7 @@ public struct UserInfo: Decodable {
 
         self.name = try container.decode(String.self, forKey: .name)
         self.realname = try container.decode(String.self, forKey: .realname)
-        self.images = try container.decode(LastFMImages.self, forKey: .images)
+        self.image = try container.decode(LastFMImages.self, forKey: .image)
         self.country = try container.decode(String.self, forKey: .country)
         self.gender = try container.decode(String.self, forKey: .gender)
         self.type = try container.decode(String.self, forKey: .type)
