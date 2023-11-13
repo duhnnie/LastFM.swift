@@ -1,0 +1,70 @@
+{
+    "results": {
+        "opensearch:Query": {
+            "#text": "",
+            "role": "request",
+            "searchTerms": "album",
+            "startPage": "1"
+        },
+        "opensearch:totalResults": "2",
+        "opensearch:startIndex": "0",
+        "opensearch:itemsPerPage": "5",
+        "albummatches": {
+            "album": [
+                {
+                    "name": "Album 0",
+                    "artist": "Artist 0",
+                    "url": "https://albums.com/album-0",
+                    "image": [
+                        {
+                            "#text": "https://images.com/album-0-s.png",
+                            "size": "small"
+                        },
+                        {
+                            "#text": "https://images.com/album-0-m.png",
+                            "size": "medium"
+                        },
+                        {
+                            "#text": "https://images.com/album-0-l.png",
+                            "size": "large"
+                        },
+                        {
+                            "#text": "https://images.com/album-0-xl.png",
+                            "size": "extralarge"
+                        }
+                    ],
+                    "streamable": "0",
+                    "mbid": "album-0-mbid"
+                },
+                {
+                    "name": "Album 1",
+                    "artist": "Artist 1",
+                    "url": "https://albums.com/album-1",
+                    "image": [
+                        {
+                            "#text": "https://images.com/album-1-s.png",
+                            "size": "small"
+                        },
+                        {
+                            "#text": "https://images.com/album-1-m.png",
+                            "size": "medium"
+                        },
+                        {
+                            "#text": "https://images.com/album-1-l.png",
+                            "size": "large"
+                        },
+                        {
+                            "#text": "https://images.com/album-1-xl.png",
+                            "size": "extralarge"
+                        }
+                    ],
+                    "streamable": "0",
+                    "mbid": "album-1-mbid"
+                }
+            ]
+        },
+        "@attr": {
+            "for": "album"
+        }
+    }
+}

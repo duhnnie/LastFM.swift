@@ -198,7 +198,15 @@ class GeoModuleTests: XCTestCase {
         }
 
         waitForExpectations(timeout: 3)
-        // TODO: Complete test
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?format=json&api_key=someAPIKey&country=australia&method=geo.gettopartists&limit=5&page=1"
+            )
+        )
     }
 
 }

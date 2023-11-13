@@ -300,4 +300,65 @@ class AlbumModuleTests: XCTestCase {
         )
     }
 
+    func test_albumSearch() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/album.search",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "Waiting for search()")
+        let params = SearchParams(term: "album", limit: 34, page: 4)
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.search(params: params) { result in
+            switch (result) {
+            case .success(let albumResults):
+                XCTAssertEqual(albumResults.pagination.startPage, 1)
+                XCTAssertEqual(albumResults.pagination.totalResults, 2)
+                XCTAssertEqual(albumResults.pagination.startIndex, 0)
+                XCTAssertEqual(albumResults.pagination.itemsPerPage, 5)
+
+                XCTAssertEqual(albumResults.items[0].name, "Album 0")
+                XCTAssertEqual(albumResults.items[0].artist, "Artist 0")
+                XCTAssertEqual(albumResults.items[0].url.absoluteString, "https://albums.com/album-0")
+                XCTAssertEqual(albumResults.items[0].image.small?.absoluteString, "https://images.com/album-0-s.png")
+                XCTAssertEqual(albumResults.items[0].image.medium?.absoluteString, "https://images.com/album-0-m.png")
+                XCTAssertEqual(albumResults.items[0].image.large?.absoluteString, "https://images.com/album-0-l.png")
+                XCTAssertEqual(albumResults.items[0].image.extraLarge?.absoluteString, "https://images.com/album-0-xl.png")
+                XCTAssertNil(albumResults.items[0].image.mega)
+                XCTAssertEqual(albumResults.items[0].streamable, false)
+                XCTAssertEqual(albumResults.items[0].mbid, "album-0-mbid")
+
+                XCTAssertEqual(albumResults.items[1].name, "Album 1")
+                XCTAssertEqual(albumResults.items[1].artist, "Artist 1")
+                XCTAssertEqual(albumResults.items[1].url.absoluteString, "https://albums.com/album-1")
+                XCTAssertEqual(albumResults.items[1].image.small?.absoluteString, "https://images.com/album-1-s.png")
+                XCTAssertEqual(albumResults.items[1].image.medium?.absoluteString, "https://images.com/album-1-m.png")
+                XCTAssertEqual(albumResults.items[1].image.large?.absoluteString, "https://images.com/album-1-l.png")
+                XCTAssertEqual(albumResults.items[1].image.extraLarge?.absoluteString, "https://images.com/album-1-xl.png")
+                XCTAssertNil(albumResults.items[1].image.mega)
+                XCTAssertEqual(albumResults.items[1].streamable, false)
+                XCTAssertEqual(albumResults.items[1].mbid, "album-1-mbid")
+            case .failure(let error):
+                XCTFail("It was expected to succeed, but it failed. Error: \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                "http://ws.audioscrobbler.com/2.0?album=album&api_key=someAPIKey&page=4&format=json&method=album.search&limit=34",
+                apiClient.getCalls[0].url.absoluteString
+            )
+        )
+    }
+
 }
