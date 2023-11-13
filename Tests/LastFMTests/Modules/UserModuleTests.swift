@@ -719,7 +719,7 @@ class UserTests: XCTestCase {
     func test_getLovedTracks_success() throws {
         let fakeDataURL = Bundle.module.url(forResource: "Resources/user.getLovedTracks", withExtension: "json")!
         let fakeData = try Data(contentsOf: fakeDataURL)
-        let params = LovedTracksParams(user: "someUser", limit: 5, page: 12)
+        let params = SearchParams(term: "someUser", limit: 5, page: 12)
         let expectation = expectation(description: "waiting for getLovedTracks")
 
         apiClientMock.data = fakeData
@@ -790,13 +790,13 @@ class UserTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=user.getlovedtracks&user=\(params.user)&limit=\(params.limit)&page=\(params.page)&api_key=\(Constants.API_KEY)&format=json"
+                "http://ws.audioscrobbler.com/2.0?method=user.getlovedtracks&user=someUser&limit=5&page=12&api_key=\(Constants.API_KEY)&format=json"
             )
         )
     }
 
     func test_getLovedTracks_failure() throws {
-        let params = LovedTracksParams(user: "Copo", limit: 345, page: 345)
+        let params = SearchParams(term: "Copo", limit: 345, page: 345)
         let expectation = expectation(description: "waiting for getLovedTracks")
 
         apiClientMock.error = RuntimeError("Any error")
@@ -1158,7 +1158,7 @@ class UserTests: XCTestCase {
         )!
 
         let fakeData = try Data(contentsOf: jsonURL)
-        let params = UserFriendsParams(user: "pepiro", limit: 2, page: 1)
+        let params = SearchParams(term: "pepiro", limit: 2, page: 1)
         let expectation = expectation(description: "Waiting for getFriends()")
 
         apiClientMock.response = Constants.RESPONSE_200_OK

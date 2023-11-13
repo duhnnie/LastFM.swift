@@ -22,29 +22,38 @@ public struct TagModule {
     }
 
     public func getTopTracks(
-        params: TagTopTracksParams,
+        params: SearchParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<TagTopTrack>>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getTopTracks)
+        let params = instance.normalizeParams(
+            params: params.toDictionary(termKey: "tag"),
+            method: APIMethod.getTopTracks
+        )
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
 
     public func getTopArtists(
-        params: TagTopArtistsParams,
+        params: SearchParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<TagTopArtist>>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getTopArtists)
+        let params = instance.normalizeParams(
+            params: params.toDictionary(termKey: "tag"),
+            method: APIMethod.getTopArtists
+        )
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
 
 
     public func getTopAlbums(
-        params: TagTopAlbumsParams,
+        params: SearchParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<TagTopAlbum>>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getTopAlbums)
+        let params = instance.normalizeParams(
+            params: params.toDictionary(termKey: "tag"),
+            method: APIMethod.getTopAlbums
+        )
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }

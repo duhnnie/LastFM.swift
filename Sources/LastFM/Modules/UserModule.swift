@@ -77,10 +77,13 @@ public struct UserModule {
     }
 
     public func getLovedTracks(
-        params: LovedTracksParams,
+        params: SearchParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<LovedTrack>>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getLovedTracks)
+        let params = instance.normalizeParams(
+            params: params.toDictionary(termKey: "user"),
+            method: APIMethod.getLovedTracks
+        )
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
@@ -128,10 +131,13 @@ public struct UserModule {
     }
 
     public func getFriends(
-        params: UserFriendsParams,
+        params: SearchParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<UserPublicInfo>>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getFriends)
+        let params = instance.normalizeParams(
+            params: params.toDictionary(termKey: "user"),
+            method: APIMethod.getFriends
+        )
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }

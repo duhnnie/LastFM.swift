@@ -19,10 +19,13 @@ public struct LibraryModule {
     }
 
     public func getArtists(
-        params: LibraryArtistsParams,
+        params: SearchParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<LibraryArtist>>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getArtists)
+        let params = instance.normalizeParams(
+            params: params.toDictionary(termKey: "user"),
+            method: APIMethod.getArtists
+        )
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }

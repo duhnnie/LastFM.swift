@@ -41,10 +41,13 @@ public struct ArtistModule {
     }
 
     public func search(
-        params: ArtistSearchParams,
+        params: SearchParams,
         onCompletion: @escaping LastFM.OnCompletion<SearchResults<ArtistSearchResult>>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.search)
+        let params = instance.normalizeParams(
+            params: params.toDictionary(termKey: "artist"),
+            method: APIMethod.search
+        )
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
