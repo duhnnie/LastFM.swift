@@ -29,10 +29,13 @@ public struct GeoModule {
     }
 
     public func getTopArtists(
-        params: GeoTopArtistsParams,
+        params: SearchParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<GeoTopArtist>>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getTopArtists)
+        let params = instance.normalizeParams(
+            params: params.toDictionary(termKey: "country"),
+            method: APIMethod.getTopArtists
+        )
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }

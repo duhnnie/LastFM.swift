@@ -298,7 +298,7 @@ class ArtistModuleTests: XCTestCase {
         )!
 
         let fakeData = try Data(contentsOf: jsonURL)
-        let params = ArtistSearchParams(artist: "neuronas", limit: 5, page: 1)
+        let params = SearchParams(term: "neuronas", limit: 5, page: 1)
         let expectation = expectation(description: "waiting for artist search results")
 
         apiClient.data = fakeData
@@ -343,7 +343,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.search&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&limit=\(params.limit)&page=\(params.page)")
+                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.search&artist=neuronas&limit=\(params.limit)&page=\(params.page)")
         )
     }
 

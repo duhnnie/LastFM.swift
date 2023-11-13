@@ -28,7 +28,7 @@ class TagModuleTests: XCTestCase {
         let fakeDataURL = Bundle.module.url(forResource: "Resources/tag.getTopTracks", withExtension: "json")!
         let fakeData = try Data(contentsOf: fakeDataURL)
 
-        let params = TagTopTracksParams(tag: "Pop punk", limit: 5, page: 1)
+        let params = SearchParams(term: "Pop punk", limit: 5, page: 1)
         let expectation = expectation(description: "waiting for getTopTracks")
 
         apiClientMock.data = fakeData
@@ -84,13 +84,13 @@ class TagModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=tag.gettoptracks&api_key=\(Constants.API_KEY)&limit=\(params.limit)&format=json&tag=\(params.tag.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&page=1"
+                "http://ws.audioscrobbler.com/2.0?method=tag.gettoptracks&api_key=\(Constants.API_KEY)&limit=5&format=json&tag=Pop%20punk&page=1"
             )
         )
     }
 
     func test_getTopTracks_failure() throws {
-        let params = TagTopTracksParams(tag: "Some Tag", limit: 35, page: 5)
+        let params = SearchParams(term: "Some Tag", limit: 35, page: 5)
 
         apiClientMock.error = RuntimeError("Some error")
 
@@ -113,7 +113,7 @@ class TagModuleTests: XCTestCase {
         )!
 
         let fakeData = try Data(contentsOf: jsonURL)
-        let params = TagTopArtistsParams(tag: "Progressive", limit: 5, page: 1)
+        let params = SearchParams(term: "Progressive", limit: 5, page: 1)
         let expectation = expectation(description: "waiting for getTopArtists")
 
         apiClientMock.data = fakeData
@@ -163,7 +163,7 @@ class TagModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=tag.gettopartists&api_key=\(Constants.API_KEY)&limit=\(params.limit)&format=json&tag=\(params.tag.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&page=1"
+                "http://ws.audioscrobbler.com/2.0?method=tag.gettopartists&api_key=\(Constants.API_KEY)&limit=5&format=json&tag=Progressive&page=1"
             )
         )
 
@@ -172,7 +172,7 @@ class TagModuleTests: XCTestCase {
     func test_getTopAlbums_success() throws {
         let fakeDataURL = Bundle.module.url(forResource: "Resources/tag.getTopAlbums", withExtension: "json")!
         let fakeData = try Data(contentsOf: fakeDataURL)
-        let params = TagTopAlbumsParams(tag: "Experimental", limit: 5, page: 12)
+        let params = SearchParams(term: "Experimental", limit: 5, page: 12)
         let expectation = expectation(description: "waiting for getTopAlbums")
 
         apiClientMock.data = fakeData
@@ -234,7 +234,7 @@ class TagModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=tag.gettopalbums&tag=\(params.tag)&limit=\(params.limit)&page=\(params.page)&api_key=\(Constants.API_KEY)&format=json"
+                "http://ws.audioscrobbler.com/2.0?method=tag.gettopalbums&tag=Experimental&limit=5&page=12&api_key=\(Constants.API_KEY)&format=json"
             )
         )
     }

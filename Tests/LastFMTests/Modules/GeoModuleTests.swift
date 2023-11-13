@@ -146,7 +146,7 @@ class GeoModuleTests: XCTestCase {
 
         let fakeData = try Data(contentsOf: jsonURL)
         let expectation = expectation(description: "Waiting for getTopArtists")
-        let params = GeoTopArtistsParams(country: "australia", limit: 5, page: 1)
+        let params = SearchParams(term: "australia", limit: 5, page: 1)
 
         apiClient.data = fakeData
         apiClient.response = Constants.RESPONSE_200_OK
@@ -198,6 +198,7 @@ class GeoModuleTests: XCTestCase {
         }
 
         waitForExpectations(timeout: 3)
+        // TODO: Complete test
     }
 
 }

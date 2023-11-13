@@ -27,7 +27,7 @@ class LibraryModuleTests: XCTestCase {
     func test_getArtists_success() throws {
         let fakeDataURL = Bundle.module.url(forResource: "Resources/library.getArtists", withExtension: "json")!
         let fakeData = try Data(contentsOf: fakeDataURL)
-        let params = LibraryArtistsParams(user: "duhnnie", limit: 5, page: 1)
+        let params = SearchParams(term: "someuser", limit: 5, page: 1)
         let expectation = expectation(description: "waiting for getLovedTracks")
 
         apiClientMock.data = fakeData
@@ -92,7 +92,7 @@ class LibraryModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=library.getartists&user=\(params.user)&limit=\(params.limit)&page=\(params.page)&api_key=\(Constants.API_KEY)&format=json"
+                "http://ws.audioscrobbler.com/2.0?method=library.getartists&user=someuser&limit=5&page=1&api_key=\(Constants.API_KEY)&format=json"
             )
         )
     }
