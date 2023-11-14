@@ -406,4 +406,47 @@ class AlbumModuleTests: XCTestCase {
         )
     }
 
+    func test_removeTag_success() throws {
+        let expectation = expectation(description: "Waiting for removeTag()")
+
+        let expectedPayload = "method=album.removetag&api_key=someAPIKey&api_sig=57ab1ed79627b879412f00420e0b12ab&artist=Artist%20A&sk=mySessionKey&tag=tag-32&album=Album%20A"
+
+        apiClient.data = "{}".data(using: .utf8)
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        try instance.removeTag(
+            artist: "Artist A",
+            album: "Album A",
+            tag: "tag-32",
+            sessionKey: "mySessionKey") { error in
+            if let error = error {
+                XCTFail("Expected to succeed, but it failed. Error: \(error)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.postCalls.count, 1)
+        XCTAssertEqual(
+            apiClient.postCalls[0].headers,
+            ["Content-Type": "application/x-www-formurlencoded"]
+        )
+
+        XCTAssertEqual(
+            apiClient.postCalls[0].url.absoluteString,
+            "http://ws.audioscrobbler.com/2.0?format=json"
+        )
+
+        let payloadData = try XCTUnwrap(apiClient.postCalls[0].body)
+        let payloadString = String(data: payloadData, encoding: .utf8)!
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                "https://domain.com/?" + payloadString,
+                "https://domain.com/?" + expectedPayload
+            )
+        )
+    }
+
 }
