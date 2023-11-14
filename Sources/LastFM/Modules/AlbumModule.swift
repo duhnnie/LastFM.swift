@@ -12,11 +12,11 @@ public struct AlbumModule {
         }
     }
 
-    private let instance: LastFM
+    private let parent: LastFM
     private let requester: Requester
 
-    internal init(instance: LastFM, requester: Requester = RequestUtils.shared) {
-        self.instance = instance
+    internal init(parent: LastFM, requester: Requester = RequestUtils.shared) {
+        self.parent = parent
         self.requester = requester
     }
 
@@ -24,7 +24,7 @@ public struct AlbumModule {
         params: AlbumInfoParams,
         onCompletion: @escaping LastFM.OnCompletion<AlbumInfo>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getInfo)
+        let params = parent.normalizeParams(params: params, method: APIMethod.getInfo)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
@@ -33,7 +33,7 @@ public struct AlbumModule {
         params: AlbumInfoByMBIDParams,
         onCompletion: @escaping LastFM.OnCompletion<AlbumInfo>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getInfo)
+        let params = parent.normalizeParams(params: params, method: APIMethod.getInfo)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
@@ -42,7 +42,7 @@ public struct AlbumModule {
         params: SearchParams,
         onCompletion: @escaping LastFM.OnCompletion<SearchResults<AlbumSearchResult>>
     ) {
-        let params = instance.normalizeParams(
+        let params = parent.normalizeParams(
             params: params.toDictionary(termKey: "album"),
             method: APIMethod.search
         )
@@ -55,13 +55,13 @@ public struct AlbumModule {
         sessionKey: String,
         onCompletion: @escaping (LastFMError?) -> Void
     ) throws {
-        var params = instance.normalizeParams(
+        var params = parent.normalizeParams(
             params: params,
             sessionKey: sessionKey,
             method: APIMethod.addTags
         )
 
-        try instance.addSignature(params: &params)
+        try parent.addSignature(params: &params)
 
         try requester.postFormURLEncoded(payload: params, secure: false, onCompletion: onCompletion)
     }

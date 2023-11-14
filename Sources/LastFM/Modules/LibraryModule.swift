@@ -10,11 +10,11 @@ public struct LibraryModule {
         }
     }
 
-    private let instance: LastFM
+    private let parent: LastFM
     private let requester: Requester
 
-    internal init(instance: LastFM, requester: Requester = RequestUtils.shared) {
-        self.instance = instance
+    internal init(parent: LastFM, requester: Requester = RequestUtils.shared) {
+        self.parent = parent
         self.requester = requester
     }
 
@@ -22,7 +22,7 @@ public struct LibraryModule {
         params: SearchParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<LibraryArtist>>
     ) {
-        let params = instance.normalizeParams(
+        let params = parent.normalizeParams(
             params: params.toDictionary(termKey: "user"),
             method: APIMethod.getArtists
         )

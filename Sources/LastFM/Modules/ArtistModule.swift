@@ -15,11 +15,11 @@ public struct ArtistModule {
         }
     }
 
-    private let instance: LastFM
+    private let parent: LastFM
     private let requester: Requester
 
-    internal init(instance: LastFM, requester: Requester = RequestUtils.shared) {
-        self.instance = instance
+    internal init(parent: LastFM, requester: Requester = RequestUtils.shared) {
+        self.parent = parent
         self.requester = requester
     }
 
@@ -27,7 +27,7 @@ public struct ArtistModule {
         params: ArtistTopTracksParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ArtistTopTrack>>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getTopTracks)
+        let params = parent.normalizeParams(params: params, method: APIMethod.getTopTracks)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
@@ -36,7 +36,7 @@ public struct ArtistModule {
         params: ArtistSimilarParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionList<ArtistSimilar>>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getSimilar)
+        let params = parent.normalizeParams(params: params, method: APIMethod.getSimilar)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
@@ -45,7 +45,7 @@ public struct ArtistModule {
         params: SearchParams,
         onCompletion: @escaping LastFM.OnCompletion<SearchResults<ArtistSearchResult>>
     ) {
-        let params = instance.normalizeParams(
+        let params = parent.normalizeParams(
             params: params.toDictionary(termKey: "artist"),
             method: APIMethod.search
         )
@@ -57,7 +57,7 @@ public struct ArtistModule {
         params: ArtistTopAlbumsParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ArtistTopAlbum>>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getTopAlbums)
+        let params = parent.normalizeParams(params: params, method: APIMethod.getTopAlbums)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
@@ -66,7 +66,7 @@ public struct ArtistModule {
         params: ArtistInfoParams,
         onCompletion: @escaping LastFM.OnCompletion<ArtistInfo>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getInfo)
+        let params = parent.normalizeParams(params: params, method: APIMethod.getInfo)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
@@ -77,7 +77,7 @@ public struct ArtistModule {
         sessionKey: String,
         onCompletion: @escaping (LastFMError?) -> Void
     ) throws {
-        var params = instance.normalizeParams(
+        var params = parent.normalizeParams(
             params: [
                 "artist": artist,
                 "tags": tags.joined(separator: ","),
@@ -86,7 +86,7 @@ public struct ArtistModule {
             method: APIMethod.addTags
         )
 
-        try instance.addSignature(params: &params)
+        try parent.addSignature(params: &params)
         try requester.postFormURLEncoded(payload: params, secure: false, onCompletion: onCompletion)
     }
 

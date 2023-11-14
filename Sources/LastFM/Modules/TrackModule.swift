@@ -16,11 +16,11 @@ public struct TrackModule {
         }
     }
 
-    private let instance: LastFM
+    private let parent: LastFM
     private let requester: Requester
 
-    internal init(instance: LastFM, requester: Requester = RequestUtils.shared) {
-        self.instance = instance
+    internal init(parent: LastFM, requester: Requester = RequestUtils.shared) {
+        self.parent = parent
         self.requester = requester
     }
 
@@ -29,13 +29,13 @@ public struct TrackModule {
         sessionKey: String,
         onCompletion: @escaping LastFM.OnCompletion<ScrobbleList>
     ) throws {
-        var payload = instance.normalizeParams(
+        var payload = parent.normalizeParams(
             params: params,
             sessionKey: sessionKey,
             method: APIMethod.scrobble
         )
         
-        try instance.addSignature(params: &payload)
+        try parent.addSignature(params: &payload)
 
         try requester.postFormURLEncodedAndParse(
             payload: payload,
@@ -49,12 +49,12 @@ public struct TrackModule {
         sessionKey: String,
         onCompletion: @escaping (LastFMError?) -> Void
     ) throws {
-        var payload = instance.normalizeParams(
+        var payload = parent.normalizeParams(
             params: params,
             sessionKey: sessionKey,
             method: APIMethod.love
         )
-        try instance.addSignature(params: &payload)
+        try parent.addSignature(params: &payload)
 
         try requester.postFormURLEncoded(
             payload: payload,
@@ -68,13 +68,13 @@ public struct TrackModule {
         sessionKey: String,
         onCompletion: @escaping (LastFMError?) -> Void
     ) throws {
-        var payload = instance.normalizeParams(
+        var payload = parent.normalizeParams(
             params: params,
             sessionKey: sessionKey,
             method: APIMethod.unlove
         )
 
-        try instance.addSignature(params: &payload)
+        try parent.addSignature(params: &payload)
 
         try requester.postFormURLEncoded(
             payload: payload,
@@ -88,13 +88,13 @@ public struct TrackModule {
         sessionKey: String,
         onCompletion: @escaping LastFM.OnCompletion<TrackPlayingNow>
     ) throws {
-        var payload = instance.normalizeParams(
+        var payload = parent.normalizeParams(
             params: params,
             sessionKey: sessionKey,
             method: APIMethod.updateNowPlaying
         )
 
-        try instance.addSignature(params: &payload)
+        try parent.addSignature(params: &payload)
 
         try requester.postFormURLEncodedAndParse(
             payload: payload,
@@ -107,7 +107,7 @@ public struct TrackModule {
         params: TrackInfoParams,
         onCompletion: @escaping LastFM.OnCompletion<TrackInfo>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getInfo)
+        let params = parent.normalizeParams(params: params, method: APIMethod.getInfo)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
@@ -116,7 +116,7 @@ public struct TrackModule {
         params: TrackInfoByMBIDParams,
         onCompletion: @escaping LastFM.OnCompletion<TrackInfo>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getInfo)
+        let params = parent.normalizeParams(params: params, method: APIMethod.getInfo)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
@@ -125,7 +125,7 @@ public struct TrackModule {
         params: TrackSearchParams,
         onCompletion: @escaping LastFM.OnCompletion<SearchResults<TrackSearchResult>>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.search)
+        let params = parent.normalizeParams(params: params, method: APIMethod.search)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }

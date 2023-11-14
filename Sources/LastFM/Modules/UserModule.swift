@@ -21,11 +21,11 @@ public struct UserModule {
         }
     }
 
-    private let instance: LastFM
+    private let parent: LastFM
     private let requester: Requester
 
-    internal init(instance: LastFM, requester: Requester = RequestUtils.shared) {
-        self.instance = instance
+    internal init(parent: LastFM, requester: Requester = RequestUtils.shared) {
+        self.parent = parent
         self.requester = requester
     }
 
@@ -34,7 +34,7 @@ public struct UserModule {
         extended: Bool,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<T>>
     ) {
-        var params = instance.normalizeParams(params: params, method: APIMethod.getRecentTracks)
+        var params = parent.normalizeParams(params: params, method: APIMethod.getRecentTracks)
 
         params["extended"] = extended ? "1" : "0"
 
@@ -59,7 +59,7 @@ public struct UserModule {
         params: UserTopTracksParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<UserTopTrack>>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getTopTracks)
+        let params = parent.normalizeParams(params: params, method: APIMethod.getTopTracks)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
@@ -68,7 +68,7 @@ public struct UserModule {
         params: UserWeeklyChartParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionList<UserWeeklyTrackChart>>
     ) {
-        let params = instance.normalizeParams(
+        let params = parent.normalizeParams(
             params: params,
             method: APIMethod.getWeeklyTrackChart
         )
@@ -80,7 +80,7 @@ public struct UserModule {
         params: SearchParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<LovedTrack>>
     ) {
-        let params = instance.normalizeParams(
+        let params = parent.normalizeParams(
             params: params.toDictionary(termKey: "user"),
             method: APIMethod.getLovedTracks
         )
@@ -92,7 +92,7 @@ public struct UserModule {
         params: UserTopArtistsParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<UserTopArtist>>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getTopArtists)
+        let params = parent.normalizeParams(params: params, method: APIMethod.getTopArtists)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
@@ -101,7 +101,7 @@ public struct UserModule {
         params: UserWeeklyChartParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionList<UserWeeklyArtistChart>>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getWeeklyArtistChart)
+        let params = parent.normalizeParams(params: params, method: APIMethod.getWeeklyArtistChart)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
@@ -110,7 +110,7 @@ public struct UserModule {
         params: UserTopAlbumsParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<UserTopAlbum>>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getTopAlbums)
+        let params = parent.normalizeParams(params: params, method: APIMethod.getTopAlbums)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
@@ -119,13 +119,13 @@ public struct UserModule {
         params: UserWeeklyChartParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionList<UserWeeklyAlbumChart>>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getWeeklyAlbumChart)
+        let params = parent.normalizeParams(params: params, method: APIMethod.getWeeklyAlbumChart)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
 
     public func getInfo(user: String, onCompletion: @escaping LastFM.OnCompletion<UserInfo>) {
-        let params = instance.normalizeParams(params: ["user": user], method: APIMethod.getInfo)
+        let params = parent.normalizeParams(params: ["user": user], method: APIMethod.getInfo)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
@@ -134,7 +134,7 @@ public struct UserModule {
         params: SearchParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<UserPublicInfo>>
     ) {
-        let params = instance.normalizeParams(
+        let params = parent.normalizeParams(
             params: params.toDictionary(termKey: "user"),
             method: APIMethod.getFriends
         )

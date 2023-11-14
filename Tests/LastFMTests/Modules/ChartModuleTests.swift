@@ -13,7 +13,7 @@ class ChartModuleTests: XCTestCase {
 
     override func setUpWithError() throws {
         instance = ChartModule(
-            instance: Self.lastFM,
+            parent: Self.lastFM,
             requester: RequestUtils(apiClient: apiClient)
         )
     }
