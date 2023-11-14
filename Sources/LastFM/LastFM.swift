@@ -26,6 +26,7 @@ final public class LastFM {
 
     internal func normalizeParams(
         params: [String: String],
+        sessionKey: String? = nil,
         method: MethodKey
     ) -> [String: String] {
         var params = params
@@ -33,11 +34,23 @@ final public class LastFM {
         params["api_key"] = apiKey
         params["method"] = method.getName()
 
+        if let sessionKey = sessionKey {
+            params["sk"] = sessionKey
+        }
+
         return params
     }
 
-    internal func normalizeParams(params: Params, method: MethodKey) -> [String: String] {
-        return normalizeParams(params: params.toDictionary(), method: method)
+    internal func normalizeParams(
+        params: Params,
+        sessionKey: String? = nil,
+        method: MethodKey
+    ) -> [String: String] {
+        return normalizeParams(
+            params: params.toDictionary(),
+            sessionKey: sessionKey,
+            method: method
+        )
     }
 
     private func generateSignature(for data: [String: String ]) throws -> String {

@@ -10,7 +10,6 @@ public struct TrackNowPlayingParams: Params {
     public var mbid: String?
     public var albumArtist: String?
     public var duration: UInt?
-    public var sessionKey: String
 
     public init(
         artist: String,
@@ -20,8 +19,7 @@ public struct TrackNowPlayingParams: Params {
         trackNumber: UInt? = nil,
         mbid: String? = nil,
         albumArtist: String? = nil,
-        duration: UInt? = nil,
-        sessionKey: String
+        duration: UInt? = nil
     ) {
         self.artist = artist
         self.track = track
@@ -31,14 +29,12 @@ public struct TrackNowPlayingParams: Params {
         self.mbid = mbid
         self.albumArtist = albumArtist
         self.duration = duration
-        self.sessionKey = sessionKey
     }
 
     internal func toDictionary() -> Dictionary<String, String> {
         var dict: [String: String] = [
             "artist": artist,
-            "track": track,
-            "sk": sessionKey
+            "track": track
         ]
 
         if let album = album {
