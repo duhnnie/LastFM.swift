@@ -5,6 +5,7 @@ public struct AlbumModule {
     internal enum APIMethod: String, MethodKey {
         case getInfo = "getinfo"
         case search
+        case addTags = "addtags"
 
         func getName() -> String {
             return "album.\(self.rawValue)"
@@ -47,6 +48,22 @@ public struct AlbumModule {
         )
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
+    public func addTags(
+        params: AlbumTagsParams,
+        sessionKey: String,
+        onCompletion: @escaping (LastFMError?) -> Void
+    ) throws {
+        var params = instance.normalizeParams(
+            params: params,
+            sessionKey: sessionKey,
+            method: APIMethod.addTags
+        )
+
+        try instance.addSignature(params: &params)
+
+        try requester.postFormURLEncoded(payload: params, secure: false, onCompletion: onCompletion)
     }
     
 }
