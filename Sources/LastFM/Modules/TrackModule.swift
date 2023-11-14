@@ -26,9 +26,15 @@ public struct TrackModule {
 
     public func scrobble(
         params: ScrobbleParams,
+        sessionKey: String,
         onCompletion: @escaping LastFM.OnCompletion<ScrobbleList>
     ) throws {
-        var payload = instance.normalizeParams(params: params, method: APIMethod.scrobble)
+        var payload = instance.normalizeParams(
+            params: params,
+            sessionKey: sessionKey,
+            method: APIMethod.scrobble
+        )
+        
         try instance.addSignature(params: &payload)
 
         try requester.postFormURLEncodedAndParse(
@@ -39,10 +45,15 @@ public struct TrackModule {
     }
 
     public func love(
-        params: TrackLoveParams,
+        params: TrackParams,
+        sessionKey: String,
         onCompletion: @escaping (LastFMError?) -> Void
     ) throws {
-        var payload = instance.normalizeParams(params: params, method: APIMethod.love)
+        var payload = instance.normalizeParams(
+            params: params,
+            sessionKey: sessionKey,
+            method: APIMethod.love
+        )
         try instance.addSignature(params: &payload)
 
         try requester.postFormURLEncoded(
@@ -53,10 +64,16 @@ public struct TrackModule {
     }
 
     public func unlove(
-        params: TrackLoveParams,
+        params: TrackParams,
+        sessionKey: String,
         onCompletion: @escaping (LastFMError?) -> Void
     ) throws {
-        var payload = instance.normalizeParams(params: params, method: APIMethod.unlove)
+        var payload = instance.normalizeParams(
+            params: params,
+            sessionKey: sessionKey,
+            method: APIMethod.unlove
+        )
+
         try instance.addSignature(params: &payload)
 
         try requester.postFormURLEncoded(
@@ -68,9 +85,14 @@ public struct TrackModule {
 
     public func updateNowPlaying(
         params: TrackNowPlayingParams,
+        sessionKey: String,
         onCompletion: @escaping LastFM.OnCompletion<TrackPlayingNow>
     ) throws {
-        var payload = instance.normalizeParams(params: params, method: APIMethod.updateNowPlaying)
+        var payload = instance.normalizeParams(
+            params: params,
+            sessionKey: sessionKey,
+            method: APIMethod.updateNowPlaying
+        )
 
         try instance.addSignature(params: &payload)
 

@@ -3,15 +3,11 @@ import Foundation
 public struct ScrobbleParams: Params {
 
     private(set) var items: [ScrobbleParamItem] = []
-    public var sessionKey: String
 
-    public init(sessionKey: String) {
-        self.sessionKey = sessionKey
-    }
-
-    public init(sessionKey: String, scrobbleItem: ScrobbleParamItem) {
-        self.init(sessionKey: sessionKey)
-        self.items.append(scrobbleItem)
+    public init(scrobbleItem: ScrobbleParamItem? = nil) {
+        if let scrobbleItem = scrobbleItem {
+            self.items.append(scrobbleItem)
+        }
     }
 
     public mutating func addItem(item: ScrobbleParamItem) {
@@ -23,7 +19,7 @@ public struct ScrobbleParams: Params {
     }
 
     internal func toDictionary() -> Dictionary<String, String> {
-        var dict: [String: String] = items.enumerated().reduce([:]) { result, enumeratedItem in
+        let dict: [String: String] = items.enumerated().reduce([:]) { result, enumeratedItem in
             var newResult = result
             let index = enumeratedItem.offset
             let scrobbleItem = enumeratedItem.element
@@ -66,8 +62,6 @@ public struct ScrobbleParams: Params {
 
             return newResult
         }
-
-        dict["sk"] = self.sessionKey
 
         return dict
     }

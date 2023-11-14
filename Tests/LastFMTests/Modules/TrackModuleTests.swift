@@ -36,14 +36,14 @@ class TrackModuleTests: XCTestCase {
             albumArtist: "Pink Floyd"
         )
 
-        let params = ScrobbleParams(sessionKey: "someKey", scrobbleItem: track)
+        let params = ScrobbleParams(scrobbleItem: track)
         let expectedPayload = "sk=someKey&api_key=someAPIKey&api_sig=2ab59ea6792fd151d933da591583e5e7&albumArtist%5B0%5D=Pink%20Floyd&method=track.scrobble&album%5B0%5D=The%20Wall&timestamp%5B0%5D=1697838599&artist%5B0%5D=Pink%20Floyd&track%5B0%5D=Comfortably%20Numb"
         let expectation = expectation(description: "Waiting for scrobble")
 
         apiClient.data = fakeData
         apiClient.response = Constants.RESPONSE_200_OK
 
-        try instance.scrobble(params: params) { result in
+        try instance.scrobble(params: params, sessionKey: "someKey") { result in
             switch(result) {
             case .success(let scrobble):
                 XCTAssertEqual(scrobble.accepted, 1)
@@ -92,7 +92,7 @@ class TrackModuleTests: XCTestCase {
     func test_multiple_scrobble_success() throws {
         let jsonURL = Bundle.module.url(forResource: "Resources/track.multipleScrobble", withExtension: "json")!
         let fakeData = try Data(contentsOf: jsonURL)
-        var params = ScrobbleParams(sessionKey: "someKey")
+        var params = ScrobbleParams()
 
         params.addItem(item: ScrobbleParamItem(
             artist: "+44",
@@ -136,7 +136,7 @@ class TrackModuleTests: XCTestCase {
         apiClient.data = fakeData
         apiClient.response = Constants.RESPONSE_200_OK
 
-        try instance.scrobble(params: params) { result in
+        try instance.scrobble(params: params, sessionKey: "someKey") { result in
             switch(result) {
             case .success(let scrobbles):
                 XCTAssertEqual(scrobbles.items.count, 5)
@@ -236,7 +236,7 @@ class TrackModuleTests: XCTestCase {
         apiClient.data = fakeData
         apiClient.response = Constants.RESPONSE_403_FORBIDDEN
 
-        try instance.scrobble(params: ScrobbleParams(sessionKey: "abcdefg")) { result in
+        try instance.scrobble(params: ScrobbleParams(), sessionKey: "abcdefg") { result in
             switch (result) {
             case .success(_):
                 XCTFail("It was supossed to fail with a 403 server error")
@@ -268,7 +268,7 @@ class TrackModuleTests: XCTestCase {
         apiClient.response = Constants.RESPONSE_200_OK
 
         // Here we sent any params since we already have fake the data to get from request
-        try instance.scrobble(params: ScrobbleParams(sessionKey: "asdfasf")){ result in
+        try instance.scrobble(params: ScrobbleParams(), sessionKey: "asdfasf"){ result in
             switch(result) {
             case .success(let entity):
                 XCTAssertEqual(entity.ignored, 5)
@@ -322,10 +322,9 @@ class TrackModuleTests: XCTestCase {
 
     func test_love_success() throws {
         let expectation = expectation(description: "waiting for love track request")
-        let params = TrackLoveParams(
+        let params = TrackParams(
             track: "SomeTrack",
-            artist: "SomeArtist",
-            sessionKey: "someSessionKey"
+            artist: "SomeArtist"
         )
 
         let expectedPayload = "sk=someSessionKey&track=SomeTrack&artist=SomeArtist&method=track.love&api_sig=c993788654294e65dc11ce48d6af0fab&api_key=someAPIKey"
@@ -333,7 +332,7 @@ class TrackModuleTests: XCTestCase {
         apiClient.data = "{}".data(using: .utf8)
         apiClient.response = Constants.RESPONSE_200_OK
 
-        try instance.love(params: params) { error in
+        try instance.love(params: params, sessionKey: "someSessionKey") { error in
             if error != nil {
                 XCTFail("It was suppossed to succeed, but it failed with error \(error!.localizedDescription)")
             }
@@ -365,10 +364,9 @@ class TrackModuleTests: XCTestCase {
 
     func test_unlove_success() throws {
         let expectation = expectation(description: "waiting for unlove track request")
-        let params = TrackLoveParams(
+        let params = TrackParams(
             track: "SomeTrack",
-            artist: "SomeArtist",
-            sessionKey: "someSessionKey"
+            artist: "SomeArtist"
         )
 
         let expectedPayload = "sk=someSessionKey&track=SomeTrack&artist=SomeArtist&method=track.unlove&api_sig=481b0418b5318df585faff2d8da9e0bf&api_key=someAPIKey"
@@ -376,7 +374,7 @@ class TrackModuleTests: XCTestCase {
         apiClient.data = "{}".data(using: .utf8)
         apiClient.response = Constants.RESPONSE_200_OK
 
-        try instance.unlove(params: params) { error in
+        try instance.unlove(params: params, sessionKey: "someSessionKey") { error in
             if error != nil {
                 XCTFail("It was suppossed to succeed, but it failed with error \(error!.localizedDescription)")
             }
@@ -418,8 +416,7 @@ class TrackModuleTests: XCTestCase {
             artist: "Soccer Mommy",
             track: "Flaw",
             album: "Clean",
-            albumArtist: "Soccer Mpmmy",
-            sessionKey: "someSessionKey"
+            albumArtist: "Soccer Mpmmy"
         )
 
         let expectedPayload = "track=Flaw&albumArtist=Soccer%20Mpmmy&api_key=someAPIKey&method=track.updateNowPlaying&sk=someSessionKey&api_sig=375e3e8321c7161de5d6c3fc89bb33e1&album=Clean&artist=Soccer%20Mommy"
@@ -428,7 +425,7 @@ class TrackModuleTests: XCTestCase {
         apiClient.data = fakeData
         apiClient.response = Constants.RESPONSE_200_OK
 
-        try instance.updateNowPlaying(params: params) { result in
+        try instance.updateNowPlaying(params: params, sessionKey: "someSessionKey") { result in
             switch(result) {
             case .success(let entity):
                 XCTAssertEqual(entity.albumArtist.corrected, false)
