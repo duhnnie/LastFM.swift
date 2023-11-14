@@ -17,7 +17,7 @@ internal struct RequestUtils: Requester {
         return allowedCharacters
     }()
 
-    internal static func urlEncode(_ string: String) throws -> String {
+    private static func urlEncode(_ string: String) throws -> String {
         guard let string = string.addingPercentEncoding(
             withAllowedCharacters: Self.allowedURLQueryCharacters
         ) else {
@@ -33,7 +33,7 @@ internal struct RequestUtils: Requester {
         self.apiClient = apiClient
     }
 
-    internal static func build(params: [String : String], secure: Bool) -> URL {
+    private static func build(params: [String : String], secure: Bool) -> URL {
         var urlComponents = URLComponents(
             string: secure ? LastFM.SECURE_API_HOST : LastFM.INSECURE_API_HOST
         )!
@@ -45,7 +45,7 @@ internal struct RequestUtils: Requester {
         return urlComponents.url!
     }
 
-    internal static func buildForFormURLEncoded(
+    private static func buildForFormURLEncoded(
         payload: [String: String]
     ) throws -> (body: Data, headers: [String: String]) {
         guard

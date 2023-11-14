@@ -6,6 +6,7 @@ public struct AuthModule {
     internal enum APIMethod: String, MethodKey {
         case getSession = "getsession"
         case getToken = "gettoken"
+        case getMobileSession = "getmobilesession"
 
         func getName() -> String {
             return "auth.\(self.rawValue)"
@@ -49,6 +50,26 @@ public struct AuthModule {
             params: params,
             secure: false,
             onCompletion: internalOnCompletion
+        )
+    }
+
+    @available(*, deprecated, message: "Last.FM: This method has other parameters which are now deprecated and should not be used.")
+    public func getMobileSession(
+        username: String,
+        password: String,
+        onCompletion: @escaping LastFM.OnCompletion<ServiceSession>
+    ) throws {
+        var params = instance.normalizeParams(
+            params: ["username": username, "password": password],
+            method: APIMethod.getMobileSession
+        )
+
+        try instance.addSignature(params: &params)
+
+        try requester.postFormURLEncodedAndParse(
+            payload: params,
+            secure: true,
+            onCompletion: onCompletion
         )
     }
     
