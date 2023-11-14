@@ -5,6 +5,7 @@ public struct AuthModule {
 
     internal enum APIMethod: String, MethodKey {
         case getSession = "getsession"
+        case getToken = "gettoken"
 
         func getName() -> String {
             return "auth.\(self.rawValue)"
@@ -28,6 +29,27 @@ public struct AuthModule {
         try instance.addSignature(params: &params)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
+    public func getToken(onCompletion: @escaping LastFM.OnCompletion<String>) throws {
+        var params = instance.normalizeParams(params: [:], method: APIMethod.getToken)
+
+        try instance.addSignature(params: &params)
+
+        let internalOnCompletion: LastFM.OnCompletion<TokenResponse> = { result in
+            switch (result) {
+            case .success(let tokenResponse):
+                onCompletion(.success(tokenResponse.token))
+            case .failure(let error):
+                onCompletion(.failure(error))
+            }
+        }
+
+        requester.getDataAndParse(
+            params: params,
+            secure: false,
+            onCompletion: internalOnCompletion
+        )
     }
     
 }
