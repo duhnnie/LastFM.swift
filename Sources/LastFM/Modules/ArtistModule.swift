@@ -9,6 +9,7 @@ public struct ArtistModule {
         case getTopAlbums = "gettopalbums"
         case getInfo = "getInfo"
         case addTags = "addtags"
+        case removeTag = "removetag"
 
         func getName() -> String {
             return "artist.\(self.rawValue)"
@@ -80,10 +81,29 @@ public struct ArtistModule {
         var params = parent.normalizeParams(
             params: [
                 "artist": artist,
-                "tags": tags.joined(separator: ","),
-                "sk": sessionKey
+                "tags": tags.joined(separator: ",")
             ],
+            sessionKey: sessionKey,
             method: APIMethod.addTags
+        )
+
+        try parent.addSignature(params: &params)
+        try requester.postFormURLEncoded(payload: params, secure: false, onCompletion: onCompletion)
+    }
+
+    public func removeTag(
+        artist: String,
+        tag: String,
+        sessionKey: String,
+        onCompletion: @escaping (LastFMError?) -> Void
+    ) throws {
+        var params = parent.normalizeParams(
+            params: [
+                "artist": artist,
+                "tags": tag
+            ],
+            sessionKey: sessionKey,
+            method: APIMethod.removeTag
         )
 
         try parent.addSignature(params: &params)
