@@ -6,6 +6,7 @@ public struct AlbumModule {
         case getInfo = "getinfo"
         case search
         case addTags = "addtags"
+        case removeTag = "removetag"
 
         func getName() -> String {
             return "album.\(self.rawValue)"
@@ -55,15 +56,36 @@ public struct AlbumModule {
         sessionKey: String,
         onCompletion: @escaping (LastFMError?) -> Void
     ) throws {
-        var params = parent.normalizeParams(
+        var payload = parent.normalizeParams(
             params: params,
             sessionKey: sessionKey,
             method: APIMethod.addTags
         )
 
-        try parent.addSignature(params: &params)
+        try parent.addSignature(params: &payload)
 
-        try requester.postFormURLEncoded(payload: params, secure: false, onCompletion: onCompletion)
+        try requester.postFormURLEncoded(payload: payload, secure: false, onCompletion: onCompletion)
+    }
+
+    public func removeTag(
+        artist: String,
+        album: String,
+        tag: String,
+        sessionKey: String,
+        onCompletion: @escaping (LastFMError?) -> Void
+    ) throws {
+        var payload = parent.normalizeParams(
+            params: [
+                "artist": artist,
+                "album": album,
+                "tag": tag
+            ],
+            sessionKey: sessionKey,
+            method: APIMethod.removeTag
+        )
+
+        try parent.addSignature(params: &payload)
+        try requester.postFormURLEncoded(payload: payload, secure: false, onCompletion: onCompletion)
     }
     
 }
