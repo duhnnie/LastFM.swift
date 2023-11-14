@@ -8,6 +8,7 @@ public struct ArtistModule {
         case search
         case getTopAlbums = "gettopalbums"
         case getInfo = "getInfo"
+        case addTags = "addtags"
 
         func getName() -> String {
             return "artist.\(self.rawValue)"
@@ -69,4 +70,24 @@ public struct ArtistModule {
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
+
+    public func addTags(
+        artist: String,
+        tags: [String],
+        sessionKey: String,
+        onCompletion: @escaping (LastFMError?) -> Void
+    ) throws {
+        var params = instance.normalizeParams(
+            params: [
+                "artist": artist,
+                "tags": tags.joined(separator: ","),
+                "sk": sessionKey
+            ],
+            method: APIMethod.addTags
+        )
+
+        try instance.addSignature(params: &params)
+        try requester.postFormURLEncoded(payload: params, secure: false, onCompletion: onCompletion)
+    }
+
 }
