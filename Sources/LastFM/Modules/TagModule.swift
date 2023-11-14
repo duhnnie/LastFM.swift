@@ -13,11 +13,11 @@ public struct TagModule {
         }
     }
 
-    private let instance: LastFM
+    private let parent: LastFM
     private let requester: Requester
 
-    internal init(instance: LastFM, requester: Requester = RequestUtils.shared) {
-        self.instance = instance
+    internal init(parent: LastFM, requester: Requester = RequestUtils.shared) {
+        self.parent = parent
         self.requester = requester
     }
 
@@ -25,7 +25,7 @@ public struct TagModule {
         params: SearchParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<TagTopTrack>>
     ) {
-        let params = instance.normalizeParams(
+        let params = parent.normalizeParams(
             params: params.toDictionary(termKey: "tag"),
             method: APIMethod.getTopTracks
         )
@@ -37,7 +37,7 @@ public struct TagModule {
         params: SearchParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<TagTopArtist>>
     ) {
-        let params = instance.normalizeParams(
+        let params = parent.normalizeParams(
             params: params.toDictionary(termKey: "tag"),
             method: APIMethod.getTopArtists
         )
@@ -50,7 +50,7 @@ public struct TagModule {
         params: SearchParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<TagTopAlbum>>
     ) {
-        let params = instance.normalizeParams(
+        let params = parent.normalizeParams(
             params: params.toDictionary(termKey: "tag"),
             method: APIMethod.getTopAlbums
         )
@@ -69,7 +69,7 @@ public struct TagModule {
             params["lang"] = lang
         }
 
-        let normalizedParams = instance.normalizeParams(params: params, method: APIMethod.getInfo)
+        let normalizedParams = parent.normalizeParams(params: params, method: APIMethod.getInfo)
 
         requester.getDataAndParse(
             params: normalizedParams,

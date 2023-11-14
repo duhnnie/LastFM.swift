@@ -13,7 +13,7 @@ class AlbumModuleTests: XCTestCase {
 
     override func setUpWithError() throws {
         instance = AlbumModule(
-            instance: Self.lastFM,
+            parent: Self.lastFM,
             requester: RequestUtils(apiClient: apiClient)
         )
     }

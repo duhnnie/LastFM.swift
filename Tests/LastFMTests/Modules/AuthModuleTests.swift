@@ -13,7 +13,7 @@ class AuthModuleTests: XCTestCase {
 
     override func setUpWithError() throws {
         instance = AuthModule(
-            instance: Self.lastFM,
+            parent: Self.lastFM,
             requester: RequestUtils(apiClient: apiClient)
         )
     }

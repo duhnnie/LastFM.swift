@@ -13,7 +13,7 @@ class TrackModuleTests: XCTestCase {
 
     override func setUpWithError() throws {
         instance = TrackModule(
-            instance: Self.lastFM,
+            parent: Self.lastFM,
             requester: RequestUtils(apiClient: apiClient)
         )
     }

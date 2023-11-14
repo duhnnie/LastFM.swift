@@ -11,11 +11,11 @@ public struct ChartModule {
         }
     }
 
-    private let instance: LastFM
+    private let parent: LastFM
     private let requester: Requester
 
-    internal init(instance: LastFM, requester: Requester = RequestUtils.shared) {
-        self.instance = instance
+    internal init(parent: LastFM, requester: Requester = RequestUtils.shared) {
+        self.parent = parent
         self.requester = requester
     }
 
@@ -23,7 +23,7 @@ public struct ChartModule {
         params: ChartTopTracksParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ChartTopTrack>>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getTopTracks)
+        let params = parent.normalizeParams(params: params, method: APIMethod.getTopTracks)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
@@ -32,7 +32,7 @@ public struct ChartModule {
         params: ChartTopArtistsParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ChartTopArtist>>
     ) {
-        let params = instance.normalizeParams(params: params, method: APIMethod.getTopArtists)
+        let params = parent.normalizeParams(params: params, method: APIMethod.getTopArtists)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }

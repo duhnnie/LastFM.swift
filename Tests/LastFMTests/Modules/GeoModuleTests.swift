@@ -13,7 +13,7 @@ class GeoModuleTests: XCTestCase {
 
     override func setUpWithError() throws {
         instance = GeoModule(
-            instance: Self.lastFM,
+            parent: Self.lastFM,
             requester: RequestUtils(apiClient: apiClient)
         )
     }

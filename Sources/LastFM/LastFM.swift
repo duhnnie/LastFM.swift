@@ -10,14 +10,14 @@ final public class LastFM {
     private let apiKey: String
     private let apiSecret: String
 
-    lazy private(set) public var User = UserModule(instance: self)
-    lazy private(set) public var Artist = ArtistModule(instance: self)
-    lazy private(set) public var Track = TrackModule(instance: self)
-    lazy private(set) public var Tag = TagModule(instance: self)
-    lazy private(set) public var Geo = GeoModule(instance: self)
-    lazy private(set) public var Chart = ChartModule(instance: self)
-    lazy private(set) public var Library = LibraryModule(instance: self)
-    lazy private(set) public var Auth = AuthModule(instance: self)
+    lazy private(set) public var User = UserModule(parent: self)
+    lazy private(set) public var Artist = ArtistModule(parent: self)
+    lazy private(set) public var Track = TrackModule(parent: self)
+    lazy private(set) public var Tag = TagModule(parent: self)
+    lazy private(set) public var Geo = GeoModule(parent: self)
+    lazy private(set) public var Chart = ChartModule(parent: self)
+    lazy private(set) public var Library = LibraryModule(parent: self)
+    lazy private(set) public var Auth = AuthModule(parent: self)
 
     public init(apiKey: String, apiSecret: String) {
         self.apiKey = apiKey

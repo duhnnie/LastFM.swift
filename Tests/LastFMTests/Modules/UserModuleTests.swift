@@ -13,7 +13,7 @@ class UserTests: XCTestCase {
 
     override func setUpWithError() throws {
         instance = UserModule(
-            instance: Self.lastFM,
+            parent: Self.lastFM,
             requester: RequestUtils(apiClient: apiClientMock)
         )
     }

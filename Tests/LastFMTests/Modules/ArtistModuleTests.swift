@@ -13,7 +13,7 @@ class ArtistModuleTests: XCTestCase {
 
     override func setUpWithError() throws {
         instance = ArtistModule(
-            instance: Self.lastFM,
+            parent: Self.lastFM,
             requester: RequestUtils(apiClient: apiClient)
         )
     }

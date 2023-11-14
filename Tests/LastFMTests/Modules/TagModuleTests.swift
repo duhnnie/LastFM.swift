@@ -13,7 +13,7 @@ class TagModuleTests: XCTestCase {
 
     override func setUpWithError() throws {
         instance = TagModule(
-            instance: Self.lastFM,
+            parent: Self.lastFM,
             requester: RequestUtils(apiClient: apiClientMock)
         )
     }
