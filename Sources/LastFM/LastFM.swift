@@ -17,6 +17,7 @@ final public class LastFM {
     lazy private(set) public var Geo = GeoModule(instance: self)
     lazy private(set) public var Chart = ChartModule(instance: self)
     lazy private(set) public var Library = LibraryModule(instance: self)
+    lazy private(set) public var Auth = AuthModule(instance: self)
 
     public init(apiKey: String, apiSecret: String) {
         self.apiKey = apiKey
