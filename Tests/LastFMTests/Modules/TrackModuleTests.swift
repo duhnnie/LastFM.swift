@@ -835,4 +835,49 @@ class TrackModuleTests: XCTestCase {
         )
     }
 
+    func test_addTags_success() throws {
+        let expectation = expectation(description: "Waiting for addTags()")
+
+        let params = TrackTagsParams(
+            artist: "Some Artist",
+            track: "Some Track",
+            tags: ["tag 1", "tag-2", "tag3"]
+        )
+
+        let expectedPayload = "method=track.addtags&api_sig=f728efe0aab72f64d5e98a2bc824e280&tags=tag%201,tag-2,tag3&track=Some%20Track&api_key=someAPIKey&artist=Some%20Artist&sk=key12345"
+
+        apiClient.data = "{}".data(using: .utf8)
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        try instance.addTags(params: params, sessionKey: "key12345") { error in
+            if let error = error {
+                XCTFail("Expected to succeed, but it failed. Error: \(error)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.postCalls.count, 1)
+        XCTAssertEqual(
+            apiClient.postCalls[0].headers,
+            ["Content-Type": "application/x-www-formurlencoded"]
+        )
+
+        XCTAssertEqual(
+            apiClient.postCalls[0].url.absoluteString,
+            "http://ws.audioscrobbler.com/2.0?format=json"
+        )
+
+        let payloadData = try XCTUnwrap(apiClient.postCalls[0].body)
+        let payloadString = String(data: payloadData, encoding: .utf8)!
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                "https://domain.com/?" + payloadString,
+                "https://domain.com/?" + expectedPayload
+            )
+        )
+    }
+
 }
