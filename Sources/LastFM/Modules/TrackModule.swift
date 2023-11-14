@@ -10,6 +10,7 @@ public struct TrackModule {
         case updateNowPlaying
         case getInfo
         case search
+        case addTags = "addtags"
 
         func getName() -> String {
             return "track.\(self.rawValue)"
@@ -128,6 +129,17 @@ public struct TrackModule {
         let params = parent.normalizeParams(params: params, method: APIMethod.search)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
+    public func addTags(
+        params: TrackTagsParams,
+        sessionKey: String,
+        onCompletion: @escaping (LastFMError?) -> Void
+    ) throws {
+        var params = parent.normalizeParams(params: params, sessionKey: sessionKey, method: APIMethod.addTags)
+
+        try parent.addSignature(params: &params)
+        try requester.postFormURLEncoded(payload: params, secure: false, onCompletion: onCompletion)
     }
 
 }
