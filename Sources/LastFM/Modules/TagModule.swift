@@ -7,6 +7,7 @@ public struct TagModule {
         case getTopArtists = "gettopartists"
         case getTopAlbums = "gettopalbums"
         case getInfo = "getinfo"
+        case getWeeklyChartList = "getweeklychartlist"
 
         func getName() -> String {
             return "tag.\(self.rawValue)"
@@ -76,6 +77,18 @@ public struct TagModule {
             secure: false,
             onCompletion: onCompletion
         )
+    }
+
+    public func getWeeklyChartList(
+        tag: String,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionList<ChartDateRange>>
+    ) {
+        let params = parent.normalizeParams(
+            params: ["tag": tag],
+            method: APIMethod.getWeeklyChartList
+        )
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
     
 }
