@@ -33,8 +33,8 @@ public struct TrackModule {
     ) throws {
         var payload = parent.normalizeParams(
             params: params,
-            sessionKey: sessionKey,
-            method: APIMethod.scrobble
+            method: APIMethod.scrobble,
+            sessionKey: sessionKey
         )
         
         try parent.addSignature(params: &payload)
@@ -53,8 +53,8 @@ public struct TrackModule {
     ) throws {
         var payload = parent.normalizeParams(
             params: params,
-            sessionKey: sessionKey,
-            method: APIMethod.love
+            method: APIMethod.love,
+            sessionKey: sessionKey
         )
         try parent.addSignature(params: &payload)
 
@@ -72,8 +72,8 @@ public struct TrackModule {
     ) throws {
         var payload = parent.normalizeParams(
             params: params,
-            sessionKey: sessionKey,
-            method: APIMethod.unlove
+            method: APIMethod.unlove,
+            sessionKey: sessionKey
         )
 
         try parent.addSignature(params: &payload)
@@ -92,8 +92,8 @@ public struct TrackModule {
     ) throws {
         var payload = parent.normalizeParams(
             params: params,
-            sessionKey: sessionKey,
-            method: APIMethod.updateNowPlaying
+            method: APIMethod.updateNowPlaying,
+            sessionKey: sessionKey
         )
 
         try parent.addSignature(params: &payload)
@@ -137,7 +137,11 @@ public struct TrackModule {
         sessionKey: String,
         onCompletion: @escaping (LastFMError?) -> Void
     ) throws {
-        var payload = parent.normalizeParams(params: params, sessionKey: sessionKey, method: APIMethod.addTags)
+        var payload = parent.normalizeParams(
+            params: params,
+            method: APIMethod.addTags,
+            sessionKey: sessionKey
+        )
 
         try parent.addSignature(params: &payload)
         try requester.postFormURLEncoded(payload: payload, secure: false, onCompletion: onCompletion)
@@ -156,8 +160,8 @@ public struct TrackModule {
                 "track": track,
                 "tag": tag,
             ],
-            sessionKey: sessionKey,
-            method: APIMethod.removeTag
+            method: APIMethod.removeTag,
+            sessionKey: sessionKey
         )
 
         try parent.addSignature(params: &payload)

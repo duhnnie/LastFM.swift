@@ -58,8 +58,8 @@ public struct AlbumModule {
     ) throws {
         var payload = parent.normalizeParams(
             params: params,
-            sessionKey: sessionKey,
-            method: APIMethod.addTags
+            method: APIMethod.addTags,
+            sessionKey: sessionKey
         )
 
         try parent.addSignature(params: &payload)
@@ -80,8 +80,8 @@ public struct AlbumModule {
                 "album": album,
                 "tag": tag
             ],
-            sessionKey: sessionKey,
-            method: APIMethod.removeTag
+            method: APIMethod.removeTag,
+            sessionKey: sessionKey
         )
 
         try parent.addSignature(params: &payload)

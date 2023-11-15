@@ -142,4 +142,16 @@ public struct UserModule {
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
 
+    public func getWeeklyChartList(
+        user: String,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionList<ChartDateRange>>
+    ) {
+        let params = parent.normalizeParams(
+            params: ["user": user],
+            method: APIMethod.getWeeklyChartList
+        )
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
 }
