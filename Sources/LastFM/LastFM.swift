@@ -26,8 +26,8 @@ final public class LastFM {
 
     internal func normalizeParams(
         params: [String: String],
-        sessionKey: String? = nil,
-        method: MethodKey
+        method: MethodKey,
+        sessionKey: String? = nil
     ) -> [String: String] {
         var params = params
 
@@ -43,13 +43,13 @@ final public class LastFM {
 
     internal func normalizeParams(
         params: Params,
-        sessionKey: String? = nil,
-        method: MethodKey
+        method: MethodKey,
+        sessionKey: String? = nil
     ) -> [String: String] {
         return normalizeParams(
             params: params.toDictionary(),
-            sessionKey: sessionKey,
-            method: method
+            method: method,
+            sessionKey: sessionKey
         )
     }
 

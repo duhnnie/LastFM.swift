@@ -83,8 +83,8 @@ public struct ArtistModule {
                 "artist": artist,
                 "tags": tags.joined(separator: ",")
             ],
-            sessionKey: sessionKey,
-            method: APIMethod.addTags
+            method: APIMethod.addTags,
+            sessionKey: sessionKey
         )
 
         try parent.addSignature(params: &params)
@@ -102,8 +102,8 @@ public struct ArtistModule {
                 "artist": artist,
                 "tags": tag
             ],
-            sessionKey: sessionKey,
-            method: APIMethod.removeTag
+            method: APIMethod.removeTag,
+            sessionKey: sessionKey
         )
 
         try parent.addSignature(params: &params)
