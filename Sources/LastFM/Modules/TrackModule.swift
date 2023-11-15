@@ -11,6 +11,7 @@ public struct TrackModule {
         case getInfo
         case search
         case addTags = "addtags"
+        case removeTag = "removetag"
 
         func getName() -> String {
             return "track.\(self.rawValue)"
@@ -136,10 +137,31 @@ public struct TrackModule {
         sessionKey: String,
         onCompletion: @escaping (LastFMError?) -> Void
     ) throws {
-        var params = parent.normalizeParams(params: params, sessionKey: sessionKey, method: APIMethod.addTags)
+        var payload = parent.normalizeParams(params: params, sessionKey: sessionKey, method: APIMethod.addTags)
 
-        try parent.addSignature(params: &params)
-        try requester.postFormURLEncoded(payload: params, secure: false, onCompletion: onCompletion)
+        try parent.addSignature(params: &payload)
+        try requester.postFormURLEncoded(payload: payload, secure: false, onCompletion: onCompletion)
+    }
+
+    public func removeTag(
+        artist: String,
+        track: String,
+        tag: String,
+        sessionKey: String,
+        onCompletion: @escaping (LastFMError?) -> Void
+    ) throws {
+        var payload = parent.normalizeParams(
+            params: [
+                "artist": artist,
+                "track": track,
+                "tag": tag,
+            ],
+            sessionKey: sessionKey,
+            method: APIMethod.removeTag
+        )
+
+        try parent.addSignature(params: &payload)
+        try requester.postFormURLEncoded(payload: payload, secure: false, onCompletion: onCompletion)
     }
 
 }
