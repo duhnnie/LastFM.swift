@@ -1234,5 +1234,44 @@ class UserTests: XCTestCase {
             )
         )
     }
-    
+
+    func test_getWeeklyChartList_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/user.getWeeklyChartList",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "Waiting for getWeeklyChartList()")
+
+        apiClientMock.response = Constants.RESPONSE_200_OK
+        apiClientMock.data = fakeData
+
+        instance.getWeeklyChartList(user: "pepiro") { result in
+            switch (result) {
+            case .success(let chartList):
+                XCTAssertEqual(chartList.items.count, 2)
+                XCTAssertEqual(chartList.items[0].from, 1108296000)
+                XCTAssertEqual(chartList.items[0].to, 1108900800)
+
+                XCTAssertEqual(chartList.items[1].from, 1108900800)
+                XCTAssertEqual(chartList.items[1].to, 1109505600)
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it failed, error: \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClientMock.getCalls.count, 1)
+        XCTAssertEqual(apiClientMock.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                "http://ws.audioscrobbler.com/2.0?format=json&user=pepiro&method=user.getweeklychartlist&api_key=someAPIKey",
+                apiClientMock.getCalls[0].url.absoluteString
+            )
+        )
+    }
 }
