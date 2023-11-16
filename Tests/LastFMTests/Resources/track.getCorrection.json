@@ -1,0 +1,21 @@
+{
+    "corrections": {
+        "correction": {
+            "track": {
+                "name": "Some Corrected Track",
+                "mbid": "some-corrected-track-mbid",
+                "url": "https://tracks.com/some-corrected-track",
+                "artist": {
+                    "name": "Some Artist",
+                    "mbid": "some-artist-mbid",
+                    "url": "https://artists.com/some-artist"
+                }
+            },
+            "@attr": {
+                "index": "0",
+                "artistcorrected": "0",
+                "trackcorrected": "1"
+            }
+        }
+    }
+}
