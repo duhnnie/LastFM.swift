@@ -12,6 +12,7 @@ public struct TrackModule {
         case search
         case addTags = "addtags"
         case removeTag = "removetag"
+        case getCorrection = "getcorrection"
 
         func getName() -> String {
             return "track.\(self.rawValue)"
@@ -166,6 +167,19 @@ public struct TrackModule {
 
         try parent.addSignature(params: &payload)
         try requester.postFormURLEncoded(payload: payload, secure: false, onCompletion: onCompletion)
+    }
+
+    public func getCorrection(
+        artist: String,
+        track: String,
+        onCompletion: @escaping LastFM.OnCompletion<TrackCorrection>
+    ) {
+        let params = parent.normalizeParams(
+            params: ["artist": artist, "track": track],
+            method: APIMethod.getCorrection
+        )
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
 
 }
