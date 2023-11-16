@@ -10,6 +10,7 @@ public struct ArtistModule {
         case getInfo = "getInfo"
         case addTags = "addtags"
         case removeTag = "removetag"
+        case getCorrection = "getcorrection"
 
         func getName() -> String {
             return "artist.\(self.rawValue)"
@@ -108,6 +109,18 @@ public struct ArtistModule {
 
         try parent.addSignature(params: &params)
         try requester.postFormURLEncoded(payload: params, secure: false, onCompletion: onCompletion)
+    }
+
+    public func getCorrection(
+        artist: String,
+        onCompletion: @escaping LastFM.OnCompletion<ArtistCorrection>
+    ) {
+        let params = parent.normalizeParams(
+            params: ["artist": artist],
+            method: APIMethod.getCorrection
+        )
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
 
 }
