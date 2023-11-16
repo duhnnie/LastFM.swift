@@ -880,7 +880,7 @@ class TrackModuleTests: XCTestCase {
         )
     }
 
-    func test_rempveTag_success() throws {
+    func test_removeTag_success() throws {
         let expectation = expectation(description: "Waiting for removeTag()")
 
         let expectedPayload = "tag=tag%20x&api_sig=c0d0fcba2b63c6d93bd18673a7c0b8a6&track=Album%20X&method=track.removetag&api_key=someAPIKey&artist=Artist%20X&sk=sessionKeyX"
@@ -923,5 +923,58 @@ class TrackModuleTests: XCTestCase {
             )
         )
     }
+
+    func test_getCorrection_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/track.getCorrection",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "waiting for getCorrection()")
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getCorrection(artist: "Some Artist", track: "Some Track") { result in
+            switch (result) {
+            case .success(let correction):
+                XCTAssertEqual(correction.mbid, "some-corrected-track-mbid")
+                XCTAssertEqual(correction.name, "Some Corrected Track")
+
+                XCTAssertEqual(
+                    correction.url.absoluteString,
+                    "https://tracks.com/some-corrected-track"
+                )
+
+                XCTAssertEqual(correction.artist.name, "Some Artist")
+                XCTAssertEqual(correction.artist.mbid, "some-artist-mbid")
+
+                XCTAssertEqual(
+                    correction.artist.url.absoluteString,
+                    "https://artists.com/some-artist"
+                )
+
+                XCTAssertEqual(correction.trackCorrected, true)
+                XCTAssertEqual(correction.artistCorrected, false)
+            case .failure(let error):
+                XCTFail("It was expected to succeed, but it failed with error \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?api_key=someAPIKey&method=track.getcorrection&format=json&track=Some%20Track&artist=Some%20Artist"
+            )
+        )
+    }
+
 
 }

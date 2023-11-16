@@ -875,7 +875,7 @@ class ArtistModuleTests: XCTestCase {
         )!
 
         let fakeData = try Data(contentsOf: jsonURL)
-        let expectation = expectation(description: "waiting for getInfo")
+        let expectation = expectation(description: "waiting for getCorrection()")
 
         apiClient.data = fakeData
         apiClient.response = Constants.RESPONSE_200_OK
