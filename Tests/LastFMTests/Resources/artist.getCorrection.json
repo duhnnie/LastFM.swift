@@ -1,0 +1,14 @@
+{
+    "corrections": {
+        "correction": {
+            "artist": {
+                "name": "Some Corrected Artist",
+                "mbid": "some-corrected-artist-mbid",
+                "url": "https://artists.com/some-corrected-artist"
+            },
+            "@attr": {
+                "index": "0"
+            }
+        }
+    }
+}
