@@ -868,4 +868,45 @@ class ArtistModuleTests: XCTestCase {
         )
     }
 
+    func test_getCorrection_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/artist.getCorrection",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "waiting for getInfo")
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getCorrection(artist: "Some Artist") { result in
+            switch (result) {
+            case .success(let correctedArtist):
+                XCTAssertEqual(correctedArtist.mbid, "some-corrected-artist-mbid")
+                XCTAssertEqual(correctedArtist.name, "Some Corrected Artist")
+
+                XCTAssertEqual(
+                    correctedArtist.url.absoluteString,
+                    "https://artists.com/some-corrected-artist"
+                )
+            case .failure(let error):
+                XCTFail("It was expected to succeed, but it failed with error \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?method=artist.getcorrection&artist=Some%20Artist&api_key=someAPIKey&format=json"
+            )
+        )
+    }
+
 }
