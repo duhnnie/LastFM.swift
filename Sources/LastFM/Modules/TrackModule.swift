@@ -13,6 +13,7 @@ public struct TrackModule {
         case addTags = "addtags"
         case removeTag = "removetag"
         case getCorrection = "getcorrection"
+        case getSimilar = "getsimilar"
 
         func getName() -> String {
             return "track.\(self.rawValue)"
@@ -178,6 +179,15 @@ public struct TrackModule {
             params: ["artist": artist, "track": track],
             method: APIMethod.getCorrection
         )
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
+    public func getSimilar(
+        params: TrackSimilarParams,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionList<TrackSimilar>>
+    ) {
+        let params = parent.normalizeParams(params: params, method: APIMethod.getSimilar)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
