@@ -976,5 +976,67 @@ class TrackModuleTests: XCTestCase {
         )
     }
 
+    func test_getSimilar_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/track.getSimilar",
+            withExtension: "json"
+        )!
 
+        let fakeData = try? Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "Waiting for getSimilar()")
+
+        let params = TrackSimilarParams(
+            track: "Track X",
+            artist: "Artist X",
+            autocorrect: true,
+            limit: 2
+        )
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getSimilar(params: params) { result in
+            switch(result) {
+            case .success(let similarTracks):
+                XCTAssertEqual(similarTracks.items.count, 2)
+                XCTAssertEqual(similarTracks.items[0].name, "Some Track 0")
+                XCTAssertEqual(similarTracks.items[0].playcount, 1770)
+                XCTAssertEqual(similarTracks.items[0].mbid, "some-track-0-mbid")
+                XCTAssertEqual(similarTracks.items[0].match, 1)
+                XCTAssertEqual(similarTracks.items[0].url.absoluteString, "https://tracks.com/track-0")
+                XCTAssertEqual(similarTracks.items[0].streamable, .noStreamable)
+                XCTAssertEqual(similarTracks.items[0].duration, 250)
+                XCTAssertEqual(similarTracks.items[0].artist.name, "Some Artist 0")
+                XCTAssertEqual(similarTracks.items[0].artist.mbid, "some-artist-0-mbid")
+                XCTAssertEqual(similarTracks.items[0].artist.url.absoluteString, "https://artists.com/artist-0")
+                XCTAssertEqual(similarTracks.items[0].image.small?.absoluteString, "https://images.com/image-0-s.png")
+                XCTAssertEqual(similarTracks.items[0].image.medium?.absoluteString, "https://images.com/image-0-m.png")
+                XCTAssertEqual(similarTracks.items[0].image.large?.absoluteString, "https://images.com/image-0-l.png")
+                XCTAssertEqual(similarTracks.items[0].image.extraLarge?.absoluteString, "https://images.com/image-0-xl.png")
+                XCTAssertEqual(similarTracks.items[0].image.mega?.absoluteString, "https://images.com/image-0-mg.png")
+
+                XCTAssertEqual(similarTracks.items[1].name, "Some Track 1")
+                XCTAssertEqual(similarTracks.items[1].playcount, 1771)
+                XCTAssertEqual(similarTracks.items[1].mbid, "some-track-1-mbid")
+                XCTAssertEqual(similarTracks.items[1].match, 0.979434)
+                XCTAssertEqual(similarTracks.items[1].url.absoluteString, "https://tracks.com/track-1")
+                XCTAssertEqual(similarTracks.items[1].streamable, .noStreamable)
+                XCTAssertEqual(similarTracks.items[1].duration, 251)
+                XCTAssertEqual(similarTracks.items[1].artist.name, "Some Artist 1")
+                XCTAssertEqual(similarTracks.items[1].artist.mbid, "some-artist-1-mbid")
+                XCTAssertEqual(similarTracks.items[1].artist.url.absoluteString, "https://artists.com/artist-1")
+                XCTAssertEqual(similarTracks.items[1].image.small?.absoluteString, "https://images.com/image-1-s.png")
+                XCTAssertEqual(similarTracks.items[1].image.medium?.absoluteString, "https://images.com/image-1-m.png")
+                XCTAssertEqual(similarTracks.items[1].image.large?.absoluteString, "https://images.com/image-1-l.png")
+                XCTAssertEqual(similarTracks.items[1].image.extraLarge?.absoluteString, "https://images.com/image-1-xl.png")
+                XCTAssertEqual(similarTracks.items[1].image.mega?.absoluteString, "https://images.com/image-1-mg.png")
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it failed. Error \(error)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+    }
 }

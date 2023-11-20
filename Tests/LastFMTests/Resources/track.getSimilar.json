@@ -1,0 +1,87 @@
+{
+    "similartracks": {
+        "track": [
+            {
+                "name": "Some Track 0",
+                "playcount": 1770,
+                "mbid": "some-track-0-mbid",
+                "match": 1.0,
+                "url": "https://tracks.com/track-0",
+                "streamable": {
+                    "#text": "0",
+                    "fulltrack": "0"
+                },
+                "duration": 250,
+                "artist": {
+                    "name": "Some Artist 0",
+                    "mbid": "some-artist-0-mbid",
+                    "url": "https://artists.com/artist-0"
+                },
+                "image": [
+                    {
+                        "#text": "https://images.com/image-0-s.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://images.com/image-0-m.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://images.com/image-0-l.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://images.com/image-0-xl.png",
+                        "size": "extralarge"
+                    },
+                    {
+                        "#text": "https://images.com/image-0-mg.png",
+                        "size": "mega"
+                    },
+                ]
+            },
+            {
+                "name": "Some Track 1",
+                "playcount": 1771,
+                "mbid": "some-track-1-mbid",
+                "match": 0.979434,
+                "url": "https://tracks.com/track-1",
+                "streamable": {
+                    "#text": "0",
+                    "fulltrack": "0"
+                },
+                "duration": 251,
+                "artist": {
+                    "name": "Some Artist 1",
+                    "mbid": "some-artist-1-mbid",
+                    "url": "https://artists.com/artist-1"
+                },
+                "image": [
+                    {
+                        "#text": "https://images.com/image-1-s.png",
+                        "size": "small"
+                    },
+                    {
+                        "#text": "https://images.com/image-1-m.png",
+                        "size": "medium"
+                    },
+                    {
+                        "#text": "https://images.com/image-1-l.png",
+                        "size": "large"
+                    },
+                    {
+                        "#text": "https://images.com/image-1-xl.png",
+                        "size": "extralarge"
+                    },
+                    {
+                        "#text": "https://images.com/image-1-mg.png",
+                        "size": "mega"
+                    },
+                ]
+            },
+        ],
+        "@attr": {
+            "artist": "Llegas"
+        }
+    }
+}
