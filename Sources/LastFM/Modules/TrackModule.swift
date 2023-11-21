@@ -192,4 +192,13 @@ public struct TrackModule {
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
 
+    public func getSimilar(
+        params: TrackSimilarByMBIDParams,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionList<TrackSimilar>>
+    ) {
+        let params = parent.normalizeParams(params: params, method: APIMethod.getSimilar)
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
 }

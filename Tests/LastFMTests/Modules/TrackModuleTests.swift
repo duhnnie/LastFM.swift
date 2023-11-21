@@ -1038,5 +1038,55 @@ class TrackModuleTests: XCTestCase {
         }
 
         waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Track%20X&limit=2&method=track.getsimilar&format=json&artist=Artist%20X&autocorrect=1"
+            )
+        )
+    }
+
+    func test_getSimilarByMBID_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/track.getSimilar",
+            withExtension: "json"
+        )!
+
+        let fakeData = try? Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "Waiting for getSimilar()")
+
+        let params = TrackSimilarByMBIDParams(
+            mbid: "some-mbid",
+            autocorrect: true,
+            limit: 2
+        )
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getSimilar(params: params) { result in
+            switch(result) {
+            case .success(_):
+                break
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it failed. Error \(error)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?api_key=someAPIKey&limit=2&method=track.getsimilar&format=json&mbid=some-mbid&autocorrect=1"
+            )
+        )
     }
 }
