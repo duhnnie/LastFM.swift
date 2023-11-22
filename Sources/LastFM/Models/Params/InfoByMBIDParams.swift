@@ -1,6 +1,6 @@
 import Foundation
 
-public struct TrackInfoByMBIDParams: Params {
+public struct InfoByMBIDParams: Params {
 
     public var mbid: String
     public var username: String?
