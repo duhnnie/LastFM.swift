@@ -11,6 +11,7 @@ public struct ArtistModule {
         case addTags = "addtags"
         case removeTag = "removetag"
         case getCorrection = "getcorrection"
+        case getTags = "gettags"
 
         func getName() -> String {
             return "artist.\(self.rawValue)"
@@ -119,6 +120,31 @@ public struct ArtistModule {
             params: ["artist": artist],
             method: APIMethod.getCorrection
         )
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
+    public func getTags(
+        params: ArtistTagsParams,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionList<LastFMEntity>>
+    ) {
+        let params = parent.normalizeParams(params: params, method: APIMethod.getTags)
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
+    public func getTags(
+        params: InfoByMBIDParams,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionList<LastFMEntity>>
+    ) {
+        var params = params.toDictionary()
+
+        if let username = params["username"] {
+            params["user"] = username
+            params.removeValue(forKey: "username")
+        }
+
+        params = parent.normalizeParams(params: params, method: APIMethod.getTags)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }

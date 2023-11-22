@@ -2,9 +2,9 @@ import Foundation
 
 public struct TrackTagsParams: Params {
 
-    let artist: String
-    let track: String
-    let tags: [String]
+    public var artist: String
+    public var track: String
+    public var tags: [String]
 
     public init(artist: String, track: String, tags: [String]) {
         self.artist = artist

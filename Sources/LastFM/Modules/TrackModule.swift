@@ -118,7 +118,7 @@ public struct TrackModule {
     }
 
     public func getInfo(
-        params: TrackInfoByMBIDParams,
+        params: InfoByMBIDParams,
         onCompletion: @escaping LastFM.OnCompletion<TrackInfo>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getInfo)
@@ -219,7 +219,7 @@ public struct TrackModule {
     }
 
     public func getTags(
-        params: TrackInfoByMBIDParams,
+        params: InfoByMBIDParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionList<LastFMEntity>>
     ) {
         var params = params.toDictionary()
