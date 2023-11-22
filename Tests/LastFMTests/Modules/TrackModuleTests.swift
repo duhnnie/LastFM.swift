@@ -598,7 +598,7 @@ class TrackModuleTests: XCTestCase {
 
         let fakeData = try Data(contentsOf: jsonURL)
         let expectation = expectation(description: "watiting for getTrackInfo")
-        let params = TrackInfoByMBIDParams(mbid: "someTrackMBID")
+        let params = InfoByMBIDParams(mbid: "someTrackMBID")
 
         apiClient.data = fakeData
         apiClient.response = Constants.RESPONSE_200_OK
@@ -686,7 +686,7 @@ class TrackModuleTests: XCTestCase {
 
         let fakeData = try Data(contentsOf: jsonURL)
         let expectation = expectation(description: "watiting for getTrackInfo")
-        let params = TrackInfoByMBIDParams(mbid: "someTrackMBID", username: "pepiro")
+        let params = InfoByMBIDParams(mbid: "someTrackMBID", username: "pepiro")
 
         apiClient.data = fakeData
         apiClient.response = Constants.RESPONSE_200_OK
@@ -1147,7 +1147,7 @@ class TrackModuleTests: XCTestCase {
         let fakeData = try Data(contentsOf: jsonURL)
         let expectation = expectation(description: "Waiting for getTags()")
 
-        let params = TrackInfoByMBIDParams(
+        let params = InfoByMBIDParams(
             mbid: "some-track-mbid",
             autocorrect: true,
             username: "pepiro"
