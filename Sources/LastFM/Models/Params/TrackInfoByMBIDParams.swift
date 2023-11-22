@@ -6,7 +6,7 @@ public struct TrackInfoByMBIDParams: Params {
     public var username: String?
     public var autocorrect: Bool
 
-    public init(mbid: String, username: String? = nil, autocorrect: Bool = true) {
+    public init(mbid: String, autocorrect: Bool = true, username: String? = nil) {
         self.mbid = mbid
         self.username = username
         self.autocorrect = autocorrect

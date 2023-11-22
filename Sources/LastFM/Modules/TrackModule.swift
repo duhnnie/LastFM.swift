@@ -14,6 +14,7 @@ public struct TrackModule {
         case removeTag = "removetag"
         case getCorrection = "getcorrection"
         case getSimilar = "getsimilar"
+        case getTags = "gettags"
 
         func getName() -> String {
             return "track.\(self.rawValue)"
@@ -197,6 +198,38 @@ public struct TrackModule {
         onCompletion: @escaping LastFM.OnCompletion<CollectionList<TrackSimilar>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getSimilar)
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
+    public func getTags(
+        params: TrackInfoParams,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionList<LastFMEntity>>
+    ) {
+        var params = params.toDictionary()
+
+        if let username = params["username"] {
+            params["user"] = username
+            params.removeValue(forKey: "username")
+        }
+
+        params = parent.normalizeParams(params: params, method: APIMethod.getTags)
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
+    public func getTags(
+        params: TrackInfoByMBIDParams,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionList<LastFMEntity>>
+    ) {
+        var params = params.toDictionary()
+
+        if let username = params["username"] {
+            params["user"] = username
+            params.removeValue(forKey: "username")
+        }
+
+        params = parent.normalizeParams(params: params, method: APIMethod.getTags)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
