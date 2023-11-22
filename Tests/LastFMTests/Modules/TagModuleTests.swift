@@ -319,5 +319,47 @@ class TagModuleTests: XCTestCase {
         )
     }
 
+    func test_getSimilar_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/tag.getSimilar",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "Waiting for getSimilar()")
+
+        apiClientMock.data = fakeData
+        apiClientMock.response = Constants.RESPONSE_200_OK
+
+        instance.getSimilar(tag: "some tag") { result in
+            switch (result) {
+            case .success(let similarTags):
+                XCTAssertEqual(similarTags.items.count, 2)
+
+                XCTAssertEqual(similarTags.items[0].name, "tag 1")
+                XCTAssertEqual(similarTags.items[0].url.absoluteString, "https://tags.com/tag-1")
+                XCTAssertEqual(similarTags.items[0].streamable, false)
+
+                XCTAssertEqual(similarTags.items[1].name, "tag 2")
+                XCTAssertEqual(similarTags.items[1].url.absoluteString, "https://tags.com/tag-2")
+                XCTAssertEqual(similarTags.items[1].streamable, false)
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it failed. Error: \(error)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClientMock.getCalls.count, 1)
+        XCTAssertEqual(apiClientMock.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClientMock.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?api_key=someAPIKey&format=json&tag=some%20tag&method=tag.getsimilar"
+            )
+        )
+    }
     
 }
