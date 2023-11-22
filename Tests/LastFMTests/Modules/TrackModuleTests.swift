@@ -1089,4 +1089,95 @@ class TrackModuleTests: XCTestCase {
             )
         )
     }
+
+    func test_getTags_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/track.getTags",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "Waiting for getTags()")
+
+        let params = TrackInfoParams(
+            artist: "Some Artist",
+            track: "Some Track",
+            autocorrect: true,
+            username: "pepiro"
+        )
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getTags(params: params) { result in
+            switch (result) {
+            case .success(let tags):
+                XCTAssertEqual(tags.items.count, 2)
+
+                XCTAssertEqual(tags.items[0].name, "tag-1")
+                XCTAssertEqual(tags.items[0].url.absoluteString, "https://tags.com/tag-1")
+
+                XCTAssertEqual(tags.items[1].name, "tag-2")
+                XCTAssertEqual(tags.items[1].url.absoluteString, "https://tags.com/tag-2")
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it failed. Error: \(error)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&user=pepiro&method=track.gettags&api_key=someAPIKey&track=Some%20Track&format=json"
+            )
+        )
+    }
+
+    func test_getTagsByMBID_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/track.getTags",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "Waiting for getTags()")
+
+        let params = TrackInfoByMBIDParams(
+            mbid: "some-track-mbid",
+            autocorrect: true,
+            username: "pepiro"
+        )
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getTags(params: params) { result in
+            switch (result) {
+            case .success(_):
+                break;
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it failed. Error: \(error)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?mbid=some-track-mbid&autocorrect=1&user=pepiro&method=track.gettags&api_key=someAPIKey&format=json"
+            )
+        )
+    }
+
+
 }

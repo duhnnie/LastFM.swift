@@ -1,0 +1,18 @@
+{
+    "tags": {
+        "tag": [
+            {
+                "name": "tag-1",
+                "url": "https://tags.com/tag-1"
+            },
+            {
+                "name": "tag-2",
+                "url": "https://tags.com/tag-2"
+            }
+        ],
+        "@attr": {
+            "artist": "Some Artist",
+            "track": "Some Track"
+        }
+    }
+}
