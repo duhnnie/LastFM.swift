@@ -8,6 +8,7 @@ public struct TagModule {
         case getTopAlbums = "gettopalbums"
         case getInfo = "getinfo"
         case getWeeklyChartList = "getweeklychartlist"
+        case getSimilar = "getsimilar"
 
         func getName() -> String {
             return "tag.\(self.rawValue)"
@@ -86,6 +87,18 @@ public struct TagModule {
         let params = parent.normalizeParams(
             params: ["tag": tag],
             method: APIMethod.getWeeklyChartList
+        )
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
+    public func getSimilar(
+        tag: String,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionList<SimilarTag>>
+    ) {
+        let params = parent.normalizeParams(
+            params: ["tag": tag],
+            method: APIMethod.getSimilar
         )
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
