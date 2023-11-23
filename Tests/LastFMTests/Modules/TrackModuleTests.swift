@@ -1234,7 +1234,7 @@ class TrackModuleTests: XCTestCase {
         )!
 
         let fakeData = try Data(contentsOf: jsonURL)
-        let expectation = expectation(description: "Waiting for getTags()")
+        let expectation = expectation(description: "Waiting for getTopTags()")
 
         apiClient.data = fakeData
         apiClient.response = Constants.RESPONSE_200_OK
