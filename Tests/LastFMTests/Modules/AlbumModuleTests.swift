@@ -538,4 +538,86 @@ class AlbumModuleTests: XCTestCase {
         )
     }
 
+    func test_getTopTags_succeess() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/track.getTopTags",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "Waiting for getTopTags()")
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getTopTags(
+            artist: "Some Artist",
+            album: "Some Album",
+            autocorrect: true
+        ) { result in
+            switch (result) {
+            case .success(let tags):
+                XCTAssertEqual(tags.items.count, 2)
+
+                XCTAssertEqual(tags.items[0].name, "tag-a")
+                XCTAssertEqual(tags.items[0].url.absoluteString, "https://tags.com/tag-a")
+                XCTAssertEqual(tags.items[0].count, 100)
+
+                XCTAssertEqual(tags.items[1].name, "tag-b")
+                XCTAssertEqual(tags.items[1].url.absoluteString, "https://tags.com/tag-b")
+                XCTAssertEqual(tags.items[1].count, 63)
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it failed. Error: \(error)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&method=album.gettoptags&api_key=someAPIKey&album=Some%20Album&format=json"
+            )
+        )
+    }
+
+    func test_getTopTagsByMBID_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/track.getTopTags",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "Waiting for getTopTags()")
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getTopTags(mbid: "some-album-mbid", autocorrect: false) { result in
+            switch (result) {
+            case .success(_):
+                break;
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it failed. Error: \(error)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?mbid=some-album-mbid&autocorrect=0&method=album.gettoptags&api_key=someAPIKey&format=json"
+            )
+        )
+    }
+
 }
