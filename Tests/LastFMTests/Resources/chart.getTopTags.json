@@ -1,0 +1,28 @@
+{
+    "tags": {
+        "tag": [
+            {
+                "name": "rock",
+                "url": "https://www.last.fm/tag/rock",
+                "reach": "399971",
+                "taggings": "4030169",
+                "streamable": "1",
+                "wiki": {}
+            },
+            {
+                "name": "electronic",
+                "url": "https://www.last.fm/tag/electronic",
+                "reach": "259049",
+                "taggings": "2449113",
+                "streamable": "1",
+                "wiki": {}
+            }
+        ],
+        "@attr": {
+            "page": "1",
+            "perPage": "2",
+            "totalPages": "10",
+            "total": "20"
+        }
+    }
+}
