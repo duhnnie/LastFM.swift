@@ -13,6 +13,7 @@ final public class LastFM {
     lazy private(set) public var User = UserModule(parent: self)
     lazy private(set) public var Artist = ArtistModule(parent: self)
     lazy private(set) public var Track = TrackModule(parent: self)
+    lazy private(set) public var Album = AlbumModule(parent: self)
     lazy private(set) public var Tag = TagModule(parent: self)
     lazy private(set) public var Geo = GeoModule(parent: self)
     lazy private(set) public var Chart = ChartModule(parent: self)
