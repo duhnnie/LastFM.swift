@@ -48,11 +48,6 @@ public struct AlbumInfo: Decodable {
             forKey: .album
         )
 
-        let tagsContainer = try container.nestedContainer(
-            keyedBy: CodingKeys.TagsKeys.self,
-            forKey: .tags
-        )
-
         let trackContainer = try container.nestedContainer(
             keyedBy: CodingKeys.TracksKeys.self,
             forKey: .tracks
@@ -60,7 +55,6 @@ public struct AlbumInfo: Decodable {
 
         self.mbid = try container.decodeIfPresent(String.self, forKey: .mbid)
         self.artist = try container.decode(String.self, forKey: .artist)
-        self.tags = try tagsContainer.decode([LastFMEntity].self, forKey: .tag)
         self.name = try container.decode(String.self, forKey: .name)
         self.image = try container.decode(LastFMImages.self, forKey: .image)
         self.tracks = try trackContainer.decodeIfPresent([AlbumInfoTrack].self, forKey: .track)
@@ -69,6 +63,19 @@ public struct AlbumInfo: Decodable {
         self.playcount = try container.decode(Int.self, forKey: .playcount)
         self.userPlaycount = try container.decodeIfPresent(Int.self, forKey: .userPlaycount)
         self.wiki = try container.decodeIfPresent(Wiki.self, forKey: .wiki)
+
+        do {
+            // NOTE: When there's no tags in current response,
+            // Last.fm sends an empty string.
+            let tagsContainer = try container.nestedContainer(
+                keyedBy: CodingKeys.TagsKeys.self,
+                forKey: .tags
+            )
+
+            self.tags = try tagsContainer.decode([LastFMEntity].self, forKey: .tag)
+        } catch {
+            self.tags = []
+        }
     }
 
 }
