@@ -15,6 +15,7 @@ public struct TrackModule {
         case getCorrection = "getcorrection"
         case getSimilar = "getsimilar"
         case getTags = "gettags"
+        case getTopTags = "gettoptags"
 
         func getName() -> String {
             return "track.\(self.rawValue)"
@@ -231,6 +232,32 @@ public struct TrackModule {
 
         params = parent.normalizeParams(params: params, method: APIMethod.getTags)
 
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
+    public func getTopTags(
+        params: TrackParams,
+        autocorrect: Bool = true,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionList<TopTag>>
+    ) {
+        var params = params.toDictionary()
+
+        params["autocorrect"] = autocorrect ? "1" : "0"
+        params = parent.normalizeParams(params: params, method: APIMethod.getTopTags)
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
+    public func getTopTags(
+        mbid: String,
+        autocorrect: Bool = true,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionList<TopTag>>
+    ) {
+        var params = [
+            "mbid": mbid,
+            "autocorrect": autocorrect ? "1" : "0"
+        ]
+
+        params = parent.normalizeParams(params: params, method: APIMethod.getTopTags)
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
 
