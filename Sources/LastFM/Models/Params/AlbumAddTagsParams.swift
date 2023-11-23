@@ -1,6 +1,6 @@
 import Foundation
 
-public struct AlbumTagsParams: Params {
+public struct AlbumAddTagsParams: Params {
 
     public var artist: String
     public var album: String
