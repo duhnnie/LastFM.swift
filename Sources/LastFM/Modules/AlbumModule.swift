@@ -8,6 +8,7 @@ public struct AlbumModule {
         case addTags = "addtags"
         case removeTag = "removetag"
         case getTags = "gettags"
+        case getTopTags = "gettoptags"
 
         func getName() -> String {
             return "album.\(self.rawValue)"
@@ -110,6 +111,40 @@ public struct AlbumModule {
         }
 
         params = parent.normalizeParams(params: params, method: APIMethod.getTags)
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
+    public func getTopTags(
+        artist: String,
+        album: String,
+        autocorrect: Bool = true,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionList<TopTag>>
+    ) {
+        let params = parent.normalizeParams(
+            params: [
+                "artist": artist,
+                "album": album,
+                "autocorrect": autocorrect ? "1" : "0"
+            ],
+            method: APIMethod.getTopTags
+        )
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
+    public func getTopTags(
+        mbid: String,
+        autocorrect: Bool = true,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionList<TopTag>>
+    ) {
+        let params = parent.normalizeParams(
+            params: [
+                "mbid": mbid,
+                "autocorrect": autocorrect ? "1" : "0"
+            ],
+            method: APIMethod.getTopTags
+        )
+
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
     
