@@ -361,5 +361,51 @@ class TagModuleTests: XCTestCase {
             )
         )
     }
+
+    func test_getTopTags_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/tag.getTopTags",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "Waiting for getTopTags()")
+
+        apiClientMock.data = fakeData
+        apiClientMock.response = Constants.RESPONSE_200_OK
+
+        instance.getTopTags(
+            offset: 0,
+            limit: 2
+        ) { result in
+            switch (result) {
+            case .success(let tags):
+                XCTAssertEqual(tags.items.count, 2)
+
+                XCTAssertEqual(tags.items[0].name, "rock")
+                XCTAssertEqual(tags.items[0].count, 4030169)
+                XCTAssertEqual(tags.items[0].reach, 399971)
+
+                XCTAssertEqual(tags.items[1].name, "electronic")
+                XCTAssertEqual(tags.items[1].count, 2449113)
+                XCTAssertEqual(tags.items[1].reach, 259049)
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it failed. Error: \(error)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClientMock.getCalls.count, 1)
+        XCTAssertEqual(apiClientMock.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClientMock.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?method=tag.gettoptags&api_key=someAPIKey&offset=0&num_res=2&format=json"
+            )
+        )
+    }
     
 }

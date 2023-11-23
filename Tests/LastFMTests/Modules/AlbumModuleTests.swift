@@ -538,7 +538,7 @@ class AlbumModuleTests: XCTestCase {
         )
     }
 
-    func test_getTopTags_succeess() throws {
+    func test_getTopTags_success() throws {
         let jsonURL = Bundle.module.url(
             forResource: "Resources/track.getTopTags",
             withExtension: "json"
