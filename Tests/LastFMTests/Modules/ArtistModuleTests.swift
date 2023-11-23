@@ -1052,7 +1052,7 @@ class ArtistModuleTests: XCTestCase {
         apiClient.data = fakeData
         apiClient.response = Constants.RESPONSE_200_OK
 
-        instance.getTopTags(mbid: "some-track-mbid", autocorrect: false) { result in
+        instance.getTopTags(mbid: "some-artist-mbid", autocorrect: false) { result in
             switch (result) {
             case .success(_):
                 break;
@@ -1070,7 +1070,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?mbid=some-track-mbid&autocorrect=0&method=artist.gettoptags&api_key=someAPIKey&format=json"
+                "http://ws.audioscrobbler.com/2.0?mbid=some-artist-mbid&autocorrect=0&method=artist.gettoptags&api_key=someAPIKey&format=json"
             )
         )
     }
