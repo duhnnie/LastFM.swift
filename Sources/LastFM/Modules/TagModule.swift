@@ -9,6 +9,7 @@ public struct TagModule {
         case getInfo = "getinfo"
         case getWeeklyChartList = "getweeklychartlist"
         case getSimilar = "getsimilar"
+        case getTopTags = "gettoptags"
 
         func getName() -> String {
             return "tag.\(self.rawValue)"
@@ -103,5 +104,21 @@ public struct TagModule {
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
-    
+
+    public func getTopTags(
+        offset: UInt = 0,
+        limit: UInt = 10,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionList<TopGlobalTag>>
+    ) {
+        let params = parent.normalizeParams(
+            params: [
+                "offset": String(offset),
+                "num_res": String(limit)
+            ],
+            method: APIMethod.getTopTags
+        )
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
 }
