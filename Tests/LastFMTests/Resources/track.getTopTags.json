@@ -1,0 +1,20 @@
+{
+    "toptags": {
+        "tag": [
+            {
+                "count": 100,
+                "name": "tag-a",
+                "url": "https://tags.com/tag-a"
+            },
+            {
+                "count": 63,
+                "name": "tag-b",
+                "url": "https://tags.com/tag-b"
+            }
+        ],
+        "@attr": {
+            "artist": "Some Artist",
+            "track": "Some Track"
+        }
+    }
+}
