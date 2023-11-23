@@ -240,4 +240,54 @@ class ChartModuleTests: XCTestCase {
 
         waitForExpectations(timeout: 3)
     }
+
+    func test_getTopTags_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/chart.getTopTags",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "Waiting for getTopTags()")
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getTopTags(page: 1, limit: 2) { result in
+            switch (result) {
+            case .success(let topTags):
+                XCTAssertEqual(topTags.items.count, 2)
+
+                XCTAssertEqual(topTags.items[0].name, "rock")
+                XCTAssertEqual(topTags.items[0].url.absoluteString, "https://www.last.fm/tag/rock")
+                XCTAssertEqual(topTags.items[0].reach, 399971)
+                XCTAssertEqual(topTags.items[0].taggings, 4030169)
+                XCTAssertEqual(topTags.items[0].streamable, true)
+                XCTAssertNil(topTags.items[0].wiki)
+
+                XCTAssertEqual(topTags.items[1].name, "electronic")
+                XCTAssertEqual(topTags.items[1].url.absoluteString, "https://www.last.fm/tag/electronic")
+                XCTAssertEqual(topTags.items[1].reach, 259049)
+                XCTAssertEqual(topTags.items[1].taggings, 2449113)
+                XCTAssertEqual(topTags.items[1].streamable, true)
+                XCTAssertNil(topTags.items[1].wiki)
+            case .failure(let error):
+                XCTFail("Expected to succeeed, but it failed, Error: \(error)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0?format=json&method=chart.gettoptags&limit=2&page=1&api_key=someAPIKey"
+            )
+        )
+    }
+
 }
