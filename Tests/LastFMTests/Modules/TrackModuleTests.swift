@@ -1058,7 +1058,7 @@ class TrackModuleTests: XCTestCase {
         let fakeData = try? Data(contentsOf: jsonURL)
         let expectation = expectation(description: "Waiting for getSimilar()")
 
-        let params = TrackSimilarByMBIDParams(
+        let params = MBIDListParams(
             mbid: "some-mbid",
             autocorrect: true,
             limit: 2

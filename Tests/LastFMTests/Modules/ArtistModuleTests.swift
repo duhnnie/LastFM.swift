@@ -98,6 +98,47 @@ class ArtistModuleTests: XCTestCase {
         )
     }
 
+    func test_corrected_getTopTracksByMBID_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/artist.getCorrectedTopTracks",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "waiting for successful corrected getTopTracks")
+
+        let params = MBIDPageParams(
+            mbid: "some-artist-mbid",
+            autocorrect: true,
+            page: 1,
+            limit: 5
+        )
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getTopTracks(params: params) { result in
+            switch(result) {
+            case .success(_):
+               break
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it failed with error \(error)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertNil(apiClient.getCalls[0].headers)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettoptracks&mbid=some-artist-mbid&autocorrect=1&limit=5&page=1")
+        )
+    }
+
     func test_non_corrected_getTopTracks_success() throws {
         let jsonURL = Bundle.module.url(
             forResource: "Resources/artist.getNonCorrectedTopTracks",
@@ -179,7 +220,7 @@ class ArtistModuleTests: XCTestCase {
         )!
 
         let fakeData = try Data(contentsOf: jsonURL)
-        let params = ArtistTopTracksParams()
+        let params = ArtistTopTracksParams(artist: "artist x")
         let expectation = expectation(description: "waiting for getTopTracks to fail")
 
         apiClient.data = fakeData
@@ -222,7 +263,6 @@ class ArtistModuleTests: XCTestCase {
 
         let params = ArtistSimilarParams(
             artist: "Queens Of The Stone Age",
-            mbid: nil,
             autocorrect: false,
             limit: 5
         )
@@ -286,6 +326,48 @@ class ArtistModuleTests: XCTestCase {
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
                 "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.getsimilar&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)")
+        )
+    }
+
+    func test_getSimilarByMBID_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/artist.getSimilar",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectaction = expectation(description: "waiting for artist.getSimilar")
+
+        let params = MBIDListParams(
+            mbid: "some-artist-mbid",
+            autocorrect: false,
+            limit: 2
+        )
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getSimilar(params: params) { result in
+            switch (result) {
+            case .success(_):
+                break
+            case .failure(let error):
+                XCTFail(
+                    "Expected to succeed, but it failed with error: \(error.localizedDescription)"
+                )
+            }
+
+            expectaction.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertNil(apiClient.getCalls[0].headers)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.getsimilar&mbid=some-artist-mbid&autocorrect=0&limit=2")
         )
     }
 
@@ -431,6 +513,41 @@ class ArtistModuleTests: XCTestCase {
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
                 "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettopalbums&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
+        )
+    }
+
+    func test_getTopAlbumsByMBID_success() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/artist.getTopAlbums",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "waiting for artists' top albums")
+        let params = MBIDPageParams(mbid: "some-artist-mbid", limit: 5)
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getTopAlbums(params: params) { result in
+            switch(result) {
+            case .success(_):
+                break
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it failed with error \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertNil(apiClient.getCalls[0].headers)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettopalbums&mbid=some-artist-mbid&autocorrect=1&limit=5&page=1")
         )
     }
 

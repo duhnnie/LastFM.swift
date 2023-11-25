@@ -27,11 +27,34 @@ public struct ArtistModule {
         self.requester = requester
     }
 
+    private func internalGetTopTracks(
+        params: Params,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ArtistTopTrack>>
+    ) {
+        let params = parent.normalizeParams(params: params, method: APIMethod.getTopTracks)
+
+        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
     public func getTopTracks(
         params: ArtistTopTracksParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ArtistTopTrack>>
     ) {
-        let params = parent.normalizeParams(params: params, method: APIMethod.getTopTracks)
+        self.internalGetTopTracks(params: params, onCompletion: onCompletion)
+    }
+
+    public func getTopTracks(
+        params: MBIDPageParams,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ArtistTopTrack>>
+    ) {
+        self.internalGetTopTracks(params: params, onCompletion: onCompletion)
+    }
+
+    private func internalGetSimilar(
+        params: Params,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionList<ArtistSimilar>>
+    ) {
+        let params = parent.normalizeParams(params: params, method: APIMethod.getSimilar)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
@@ -40,9 +63,14 @@ public struct ArtistModule {
         params: ArtistSimilarParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionList<ArtistSimilar>>
     ) {
-        let params = parent.normalizeParams(params: params, method: APIMethod.getSimilar)
+        self.internalGetSimilar(params: params, onCompletion: onCompletion)
+    }
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    public func getSimilar(
+        params: MBIDListParams,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionList<ArtistSimilar>>
+    ) {
+        self.internalGetSimilar(params: params, onCompletion: onCompletion)
     }
 
     public func search(
@@ -57,13 +85,27 @@ public struct ArtistModule {
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
 
-    public func getTopAlbums(
-        params: ArtistTopAlbumsParams,
+    private func internalGetTopAlbums(
+        params: Params,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ArtistTopAlbum>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopAlbums)
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+    }
+
+    public func getTopAlbums(
+        params: ArtistTopAlbumsParams,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ArtistTopAlbum>>
+    ) {
+        self.internalGetTopAlbums(params: params, onCompletion: onCompletion)
+    }
+
+    public func getTopAlbums(
+        params: MBIDPageParams,
+        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ArtistTopAlbum>>
+    ) {
+        self.internalGetTopAlbums(params: params, onCompletion: onCompletion)
     }
 
     public func getInfo(
