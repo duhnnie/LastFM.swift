@@ -56,7 +56,7 @@ public struct UserModule {
     }
 
     public func getTopTracks(
-        params: UserTopTracksParams,
+        params: UserTopItemsParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<UserTopTrack>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopTracks)
@@ -89,7 +89,7 @@ public struct UserModule {
     }
 
     public func getTopArtists(
-        params: UserTopArtistsParams,
+        params: UserTopItemsParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<UserTopArtist>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopArtists)
@@ -107,7 +107,7 @@ public struct UserModule {
     }
 
     public func getTopAlbums(
-        params: UserTopAlbumsParams,
+        params: UserTopItemsParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<UserTopAlbum>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopAlbums)

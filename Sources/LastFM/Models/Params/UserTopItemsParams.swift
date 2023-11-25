@@ -1,6 +1,6 @@
 import Foundation
 
-public struct UserTopTracksParams: Params {
+public struct UserTopItemsParams: Params {
 
     public var user: String
     public var period: Period

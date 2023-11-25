@@ -21,7 +21,7 @@ public struct ChartModule {
     }
 
     public func getTopTracks(
-        params: ChartTopTracksParams,
+        params: ChartTopItemsParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ChartTopTrack>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopTracks)
@@ -30,7 +30,7 @@ public struct ChartModule {
     }
 
     public func getTopArtists(
-        params: ChartTopArtistsParams,
+        params: ChartTopItemsParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ChartTopArtist>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopArtists)

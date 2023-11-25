@@ -33,7 +33,7 @@ class ArtistModuleTests: XCTestCase {
         let fakeData = try Data(contentsOf: jsonURL)
         let expectation = expectation(description: "waiting for successful corrected getTopTracks")
 
-        let params = ArtistTopTracksParams(
+        let params = ArtistTopItemsParams(
             artist: "Cafe Tacuva",
             autocorrect: true,
             page: 1,
@@ -148,7 +148,7 @@ class ArtistModuleTests: XCTestCase {
         let fakeData = try Data(contentsOf: jsonURL)
         let expectation = expectation(description: "waiting for successful corrected getTopTracks")
 
-        let params = ArtistTopTracksParams(
+        let params = ArtistTopItemsParams(
             artist: "Cafe Tacuva",
             autocorrect: true,
             page: 1,
@@ -220,7 +220,7 @@ class ArtistModuleTests: XCTestCase {
         )!
 
         let fakeData = try Data(contentsOf: jsonURL)
-        let params = ArtistTopTracksParams(artist: "artist x")
+        let params = ArtistTopItemsParams(artist: "artist x")
         let expectation = expectation(description: "waiting for getTopTracks to fail")
 
         apiClient.data = fakeData
@@ -437,7 +437,7 @@ class ArtistModuleTests: XCTestCase {
 
         let fakeData = try Data(contentsOf: jsonURL)
         let expectation = expectation(description: "waiting for artists' top albums")
-        let params = ArtistTopAlbumsParams(artist: "No Use For a Name", limit: 5)
+        let params = ArtistTopItemsParams(artist: "No Use For a Name", limit: 5)
 
         apiClient.data = fakeData
         apiClient.response = Constants.RESPONSE_200_OK

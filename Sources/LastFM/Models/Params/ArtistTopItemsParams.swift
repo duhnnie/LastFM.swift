@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ArtistTopTracksParams: Params {
+public struct ArtistTopItemsParams: Params {
 
     public var artist: String
     public var autocorrect: Bool

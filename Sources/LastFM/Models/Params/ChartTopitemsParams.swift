@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ChartTopTracksParams: Params {
+public struct ChartTopItemsParams: Params {
 
     public var page: UInt
     public var limit: UInt
