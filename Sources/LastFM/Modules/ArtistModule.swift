@@ -37,7 +37,7 @@ public struct ArtistModule {
     }
 
     public func getTopTracks(
-        params: ArtistTopTracksParams,
+        params: ArtistTopItemsParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ArtistTopTrack>>
     ) {
         self.internalGetTopTracks(params: params, onCompletion: onCompletion)
@@ -95,7 +95,7 @@ public struct ArtistModule {
     }
 
     public func getTopAlbums(
-        params: ArtistTopAlbumsParams,
+        params: ArtistTopItemsParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ArtistTopAlbum>>
     ) {
         self.internalGetTopAlbums(params: params, onCompletion: onCompletion)

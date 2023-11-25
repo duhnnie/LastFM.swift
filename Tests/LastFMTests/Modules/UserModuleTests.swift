@@ -28,7 +28,7 @@ class UserTests: XCTestCase {
             withExtension: "json"
         )!
 
-        let params = UserTopTracksParams(user: "andrea")
+        let params = UserTopItemsParams(user: "andrea")
         let expectation = expectation(description: "waiting for request with invalid api key")
 
         apiClientMock.data = try Data(contentsOf: jsonURL)
@@ -527,7 +527,7 @@ class UserTests: XCTestCase {
 
         let fakeData = try Data(contentsOf: jsonURL)
 
-        let params = UserTopTracksParams(
+        let params = UserTopItemsParams(
             user: "pepito",
             period: .last180days,
             limit: 34,
@@ -598,7 +598,7 @@ class UserTests: XCTestCase {
     }
 
     func test_getTopTracks_failure() throws {
-        let params = UserTopTracksParams(
+        let params = UserTopItemsParams(
             user: "user",
             period: .last180days,
             limit: 10,
@@ -819,7 +819,7 @@ class UserTests: XCTestCase {
     func test_getTopArtists_success() throws {
         let fakeDataURL = Bundle.module.url(forResource: "Resources/user.getTopArtists", withExtension: "json")!
         let fakeData = try Data(contentsOf: fakeDataURL)
-        let params = UserTopArtistsParams(user: "someUser", limit: 5, page: 12)
+        let params = UserTopItemsParams(user: "someUser", limit: 5, page: 12)
         let expectation = expectation(description: "waiting for getTopArtists")
 
         apiClientMock.data = fakeData
@@ -877,7 +877,7 @@ class UserTests: XCTestCase {
     }
 
     func test_getTopArtists_failure() throws {
-        let params = UserTopArtistsParams(user: "Copo", limit: 345, page: 345)
+        let params = UserTopItemsParams(user: "Copo", limit: 345, page: 345)
         let expectation = expectation(description: "waiting for getLovedTracks")
 
         apiClientMock.error = RuntimeError("Any error")
@@ -949,7 +949,7 @@ class UserTests: XCTestCase {
     func test_getTopAlbums_success() throws {
         let fakeDataURL = Bundle.module.url(forResource: "Resources/user.getTopAlbums", withExtension: "json")!
         let fakeData = try Data(contentsOf: fakeDataURL)
-        let params = UserTopAlbumsParams(user: "someUser", limit: 5, page: 12)
+        let params = UserTopItemsParams(user: "someUser", limit: 5, page: 12)
         let expectation = expectation(description: "waiting for getTopAlbums")
 
         apiClientMock.data = fakeData

@@ -33,7 +33,7 @@ class ChartModuleTests: XCTestCase {
         let fakeData = try Data(contentsOf: jsonURL)
         let expectation = expectation(description: "waiting for successful getTopTracks")
 
-        let params = ChartTopTracksParams(page: 1, limit: 5)
+        let params = ChartTopItemsParams(page: 1, limit: 5)
 
         apiClient.data = fakeData
         apiClient.response = Constants.RESPONSE_200_OK
@@ -147,7 +147,7 @@ class ChartModuleTests: XCTestCase {
         )!
 
         let fakeData = try Data(contentsOf: jsonURL)
-        let params = ChartTopTracksParams()
+        let params = ChartTopItemsParams()
         let expectation = expectation(description: "waiting for getTopTracks to fail")
 
         apiClient.data = fakeData
@@ -187,7 +187,7 @@ class ChartModuleTests: XCTestCase {
 
         let fakeData = try Data(contentsOf: jsonURL)
         let expectation = expectation(description: "Waiting for getTopArtists")
-        let params = ChartTopArtistsParams(page: 1, limit: 5)
+        let params = ChartTopItemsParams(page: 1, limit: 5)
 
         apiClient.data = fakeData
         apiClient.response = Constants.RESPONSE_200_OK

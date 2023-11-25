@@ -1,1 +1,0 @@
-public typealias ArtistTopAlbumsParams = ArtistTopTracksParams
