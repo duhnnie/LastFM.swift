@@ -195,7 +195,7 @@ public struct TrackModule {
     }
 
     public func getSimilar(
-        params: TrackSimilarByMBIDParams,
+        params: MBIDListParams,
         onCompletion: @escaping LastFM.OnCompletion<CollectionList<TrackSimilar>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getSimilar)
