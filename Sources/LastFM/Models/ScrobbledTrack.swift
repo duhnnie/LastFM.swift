@@ -81,7 +81,6 @@ public struct ScrobbledTrack: Decodable {
             throw DecodingError.dataCorrupted(context)
         }
 
-
         self.ignored = ignored
     }
 
