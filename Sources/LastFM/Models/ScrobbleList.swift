@@ -41,7 +41,12 @@ public struct ScrobbleList: Decodable {
         }  else if let items = try? subcontainer.decode([ScrobbledTrack].self, forKey: .items) {
             self.items = items
         } else {
-            throw RuntimeError("Can't decode scrobbles")
+            let context = DecodingError.Context(
+                codingPath: subcontainer.codingPath,
+                debugDescription: "Can't decode scrobbles"
+            )
+
+            throw DecodingError.dataCorrupted(context)
         }
     }
 }

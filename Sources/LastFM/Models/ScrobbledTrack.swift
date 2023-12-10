@@ -73,7 +73,12 @@ public struct ScrobbledTrack: Decodable {
         guard
             let ignored = IgnoredType(rawValue: ignoredCode)
         else {
-            throw RuntimeError("Invalid ignoredMessage.code")
+            let context = DecodingError.Context(
+                codingPath: ignoredContainer.codingPath,
+                debugDescription: "Invalid ignoredMessage.code"
+            )
+
+            throw DecodingError.dataCorrupted(context)
         }
 
 

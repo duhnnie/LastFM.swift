@@ -21,7 +21,12 @@ public struct Wiki: Decodable {
         dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
 
         guard let published = dateFormatter.date(from: publishedString) else {
-            throw RuntimeError("Can't decode \"published\" property.")
+            let context = DecodingError.Context(
+                codingPath: container.codingPath,
+                debugDescription: "Can't decode \"published\" property."
+            )
+
+            throw DecodingError.dataCorrupted(context)
         }
 
         self.published = published
