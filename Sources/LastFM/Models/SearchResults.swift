@@ -60,7 +60,12 @@ public struct SearchResults<T: Decodable>: Decodable {
                 "@attr"
             ].contains(key.stringValue)
         }) else {
-            throw RuntimeError("Can't find key for subcontainer")
+            let context = DecodingError.Context(
+                codingPath: resultsContainer.codingPath,
+                debugDescription: "Can't find key for subcontainer"
+            )
+
+            throw DecodingError.dataCorrupted(context)
         }
 
         let subcontainer = try resultsContainer.nestedContainer(
@@ -69,7 +74,12 @@ public struct SearchResults<T: Decodable>: Decodable {
         )
 
         guard let itemsKey = subcontainer.allKeys.first else {
-            throw RuntimeError("Can't find key for items")
+            let context = DecodingError.Context(
+                codingPath: subcontainer.codingPath,
+                debugDescription: "Can't find key for items"
+            )
+
+            throw DecodingError.dataCorrupted(context)
         }
 
         self.items = try subcontainer.decode([T].self, forKey: itemsKey)

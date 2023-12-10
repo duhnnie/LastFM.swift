@@ -8,7 +8,12 @@ public struct CollectionList<T: Decodable>: Decodable {
         let container = try decoder.container(keyedBy: StringCodingKeys.self)
 
         guard let rootKey = container.allKeys.first else {
-            throw RuntimeError("Error at getting root key.")
+            let context = DecodingError.Context(
+                codingPath: decoder.codingPath,
+                debugDescription: "Error at getting root key."
+            )
+
+            throw DecodingError.dataCorrupted(context)
         }
 
         let subcontainer = try container.nestedContainer(
@@ -25,7 +30,12 @@ public struct CollectionList<T: Decodable>: Decodable {
         }
 
         guard let items = items else {
-            throw RuntimeError("Can't decode list")
+            let context = DecodingError.Context(
+                codingPath: subcontainer.codingPath,
+                debugDescription: "Can't decode list"
+            )
+
+            throw DecodingError.dataCorrupted(context)
         }
 
         self.items = items
