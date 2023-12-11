@@ -21,7 +21,7 @@ let package = Package(
         .package(
             name: "SwiftRestClient",
             url: "https://github.com/duhnnie/SwiftRestClient",
-            from: "0.2.0")
+            from: "0.3.0")
     ],
     targets: [
         .target(
@@ -36,5 +36,6 @@ let package = Package(
                 .copy("Resources")
             ]
         ),
-    ]
+    ],
+    swiftLanguageVersions: [.v5]
 )
