@@ -1,6 +1,6 @@
 # LastFM.swift
 
-A library for consuming last.fm API. This library covers all services listed in [last.fm API page](https://www.last.fm/api).
+A library for consuming the last.fm API. This library covers all services listed in [last.fm API page](https://www.last.fm/api).
 
 ## Installation
 
