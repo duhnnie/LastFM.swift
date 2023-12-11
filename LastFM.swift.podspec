@@ -21,4 +21,5 @@ Pod::Spec.new do |s|
   s.swift_version = '5.0'
 
   s.source_files = 'Sources/LastFM/**/*'
+  s.dependency 'SwiftRestClient', '>= 0.4.0'
 end
