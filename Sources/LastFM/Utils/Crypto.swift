@@ -10,7 +10,7 @@ internal struct Crypto {
      * https://opensource.apple.com/source/CommonCrypto/CommonCrypto-60118.50.1/include/CommonDigest.h.auto.html
      **/
     internal static func md5Hash (data: Data) -> String {
-        if #available(iOS 13, *) {
+        if #available(iOS 13, watchOS 6, tvOS 13, *) {
             return Insecure.MD5.hash(data: data)
                 .map{String(format: "%02x", $0)}
                 .joined()
