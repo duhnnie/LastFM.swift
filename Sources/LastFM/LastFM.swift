@@ -1,5 +1,3 @@
-import CryptoKit
-
 final public class LastFM {
 
     public typealias OnCompletion<T> = (Result<T, LastFMError>) -> Void
@@ -69,9 +67,7 @@ final public class LastFM {
             throw RuntimeError("Can't encode for signature")
         }
 
-        return Insecure.MD5.hash(data: dataToEncode)
-            .map{String(format: "%02x", $0)}
-            .joined()
+        return Crypto.md5Hash(data: dataToEncode)
     }
 
     internal func addSignature(params: inout [String: String]) throws {
