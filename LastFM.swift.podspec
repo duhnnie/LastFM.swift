@@ -18,6 +18,8 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = watchos_deployment_target
   s.tvos.deployment_target = tvos_deployment_target
 
+  s.module_name = 'LastFM'
+
   s.swift_version = '5.0'
 
   s.source_files = 'Sources/LastFM/**/*'
