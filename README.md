@@ -141,7 +141,7 @@ try lastFM.Track.scrobble(
 )
 ```
 
-# Contribution
+## Contribution
 
  - Found a **bug** or have a **feature request**? [Open an issue][].
  - Want to **contribute**? [Submit a pull request][].
@@ -150,13 +150,13 @@ try lastFM.Track.scrobble(
 [Submit a pull request]: https://github.com/duhnnie/lastFM.swift/fork
 
 
-# Original author
+## Original author
 
  - [Daniel Canedo](mailto:me@duhnnie.net)
    ([@duhnnie](https://twitter.com/duhnnie))
 
 
-# License
+## License
 
 LastFM.swift is available under the MIT license. See [the LICENSE
 file](./LICENSE.txt) for more information.
