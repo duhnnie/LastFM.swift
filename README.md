@@ -46,6 +46,34 @@ install LastFM.swift with Carthage:
 [Carthage Installation]: https://github.com/Carthage/Carthage#installing-carthage
 [Carthage Usage]: https://github.com/Carthage/Carthage#adding-frameworks-to-an-application
 
+### CocoaPods
+
+[CocoaPods][] is a dependency manager for Cocoa projects. To install
+LastFM.swift with CocoaPods:
+
+ 1. Make sure CocoaPods is [installed][CocoaPods Installation].
+
+    ```sh
+    # Using the default Ruby install will require you to use sudo when
+    # installing and updating gems.
+    [sudo] gem install cocoapods
+    ```
+
+ 2. Update your Podfile to include the following:
+
+    ```ruby
+    use_frameworks!
+
+    target 'YourAppTargetName' do
+        pod 'LastFM.swift', '~> 1.0.0'
+    end
+    ```
+
+ 3. Run `pod install --repo-update`.
+
+[CocoaPods]: https://cocoapods.org
+[CocoaPods Installation]: https://guides.cocoapods.org/using/getting-started.html#getting-started
+
 ## Usage
 You will need a last.fm API account, you can get one [here](https://www.last.fm/api/account/create).
 Once you have an API account, you will need to create a LastFM.swift instance providing the **api key** and **api secret**:
@@ -56,7 +84,7 @@ import LastFM
 let lastFM = LastFM(apiKey: "your_api_key", apiSecret: "your_api_secret")
 ```
 
-After that, you'll be able to start consuming services:
+After that, you'll be able to start consuming services (check [here](https://www.last.fm/api) for info/docs about all available services):
 
 ```swift
 let recentTrackParams = RecentTracksParams(user: "someUser", limit: 10, page: 1)
@@ -112,3 +140,23 @@ try lastFM.Track.scrobble(
   }
 )
 ```
+
+# Contribution
+
+ - Found a **bug** or have a **feature request**? [Open an issue][].
+ - Want to **contribute**? [Submit a pull request][].
+
+[Open an issue]: https://github.com/duhnnie/lastFM.swift/issues/new
+[Submit a pull request]: https://github.com/duhnnie/lastFM.swift/fork
+
+
+# Original author
+
+ - [Daniel Canedo](mailto:me@duhnnie.net)
+   ([@duhnnie](https://twitter.com/duhnnie))
+
+
+# License
+
+LastFM.swift is available under the MIT license. See [the LICENSE
+file](./LICENSE.txt) for more information.
