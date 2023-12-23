@@ -29,5 +29,10 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build
       run: swift build -v
-    - name: Run tests
-      run: swift test -v
+
+    # Disabling tests for linux due an issue:
+    # https://github.com/apple/swift/issues/56730
+    # https://github.com/apple/swift-corelibs-foundation/issues/4804
+
+    # - name: Run tests
+    #   run: swift test -v

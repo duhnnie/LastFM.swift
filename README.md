@@ -141,6 +141,21 @@ try lastFM.Track.scrobble(
 )
 ```
 
+## Linux support
+LastFM.swift is supported by Linux. However running the tests results in a fatal error:
+
+```
+Fatal error: Constant strings cannot be deallocated
+```
+So that's why some test running in GitHub Actions. Anyway, you can run tests locally by running:
+```
+./runLinuxTests.sh
+```
+
+### About the issues in Linux
+- https://github.com/apple/swift/issues/56730
+- https://github.com/apple/swift-corelibs-foundation/issues/4804
+
 ## Contribution
 
  - Found a **bug** or have a **feature request**? [Open an issue][].
