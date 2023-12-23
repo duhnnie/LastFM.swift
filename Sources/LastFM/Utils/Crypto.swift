@@ -1,6 +1,10 @@
 import Foundation
+#if os(Linux)
+import Crypto
+#else
 import CryptoKit
 import CommonCrypto
+#endif
 
 internal struct Crypto {
 
@@ -10,6 +14,11 @@ internal struct Crypto {
      * https://opensource.apple.com/source/CommonCrypto/CommonCrypto-60118.50.1/include/CommonDigest.h.auto.html
      **/
     internal static func md5Hash (data: Data) -> String {
+        #if os(Linux)
+            return Insecure.MD5.hash(data: data)
+                .map{String(format: "%02x", $0)}
+                .joined()
+        #else
         if #available(iOS 13, watchOS 6, tvOS 13, *) {
             return Insecure.MD5.hash(data: data)
                 .map{String(format: "%02x", $0)}
@@ -39,6 +48,7 @@ internal struct Crypto {
 
             return md5String
         }
+        #endif
     }
 
 }

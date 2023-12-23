@@ -21,7 +21,7 @@ let package = Package(
         .package(
             name: "SwiftRestClient",
             url: "https://github.com/duhnnie/SwiftRestClient",
-            from: "0.4.0")
+            from: "0.5.0")
     ],
     targets: [
         .target(
@@ -39,3 +39,13 @@ let package = Package(
     ],
     swiftLanguageVersions: [.v5]
 )
+
+#if os(Linux)
+package.dependencies.append(
+    .package(url: "https://github.com/apple/swift-crypto.git", "1.0.0" ..< "3.0.0")
+)
+
+package.targets.first?.dependencies += [
+    .product(name: "Crypto", package: "swift-crypto")
+]
+#endif
