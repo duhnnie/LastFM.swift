@@ -1,6 +1,10 @@
 import Foundation
 import SwiftRestClient
 
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 internal struct RequestUtils: Requester {
 
     internal static let shared = RequestUtils()

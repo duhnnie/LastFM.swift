@@ -1,5 +1,10 @@
 import Foundation
 import SwiftRestClient
+
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 @testable import LastFM
 
 final internal class APIClientMock: APIClient, Mock {
