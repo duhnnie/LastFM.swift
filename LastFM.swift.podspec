@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'LastFM.swift'
-  s.version          = '1.0.0'
+  s.version          = '1.1.0'
   s.summary          = 'A library for consuming the last.fm API'
 
   s.homepage         = 'https://github.com/duhnnie/LastFM.swift'
@@ -20,8 +20,8 @@ Pod::Spec.new do |s|
 
   s.module_name = 'LastFM'
 
-  s.swift_version = '5.0'
+  s.swift_versions = ['5']
 
   s.source_files = 'Sources/LastFM/**/*'
-  s.dependency 'SwiftRestClient', '>= 0.4.0'
+  s.dependency 'SwiftRestClient', '>= 0.5.0'
 end
