@@ -1,4 +1,6 @@
 # LastFM.swift
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fduhnnie%2FLastFM.swift%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/duhnnie/LastFM.swift)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fduhnnie%2FLastFM.swift%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/duhnnie/LastFM.swift)
 
 A library for consuming the last.fm API. This library covers all services listed in [last.fm API page](https://www.last.fm/api).
 
