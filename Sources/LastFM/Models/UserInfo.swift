@@ -1,12 +1,12 @@
 import Foundation
 
-public struct UserInfo: Decodable {
+public struct UserInfo: Codable {
 
     public let name: String
     public let age: UInt
     public let subscriber: Bool
     public let realname: String
-    public let bootsrap: Bool
+    public let bootstrap: Bool
     public let playcount: UInt
     public let artistCount: UInt
     public let playlists: UInt
@@ -64,7 +64,7 @@ public struct UserInfo: Decodable {
 
         self.age = try container.decode(UInt.self, forKey: .age)
         self.subscriber = try container.decode(Bool.self, forKey: .subscriber)
-        self.bootsrap = try container.decode(Bool.self, forKey: .bootstrap)
+        self.bootstrap = try container.decode(Bool.self, forKey: .bootstrap)
         self.playcount = try container.decode(UInt.self, forKey: .playcount)
         self.artistCount = try container.decode(UInt.self, forKey: .artistCount)
         self.playlists = try container.decode(UInt.self, forKey: .playlists)
@@ -75,6 +75,36 @@ public struct UserInfo: Decodable {
         let registeredDouble = try registeredContainer.decode(Double.self, forKey: .text)
 
         self.registered = Date(timeIntervalSince1970: registeredDouble)
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: OuterCodingKeys.self)
+        var subcontainer = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .user)
+        
+        var subsubcontainer = subcontainer.nestedContainer(
+            keyedBy: CodingKeys.RegisteredKeys.self,
+            forKey: .registered
+        )
+        
+        try subcontainer.encode(name, forKey: .name)
+        try subcontainer.encode(age, forKey: .age)
+        try subcontainer.encode(subscriber, forKey: .subscriber)
+        try subcontainer.encode(name, forKey: .name)
+        try subcontainer.encode(age, forKey: .age)
+        try subcontainer.encode(subscriber, forKey: .subscriber)
+        try subcontainer.encode(realname, forKey: .realname)
+        try subcontainer.encode(bootstrap, forKey: .bootstrap)
+        try subcontainer.encode(playcount, forKey: .playcount)
+        try subcontainer.encode(artistCount, forKey: .artistCount)
+        try subcontainer.encode(playlists, forKey: .playlists)
+        try subcontainer.encode(trackCount, forKey: .trackCount)
+        try subcontainer.encode(albumCount, forKey: .albumCount)
+        try subcontainer.encode(image, forKey: .image)
+        try subcontainer.encode(country, forKey: .country)
+        try subcontainer.encode(gender, forKey: .gender)
+        try subcontainer.encode(url, forKey: .url)
+        try subcontainer.encode(type, forKey: .type)
+        try subsubcontainer.encode(registered, forKey: .text)
     }
 
 }
