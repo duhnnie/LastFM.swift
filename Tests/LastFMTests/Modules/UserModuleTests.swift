@@ -1093,7 +1093,7 @@ class UserTests: XCTestCase {
                 XCTAssertEqual(userInfo.age, 0)
                 XCTAssertEqual(userInfo.subscriber, false)
                 XCTAssertEqual(userInfo.realname, "Jose")
-                XCTAssertEqual(userInfo.bootsrap, false)
+                XCTAssertEqual(userInfo.bootstrap, false)
                 XCTAssertEqual(userInfo.playcount, 347575)
                 XCTAssertEqual(userInfo.artistCount, 14264)
                 XCTAssertEqual(userInfo.playlists, 0)
