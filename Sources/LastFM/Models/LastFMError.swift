@@ -26,7 +26,6 @@ public enum LastFMServiceErrorType: Int {
 
 public enum LastFMError: Error {
     case LastFMServiceError(LastFMServiceErrorType, String)
-    case NoSessionKey
     case NoData
     case OtherError(Error)
 }
@@ -39,8 +38,6 @@ extension LastFMError: LocalizedError {
         switch (self) {
         case .LastFMServiceError(_, let message):
             detail = "\(message)"
-        case .NoSessionKey:
-            detail = "No session key."
         case .NoData:
             detail = "No data was returned."
         case .OtherError(let error):
