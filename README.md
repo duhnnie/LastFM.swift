@@ -103,8 +103,6 @@ lastFM.User.getRecentTracks(params: recentTrackParams) { result in
             print("No data was returned.")
         case .OtherError(let error):
             print("An error ocurred: \(error)")
-        case .NoSessionKey:
-            print("No session key provided.")
         }
     case .success(let obj):
         for track in obj.items {
