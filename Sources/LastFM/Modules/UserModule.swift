@@ -129,6 +129,12 @@ public struct UserModule {
 
         requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
     }
+    
+    public func getInfo(sessionKey: String, onCompletion: @escaping LastFM.OnCompletion<UserInfo>) throws {
+        let params = parent.normalizeParams(params: [:], method: APIMethod.getInfo, sessionKey: sessionKey)
+
+        try requester.postFormURLEncodedAndParse(payload: params, secure: false, onCompletion: onCompletion)
+    }
 
     public func getFriends(
         params: SearchParams,

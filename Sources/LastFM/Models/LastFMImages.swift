@@ -1,7 +1,7 @@
 import Foundation
 
-public struct LastFMImages: Decodable {
-    public enum LastFMImageSize: String, Decodable {
+public struct LastFMImages: Codable {
+    public enum LastFMImageSize: String, Decodable, CaseIterable {
         case S = "small"
         case M = "medium"
         case L = "large"
@@ -59,5 +59,38 @@ public struct LastFMImages: Decodable {
                 self.mega = URL(string: urlString)
             }
         }
+    }
+    
+    private func encodeItem(
+        container: inout UnkeyedEncodingContainer,
+        url: URL?,
+        size: LastFMImageSize
+    ) throws {
+        if let url = url {
+            var subcontainer = container.nestedContainer(keyedBy: CodingKeys.self)
+            
+            try subcontainer.encode(size.rawValue, forKey: .size)
+            try subcontainer.encode(url, forKey: .url)
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        
+        for size in LastFMImageSize.allCases {
+            switch size {
+            case .S:
+                try encodeItem(container: &container, url: small, size: size)
+            case .M:
+                try encodeItem(container: &container, url: medium, size: size)
+            case .L:
+                try encodeItem(container: &container, url: large, size: size)
+            case .XL:
+                try encodeItem(container: &container, url: extraLarge, size: size)
+            case .MG:
+                try encodeItem(container: &container, url: mega, size: size)
+            }
+        }
+        
     }
 }
