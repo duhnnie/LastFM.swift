@@ -10,7 +10,11 @@ public struct ScrobbleParams: Params {
         }
     }
 
-    public mutating func addItem(item: ScrobbleParamItem) {
+    public mutating func addItem(item: ScrobbleParamItem) throws {
+        guard self.items.count < 50 else {
+            throw ScrobbleError.TooMuchScrobbleIItems
+        }
+        
         self.items.append(item)
     }
 

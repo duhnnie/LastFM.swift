@@ -94,35 +94,35 @@ class TrackModuleTests: XCTestCase {
         let fakeData = try Data(contentsOf: jsonURL)
         var params = ScrobbleParams()
 
-        params.addItem(item: ScrobbleParamItem(
+        try params.addItem(item: ScrobbleParamItem(
             artist: "+44",
             track: "Cliff Diving",
             timestamp: 1697843437,
             album: "When Your Heart Stops Beating",
             albumArtist: "+44"))
 
-        params.addItem(item: ScrobbleParamItem(
+        try params.addItem(item: ScrobbleParamItem(
             artist: "Broken Social Scene",
             track: "Cause = Time",
             date: Date(timeIntervalSince1970: 1697843377),
             album: "You Forgot It In People",
             albumArtist: "Broken Social Scene"))
 
-        params.addItem(item: ScrobbleParamItem(
+        try params.addItem(item: ScrobbleParamItem(
             artist: "Nine Inch Nails",
             track: "Branches / Bones",
             timestamp: 1697843317,
             album: "Not The Actual Events",
             albumArtist: "Nine Inch Nails"))
 
-        params.addItem(item: ScrobbleParamItem(
+        try params.addItem(item: ScrobbleParamItem(
             artist: "Llegas",
             track: "Viene El Sol",
             timestamp: 1697843257,
             album: "#VieneElSol",
             albumArtist: "Llegas"))
 
-        params.addItem(item: ScrobbleParamItem(
+        try params.addItem(item: ScrobbleParamItem(
             artist: "Foo Fighters",
             track: "Back & Forth",
             timestamp: 1697843197,
