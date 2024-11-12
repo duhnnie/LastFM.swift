@@ -38,7 +38,7 @@ public struct UserModule {
 
         params["extended"] = extended ? "1" : "0"
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: true, onCompletion: onCompletion)
     }
 
     public func getRecentTracks(
@@ -61,7 +61,7 @@ public struct UserModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopTracks)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: true, onCompletion: onCompletion)
     }
 
     public func getWeeklyTrackChart(
@@ -94,7 +94,7 @@ public struct UserModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopArtists)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: true, onCompletion: onCompletion)
     }
 
     public func getWeeklyArtistChart(
@@ -112,7 +112,7 @@ public struct UserModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopAlbums)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: true, onCompletion: onCompletion)
     }
 
     public func getWeeklyAlbumChart(

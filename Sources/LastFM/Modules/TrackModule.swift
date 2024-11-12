@@ -64,7 +64,7 @@ public struct TrackModule {
 
         try requester.postFormURLEncoded(
             payload: payload,
-            secure: false,
+            secure: true,
             onCompletion: onCompletion
         )
     }
@@ -84,7 +84,7 @@ public struct TrackModule {
 
         try requester.postFormURLEncoded(
             payload: payload,
-            secure: false,
+            secure: true,
             onCompletion: onCompletion
         )
     }

@@ -29,7 +29,7 @@ public struct AuthModule {
 
         try parent.addSignature(params: &params)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: true, onCompletion: onCompletion)
     }
 
     public func getToken(onCompletion: @escaping LastFM.OnCompletion<String>) throws {
@@ -48,7 +48,7 @@ public struct AuthModule {
 
         requester.getDataAndParse(
             params: params,
-            secure: false,
+            secure: true,
             onCompletion: internalOnCompletion
         )
     }
