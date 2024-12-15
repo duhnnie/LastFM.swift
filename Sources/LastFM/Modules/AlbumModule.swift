@@ -17,10 +17,12 @@ public struct AlbumModule {
 
     private let parent: LastFM
     private let requester: Requester
+    private let secure: Bool
 
-    internal init(parent: LastFM, requester: Requester = RequestUtils.shared) {
+    internal init(parent: LastFM, secure: Bool, requester: Requester = RequestUtils.shared) {
         self.parent = parent
         self.requester = requester
+        self.secure = secure
     }
 
     public func getInfo(
@@ -29,7 +31,7 @@ public struct AlbumModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getInfo)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getInfo(
@@ -38,7 +40,7 @@ public struct AlbumModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getInfo)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func search(
@@ -50,7 +52,7 @@ public struct AlbumModule {
             method: APIMethod.search
         )
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func addTags(
@@ -66,7 +68,7 @@ public struct AlbumModule {
 
         try parent.addSignature(params: &payload)
 
-        try requester.postFormURLEncoded(payload: payload, secure: false, onCompletion: onCompletion)
+        try requester.postFormURLEncoded(payload: payload, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func removeTag(
@@ -87,7 +89,7 @@ public struct AlbumModule {
         )
 
         try parent.addSignature(params: &payload)
-        try requester.postFormURLEncoded(payload: payload, secure: false, onCompletion: onCompletion)
+        try requester.postFormURLEncoded(payload: payload, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getTags(
@@ -96,7 +98,7 @@ public struct AlbumModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTags)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getTags(
@@ -111,7 +113,7 @@ public struct AlbumModule {
         }
 
         params = parent.normalizeParams(params: params, method: APIMethod.getTags)
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getTopTags(
@@ -129,7 +131,7 @@ public struct AlbumModule {
             method: APIMethod.getTopTags
         )
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getTopTags(
@@ -145,7 +147,7 @@ public struct AlbumModule {
             method: APIMethod.getTopTags
         )
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
     
 }

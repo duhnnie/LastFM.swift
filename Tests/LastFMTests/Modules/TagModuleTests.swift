@@ -14,6 +14,7 @@ class TagModuleTests: XCTestCase {
     override func setUpWithError() throws {
         instance = TagModule(
             parent: Self.lastFM,
+            secure: true,
             requester: RequestUtils(apiClient: apiClientMock)
         )
     }
@@ -84,7 +85,7 @@ class TagModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=tag.gettoptracks&api_key=\(Constants.API_KEY)&limit=5&format=json&tag=Pop%20punk&page=1"
+                "https://ws.audioscrobbler.com/2.0?method=tag.gettoptracks&api_key=\(Constants.API_KEY)&limit=5&format=json&tag=Pop%20punk&page=1"
             )
         )
     }
@@ -163,7 +164,7 @@ class TagModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=tag.gettopartists&api_key=\(Constants.API_KEY)&limit=5&format=json&tag=Progressive&page=1"
+                "https://ws.audioscrobbler.com/2.0?method=tag.gettopartists&api_key=\(Constants.API_KEY)&limit=5&format=json&tag=Progressive&page=1"
             )
         )
 
@@ -234,7 +235,7 @@ class TagModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=tag.gettopalbums&tag=Experimental&limit=5&page=12&api_key=\(Constants.API_KEY)&format=json"
+                "https://ws.audioscrobbler.com/2.0?method=tag.gettopalbums&tag=Experimental&limit=5&page=12&api_key=\(Constants.API_KEY)&format=json"
             )
         )
     }
@@ -274,7 +275,7 @@ class TagModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=tag.getinfo&format=json&name=indie&lang=en&api_key=someAPIKey"
+                "https://ws.audioscrobbler.com/2.0?method=tag.getinfo&format=json&name=indie&lang=en&api_key=someAPIKey"
             )
         )
     }
@@ -313,7 +314,7 @@ class TagModuleTests: XCTestCase {
 
         XCTAssertTrue(
             Util.areSameURL(
-                "http://ws.audioscrobbler.com/2.0?format=json&tag=alternative%20rock&method=tag.getweeklychartlist&api_key=someAPIKey",
+                "https://ws.audioscrobbler.com/2.0?format=json&tag=alternative%20rock&method=tag.getweeklychartlist&api_key=someAPIKey",
                 apiClientMock.getCalls[0].url.absoluteString
             )
         )
@@ -357,7 +358,7 @@ class TagModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?api_key=someAPIKey&format=json&tag=some%20tag&method=tag.getsimilar"
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&format=json&tag=some%20tag&method=tag.getsimilar"
             )
         )
     }
@@ -403,7 +404,7 @@ class TagModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=tag.gettoptags&api_key=someAPIKey&offset=0&num_res=2&format=json"
+                "https://ws.audioscrobbler.com/2.0?method=tag.gettoptags&api_key=someAPIKey&offset=0&num_res=2&format=json"
             )
         )
     }

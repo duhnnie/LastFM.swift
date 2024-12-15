@@ -18,10 +18,12 @@ public struct TagModule {
 
     private let parent: LastFM
     private let requester: Requester
+    private let secure: Bool
 
-    internal init(parent: LastFM, requester: Requester = RequestUtils.shared) {
+    internal init(parent: LastFM, secure: Bool, requester: Requester = RequestUtils.shared) {
         self.parent = parent
         self.requester = requester
+        self.secure = secure
     }
 
     public func getTopTracks(
@@ -33,7 +35,7 @@ public struct TagModule {
             method: APIMethod.getTopTracks
         )
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getTopArtists(
@@ -45,7 +47,7 @@ public struct TagModule {
             method: APIMethod.getTopArtists
         )
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
 
@@ -58,7 +60,7 @@ public struct TagModule {
             method: APIMethod.getTopAlbums
         )
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getInfo(
@@ -76,7 +78,7 @@ public struct TagModule {
 
         requester.getDataAndParse(
             params: normalizedParams,
-            secure: false,
+            secure: self.secure,
             onCompletion: onCompletion
         )
     }
@@ -90,7 +92,7 @@ public struct TagModule {
             method: APIMethod.getWeeklyChartList
         )
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getSimilar(
@@ -102,7 +104,7 @@ public struct TagModule {
             method: APIMethod.getSimilar
         )
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getTopTags(
@@ -118,7 +120,7 @@ public struct TagModule {
             method: APIMethod.getTopTags
         )
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
 }

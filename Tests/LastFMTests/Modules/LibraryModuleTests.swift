@@ -14,6 +14,7 @@ class LibraryModuleTests: XCTestCase {
     override func setUpWithError() throws {
         instance = LibraryModule(
             parent: Self.lastFM,
+            secure: true,
             requester: RequestUtils(apiClient: apiClientMock)
         )
     }
@@ -92,7 +93,7 @@ class LibraryModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=library.getartists&user=someuser&limit=5&page=1&api_key=\(Constants.API_KEY)&format=json"
+                "https://ws.audioscrobbler.com/2.0?method=library.getartists&user=someuser&limit=5&page=1&api_key=\(Constants.API_KEY)&format=json"
             )
         )
     }
