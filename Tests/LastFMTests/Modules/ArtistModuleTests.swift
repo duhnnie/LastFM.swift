@@ -14,6 +14,7 @@ class ArtistModuleTests: XCTestCase {
     override func setUpWithError() throws {
         instance = ArtistModule(
             parent: Self.lastFM,
+            secure: true,
             requester: RequestUtils(apiClient: apiClient)
         )
     }
@@ -94,7 +95,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettoptracks&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
+                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettoptracks&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
         )
     }
 
@@ -135,7 +136,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettoptracks&mbid=some-artist-mbid&autocorrect=1&limit=5&page=1")
+                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettoptracks&mbid=some-artist-mbid&autocorrect=1&limit=5&page=1")
         )
     }
 
@@ -209,7 +210,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettoptracks&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
+                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettoptracks&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
         )
     }
 
@@ -325,7 +326,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.getsimilar&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)")
+                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.getsimilar&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)")
         )
     }
 
@@ -367,7 +368,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.getsimilar&mbid=some-artist-mbid&autocorrect=0&limit=2")
+                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.getsimilar&mbid=some-artist-mbid&autocorrect=0&limit=2")
         )
     }
 
@@ -425,7 +426,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.search&artist=neuronas&limit=\(params.limit)&page=\(params.page)")
+                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.search&artist=neuronas&limit=\(params.limit)&page=\(params.page)")
         )
     }
 
@@ -512,7 +513,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettopalbums&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
+                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettopalbums&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
         )
     }
 
@@ -547,7 +548,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettopalbums&mbid=some-artist-mbid&autocorrect=1&limit=5&page=1")
+                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettopalbums&mbid=some-artist-mbid&autocorrect=1&limit=5&page=1")
         )
     }
 
@@ -816,7 +817,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?format=json&username=pepiro&artist=Some%20Artist&api_key=someAPIKey&autocorrect=1&method=artist.getInfo&lang=en"
+                "https://ws.audioscrobbler.com/2.0?format=json&username=pepiro&artist=Some%20Artist&api_key=someAPIKey&autocorrect=1&method=artist.getInfo&lang=en"
             )
         )
     }
@@ -858,7 +859,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?format=json&artist=Some%20Artist&api_key=someAPIKey&autocorrect=1&method=artist.getInfo&lang=es"
+                "https://ws.audioscrobbler.com/2.0?format=json&artist=Some%20Artist&api_key=someAPIKey&autocorrect=1&method=artist.getInfo&lang=es"
             )
         )
     }
@@ -902,7 +903,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?format=json&mbid=some-mbid&api_key=someAPIKey&autocorrect=1&method=artist.getInfo&username=pepiro&lang=pt"
+                "https://ws.audioscrobbler.com/2.0?format=json&mbid=some-mbid&api_key=someAPIKey&autocorrect=1&method=artist.getInfo&username=pepiro&lang=pt"
             )
         )
     }
@@ -932,7 +933,7 @@ class ArtistModuleTests: XCTestCase {
 
         XCTAssertEqual(
             apiClient.postCalls[0].url.absoluteString,
-            "http://ws.audioscrobbler.com/2.0?format=json"
+            "https://ws.audioscrobbler.com/2.0?format=json"
         )
 
         let payloadData = try XCTUnwrap(apiClient.postCalls[0].body)
@@ -971,7 +972,7 @@ class ArtistModuleTests: XCTestCase {
 
         XCTAssertEqual(
             apiClient.postCalls[0].url.absoluteString,
-            "http://ws.audioscrobbler.com/2.0?format=json"
+            "https://ws.audioscrobbler.com/2.0?format=json"
         )
 
         let payloadData = try XCTUnwrap(apiClient.postCalls[0].body)
@@ -1021,7 +1022,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=artist.getcorrection&artist=Some%20Artist&api_key=someAPIKey&format=json"
+                "https://ws.audioscrobbler.com/2.0?method=artist.getcorrection&artist=Some%20Artist&api_key=someAPIKey&format=json"
             )
         )
     }
@@ -1068,7 +1069,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&user=pepiro&method=artist.gettags&api_key=someAPIKey&format=json"
+                "https://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&user=pepiro&method=artist.gettags&api_key=someAPIKey&format=json"
             )
         )
     }
@@ -1109,7 +1110,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?mbid=some-artist-mbid&autocorrect=1&user=pepiro&method=artist.gettags&api_key=someAPIKey&format=json"
+                "https://ws.audioscrobbler.com/2.0?mbid=some-artist-mbid&autocorrect=1&user=pepiro&method=artist.gettags&api_key=someAPIKey&format=json"
             )
         )
     }
@@ -1152,7 +1153,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&method=artist.gettoptags&api_key=someAPIKey&format=json"
+                "https://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&method=artist.gettoptags&api_key=someAPIKey&format=json"
             )
         )
     }
@@ -1187,7 +1188,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?mbid=some-artist-mbid&autocorrect=0&method=artist.gettoptags&api_key=someAPIKey&format=json"
+                "https://ws.audioscrobbler.com/2.0?mbid=some-artist-mbid&autocorrect=0&method=artist.gettoptags&api_key=someAPIKey&format=json"
             )
         )
     }

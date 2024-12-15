@@ -54,7 +54,7 @@ class AuthModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?api_key=someAPIKey&format=json&method=auth.getsession&token=myToken&api_sig=a0a73c6e4fba81fb1fb1be8e92481634"
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&format=json&method=auth.getsession&token=myToken&api_sig=a0a73c6e4fba81fb1fb1be8e92481634"
             )
         )
     }
@@ -89,7 +89,7 @@ class AuthModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?format=json&api_sig=122ce70950973a4b1f1d8c59030fa108&method=auth.gettoken&api_key=someAPIKey"
+                "https://ws.audioscrobbler.com/2.0?format=json&api_sig=122ce70950973a4b1f1d8c59030fa108&method=auth.gettoken&api_key=someAPIKey"
             )
         )
     }
