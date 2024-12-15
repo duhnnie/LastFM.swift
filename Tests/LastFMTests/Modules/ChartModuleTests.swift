@@ -14,6 +14,7 @@ class ChartModuleTests: XCTestCase {
     override func setUpWithError() throws {
         instance = ChartModule(
             parent: Self.lastFM,
+            secure: true,
             requester: RequestUtils(apiClient: apiClient)
         )
     }
@@ -136,7 +137,7 @@ class ChartModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=chart.gettoptracks&page=\(params.page)&limit=\(params.limit)")
+                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=chart.gettoptracks&page=\(params.page)&limit=\(params.limit)")
         )
     }
 
@@ -285,7 +286,7 @@ class ChartModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?format=json&method=chart.gettoptags&limit=2&page=1&api_key=someAPIKey"
+                "https://ws.audioscrobbler.com/2.0?format=json&method=chart.gettoptags&limit=2&page=1&api_key=someAPIKey"
             )
         )
     }

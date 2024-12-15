@@ -14,6 +14,7 @@ class TrackModuleTests: XCTestCase {
     override func setUpWithError() throws {
         instance = TrackModule(
             parent: Self.lastFM,
+            secure: true,
             requester: RequestUtils(apiClient: apiClient)
         )
     }
@@ -85,7 +86,7 @@ class TrackModuleTests: XCTestCase {
 
         XCTAssertEqual(
             apiClient.postCalls[0].url.absoluteString,
-            "http://ws.audioscrobbler.com/2.0?format=json"
+            "https://ws.audioscrobbler.com/2.0?format=json"
         )
     }
 
@@ -222,7 +223,7 @@ class TrackModuleTests: XCTestCase {
 
         XCTAssertEqual(
             apiClient.postCalls[0].url.absoluteString,
-            "http://ws.audioscrobbler.com/2.0?format=json"
+            "https://ws.audioscrobbler.com/2.0?format=json"
         )
     }
 
@@ -358,7 +359,7 @@ class TrackModuleTests: XCTestCase {
 
         XCTAssertEqual(
             apiClient.postCalls[0].url.absoluteString,
-            "http://ws.audioscrobbler.com/2.0?format=json"
+            "https://ws.audioscrobbler.com/2.0?format=json"
         )
     }
 
@@ -400,7 +401,7 @@ class TrackModuleTests: XCTestCase {
 
         XCTAssertEqual(
             apiClient.postCalls[0].url.absoluteString,
-            "http://ws.audioscrobbler.com/2.0?format=json"
+            "https://ws.audioscrobbler.com/2.0?format=json"
         )
     }
 
@@ -462,7 +463,7 @@ class TrackModuleTests: XCTestCase {
 
         XCTAssertEqual(
             apiClient.postCalls[0].url.absoluteString,
-            "http://ws.audioscrobbler.com/2.0?format=json"
+            "https://ws.audioscrobbler.com/2.0?format=json"
         )
     }
 
@@ -523,7 +524,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some%20Track&format=json&method=track.getInfo&artist=Some%20Artist&autocorrect=1"
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some%20Track&format=json&method=track.getInfo&artist=Some%20Artist&autocorrect=1"
             )
         )
     }
@@ -585,7 +586,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some%20Track&format=json&method=track.getInfo&artist=Some%20Artist&autocorrect=1&username=pepiro"
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some%20Track&format=json&method=track.getInfo&artist=Some%20Artist&autocorrect=1&username=pepiro"
             )
         )
     }
@@ -673,7 +674,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?api_key=someAPIKey&format=json&method=track.getInfo&mbid=someTrackMBID&autocorrect=1"
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&format=json&method=track.getInfo&mbid=someTrackMBID&autocorrect=1"
             )
         )
     }
@@ -761,7 +762,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?api_key=someAPIKey&format=json&method=track.getInfo&mbid=someTrackMBID&autocorrect=1&username=pepiro"
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&format=json&method=track.getInfo&mbid=someTrackMBID&autocorrect=1&username=pepiro"
             )
         )
     }
@@ -830,7 +831,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?limit=5&method=track.search&artist=Some%20Artist&track=Some%20Track&api_key=someAPIKey&format=json&page=12"
+                "https://ws.audioscrobbler.com/2.0?limit=5&method=track.search&artist=Some%20Artist&track=Some%20Track&api_key=someAPIKey&format=json&page=12"
             )
         )
     }
@@ -866,7 +867,7 @@ class TrackModuleTests: XCTestCase {
 
         XCTAssertEqual(
             apiClient.postCalls[0].url.absoluteString,
-            "http://ws.audioscrobbler.com/2.0?format=json"
+            "https://ws.audioscrobbler.com/2.0?format=json"
         )
 
         let payloadData = try XCTUnwrap(apiClient.postCalls[0].body)
@@ -910,7 +911,7 @@ class TrackModuleTests: XCTestCase {
 
         XCTAssertEqual(
             apiClient.postCalls[0].url.absoluteString,
-            "http://ws.audioscrobbler.com/2.0?format=json"
+            "https://ws.audioscrobbler.com/2.0?format=json"
         )
 
         let payloadData = try XCTUnwrap(apiClient.postCalls[0].body)
@@ -971,7 +972,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?api_key=someAPIKey&method=track.getcorrection&format=json&track=Some%20Track&artist=Some%20Artist"
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&method=track.getcorrection&format=json&track=Some%20Track&artist=Some%20Artist"
             )
         )
     }
@@ -1044,7 +1045,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Track%20X&limit=2&method=track.getsimilar&format=json&artist=Artist%20X&autocorrect=1"
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Track%20X&limit=2&method=track.getsimilar&format=json&artist=Artist%20X&autocorrect=1"
             )
         )
     }
@@ -1085,7 +1086,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?api_key=someAPIKey&limit=2&method=track.getsimilar&format=json&mbid=some-mbid&autocorrect=1"
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&limit=2&method=track.getsimilar&format=json&mbid=some-mbid&autocorrect=1"
             )
         )
     }
@@ -1133,7 +1134,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&user=pepiro&method=track.gettags&api_key=someAPIKey&track=Some%20Track&format=json"
+                "https://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&user=pepiro&method=track.gettags&api_key=someAPIKey&track=Some%20Track&format=json"
             )
         )
     }
@@ -1174,7 +1175,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?mbid=some-track-mbid&autocorrect=1&user=pepiro&method=track.gettags&api_key=someAPIKey&format=json"
+                "https://ws.audioscrobbler.com/2.0?mbid=some-track-mbid&autocorrect=1&user=pepiro&method=track.gettags&api_key=someAPIKey&format=json"
             )
         )
     }
@@ -1222,7 +1223,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&method=track.gettoptags&api_key=someAPIKey&track=Some%20Track&format=json"
+                "https://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&method=track.gettoptags&api_key=someAPIKey&track=Some%20Track&format=json"
             )
         )
     }
@@ -1257,7 +1258,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?mbid=some-track-mbid&autocorrect=0&method=track.gettoptags&api_key=someAPIKey&format=json"
+                "https://ws.audioscrobbler.com/2.0?mbid=some-track-mbid&autocorrect=0&method=track.gettoptags&api_key=someAPIKey&format=json"
             )
         )
     }
