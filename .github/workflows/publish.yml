@@ -1,0 +1,15 @@
+name: Publish
+
+on:
+  push:
+    # Pattern matched against refs/tags
+    tags:        
+      - '*'  
+
+jobs:
+  publish-swift-package-registry:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Swift Package Registry
+        uses: twodayslate/swift-package-registry@v0.0.2
+        
