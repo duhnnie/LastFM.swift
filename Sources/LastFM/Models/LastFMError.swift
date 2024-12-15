@@ -19,6 +19,7 @@ public enum LastFMServiceErrorType: Int {
     case InvalidAPIKey = 10
     case ServiceOffline = 11
     case InvalidMethodSignature = 13
+    case UnauthorizedTokn = 14
     case TemporaryProcessingError = 16
     case SuspendedAPIKey = 26
     case RateLimitExceeded = 29

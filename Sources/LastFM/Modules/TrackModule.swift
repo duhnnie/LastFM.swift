@@ -24,10 +24,12 @@ public struct TrackModule {
 
     private let parent: LastFM
     private let requester: Requester
+    private let secure: Bool
 
-    internal init(parent: LastFM, requester: Requester = RequestUtils.shared) {
+    internal init(parent: LastFM, secure: Bool, requester: Requester = RequestUtils.shared) {
         self.parent = parent
         self.requester = requester
+        self.secure = secure
     }
 
     public func scrobble(
@@ -45,7 +47,7 @@ public struct TrackModule {
 
         try requester.postFormURLEncodedAndParse(
             payload: payload,
-            secure: false,
+            secure: self.secure,
             onCompletion: onCompletion
         )
     }
@@ -64,7 +66,7 @@ public struct TrackModule {
 
         try requester.postFormURLEncoded(
             payload: payload,
-            secure: false,
+            secure: self.secure,
             onCompletion: onCompletion
         )
     }
@@ -84,7 +86,7 @@ public struct TrackModule {
 
         try requester.postFormURLEncoded(
             payload: payload,
-            secure: false,
+            secure: self.secure,
             onCompletion: onCompletion
         )
     }
@@ -104,7 +106,7 @@ public struct TrackModule {
 
         try requester.postFormURLEncodedAndParse(
             payload: payload,
-            secure: false,
+            secure: self.secure,
             onCompletion: onCompletion
         )
     }
@@ -115,7 +117,7 @@ public struct TrackModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getInfo)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getInfo(
@@ -124,7 +126,7 @@ public struct TrackModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getInfo)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func search(
@@ -133,7 +135,7 @@ public struct TrackModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.search)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func addTags(
@@ -148,7 +150,7 @@ public struct TrackModule {
         )
 
         try parent.addSignature(params: &payload)
-        try requester.postFormURLEncoded(payload: payload, secure: false, onCompletion: onCompletion)
+        try requester.postFormURLEncoded(payload: payload, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func removeTag(
@@ -169,7 +171,7 @@ public struct TrackModule {
         )
 
         try parent.addSignature(params: &payload)
-        try requester.postFormURLEncoded(payload: payload, secure: false, onCompletion: onCompletion)
+        try requester.postFormURLEncoded(payload: payload, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getCorrection(
@@ -182,7 +184,7 @@ public struct TrackModule {
             method: APIMethod.getCorrection
         )
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getSimilar(
@@ -191,7 +193,7 @@ public struct TrackModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getSimilar)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getSimilar(
@@ -200,7 +202,7 @@ public struct TrackModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getSimilar)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getTags(
@@ -216,7 +218,7 @@ public struct TrackModule {
 
         params = parent.normalizeParams(params: params, method: APIMethod.getTags)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getTags(
@@ -232,7 +234,7 @@ public struct TrackModule {
 
         params = parent.normalizeParams(params: params, method: APIMethod.getTags)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getTopTags(
@@ -244,7 +246,7 @@ public struct TrackModule {
 
         params["autocorrect"] = autocorrect ? "1" : "0"
         params = parent.normalizeParams(params: params, method: APIMethod.getTopTags)
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getTopTags(
@@ -258,7 +260,7 @@ public struct TrackModule {
         ]
 
         params = parent.normalizeParams(params: params, method: APIMethod.getTopTags)
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
 }

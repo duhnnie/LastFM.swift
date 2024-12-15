@@ -7,20 +7,22 @@ final public class LastFM {
 
     private let apiKey: String
     private let apiSecret: String
+    private let secure: Bool
 
-    lazy private(set) public var User = UserModule(parent: self)
-    lazy private(set) public var Artist = ArtistModule(parent: self)
-    lazy private(set) public var Track = TrackModule(parent: self)
-    lazy private(set) public var Album = AlbumModule(parent: self)
-    lazy private(set) public var Tag = TagModule(parent: self)
-    lazy private(set) public var Geo = GeoModule(parent: self)
-    lazy private(set) public var Chart = ChartModule(parent: self)
-    lazy private(set) public var Library = LibraryModule(parent: self)
+    lazy private(set) public var User = UserModule(parent: self, secure: self.secure)
+    lazy private(set) public var Artist = ArtistModule(parent: self, secure: self.secure)
+    lazy private(set) public var Track = TrackModule(parent: self, secure: self.secure)
+    lazy private(set) public var Album = AlbumModule(parent: self, secure: self.secure)
+    lazy private(set) public var Tag = TagModule(parent: self, secure: self.secure)
+    lazy private(set) public var Geo = GeoModule(parent: self, secure: self.secure)
+    lazy private(set) public var Chart = ChartModule(parent: self, secure: self.secure)
+    lazy private(set) public var Library = LibraryModule(parent: self, secure: self.secure)
     lazy private(set) public var Auth = AuthModule(parent: self)
 
-    public init(apiKey: String, apiSecret: String) {
+    public init(apiKey: String, apiSecret: String, secure: Bool = true) {
         self.apiKey = apiKey
         self.apiSecret = apiSecret
+        self.secure = secure
     }
 
     internal func normalizeParams(
