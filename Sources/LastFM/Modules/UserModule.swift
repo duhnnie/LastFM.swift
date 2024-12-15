@@ -23,10 +23,12 @@ public struct UserModule {
 
     private let parent: LastFM
     private let requester: Requester
+    private let secure: Bool
 
-    internal init(parent: LastFM, requester: Requester = RequestUtils.shared) {
+    internal init(parent: LastFM, secure: Bool, requester: Requester = RequestUtils.shared) {
         self.parent = parent
         self.requester = requester
+        self.secure = secure
     }
 
     private func getBaseRecentTracks<T: Decodable>(
@@ -38,7 +40,7 @@ public struct UserModule {
 
         params["extended"] = extended ? "1" : "0"
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getRecentTracks(
@@ -61,7 +63,7 @@ public struct UserModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopTracks)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getWeeklyTrackChart(
@@ -73,7 +75,7 @@ public struct UserModule {
             method: APIMethod.getWeeklyTrackChart
         )
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: true, onCompletion: onCompletion)
     }
 
     public func getLovedTracks(
@@ -85,7 +87,7 @@ public struct UserModule {
             method: APIMethod.getLovedTracks
         )
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: true, onCompletion: onCompletion)
     }
 
     public func getTopArtists(
@@ -94,7 +96,7 @@ public struct UserModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopArtists)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getWeeklyArtistChart(
@@ -103,7 +105,7 @@ public struct UserModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getWeeklyArtistChart)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: true, onCompletion: onCompletion)
     }
 
     public func getTopAlbums(
@@ -112,7 +114,7 @@ public struct UserModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopAlbums)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getWeeklyAlbumChart(
@@ -121,19 +123,19 @@ public struct UserModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getWeeklyAlbumChart)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: true, onCompletion: onCompletion)
     }
 
     public func getInfo(user: String, onCompletion: @escaping LastFM.OnCompletion<UserInfo>) {
         let params = parent.normalizeParams(params: ["user": user], method: APIMethod.getInfo)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: true, onCompletion: onCompletion)
     }
     
     public func getInfo(sessionKey: String, onCompletion: @escaping LastFM.OnCompletion<UserInfo>) throws {
         let params = parent.normalizeParams(params: [:], method: APIMethod.getInfo, sessionKey: sessionKey)
 
-        try requester.postFormURLEncodedAndParse(payload: params, secure: false, onCompletion: onCompletion)
+        try requester.postFormURLEncodedAndParse(payload: params, secure: true, onCompletion: onCompletion)
     }
 
     public func getFriends(
@@ -145,7 +147,7 @@ public struct UserModule {
             method: APIMethod.getFriends
         )
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: true, onCompletion: onCompletion)
     }
 
     public func getWeeklyChartList(
@@ -157,7 +159,7 @@ public struct UserModule {
             method: APIMethod.getWeeklyChartList
         )
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: true, onCompletion: onCompletion)
     }
 
 }

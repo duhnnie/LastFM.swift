@@ -21,10 +21,12 @@ public struct ArtistModule {
 
     private let parent: LastFM
     private let requester: Requester
+    private let secure: Bool
 
-    internal init(parent: LastFM, requester: Requester = RequestUtils.shared) {
+    internal init(parent: LastFM, secure: Bool,  requester: Requester = RequestUtils.shared) {
         self.parent = parent
         self.requester = requester
+        self.secure = secure
     }
 
     private func internalGetTopTracks(
@@ -33,7 +35,7 @@ public struct ArtistModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopTracks)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getTopTracks(
@@ -56,7 +58,7 @@ public struct ArtistModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getSimilar)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getSimilar(
@@ -82,7 +84,7 @@ public struct ArtistModule {
             method: APIMethod.search
         )
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     private func internalGetTopAlbums(
@@ -91,7 +93,7 @@ public struct ArtistModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopAlbums)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getTopAlbums(
@@ -114,7 +116,7 @@ public struct ArtistModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getInfo)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func addTags(
@@ -133,7 +135,7 @@ public struct ArtistModule {
         )
 
         try parent.addSignature(params: &params)
-        try requester.postFormURLEncoded(payload: params, secure: false, onCompletion: onCompletion)
+        try requester.postFormURLEncoded(payload: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func removeTag(
@@ -152,7 +154,7 @@ public struct ArtistModule {
         )
 
         try parent.addSignature(params: &params)
-        try requester.postFormURLEncoded(payload: params, secure: false, onCompletion: onCompletion)
+        try requester.postFormURLEncoded(payload: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getCorrection(
@@ -164,7 +166,7 @@ public struct ArtistModule {
             method: APIMethod.getCorrection
         )
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getTags(
@@ -173,7 +175,7 @@ public struct ArtistModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTags)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getTags(
@@ -189,7 +191,7 @@ public struct ArtistModule {
 
         params = parent.normalizeParams(params: params, method: APIMethod.getTags)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getTopTags(
@@ -205,7 +207,7 @@ public struct ArtistModule {
             method: APIMethod.getTopTags
         )
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getTopTags(
@@ -221,7 +223,7 @@ public struct ArtistModule {
             method: APIMethod.getTopTags
         )
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
 }
