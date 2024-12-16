@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "LastFM.swift"
-  s.version          = "1.4.0"
+  s.version          = "1.4.1"
   s.summary          = "A library for consuming the last.fm API"
 
   s.description      = <<-DESC
@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
 
   s.homepage         = "https://github.com/duhnnie/LastFM.swift"
   s.license          = { :type => "MIT", :file => "LICENSE" }
-  s.author           = { "Daniel Canedo Ramos" => "me@duhnnie.net" }
+  s.author           = { "Daniel Canedo Ramos" => "me@duhnnie.com" }
   s.source           = { :git => "https://github.com/duhnnie/LastFM.swift.git", :tag => s.version.to_s }
 
   ios_deployment_target = "11.0"
