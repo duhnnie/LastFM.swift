@@ -83,7 +83,7 @@
                         "fulltrack": "0",
                         "#text": "0"
                     },
-                    "duration": 187,
+                    "duration": null,
                     "url": "http://tracks.com/track-3",
                     "name": "Track 3",
                     "@attr": {

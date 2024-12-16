@@ -105,7 +105,7 @@ class AlbumModuleTests: XCTestCase {
                 XCTAssertEqual(albumInfo.tracks?[1].artist.mbid, "artist-2-mbid")
 
                 XCTAssertEqual(albumInfo.tracks?[2].streamable, .noStreamable)
-                XCTAssertEqual(albumInfo.tracks?[2].duration, 187)
+                XCTAssertEqual(albumInfo.tracks?[2].duration, nil)
                 XCTAssertEqual(albumInfo.tracks?[2].url.absoluteString, "http://tracks.com/track-3")
                 XCTAssertEqual(albumInfo.tracks?[2].name, "Track 3")
                 XCTAssertEqual(albumInfo.tracks?[2].trackNumber, 3)
