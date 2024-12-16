@@ -205,7 +205,8 @@ internal extension KeyedDecodingContainer {
 
     func decodeIfPresent(_ type: Int.Type, forKey key: K) throws -> Int? {
         guard
-            (self.allKeys.contains { $0.stringValue == key.stringValue })
+            self.contains(key),
+            try !self.decodeNil(forKey: key)
         else {
             return nil
         }
@@ -215,7 +216,8 @@ internal extension KeyedDecodingContainer {
 
     func decodeIfPresent(_ type: UInt.Type, forKey key: K) throws -> UInt? {
         guard
-            (self.allKeys.contains { $0.stringValue == key.stringValue })
+            self.contains(key),
+            try !self.decodeNil(forKey: key)
         else {
             return nil
         }
@@ -225,7 +227,8 @@ internal extension KeyedDecodingContainer {
 
     func decodeIfPresent(_ type: UInt8.Type, forKey key: K) throws -> UInt8? {
         guard
-            (self.allKeys.contains { $0.stringValue == key.stringValue })
+            self.contains(key),
+            try !self.decodeNil(forKey: key)
         else {
             return nil
         }
@@ -235,7 +238,8 @@ internal extension KeyedDecodingContainer {
 
     func decodeIfPresent(_ type: Float.Type, forKey key: K) throws -> Float? {
         guard
-            (self.allKeys.contains { $0.stringValue == key.stringValue })
+            self.contains(key),
+            try !self.decodeNil(forKey: key)
         else {
             return nil
         }
@@ -245,7 +249,8 @@ internal extension KeyedDecodingContainer {
 
     func decodeIfPresent(_ type: Bool.Type, forKey key: K) throws -> Bool? {
         guard
-            (self.allKeys.contains { $0.stringValue == key.stringValue })
+            self.contains(key),
+            try !self.decodeNil(forKey: key)
         else {
             return nil
         }
@@ -255,7 +260,8 @@ internal extension KeyedDecodingContainer {
 
     func decodeIfPresent(_ type: Date.Type, forKey key: K) throws -> Date? {
         guard
-            (self.allKeys.contains { $0.stringValue == key.stringValue })
+            self.contains(key),
+            try !self.decodeNil(forKey: key)
         else {
             return nil
         }
