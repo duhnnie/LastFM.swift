@@ -116,7 +116,7 @@
                         "fulltrack": "0",
                         "#text": "0"
                     },
-                    "duration": 222,
+                    "duration": null,
                     "url": "http://tracks.com/track-5",
                     "name": "Track 5",
                     "@attr": {
