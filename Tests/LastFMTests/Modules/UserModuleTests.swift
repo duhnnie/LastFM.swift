@@ -14,6 +14,7 @@ class UserTests: XCTestCase {
     override func setUpWithError() throws {
         instance = UserModule(
             parent: Self.lastFM,
+            secure: true,
             requester: RequestUtils(apiClient: apiClientMock)
         )
     }
@@ -238,7 +239,7 @@ class UserTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=\(params.user)&extended=0&limit=\(params.limit)&api_key=\(Constants.API_KEY)&format=json&page=\(params.page)"
+                "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=\(params.user)&extended=0&limit=\(params.limit)&api_key=\(Constants.API_KEY)&format=json&page=\(params.page)"
             )
         )
     }
@@ -492,7 +493,7 @@ class UserTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=\(params.user)&extended=1&limit=\(params.limit)&api_key=\(Constants.API_KEY)&format=json&page=\(params.page)&from=\(params.from!)&to=\(params.to!)"
+                "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=\(params.user)&extended=1&limit=\(params.limit)&api_key=\(Constants.API_KEY)&format=json&page=\(params.page)&from=\(params.from!)&to=\(params.to!)"
             )
         )
     }
@@ -592,7 +593,7 @@ class UserTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=user.gettoptracks&user=\(params.user)&limit=\(params.limit)&page=\(params.page)&period=\(params.period.rawValue)&api_key=\(Constants.API_KEY)&format=json"
+                "https://ws.audioscrobbler.com/2.0?method=user.gettoptracks&user=\(params.user)&limit=\(params.limit)&page=\(params.page)&period=\(params.period.rawValue)&api_key=\(Constants.API_KEY)&format=json"
             )
         )
     }
@@ -686,7 +687,7 @@ class UserTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=user.getweeklytrackchart&user=\(params.user)&from=\(params.from)&to=\(params.to)&api_key=\(Constants.API_KEY)&format=json"
+                "https://ws.audioscrobbler.com/2.0?method=user.getweeklytrackchart&user=\(params.user)&from=\(params.from)&to=\(params.to)&api_key=\(Constants.API_KEY)&format=json"
             )
         )
     }
@@ -790,7 +791,7 @@ class UserTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=user.getlovedtracks&user=someUser&limit=5&page=12&api_key=\(Constants.API_KEY)&format=json"
+                "https://ws.audioscrobbler.com/2.0?method=user.getlovedtracks&user=someUser&limit=5&page=12&api_key=\(Constants.API_KEY)&format=json"
             )
         )
     }
@@ -871,7 +872,7 @@ class UserTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=user.gettopartists&user=\(params.user)&period=\(params.period)&limit=\(params.limit)&page=\(params.page)&api_key=\(Constants.API_KEY)&format=json"
+                "https://ws.audioscrobbler.com/2.0?method=user.gettopartists&user=\(params.user)&period=\(params.period)&limit=\(params.limit)&page=\(params.page)&api_key=\(Constants.API_KEY)&format=json"
             )
         )
     }
@@ -939,7 +940,7 @@ class UserTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=user.getweeklyartistchart&user=\(params.user)&from=\(params.from)&to=\(params.to)&api_key=\(Constants.API_KEY)&format=json"
+                "https://ws.audioscrobbler.com/2.0?method=user.getweeklyartistchart&user=\(params.user)&from=\(params.from)&to=\(params.to)&api_key=\(Constants.API_KEY)&format=json"
             )
         )
     }
@@ -1010,7 +1011,7 @@ class UserTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=user.gettopalbums&user=\(params.user)&period=\(params.period)&limit=\(params.limit)&page=\(params.page)&api_key=\(Constants.API_KEY)&format=json"
+                "https://ws.audioscrobbler.com/2.0?method=user.gettopalbums&user=\(params.user)&period=\(params.period)&limit=\(params.limit)&page=\(params.page)&api_key=\(Constants.API_KEY)&format=json"
             )
         )
     }
@@ -1069,7 +1070,7 @@ class UserTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=user.getweeklyalbumchart&user=\(params.user)&from=\(params.from)&to=\(params.to)&api_key=\(Constants.API_KEY)&format=json"
+                "https://ws.audioscrobbler.com/2.0?method=user.getweeklyalbumchart&user=\(params.user)&from=\(params.from)&to=\(params.to)&api_key=\(Constants.API_KEY)&format=json"
             )
         )
     }
@@ -1146,7 +1147,7 @@ class UserTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClientMock.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?method=user.getinfo&user=pepito&api_key=\(Constants.API_KEY)&format=json"
+                "https://ws.audioscrobbler.com/2.0?method=user.getinfo&user=pepito&api_key=\(Constants.API_KEY)&format=json"
             )
         )
     }
@@ -1240,7 +1241,7 @@ class UserTests: XCTestCase {
         
         XCTAssertTrue(
             Util.areSameURL(
-                "http://ws.audioscrobbler.com/2.0?format=json",
+                "https://ws.audioscrobbler.com/2.0?format=json",
                 apiClientMock.postCalls[0].url.absoluteString
             )
         )
@@ -1324,7 +1325,7 @@ class UserTests: XCTestCase {
 
         XCTAssertTrue(
             Util.areSameURL(
-                "http://ws.audioscrobbler.com/2.0?method=user.getfriends&format=json&api_key=someAPIKey&page=1&user=pepiro&limit=2",
+                "https://ws.audioscrobbler.com/2.0?method=user.getfriends&format=json&api_key=someAPIKey&page=1&user=pepiro&limit=2",
                 apiClientMock.getCalls[0].url.absoluteString
             )
         )
@@ -1364,7 +1365,7 @@ class UserTests: XCTestCase {
 
         XCTAssertTrue(
             Util.areSameURL(
-                "http://ws.audioscrobbler.com/2.0?format=json&user=pepiro&method=user.getweeklychartlist&api_key=someAPIKey",
+                "https://ws.audioscrobbler.com/2.0?format=json&user=pepiro&method=user.getweeklychartlist&api_key=someAPIKey",
                 apiClientMock.getCalls[0].url.absoluteString
             )
         )

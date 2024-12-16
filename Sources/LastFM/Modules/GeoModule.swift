@@ -13,10 +13,12 @@ public struct GeoModule {
 
     private let parent: LastFM
     private let requester: Requester
+    private let secure: Bool
 
-    internal init(parent: LastFM, requester: Requester = RequestUtils.shared) {
+    internal init(parent: LastFM, secure: Bool, requester: Requester = RequestUtils.shared) {
         self.parent = parent
         self.requester = requester
+        self.secure = secure
     }
 
     public func getTopTracks(
@@ -25,7 +27,7 @@ public struct GeoModule {
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopTracks)
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
 
     public func getTopArtists(
@@ -37,7 +39,7 @@ public struct GeoModule {
             method: APIMethod.getTopArtists
         )
 
-        requester.getDataAndParse(params: params, secure: false, onCompletion: onCompletion)
+        requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
     
 }

@@ -14,6 +14,7 @@ class GeoModuleTests: XCTestCase {
     override func setUpWithError() throws {
         instance = GeoModule(
             parent: Self.lastFM,
+            secure: true,
             requester: RequestUtils(apiClient: apiClient)
         )
     }
@@ -95,7 +96,7 @@ class GeoModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=geo.gettoptracks&country=\(params.country)&location=\(params.location!)&limit=\(params.limit)&page=\(params.page)")
+                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=geo.gettoptracks&country=\(params.country)&location=\(params.location!)&limit=\(params.limit)&page=\(params.page)")
         )
     }
 
@@ -204,7 +205,7 @@ class GeoModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "http://ws.audioscrobbler.com/2.0?format=json&api_key=someAPIKey&country=australia&method=geo.gettopartists&limit=5&page=1"
+                "https://ws.audioscrobbler.com/2.0?format=json&api_key=someAPIKey&country=australia&method=geo.gettopartists&limit=5&page=1"
             )
         )
     }
