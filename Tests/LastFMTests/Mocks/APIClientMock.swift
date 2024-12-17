@@ -105,6 +105,8 @@ final internal class APIClientMock: APIClient, Mock {
         response = nil
         error = nil
         getCalls.removeAll()
+        asyncGetCalls.removeAll()
         postCalls.removeAll()
+        asyncPostCalls.removeAll()
     }
 }
