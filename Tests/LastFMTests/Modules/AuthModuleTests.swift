@@ -22,6 +22,38 @@ class AuthModuleTests: XCTestCase {
         apiClient.clearMock()
     }
 
+    private func validateSession(_ session: ServiceSession) {
+        XCTAssertEqual(session.name, "pepiro")
+        XCTAssertEqual(session.key, "1234567890")
+        XCTAssertEqual(session.subscriber, false)
+    }
+
+    func test_getSession_success() async throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/auth.getSession",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        let session = try await instance.getSession(token: "myToken")
+
+        validateSession(session)
+
+        XCTAssertEqual(apiClient.asyncGetCalls.count, 1)
+        XCTAssertEqual(apiClient.asyncGetCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.asyncGetCalls[0].url.absoluteString,
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&format=json&method=auth.getsession&token=myToken&api_sig=a0a73c6e4fba81fb1fb1be8e92481634"
+            )
+        )
+    }
+
     func test_getSession_success() throws {
         let jsonURL = Bundle.module.url(
             forResource: "Resources/auth.getSession",
@@ -39,9 +71,7 @@ class AuthModuleTests: XCTestCase {
 
             switch (result) {
             case .success(let session):
-                XCTAssertEqual(session.name, "pepiro")
-                XCTAssertEqual(session.key, "1234567890")
-                XCTAssertEqual(session.subscriber, false)
+                self.validateSession(session)
             case .failure(let error):
                 XCTFail("It was expected to succeed, but it failed. Error: \(error.localizedDescription)")
             }
@@ -55,6 +85,31 @@ class AuthModuleTests: XCTestCase {
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
                 "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&format=json&method=auth.getsession&token=myToken&api_sig=a0a73c6e4fba81fb1fb1be8e92481634"
+            )
+        )
+    }
+
+    func test_getToken_success() async throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/auth.getToken",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        let token = try await instance.getToken()
+        XCTAssertEqual(token, "0987654321")
+
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "https://ws.audioscrobbler.com/2.0?format=json&api_sig=122ce70950973a4b1f1d8c59030fa108&method=auth.gettoken&api_key=someAPIKey"
             )
         )
     }
@@ -94,6 +149,47 @@ class AuthModuleTests: XCTestCase {
         )
     }
 
+    func test_getMobileSession_success() async throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/auth.getSession",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+
+        let expectedPayload = "password=436tggdsgh&api_sig=fb79d4df16117ad14c423bea23f3d107&username=pepiro&api_key=someAPIKey&method=auth.getmobilesession"
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        let session = try await instance.getMobileSession(username: "pepiro", password: "436tggdsgh")
+
+        validateSession(session)
+
+        XCTAssertEqual(apiClient.postCalls.count, 1)
+        XCTAssertEqual(
+            apiClient.postCalls[0].headers,
+            ["Content-Type": "application/x-www-formurlencoded"]
+        )
+
+        let payloadData = try XCTUnwrap(apiClient.postCalls[0].body)
+        let payload = String(data: payloadData, encoding: .utf8)!
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                "https://domain.com/?\(payload)",
+                "https://domain.com/?\(expectedPayload)"
+            )
+        )
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.postCalls[0].url.absoluteString,
+                "https://ws.audioscrobbler.com/2.0?format=json"
+            )
+        )
+    }
+
     func test_getMobileSession_success() throws {
         let jsonURL = Bundle.module.url(
             forResource: "Resources/auth.getSession",
@@ -113,9 +209,7 @@ class AuthModuleTests: XCTestCase {
 
             switch (result) {
             case .success(let session):
-                XCTAssertEqual(session.name, "pepiro")
-                XCTAssertEqual(session.key, "1234567890")
-                XCTAssertEqual(session.subscriber, false)
+                self.validateSession(session)
             case .failure(let error):
                 XCTFail("It was expected to succeed, but it failed. Error: \(error.localizedDescription)")
             }
