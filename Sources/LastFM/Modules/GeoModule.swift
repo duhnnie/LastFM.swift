@@ -20,6 +20,12 @@ public struct GeoModule {
         self.requester = requester
         self.secure = secure
     }
+    
+    public func getTopTracks(params: GeoTopTracksParams) async throws -> CollectionPage<GeoTopTrack> {
+        let params = parent.normalizeParams(params: params, method: APIMethod.getTopTracks)
+
+        return try await requester.getDataAndParse(params: params, type: CollectionPage<GeoTopTrack>.self, secure: self.secure)
+    }
 
     public func getTopTracks(
         params: GeoTopTracksParams,
@@ -28,6 +34,15 @@ public struct GeoModule {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopTracks)
 
         requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
+    }
+    
+    public func getTopArtists(params: SearchParams) async throws -> CollectionPage<GeoTopArtist> {
+        let params = parent.normalizeParams(
+            params: params.toDictionary(termKey: "country"),
+            method: APIMethod.getTopArtists
+        )
+
+        return try await requester.getDataAndParse(params: params, type: CollectionPage<GeoTopArtist>.self, secure: self.secure)
     }
 
     public func getTopArtists(
