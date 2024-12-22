@@ -21,6 +21,7 @@ public struct GeoModule {
         self.secure = secure
     }
     
+    @available(iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func getTopTracks(params: GeoTopTracksParams) async throws -> CollectionPage<GeoTopTrack> {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopTracks)
 
@@ -36,6 +37,7 @@ public struct GeoModule {
         requester.getDataAndParse(params: params, secure: self.secure, onCompletion: onCompletion)
     }
     
+    @available(iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func getTopArtists(params: SearchParams) async throws -> CollectionPage<GeoTopArtist> {
         let params = parent.normalizeParams(
             params: params.toDictionary(termKey: "country"),
