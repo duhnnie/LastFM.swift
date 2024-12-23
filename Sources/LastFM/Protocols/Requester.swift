@@ -15,6 +15,13 @@ internal protocol Requester {
         secure: Bool,
         onCompletion: @escaping LastFM.OnCompletion<T>
     )
+    
+    @available(iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func postFormURLEncodedAndParse<T: Decodable>(
+        payload: [String: String],
+        type: T.Type,
+        secure: Bool
+    ) async throws -> T
 
     func postFormURLEncodedAndParse<T: Decodable>(
         payload: [String: String],

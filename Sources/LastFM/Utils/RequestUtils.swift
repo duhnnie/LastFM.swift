@@ -176,6 +176,26 @@ internal struct RequestUtils: Requester {
         apiClient.get(url, headers: nil, onCompletion: onRequestCompletion)
     }
 
+    @available(iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    internal func postFormURLEncodedAndParse<T: Decodable>(
+        payload: [String: String],
+        type: T.Type,
+        secure: Bool
+    ) async throws -> T {
+        guard let headerAndBody = try? Self.buildForFormURLEncoded(payload: payload) else {
+            throw RuntimeError("Error at building payload body.")
+        }
+
+        let body = headerAndBody.body
+        let headers = headerAndBody.headers
+        let url = Self.build(params: ["format": "json"], secure: secure)
+        
+        let (data, response) = try await apiClient.post(url, body: body, headers: headers)
+        try Self.validateResponse(data: data, response: response)
+        
+        return try Self.encodeEntity(data: data, to: type.self)
+    }
+    
     internal func postFormURLEncodedAndParse<T: Decodable>(
         payload: [String: String],
         secure: Bool,
