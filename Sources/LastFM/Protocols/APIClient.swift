@@ -1,6 +1,10 @@
 import Foundation
 import SwiftRestClient
 
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 internal protocol APIClient {
     
     @available(iOS 13.0, watchOS 6.0, tvOS 13.0, *)
