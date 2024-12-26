@@ -46,17 +46,20 @@ public struct LastFMImages: Codable {
 
             let urlString = try imageContainer.decode(String.self, forKey: .url)
 
+            // NOTE: from swift 6 an empty string is a valid URL,
+            // but on LastFM responses an empty string means a absence of image
+            // so we return nil for any empty string
             switch (size) {
             case .S:
-                self.small = URL(string: urlString)
+                self.small = urlString.isEmpty ? nil : URL(string: urlString)
             case .M:
-                self.medium = URL(string: urlString)
+                self.medium = urlString.isEmpty ? nil : URL(string: urlString)
             case .L:
-                self.large = URL(string: urlString)
+                self.large = urlString.isEmpty ? nil : URL(string: urlString)
             case .XL:
-                self.extraLarge = URL(string: urlString)
+                self.extraLarge = urlString.isEmpty ? nil : URL(string: urlString)
             case .MG:
-                self.mega = URL(string: urlString)
+                self.mega = urlString.isEmpty ? nil : URL(string: urlString)
             }
         }
     }

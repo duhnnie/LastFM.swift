@@ -65,6 +65,35 @@ internal struct RequestUtils: Requester {
 
         return ( body: body, headers: headers )
     }
+    
+    private static func validateResponse(data: Data, response: URLResponse?) throws {
+        do {
+            if
+                let httpResponse = response as? HTTPURLResponse,
+                httpResponse.statusCode == 200
+            {
+                return
+            } else {
+                let jsonDict = try JSONSerialization.jsonObject(
+                    with: data,
+                    options: []
+                ) as? [String: Any]
+
+                guard
+                    let json = jsonDict,
+                    let code = json["error"] as? Int,
+                    let message = json["message"] as? String,
+                    let lastfmErrorType = LastFMServiceErrorType(rawValue: code)
+                else {
+                    throw LastFMError.OtherError(RuntimeError("Unknown response"))
+                }
+
+                throw LastFMError.LastFMServiceError(lastfmErrorType, message)
+            }
+        } catch {
+            throw error
+        }
+    }
 
     private static func handleResponse(
         _ onCompletion: @escaping LastFM.OnCompletion<Data>
@@ -81,33 +110,21 @@ internal struct RequestUtils: Requester {
             }
 
             do {
-                if
-                    let httpResponse = response as? HTTPURLResponse,
-                    httpResponse.statusCode == 200
-                {
-                    onCompletion(.success(data))
-                } else {
-                    let jsonDict = try JSONSerialization.jsonObject(
-                        with: data,
-                        options: []
-                    ) as? [String: Any]
-
-                    guard
-                        let json = jsonDict,
-                        let code = json["error"] as? Int,
-                        let message = json["message"] as? String,
-                        let lastfmErrorType = LastFMServiceErrorType(rawValue: code)
-                    else {
-                        onCompletion(.failure(.OtherError(RuntimeError("Unknown response"))))
-                        return
-                    }
-
-                    onCompletion(.failure(.LastFMServiceError(lastfmErrorType, message)))
-                }
+                try Self.validateResponse(data: data, response: response)
+                onCompletion(.success(data))
+            } catch let error as LastFMError {
+                onCompletion(.failure(error))
             } catch {
                 onCompletion(.failure(.OtherError(error)))
             }
         }
+    }
+    
+    private static func encodeEntity<T: Decodable>(data: Data, to: T.Type) throws -> T {
+        return try JSONDecoder().decode(
+            to,
+            from: data
+        )
     }
 
     private static func handleEntityDecoding<T: Decodable>(
@@ -117,11 +134,7 @@ internal struct RequestUtils: Requester {
             switch (result) {
             case .success(let data):
                 do {
-                    let entity = try JSONDecoder().decode(
-                        T.self,
-                        from: data
-                    )
-
+                    let entity = try Self.encodeEntity(data: data, to: T.self)
                     onCompletion(.success(entity))
                 } catch{
                     onCompletion(.failure(.OtherError(error)))
@@ -130,6 +143,22 @@ internal struct RequestUtils: Requester {
                 onCompletion(.failure(error))
             }
         }
+    }
+    
+    @available(iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    internal func getDataAndParse<T: Decodable>(
+        params: [String: String],
+        type: T.Type,
+        secure: Bool = false
+    ) async throws -> T {
+        var params = params
+        params["format"] =  "json"
+
+        let url = Self.build(params: params, secure: secure)
+        let (data, response) = try await apiClient.get(url, headers: nil)
+        try Self.validateResponse(data: data, response: response)
+        
+        return try Self.encodeEntity(data: data, to: type.self)
     }
 
     internal func getDataAndParse<T: Decodable>(
@@ -147,6 +176,26 @@ internal struct RequestUtils: Requester {
         apiClient.get(url, headers: nil, onCompletion: onRequestCompletion)
     }
 
+    @available(iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    internal func postFormURLEncodedAndParse<T: Decodable>(
+        payload: [String: String],
+        type: T.Type,
+        secure: Bool
+    ) async throws -> T {
+        guard let headerAndBody = try? Self.buildForFormURLEncoded(payload: payload) else {
+            throw RuntimeError("Error at building payload body.")
+        }
+
+        let body = headerAndBody.body
+        let headers = headerAndBody.headers
+        let url = Self.build(params: ["format": "json"], secure: secure)
+        
+        let (data, response) = try await apiClient.post(url, body: body, headers: headers)
+        try Self.validateResponse(data: data, response: response)
+        
+        return try Self.encodeEntity(data: data, to: type.self)
+    }
+    
     internal func postFormURLEncodedAndParse<T: Decodable>(
         payload: [String: String],
         secure: Bool,
@@ -163,6 +212,23 @@ internal struct RequestUtils: Requester {
         let onRequestCompletion = Self.handleResponse(onDataReady)
 
         apiClient.post(url, body: body, headers: headers, onCompletion: onRequestCompletion)
+    }
+    
+    @available(iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    internal func postFormURLEncoded(
+        payload: [String: String],
+        secure: Bool
+    ) async throws {
+        guard let headerAndBody = try? Self.buildForFormURLEncoded(payload: payload) else {
+            throw RuntimeError("Error at building payload body.")
+        }
+
+        let body = headerAndBody.body
+        let headers = headerAndBody.headers
+        let url = Self.build(params: ["format": "json"], secure: secure)
+        
+        let (data, response) = try await apiClient.post(url, body: body, headers: headers)
+        try Self.validateResponse(data: data, response: response)
     }
 
     internal func postFormURLEncoded(

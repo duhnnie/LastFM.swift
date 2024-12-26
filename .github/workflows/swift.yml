@@ -34,5 +34,5 @@ jobs:
     # https://github.com/apple/swift/issues/56730
     # https://github.com/apple/swift-corelibs-foundation/issues/4804
 
-    # - name: Run tests
-    #   run: swift test -v
+    - name: Run tests
+      run: swift test -v

@@ -19,6 +19,20 @@ public struct LibraryModule {
         self.requester = requester
         self.secure = secure
     }
+    
+    @available(iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    public func getArtists(params: SearchParams) async throws -> CollectionPage<LibraryArtist> {
+        let params = parent.normalizeParams(
+            params: params.toDictionary(termKey: "user"),
+            method: APIMethod.getArtists
+        )
+        
+        return try await requester.getDataAndParse(
+            params: params,
+            type: CollectionPage<LibraryArtist>.self,
+            secure: self.secure
+        )
+    }
 
     public func getArtists(
         params: SearchParams,
