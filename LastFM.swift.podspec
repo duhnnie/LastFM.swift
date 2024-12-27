@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "LastFM.swift"
-  s.version          = "1.5.0"
+  s.version          = "1.5.1"
   s.summary          = "A library for consuming the last.fm API"
 
   s.description      = <<-DESC
@@ -27,5 +27,5 @@ Pod::Spec.new do |s|
   s.swift_versions = ["5"]
 
   s.source_files = "Sources/LastFM/**/*"
-  s.dependency "SwiftRestClient", ">= 0.5.0"
+  s.dependency "SwiftRestClient", ">= 0.7.1"
 end
