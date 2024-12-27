@@ -15,7 +15,7 @@ Swift code.
 
   ```swift
   dependencies: [
-      .package(url: "https://github.com/duhnnie/LastFM.swift", from: "1.0.0")
+      .package(url: "https://github.com/duhnnie/LastFM.swift", from: "1.5.2")
   ]
   ```
 
@@ -37,7 +37,7 @@ install LastFM.swift with Carthage:
  2. Update your Cartfile to include the following:
 
     ```ruby
-    github "duhnnie/LastFM.swift" ~> 1.0.0
+    github "duhnnie/LastFM.swift" ~> 1.5.2
     ```
 
  3. Run `carthage update` and
@@ -67,7 +67,7 @@ LastFM.swift with CocoaPods:
     use_frameworks!
 
     target 'YourAppTargetName' do
-        pod 'LastFM.swift', '~> 1.0.0'
+        pod 'LastFM.swift', '~> 1.5.2'
     end
     ```
 
@@ -87,6 +87,29 @@ let lastFM = LastFM(apiKey: "your_api_key", apiSecret: "your_api_secret")
 ```
 
 After that, you'll be able to start consuming services (check [here](https://www.last.fm/api) for info/docs about all available services):
+
+Using async/await:
+
+```swift
+let recentTrackParams = RecentTracksParams(user: "someUser", limit: 10, page: 1)
+                
+do {
+    let recentTracks = try await lastFM.User.getRecentTracks(params: recentTrackParams)
+    
+    for track in recentTracks.items {
+        print("\(track.artist.name) - \(track.name) - \(track.nowPlaying ? "🔈" : track.date!.debugDescription)")
+    }
+} catch LastFMError.LastFMServiceError(let errorType, let message) {
+    print(errorType, message)
+} catch LastFMError.NoData {
+    print("No data was returned.")
+} catch {
+    print("An error ocurred: \(error)")
+}
+
+```
+
+Using completion handlers:
 
 ```swift
 let recentTrackParams = RecentTracksParams(user: "someUser", limit: 10, page: 1)
@@ -120,7 +143,7 @@ For example, for scrobbling a track to your last.fm profile, you need to provide
 ```swift
 var scrobbleParams = ScrobbleParams()
 
-scrobbleParams.addItem(
+try scrobbleParams.addItem(
   item: ScrobbleParamItem(
     artist: "The Strokes",
     track: "The Adults Are Talking",
@@ -129,6 +152,9 @@ scrobbleParams.addItem(
   )
 )
 
+let scrobble = try await lastFM.Track.scrobble(params: scrobbleParams, sessionKey: "your-session-key")
+
+// Or using the completion handler version:
 try lastFM.Track.scrobble(
   params: scrobbleParams,
   sessionKey: "your_session_key",
@@ -169,7 +195,7 @@ So that's why some test running in GitHub Actions. Anyway, you can run the tests
 
 ## Original author
 
- - [Daniel Canedo](mailto:me@duhnnie.net)
+ - [Daniel Canedo](mailto:me@duhnnie.com)
    ([@duhnnie](https://twitter.com/duhnnie))
 
 
