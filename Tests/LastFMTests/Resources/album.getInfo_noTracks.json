@@ -1,0 +1,38 @@
+{
+    "album": {
+        "artist": "Some artist",
+        "mbid": "",
+        "tags": "",
+        "playcount": "13242",
+        "image": [
+            {
+                "size": "small",
+                "#text": "https://images.com/34s/6b8d5cceea662e103e2c6f06178a66f8.jpg"
+            },
+            {
+                "size": "medium",
+                "#text": "https://images.com/64s/6b8d5cceea662e103e2c6f06178a66f8.jpg"
+            },
+            {
+                "size": "large",
+                "#text": "https://images.com/174s/artist.jpg"
+            },
+            {
+                "size": "extralarge",
+                "#text": "https://images.com/300x300/artist.jpg"
+            },
+            {
+                "size": "mega",
+                "#text": "https://images.com/300x300/artist.jpg"
+            },
+            {
+                "size": "",
+                "#text": "https://images.com/300x300/artist.jpg"
+            }
+        ],
+        "url": "https://www.last.fm/music/SomeArtist/SomeAlbum",
+        "name": "SomeAlbum",
+        "listeners": "3189",
+        "userplaycount": 128
+    }
+}

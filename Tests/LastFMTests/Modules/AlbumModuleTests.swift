@@ -479,6 +479,61 @@ class AlbumModuleTests: XCTestCase {
         )
     }
 
+    func test_getInfo_noTracks() async throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/album.getInfo_noTracks",
+            withExtension: "json"
+        )!
+
+        let fakeDate = try Data(contentsOf: jsonURL)
+
+        let params = AlbumInfoParams(
+            artist: "Some Artist",
+            album: "Some Album Title",
+            autocorrect: false,
+            lang: "fr"
+        )
+
+        apiClient.data = fakeDate
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        let albumInfo = try await instance.getInfo(params: params)
+        XCTAssertNil(albumInfo.tracks)
+    }
+
+    func test_getInfo_noTracks() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/album.getInfo_noTracks",
+            withExtension: "json"
+        )!
+
+        let fakeDate = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "Waiting for getInfo with username")
+
+        let params = AlbumInfoParams(
+            artist: "Some Artist",
+            album: "Some Album Title",
+            autocorrect: false,
+            lang: "fr"
+        )
+
+        apiClient.data = fakeDate
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getInfo(params: params) { result in
+            switch (result) {
+            case .success(let albumInfo):
+                XCTAssertNil(albumInfo.tracks)
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it failed with error: \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+    }
+
     func test_albumSearch() async throws {
         let jsonURL = Bundle.module.url(
             forResource: "Resources/album.search",
