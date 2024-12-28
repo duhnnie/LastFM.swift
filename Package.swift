@@ -21,7 +21,7 @@ let package = Package(
         .package(
             name: "SwiftRestClient",
             url: "https://github.com/duhnnie/SwiftRestClient",
-            from: "0.7.0"),
+            from: "0.7.1"),
     ],
     targets: [
         .target(
