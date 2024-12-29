@@ -754,14 +754,14 @@ class TrackModuleTests: XCTestCase {
         XCTAssertEqual(trackInfo.playcount, 136)
         XCTAssertEqual(trackInfo.artist.name, "Some Artist")
         XCTAssertEqual(trackInfo.artist.url.absoluteString, "https://someartist.com")
-        XCTAssertEqual(trackInfo.album.artist, "Some Artist")
-        XCTAssertEqual(trackInfo.album.title, "Some Album")
-        XCTAssertEqual(trackInfo.album.url.absoluteString, "https://somealbum.com")
-        XCTAssertNil(trackInfo.album.image.small)
-        XCTAssertNil(trackInfo.album.image.medium)
-        XCTAssertNil(trackInfo.album.image.large)
-        XCTAssertNil(trackInfo.album.image.extraLarge)
-        XCTAssertNil(trackInfo.album.image.mega)
+        XCTAssertEqual(trackInfo.album!.artist, "Some Artist")
+        XCTAssertEqual(trackInfo.album!.title, "Some Album")
+        XCTAssertEqual(trackInfo.album!.url.absoluteString, "https://somealbum.com")
+        XCTAssertNil(trackInfo.album!.image.small)
+        XCTAssertNil(trackInfo.album!.image.medium)
+        XCTAssertNil(trackInfo.album!.image.large)
+        XCTAssertNil(trackInfo.album!.image.extraLarge)
+        XCTAssertNil(trackInfo.album!.image.mega)
         XCTAssertNil(trackInfo.userLoved)
         XCTAssertNil(trackInfo.userPlaycount)
         XCTAssertEqual(trackInfo.topTags.count, 0)
@@ -842,6 +842,80 @@ class TrackModuleTests: XCTestCase {
             )
         )
     }
+    
+    func test_getTrackInfo_no_album() async throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/track.getInfo_noAlbum",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+
+        let params = TrackInfoParams(
+            artist: "Some Artist",
+            track: "Some Track",
+            autocorrect: true,
+            username: nil
+        )
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+        
+        let trackInfo = try await instance.getInfo(params: params)
+
+        XCTAssertNil(trackInfo.album)
+        XCTAssertEqual(apiClient.asyncGetCalls.count, 1)
+        XCTAssertEqual(apiClient.asyncGetCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.asyncGetCalls[0].url.absoluteString,
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some%20Track&format=json&method=track.getInfo&artist=Some%20Artist&autocorrect=1"
+            )
+        )
+    }
+    
+    func test_getTrackInfo_no_album() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/track.getInfo_noAlbum",
+            withExtension: "json"
+        )!
+
+        let fakeData = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "watiting for getTrackInfo")
+
+        let params = TrackInfoParams(
+            artist: "Some Artist",
+            track: "Some Track",
+            autocorrect: true,
+            username: nil
+        )
+
+        apiClient.data = fakeData
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getInfo(params: params) { result in
+            switch (result) {
+            case .success(let trackInfo):
+                XCTAssertNil(trackInfo.album)
+            case .failure(let error):
+                XCTFail("It was expected to succeed, but it failed with error \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some%20Track&format=json&method=track.getInfo&artist=Some%20Artist&autocorrect=1"
+            )
+        )
+    }
 
     fileprivate func validateTrackInfoByArtistNameNoUsernameNoMBIDResponse(_ trackInfo: (TrackInfo)) {
         XCTAssertEqual(trackInfo.name, "Some Track")
@@ -853,14 +927,14 @@ class TrackModuleTests: XCTestCase {
         XCTAssertEqual(trackInfo.playcount, 136)
         XCTAssertEqual(trackInfo.artist.name, "Some Artist")
         XCTAssertEqual(trackInfo.artist.url.absoluteString, "https://someartist.com")
-        XCTAssertEqual(trackInfo.album.artist, "Some Artist")
-        XCTAssertEqual(trackInfo.album.title, "Some Album")
-        XCTAssertEqual(trackInfo.album.url.absoluteString, "https://somealbum.com")
-        XCTAssertNil(trackInfo.album.image.small)
-        XCTAssertNil(trackInfo.album.image.medium)
-        XCTAssertNil(trackInfo.album.image.large)
-        XCTAssertNil(trackInfo.album.image.extraLarge)
-        XCTAssertNil(trackInfo.album.image.mega)
+        XCTAssertEqual(trackInfo.album!.artist, "Some Artist")
+        XCTAssertEqual(trackInfo.album!.title, "Some Album")
+        XCTAssertEqual(trackInfo.album!.url.absoluteString, "https://somealbum.com")
+        XCTAssertNil(trackInfo.album!.image.small)
+        XCTAssertNil(trackInfo.album!.image.medium)
+        XCTAssertNil(trackInfo.album!.image.large)
+        XCTAssertNil(trackInfo.album!.image.extraLarge)
+        XCTAssertNil(trackInfo.album!.image.mega)
         XCTAssertEqual(trackInfo.userLoved, true)
         XCTAssertEqual(trackInfo.userPlaycount, 48)
         XCTAssertEqual(trackInfo.topTags.count, 0)
@@ -952,31 +1026,31 @@ class TrackModuleTests: XCTestCase {
         XCTAssertEqual(trackInfo.playcount, 136)
         XCTAssertEqual(trackInfo.artist.name, "Some Artist")
         XCTAssertEqual(trackInfo.artist.url.absoluteString, "https://someartist.com")
-        XCTAssertEqual(trackInfo.album.artist, "Some Artist")
-        XCTAssertEqual(trackInfo.album.title, "Some Album")
-        XCTAssertEqual(trackInfo.album.url.absoluteString, "https://somealbum.com")
+        XCTAssertEqual(trackInfo.album!.artist, "Some Artist")
+        XCTAssertEqual(trackInfo.album!.title, "Some Album")
+        XCTAssertEqual(trackInfo.album!.url.absoluteString, "https://somealbum.com")
         
         XCTAssertEqual(
-            trackInfo.album.image.small?.absoluteString,
+            trackInfo.album!.image.small?.absoluteString,
             "https://images.com/s.png"
         )
         
         XCTAssertEqual(
-            trackInfo.album.image.medium?.absoluteString,
+            trackInfo.album!.image.medium?.absoluteString,
             "https://images.com/m.png"
         )
         
         XCTAssertEqual(
-            trackInfo.album.image.large?.absoluteString,
+            trackInfo.album!.image.large?.absoluteString,
             "https://images.com/l.png"
         )
         
         XCTAssertEqual(
-            trackInfo.album.image.extraLarge?.absoluteString,
+            trackInfo.album!.image.extraLarge?.absoluteString,
             "https://images.com/xl.png"
         )
         
-        XCTAssertNil(trackInfo.album.image.mega)
+        XCTAssertNil(trackInfo.album!.image.mega)
         XCTAssertNil(trackInfo.userLoved)
         XCTAssertNil(trackInfo.userPlaycount)
         XCTAssertEqual(trackInfo.topTags.count, 4)
@@ -1071,31 +1145,31 @@ class TrackModuleTests: XCTestCase {
         XCTAssertEqual(trackInfo.playcount, 136)
         XCTAssertEqual(trackInfo.artist.name, "Some Artist")
         XCTAssertEqual(trackInfo.artist.url.absoluteString, "https://someartist.com")
-        XCTAssertEqual(trackInfo.album.artist, "Some Artist")
-        XCTAssertEqual(trackInfo.album.title, "Some Album")
-        XCTAssertEqual(trackInfo.album.url.absoluteString, "https://somealbum.com")
+        XCTAssertEqual(trackInfo.album!.artist, "Some Artist")
+        XCTAssertEqual(trackInfo.album!.title, "Some Album")
+        XCTAssertEqual(trackInfo.album!.url.absoluteString, "https://somealbum.com")
         
         XCTAssertEqual(
-            trackInfo.album.image.small?.absoluteString,
+            trackInfo.album!.image.small?.absoluteString,
             "https://images.com/s.png"
         )
         
         XCTAssertEqual(
-            trackInfo.album.image.medium?.absoluteString,
+            trackInfo.album!.image.medium?.absoluteString,
             "https://images.com/m.png"
         )
         
         XCTAssertEqual(
-            trackInfo.album.image.large?.absoluteString,
+            trackInfo.album!.image.large?.absoluteString,
             "https://images.com/l.png"
         )
         
         XCTAssertEqual(
-            trackInfo.album.image.extraLarge?.absoluteString,
+            trackInfo.album!.image.extraLarge?.absoluteString,
             "https://images.com/xl.png"
         )
         
-        XCTAssertNil(trackInfo.album.image.mega)
+        XCTAssertNil(trackInfo.album!.image.mega)
         XCTAssertEqual(trackInfo.userLoved, false)
         XCTAssertEqual(trackInfo.userPlaycount, 13)
         XCTAssertEqual(trackInfo.topTags.count, 4)
