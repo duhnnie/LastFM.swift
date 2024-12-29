@@ -1,0 +1,20 @@
+{
+    "track": {
+        "name": "Some Track",
+        "url": "https://sometrack.com",
+        "duration": "302000",
+        "streamable": {
+            "#text": "0",
+            "fulltrack": "0"
+        },
+        "listeners": "19",
+        "playcount": "136",
+        "artist": {
+            "name": "Some Artist",
+            "url": "https://someartist.com"
+        },
+        "toptags": {
+            "tag": []
+        }
+    }
+}

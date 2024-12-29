@@ -10,7 +10,7 @@ public struct TrackInfo: Decodable {
     public let listeners: Int
     public let playcount: Int
     public let artist: LastFMOptionalMBEntity
-    public let album: TrackInfoAlbum
+    public let album: TrackInfoAlbum?
     public let topTags: [LastFMEntity]
     public let wiki: Wiki?
     public let userPlaycount: Int?
@@ -61,7 +61,7 @@ public struct TrackInfo: Decodable {
         self.listeners = try subcontainer.decode(Int.self, forKey: .listeners)
         self.playcount = try subcontainer.decode(Int.self, forKey: .playcount)
         self.artist = try subcontainer.decode(LastFMOptionalMBEntity.self, forKey: .artist)
-        self.album = try subcontainer.decode(TrackInfoAlbum.self, forKey: .album)
+        self.album = try subcontainer.decodeIfPresent(TrackInfoAlbum.self, forKey: .album)
         self.topTags = try topTagsContainer.decode([LastFMEntity].self, forKey: .tags)
         self.wiki = try subcontainer.decodeIfPresent(Wiki.self, forKey: .wiki)
         self.userPlaycount = try subcontainer.decodeIfPresent(Int.self, forKey: .userPlaycount)
