@@ -52,7 +52,19 @@ public struct AlbumInfo: Decodable {
             keyedBy: CodingKeys.TracksKeys.self,
             forKey: .tracks
         ) {
-            self.tracks = try trackContainer.decodeIfPresent([AlbumInfoTrack].self, forKey: .track)
+            // NOTE: Last.fm API returns an array of tracks when there's more than one track.
+            do {
+                self.tracks = try trackContainer.decodeIfPresent([AlbumInfoTrack].self, forKey: .track)
+            } catch {
+                let originalError = error as NSError
+
+                do {
+                    let track = try trackContainer.decode(AlbumInfoTrack.self, forKey: .track)  
+                    self.tracks = [track]
+                } catch {
+                    throw originalError
+                }
+            }
         } else {
             self.tracks = nil
         }
