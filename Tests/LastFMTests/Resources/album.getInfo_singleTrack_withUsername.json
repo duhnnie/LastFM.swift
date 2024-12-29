@@ -1,0 +1,80 @@
+{
+    "album": {
+        "artist": "Stardust",
+        "mbid": "1061c7a9-0d10-4bb5-aaeb-b3763077b129",
+        "tags": {
+            "tag": [
+                {
+                    "url": "https://www.last.fm/tag/house",
+                    "name": "house"
+                },
+                {
+                    "url": "https://www.last.fm/tag/disco+house",
+                    "name": "disco house"
+                },
+                {
+                    "url": "https://www.last.fm/tag/dance",
+                    "name": "dance"
+                },
+                {
+                    "url": "https://www.last.fm/tag/electronic",
+                    "name": "electronic"
+                },
+                {
+                    "url": "https://www.last.fm/tag/electronica",
+                    "name": "electronica"
+                }
+            ]
+        },
+        "name": "Music Sounds Better With You",
+        "image": [
+            {
+                "size": "small",
+                "#text": "https://lastfm.freetls.fastly.net/i/u/34s/cc04c31da6a92bd6f434e44617ba571a.jpg"
+            },
+            {
+                "size": "medium",
+                "#text": "https://lastfm.freetls.fastly.net/i/u/64s/cc04c31da6a92bd6f434e44617ba571a.jpg"
+            },
+            {
+                "size": "large",
+                "#text": "https://lastfm.freetls.fastly.net/i/u/174s/cc04c31da6a92bd6f434e44617ba571a.jpg"
+            },
+            {
+                "size": "extralarge",
+                "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/cc04c31da6a92bd6f434e44617ba571a.jpg"
+            },
+            {
+                "size": "mega",
+                "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/cc04c31da6a92bd6f434e44617ba571a.jpg"
+            },
+            {
+                "size": "",
+                "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/cc04c31da6a92bd6f434e44617ba571a.jpg"
+            }
+        ],
+        "tracks": {
+            "track": {
+                "streamable": {
+                    "fulltrack": "0",
+                    "#text": "0"
+                },
+                "duration": 261,
+                "url": "https://www.last.fm/music/Stardust/Music+Sounds+Better+With+You/Music+Sounds+Better+With+You",
+                "name": "Music Sounds Better With You",
+                "@attr": {
+                    "rank": 1
+                },
+                "artist": {
+                    "url": "https://www.last.fm/music/Stardust",
+                    "name": "Stardust",
+                    "mbid": "34720a3f-df00-43d7-916e-877bdb930e98"
+                }
+            }
+        },
+        "url": "https://www.last.fm/music/Stardust/Music+Sounds+Better+With+You",
+        "listeners": "532941",
+        "playcount": "4313575",
+        "userplaycount": 119
+    }
+}
