@@ -46,7 +46,7 @@ internal struct RequestUtils: Requester {
             return URLQueryItem(name: key, value: value)
         })
 
-        return urlComponents.url!
+        return urlComponents.lastFMUrl!
     }
 
     private static func buildForFormURLEncoded(

@@ -137,6 +137,25 @@ class AlbumModuleTests: XCTestCase {
         XCTAssertEqual(albumInfo.wiki?.content, "Some content.")
     }
 
+    private func validateSingleTrackAlbumInfo(_ albumInfo: AlbumInfo) {
+        XCTAssertEqual(albumInfo.artist, "Stardust")
+        XCTAssertEqual(albumInfo.mbid, "1061c7a9-0d10-4bb5-aaeb-b3763077b129")
+
+        XCTAssertEqual(albumInfo.tracks?.count, 1)
+
+        // NOTE: here we are only testing a part of the response: the track,
+        // which is the only thing that changes between the no-single-track response.
+
+        XCTAssertEqual(albumInfo.tracks?[0].streamable, .noStreamable)
+        XCTAssertEqual(albumInfo.tracks?[0].duration, 261)
+        XCTAssertEqual(albumInfo.tracks?[0].url.absoluteString, "https://www.last.fm/music/Stardust/Music+Sounds+Better+With+You/Music+Sounds+Better+With+You")
+        XCTAssertEqual(albumInfo.tracks?[0].name, "Music Sounds Better With You")
+        XCTAssertEqual(albumInfo.tracks?[0].trackNumber, 1)
+        XCTAssertEqual(albumInfo.tracks?[0].artist.url.absoluteString, "https://www.last.fm/music/Stardust")
+        XCTAssertEqual(albumInfo.tracks?[0].artist.name, "Stardust")
+        XCTAssertEqual(albumInfo.tracks?[0].artist.mbid, "34720a3f-df00-43d7-916e-877bdb930e98")
+    }
+
     private func validateAlbumSearchResults(_ albumResults: SearchResults<AlbumSearchResult>) {
         XCTAssertEqual(albumResults.pagination.startPage, 1)
         XCTAssertEqual(albumResults.pagination.totalResults, 2)
@@ -260,7 +279,80 @@ class AlbumModuleTests: XCTestCase {
             )
         )
     }
+
+
+    func test_getInfo_singleTrack_withUsername() async throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/album.getInfo_singleTrack_withUsername",
+            withExtension: "json"
+        )!
+
+        let fakeDate = try Data(contentsOf: jsonURL)
+
+        let params = AlbumInfoParams(
+            artist: "Stardust",
+            album: "Music Sounds Better With You",
+            username: "pepe"
+        )
+
+        apiClient.data = fakeDate
+        apiClient.response = Constants.RESPONSE_200_OK
+        
+        let albumInfo = try await instance.getInfo(params: params)
+        validateSingleTrackAlbumInfo(albumInfo)
+
+        XCTAssertEqual(apiClient.asyncGetCalls.count, 1)
+        XCTAssertEqual(apiClient.asyncGetCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.asyncGetCalls[0].url.absoluteString,
+                "https://ws.audioscrobbler.com/2.0?album=Music%20Sounds%20Better%20With%20You&method=album.getinfo&artist=Stardust&username=pepe&api_key=someAPIKey&format=json&autocorrect=1"
+            )
+        )
+    }
     
+    func test_getInfo_singleTrack_withUsername() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/album.getInfo_singleTrack_withUsername",
+            withExtension: "json"
+        )!
+
+        let fakeDate = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "Waiting for getInfo with username")
+
+        let params = AlbumInfoParams(
+            artist: "Stardust",
+            album: "Music Sounds Better With You",
+            username: "pepe"
+        )
+
+        apiClient.data = fakeDate
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getInfo(params: params) { result in
+            switch (result) {
+            case .success(let albumInfo):
+                self.validateSingleTrackAlbumInfo(albumInfo)
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it failed with error: \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
+        XCTAssertEqual(apiClient.getCalls.count, 1)
+        XCTAssertEqual(apiClient.getCalls[0].headers, nil)
+
+        XCTAssertTrue(
+            Util.areSameURL(
+                apiClient.getCalls[0].url.absoluteString,
+                "https://ws.audioscrobbler.com/2.0?album=Music%20Sounds%20Better%20With%20You&method=album.getinfo&artist=Stardust&username=pepe&api_key=someAPIKey&format=json&autocorrect=1"
+            )
+        )
+    }
+ 
     func test_getInfoByMBID_withUsername() async throws {
         let jsonURL = Bundle.module.url(
             forResource: "Resources/album.getInfo_withUsername",
@@ -477,6 +569,61 @@ class AlbumModuleTests: XCTestCase {
                 "https://ws.audioscrobbler.com/2.0?method=album.getinfo&mbid=some-artist-mbid&format=json&lang=pt&autocorrect=1&api_key=someAPIKey"
             )
         )
+    }
+
+    func test_getInfo_noTracks() async throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/album.getInfo_noTracks",
+            withExtension: "json"
+        )!
+
+        let fakeDate = try Data(contentsOf: jsonURL)
+
+        let params = AlbumInfoParams(
+            artist: "Some Artist",
+            album: "Some Album Title",
+            autocorrect: false,
+            lang: "fr"
+        )
+
+        apiClient.data = fakeDate
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        let albumInfo = try await instance.getInfo(params: params)
+        XCTAssertNil(albumInfo.tracks)
+    }
+
+    func test_getInfo_noTracks() throws {
+        let jsonURL = Bundle.module.url(
+            forResource: "Resources/album.getInfo_noTracks",
+            withExtension: "json"
+        )!
+
+        let fakeDate = try Data(contentsOf: jsonURL)
+        let expectation = expectation(description: "Waiting for getInfo with username")
+
+        let params = AlbumInfoParams(
+            artist: "Some Artist",
+            album: "Some Album Title",
+            autocorrect: false,
+            lang: "fr"
+        )
+
+        apiClient.data = fakeDate
+        apiClient.response = Constants.RESPONSE_200_OK
+
+        instance.getInfo(params: params) { result in
+            switch (result) {
+            case .success(let albumInfo):
+                XCTAssertNil(albumInfo.tracks)
+            case .failure(let error):
+                XCTFail("Expected to succeed, but it failed with error: \(error.localizedDescription)")
+            }
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 3)
     }
 
     func test_albumSearch() async throws {

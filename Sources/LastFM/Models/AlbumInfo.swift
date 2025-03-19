@@ -48,16 +48,31 @@ public struct AlbumInfo: Decodable {
             forKey: .album
         )
 
-        let trackContainer = try container.nestedContainer(
+        if let trackContainer = try? container.nestedContainer(
             keyedBy: CodingKeys.TracksKeys.self,
             forKey: .tracks
-        )
+        ) {
+            // NOTE: Last.fm API returns an array of tracks when there's more than one track.
+            do {
+                self.tracks = try trackContainer.decodeIfPresent([AlbumInfoTrack].self, forKey: .track)
+            } catch {
+                let originalError = error as NSError
+
+                do {
+                    let track = try trackContainer.decode(AlbumInfoTrack.self, forKey: .track)  
+                    self.tracks = [track]
+                } catch {
+                    throw originalError
+                }
+            }
+        } else {
+            self.tracks = nil
+        }
 
         self.mbid = try container.decodeIfPresent(String.self, forKey: .mbid)
         self.artist = try container.decode(String.self, forKey: .artist)
         self.name = try container.decode(String.self, forKey: .name)
         self.image = try container.decode(LastFMImages.self, forKey: .image)
-        self.tracks = try trackContainer.decodeIfPresent([AlbumInfoTrack].self, forKey: .track)
         self.url = try container.decode(URL.self, forKey: .url)
         self.listeners = try container.decode(Int.self, forKey: .listeners)
         self.playcount = try container.decode(Int.self, forKey: .playcount)
