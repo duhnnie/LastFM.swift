@@ -45,7 +45,7 @@ extension LastFMError: LocalizedError {
             detail = "\(error.localizedDescription)"
         }
 
-        return "Error: \(detail)"
+        return detail
     }
 
 }
