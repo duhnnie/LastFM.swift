@@ -32,13 +32,14 @@ public struct TrackInfoAlbum: Decodable {
         self.image = try container.decode(LastFMImages.self, forKey: .image)
 
         guard
-            let attrContainer = try? container.nestedContainer(keyedBy: CodingKeys.AttrKeys.self, forKey: .attr)
+            let attrContainer = try? container.nestedContainer(keyedBy: CodingKeys.AttrKeys.self, forKey: .attr),
+            let position = try? attrContainer.decode(UInt.self, forKey: .position)
         else {
             self.position = nil
             return
         }
 
-        self.position = try attrContainer.decode(UInt.self, forKey: .position)
+        self.position = position
     }
     
 }
