@@ -9,7 +9,7 @@ import Foundation
 
 extension String {
     
-    private static let uriComponentCharacterSet = CharacterSet.urlPathAllowed.subtracting(CharacterSet(["/", "+"]))
+    private static let uriComponentCharacterSet = CharacterSet.urlPathAllowed.subtracting(CharacterSet(["/", "+", "&", "'", "="]))
 
     func encodeURIComponent() -> String? {
         return self.addingPercentEncoding(withAllowedCharacters: Self.uriComponentCharacterSet)
