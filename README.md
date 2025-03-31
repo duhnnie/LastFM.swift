@@ -67,7 +67,7 @@ LastFM.swift with CocoaPods:
     use_frameworks!
 
     target 'YourAppTargetName' do
-        pod 'LastFM.swift', '~> 1.5.3'
+        pod 'LastFM.swift', '~> 1.5.4'
     end
     ```
 
