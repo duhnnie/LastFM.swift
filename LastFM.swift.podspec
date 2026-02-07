@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "LastFM.swift"
-  s.version          = "1.5.4"
+  s.version          = "1.6.0"
   s.summary          = "A library for consuming the last.fm API"
 
   s.description      = <<-DESC
