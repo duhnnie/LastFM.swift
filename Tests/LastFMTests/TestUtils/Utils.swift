@@ -55,4 +55,44 @@ internal struct Util {
 
         return areSameURL(urlA, urlB)
     }
+    
+    private static func jsonEquals(_ lhs: Any, _ rhs: Any) -> Bool {
+        switch (lhs, rhs) {
+
+        case let (l as NSDictionary, r as NSDictionary):
+            return l.count == r.count &&
+                l.allKeys.allSatisfy { key in
+                    guard let rValue = r[key] else { return false }
+                    return jsonEquals(l[key]!, rValue)
+                }
+
+        case let (l as NSArray, r as NSArray):
+            guard l.count == r.count else { return false }
+            return zip(l, r).allSatisfy { jsonEquals($0, $1) }
+
+        case let (l as NSNumber, r as NSNumber):
+            return l == r
+
+        case let (l as NSString, r as NSString):
+            return l == r
+
+        case (_ as NSNull, _ as NSNull):
+            return true
+
+        default:
+            return false
+        }
+    }
+
+    internal static func jsonDataEquals(_ lhs: Data, _ rhs: Data) -> Bool {
+        do {
+            let leftObject = try JSONSerialization.jsonObject(with: lhs, options: [.fragmentsAllowed])
+            let rightObject = try JSONSerialization.jsonObject(with: rhs, options: [.fragmentsAllowed])
+            
+            return jsonEquals(leftObject, rightObject)
+        } catch {
+            return false
+        }
+    }
+
 }
