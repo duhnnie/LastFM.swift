@@ -1,7 +1,7 @@
 import Foundation
 
 // NOTE: this could be also URLMusicBrainzEntity
-public struct ExtendedRecentTrack: Decodable {
+public struct ExtendedRecentTrack: Codable {
 
     public let name: String
     public let artist: LastFMMBExtendedEntity
@@ -32,6 +32,7 @@ public struct ExtendedRecentTrack: Decodable {
 
         enum DateKeys: String, CodingKey {
             case uts
+            case text = "#text"
         }
     }
 
@@ -69,6 +70,43 @@ public struct ExtendedRecentTrack: Decodable {
             self.date = Date(timeIntervalSince1970: Double(uts))
         } else {
             self.date = nil
+        }
+    }
+    
+    public func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(name, forKey: .name)
+        try container.encode(artist, forKey: .artist)
+        try container.encode(album, forKey: .album)
+        try container.encode(mbid, forKey: .mbid)
+        try container.encode(url, forKey: .url)
+        try container.encode(image, forKey: .image)
+        try container.encode(streamable ? "1" : "0", forKey: .streamable)
+        try container.encode(loved ? "1" : "0", forKey: .loved)
+        
+        if let date = date {
+            var dateContainer = container.nestedContainer(
+                keyedBy: CodingKeys.DateKeys.self,
+                forKey: .date)
+            
+            let timestamp = Int(date.timeIntervalSince1970)
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd MMM yyyy, HH:mm"
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+                
+            let dateText = formatter.string(from: date)
+            
+            try dateContainer.encode(String(timestamp), forKey: .uts)
+            try dateContainer.encode(dateText, forKey: .text)
+        } else {
+            var attrContainer = container.nestedContainer(
+                keyedBy: CodingKeys.AttrKeys.self,
+                forKey: .attr)
+            
+            try attrContainer.encode(nowPlaying ? "true" : "false", forKey: .nowplaying)
         }
     }
 
