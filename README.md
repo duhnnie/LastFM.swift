@@ -15,7 +15,7 @@ Swift code.
 
   ```swift
   dependencies: [
-      .package(url: "https://github.com/duhnnie/LastFM.swift", from: "1.6.0")
+      .package(url: "https://github.com/duhnnie/LastFM.swift", from: "1.6.1")
   ]
   ```
 
@@ -37,7 +37,7 @@ install LastFM.swift with Carthage:
  2. Update your Cartfile to include the following:
 
     ```ruby
-    github "duhnnie/LastFM.swift" ~> 1.6.0
+    github "duhnnie/LastFM.swift" ~> 1.6.1
     ```
 
  3. Run `carthage update` and
@@ -67,7 +67,7 @@ LastFM.swift with CocoaPods:
     use_frameworks!
 
     target 'YourAppTargetName' do
-        pod 'LastFM.swift', '~> 1.6.0'
+        pod 'LastFM.swift', '~> 1.6.1'
     end
     ```
 
