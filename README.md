@@ -15,7 +15,7 @@ Swift code.
 
   ```swift
   dependencies: [
-      .package(url: "https://github.com/duhnnie/LastFM.swift", from: "1.6.1")
+      .package(url: "https://github.com/duhnnie/LastFM.swift", from: "1.7.0")
   ]
   ```
 
@@ -37,7 +37,7 @@ install LastFM.swift with Carthage:
  2. Update your Cartfile to include the following:
 
     ```ruby
-    github "duhnnie/LastFM.swift" ~> 1.6.1
+    github "duhnnie/LastFM.swift" ~> 1.7.0
     ```
 
  3. Run `carthage update` and
@@ -67,7 +67,7 @@ LastFM.swift with CocoaPods:
     use_frameworks!
 
     target 'YourAppTargetName' do
-        pod 'LastFM.swift', '~> 1.6.1'
+        pod 'LastFM.swift', '~> 1.7.0'
     end
     ```
 
@@ -83,7 +83,7 @@ Once you have an API account, you will need to create a LastFM.swift instance pr
 ```swift
 import LastFM
 
-let lastFM = LastFM(apiKey: "your_api_key", apiSecret: "your_api_secret")
+let lastFM = LastFMClient(apiKey: "your_api_key", apiSecret: "your_api_secret")
 ```
 
 After that, you'll be able to start consuming services (check [here](https://www.last.fm/api) for info/docs about all available services):

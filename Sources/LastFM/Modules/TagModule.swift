@@ -16,11 +16,11 @@ public struct TagModule {
         }
     }
 
-    private let parent: LastFM
+    private let parent: LastFMClient
     private let requester: Requester
     private let secure: Bool
 
-    internal init(parent: LastFM, secure: Bool, requester: Requester = RequestUtils.shared) {
+    internal init(parent: LastFMClient, secure: Bool, requester: Requester = RequestUtils.shared) {
         self.parent = parent
         self.requester = requester
         self.secure = secure
@@ -42,7 +42,7 @@ public struct TagModule {
 
     public func getTopTracks(
         params: SearchParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<TagTopTrack>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<TagTopTrack>>
     ) {
         let params = parent.normalizeParams(
             params: params.toDictionary(termKey: "tag"),
@@ -68,7 +68,7 @@ public struct TagModule {
 
     public func getTopArtists(
         params: SearchParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<TagTopArtist>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<TagTopArtist>>
     ) {
         let params = parent.normalizeParams(
             params: params.toDictionary(termKey: "tag"),
@@ -90,7 +90,7 @@ public struct TagModule {
 
     public func getTopAlbums(
         params: SearchParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<TagTopAlbum>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<TagTopAlbum>>
     ) {
         let params = parent.normalizeParams(
             params: params.toDictionary(termKey: "tag"),
@@ -120,7 +120,7 @@ public struct TagModule {
     public func getInfo(
         name: String,
         lang: String? = nil,
-        onCompletion: @escaping LastFM.OnCompletion<TagInfo>
+        onCompletion: @escaping LastFMClient.OnCompletion<TagInfo>
     ) {
         var params = ["name": name]
 
@@ -153,7 +153,7 @@ public struct TagModule {
     
     public func getWeeklyChartList(
         tag: String,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionList<ChartDateRange>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionList<ChartDateRange>>
     ) {
         let params = parent.normalizeParams(
             params: ["tag": tag],
@@ -179,7 +179,7 @@ public struct TagModule {
 
     public func getSimilar(
         tag: String,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionList<SimilarTag>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionList<SimilarTag>>
     ) {
         let params = parent.normalizeParams(
             params: ["tag": tag],
@@ -212,7 +212,7 @@ public struct TagModule {
     public func getTopTags(
         offset: UInt = 0,
         limit: UInt = 10,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionList<TopGlobalTag>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionList<TopGlobalTag>>
     ) {
         let params = parent.normalizeParams(
             params: [

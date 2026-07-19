@@ -21,11 +21,11 @@ public struct UserModule {
         }
     }
 
-    private let parent: LastFM
+    private let parent: LastFMClient
     private let requester: Requester
     private let secure: Bool
 
-    internal init(parent: LastFM, secure: Bool, requester: Requester = RequestUtils.shared) {
+    internal init(parent: LastFMClient, secure: Bool, requester: Requester = RequestUtils.shared) {
         self.parent = parent
         self.requester = requester
         self.secure = secure
@@ -46,7 +46,7 @@ public struct UserModule {
     private func getBaseRecentTracks<T: Decodable>(
         params: RecentTracksParams,
         extended: Bool,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<T>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<T>>
     ) {
         var params = parent.normalizeParams(params: params, method: APIMethod.getRecentTracks)
 
@@ -64,7 +64,7 @@ public struct UserModule {
 
     public func getRecentTracks(
         params: RecentTracksParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<RecentTrack>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<RecentTrack>>
     ) {
         getBaseRecentTracks(params: params, extended: false, onCompletion: onCompletion)
     }
@@ -78,7 +78,7 @@ public struct UserModule {
 
     public func getExtendedRecentTracks(
         params: RecentTracksParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ExtendedRecentTrack>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<ExtendedRecentTrack>>
     ) {
         getBaseRecentTracks(params: params, extended: true, onCompletion: onCompletion)
     }
@@ -94,7 +94,7 @@ public struct UserModule {
 
     public func getTopTracks(
         params: UserTopItemsParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<UserTopTrack>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<UserTopTrack>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopTracks)
 
@@ -119,7 +119,7 @@ public struct UserModule {
 
     public func getWeeklyTrackChart(
         params: UserWeeklyChartParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionList<UserWeeklyTrackChart>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionList<UserWeeklyTrackChart>>
     ) {
         let params = parent.normalizeParams(
             params: params,
@@ -145,7 +145,7 @@ public struct UserModule {
 
     public func getLovedTracks(
         params: SearchParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<LovedTrack>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<LovedTrack>>
     ) {
         let params = parent.normalizeParams(
             params: params.toDictionary(termKey: "user"),
@@ -170,7 +170,7 @@ public struct UserModule {
 
     public func getTopArtists(
         params: UserTopItemsParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<UserTopArtist>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<UserTopArtist>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopArtists)
 
@@ -192,7 +192,7 @@ public struct UserModule {
 
     public func getWeeklyArtistChart(
         params: UserWeeklyChartParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionList<UserWeeklyArtistChart>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionList<UserWeeklyArtistChart>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getWeeklyArtistChart)
 
@@ -214,7 +214,7 @@ public struct UserModule {
 
     public func getTopAlbums(
         params: UserTopItemsParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<UserTopAlbum>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<UserTopAlbum>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopAlbums)
 
@@ -236,7 +236,7 @@ public struct UserModule {
 
     public func getWeeklyAlbumChart(
         params: UserWeeklyChartParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionList<UserWeeklyAlbumChart>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionList<UserWeeklyAlbumChart>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getWeeklyAlbumChart)
 
@@ -254,7 +254,7 @@ public struct UserModule {
         )
     }
 
-    public func getInfo(user: String, onCompletion: @escaping LastFM.OnCompletion<UserInfo>) {
+    public func getInfo(user: String, onCompletion: @escaping LastFMClient.OnCompletion<UserInfo>) {
         let params = parent.normalizeParams(params: ["user": user], method: APIMethod.getInfo)
 
         requester.getDataAndParse(params: params, secure: true, onCompletion: onCompletion)
@@ -271,7 +271,7 @@ public struct UserModule {
         )
     }
     
-    public func getInfo(sessionKey: String, onCompletion: @escaping LastFM.OnCompletion<UserInfo>) throws {
+    public func getInfo(sessionKey: String, onCompletion: @escaping LastFMClient.OnCompletion<UserInfo>) throws {
         let params = parent.normalizeParams(params: [:], method: APIMethod.getInfo, sessionKey: sessionKey)
 
         try requester.postFormURLEncodedAndParse(payload: params, secure: true, onCompletion: onCompletion)
@@ -293,7 +293,7 @@ public struct UserModule {
 
     public func getFriends(
         params: SearchParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<UserPublicInfo>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<UserPublicInfo>>
     ) {
         let params = parent.normalizeParams(
             params: params.toDictionary(termKey: "user"),
@@ -319,7 +319,7 @@ public struct UserModule {
 
     public func getWeeklyChartList(
         user: String,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionList<ChartDateRange>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionList<ChartDateRange>>
     ) {
         let params = parent.normalizeParams(
             params: ["user": user],

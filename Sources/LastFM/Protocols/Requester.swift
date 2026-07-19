@@ -13,7 +13,7 @@ internal protocol Requester {
     func getDataAndParse<T: Decodable>(
         params: [String: String],
         secure: Bool,
-        onCompletion: @escaping LastFM.OnCompletion<T>
+        onCompletion: @escaping LastFMClient.OnCompletion<T>
     )
     
     @available(iOS 13.0, watchOS 6.0, tvOS 13.0, *)
@@ -26,7 +26,7 @@ internal protocol Requester {
     func postFormURLEncodedAndParse<T: Decodable>(
         payload: [String: String],
         secure: Bool,
-        onCompletion: @escaping LastFM.OnCompletion<T>
+        onCompletion: @escaping LastFMClient.OnCompletion<T>
     ) throws
     
     @available(iOS 13.0, watchOS 6.0, tvOS 13.0, *)
