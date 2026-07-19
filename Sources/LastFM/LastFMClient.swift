@@ -1,4 +1,4 @@
-final public class LastFM {
+final public class LastFMClient {
 
     public typealias OnCompletion<T> = (Result<T, LastFMError>) -> Void
 

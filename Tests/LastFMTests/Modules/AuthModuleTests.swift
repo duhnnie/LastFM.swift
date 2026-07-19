@@ -3,7 +3,7 @@ import XCTest
 
 class AuthModuleTests: XCTestCase {
 
-    private static let lastFM = LastFM(
+    private static let lastFM = LastFMClient(
         apiKey: Constants.API_KEY,
         apiSecret: Constants.API_SECRET
     )

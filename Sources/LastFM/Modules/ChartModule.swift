@@ -12,11 +12,11 @@ public struct ChartModule {
         }
     }
 
-    private let parent: LastFM
+    private let parent: LastFMClient
     private let requester: Requester
     private let secure: Bool
 
-    internal init(parent: LastFM, secure: Bool, requester: Requester = RequestUtils.shared) {
+    internal init(parent: LastFMClient, secure: Bool, requester: Requester = RequestUtils.shared) {
         self.parent = parent
         self.requester = requester
         self.secure = secure
@@ -31,7 +31,7 @@ public struct ChartModule {
 
     public func getTopTracks(
         params: ChartTopItemsParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ChartTopTrack>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<ChartTopTrack>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopTracks)
 
@@ -47,7 +47,7 @@ public struct ChartModule {
 
     public func getTopArtists(
         params: ChartTopItemsParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ChartTopArtist>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<ChartTopArtist>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopArtists)
 
@@ -69,7 +69,7 @@ public struct ChartModule {
     public func getTopTags(
         page: UInt,
         limit: UInt,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ChartTopTag>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<ChartTopTag>>
     ) {
         let params = parent.normalizeParams(
             params: [
