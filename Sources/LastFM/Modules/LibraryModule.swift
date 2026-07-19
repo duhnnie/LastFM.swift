@@ -10,11 +10,11 @@ public struct LibraryModule {
         }
     }
 
-    private let parent: LastFM
+    private let parent: LastFMClient
     private let requester: Requester
     private let secure: Bool
 
-    internal init(parent: LastFM, secure: Bool, requester: Requester = RequestUtils.shared) {
+    internal init(parent: LastFMClient, secure: Bool, requester: Requester = RequestUtils.shared) {
         self.parent = parent
         self.requester = requester
         self.secure = secure
@@ -36,7 +36,7 @@ public struct LibraryModule {
 
     public func getArtists(
         params: SearchParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<LibraryArtist>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<LibraryArtist>>
     ) {
         let params = parent.normalizeParams(
             params: params.toDictionary(termKey: "user"),

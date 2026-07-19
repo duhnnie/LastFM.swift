@@ -19,11 +19,11 @@ public struct ArtistModule {
         }
     }
 
-    private let parent: LastFM
+    private let parent: LastFMClient
     private let requester: Requester
     private let secure: Bool
 
-    internal init(parent: LastFM, secure: Bool,  requester: Requester = RequestUtils.shared) {
+    internal init(parent: LastFMClient, secure: Bool,  requester: Requester = RequestUtils.shared) {
         self.parent = parent
         self.requester = requester
         self.secure = secure
@@ -31,7 +31,7 @@ public struct ArtistModule {
 
     private func internalGetTopTracks(
         params: Params,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ArtistTopTrack>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<ArtistTopTrack>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopTracks)
 
@@ -59,7 +59,7 @@ public struct ArtistModule {
 
     public func getTopTracks(
         params: ArtistTopItemsParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ArtistTopTrack>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<ArtistTopTrack>>
     ) {
         self.internalGetTopTracks(params: params, onCompletion: onCompletion)
     }
@@ -71,14 +71,14 @@ public struct ArtistModule {
 
     public func getTopTracks(
         params: MBIDPageParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ArtistTopTrack>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<ArtistTopTrack>>
     ) {
         self.internalGetTopTracks(params: params, onCompletion: onCompletion)
     }
 
     private func internalGetSimilar(
         params: Params,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionList<ArtistSimilar>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionList<ArtistSimilar>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getSimilar)
 
@@ -103,7 +103,7 @@ public struct ArtistModule {
 
     public func getSimilar(
         params: ArtistSimilarParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionList<ArtistSimilar>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionList<ArtistSimilar>>
     ) {
         self.internalGetSimilar(params: params, onCompletion: onCompletion)
     }
@@ -115,7 +115,7 @@ public struct ArtistModule {
 
     public func getSimilar(
         params: MBIDListParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionList<ArtistSimilar>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionList<ArtistSimilar>>
     ) {
         self.internalGetSimilar(params: params, onCompletion: onCompletion)
     }
@@ -136,7 +136,7 @@ public struct ArtistModule {
 
     public func search(
         params: SearchParams,
-        onCompletion: @escaping LastFM.OnCompletion<SearchResults<ArtistSearchResult>>
+        onCompletion: @escaping LastFMClient.OnCompletion<SearchResults<ArtistSearchResult>>
     ) {
         let params = parent.normalizeParams(
             params: params.toDictionary(termKey: "artist"),
@@ -159,7 +159,7 @@ public struct ArtistModule {
 
     private func internalGetTopAlbums(
         params: Params,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ArtistTopAlbum>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<ArtistTopAlbum>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopAlbums)
 
@@ -173,7 +173,7 @@ public struct ArtistModule {
 
     public func getTopAlbums(
         params: ArtistTopItemsParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ArtistTopAlbum>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<ArtistTopAlbum>>
     ) {
         self.internalGetTopAlbums(params: params, onCompletion: onCompletion)
     }
@@ -185,7 +185,7 @@ public struct ArtistModule {
 
     public func getTopAlbums(
         params: MBIDPageParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<ArtistTopAlbum>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<ArtistTopAlbum>>
     ) {
         self.internalGetTopAlbums(params: params, onCompletion: onCompletion)
     }
@@ -201,7 +201,7 @@ public struct ArtistModule {
 
     public func getInfo(
         params: ArtistInfoParams,
-        onCompletion: @escaping LastFM.OnCompletion<ArtistInfo>
+        onCompletion: @escaping LastFMClient.OnCompletion<ArtistInfo>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getInfo)
 
@@ -304,7 +304,7 @@ public struct ArtistModule {
 
     public func getCorrection(
         artist: String,
-        onCompletion: @escaping LastFM.OnCompletion<ArtistCorrection>
+        onCompletion: @escaping LastFMClient.OnCompletion<ArtistCorrection>
     ) {
         let params = parent.normalizeParams(
             params: ["artist": artist],
@@ -323,7 +323,7 @@ public struct ArtistModule {
 
     public func getTags(
         params: ArtistTagsParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionList<LastFMEntity>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionList<LastFMEntity>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTags)
 
@@ -346,7 +346,7 @@ public struct ArtistModule {
 
     public func getTags(
         params: InfoByMBIDParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionList<LastFMEntity>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionList<LastFMEntity>>
     ) {
         var params = params.toDictionary()
 
@@ -377,7 +377,7 @@ public struct ArtistModule {
     public func getTopTags(
         artist: String,
         autocorrect: Bool = true,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionList<TopTag>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionList<TopTag>>
     ) {
         let params = parent.normalizeParams(
             params: [
@@ -407,7 +407,7 @@ public struct ArtistModule {
     public func getTopTags(
         mbid: String,
         autocorrect: Bool = true,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionList<TopTag>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionList<TopTag>>
     ) {
         let params = parent.normalizeParams(
             params: [

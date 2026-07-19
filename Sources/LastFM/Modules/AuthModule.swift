@@ -13,10 +13,10 @@ public struct AuthModule {
         }
     }
 
-    private let parent: LastFM
+    private let parent: LastFMClient
     private let requester: Requester
 
-    internal init(parent: LastFM, requester: Requester = RequestUtils.shared) {
+    internal init(parent: LastFMClient, requester: Requester = RequestUtils.shared) {
         self.parent = parent
         self.requester = requester
     }
@@ -33,7 +33,7 @@ public struct AuthModule {
         return try await requester.getDataAndParse(params: params, type: ServiceSession.self, secure: true)
     }
 
-    public func getSession(token: String, onCompletion: @escaping LastFM.OnCompletion<ServiceSession>) throws {
+    public func getSession(token: String, onCompletion: @escaping LastFMClient.OnCompletion<ServiceSession>) throws {
         var params = parent.normalizeParams(
             params: ["token": token],
             method: APIMethod.getSession
@@ -62,12 +62,12 @@ public struct AuthModule {
         })
     }
 
-    public func getToken(onCompletion: @escaping LastFM.OnCompletion<String>) throws {
+    public func getToken(onCompletion: @escaping LastFMClient.OnCompletion<String>) throws {
         var params = parent.normalizeParams(params: [:], method: APIMethod.getToken)
 
         try parent.addSignature(params: &params)
 
-        let internalOnCompletion: LastFM.OnCompletion<TokenResponse> = { result in
+        let internalOnCompletion: LastFMClient.OnCompletion<TokenResponse> = { result in
             switch (result) {
             case .success(let tokenResponse):
                 onCompletion(.success(tokenResponse.token))
@@ -106,7 +106,7 @@ public struct AuthModule {
     public func getMobileSession(
         username: String,
         password: String,
-        onCompletion: @escaping LastFM.OnCompletion<ServiceSession>
+        onCompletion: @escaping LastFMClient.OnCompletion<ServiceSession>
     ) throws {
         var params = parent.normalizeParams(
             params: ["username": username, "password": password],
