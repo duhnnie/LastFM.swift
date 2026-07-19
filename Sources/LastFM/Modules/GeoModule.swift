@@ -11,11 +11,11 @@ public struct GeoModule {
         }
     }
 
-    private let parent: LastFM
+    private let parent: LastFMClient
     private let requester: Requester
     private let secure: Bool
 
-    internal init(parent: LastFM, secure: Bool, requester: Requester = RequestUtils.shared) {
+    internal init(parent: LastFMClient, secure: Bool, requester: Requester = RequestUtils.shared) {
         self.parent = parent
         self.requester = requester
         self.secure = secure
@@ -30,7 +30,7 @@ public struct GeoModule {
 
     public func getTopTracks(
         params: GeoTopTracksParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<GeoTopTrack>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<GeoTopTrack>>
     ) {
         let params = parent.normalizeParams(params: params, method: APIMethod.getTopTracks)
 
@@ -49,7 +49,7 @@ public struct GeoModule {
 
     public func getTopArtists(
         params: SearchParams,
-        onCompletion: @escaping LastFM.OnCompletion<CollectionPage<GeoTopArtist>>
+        onCompletion: @escaping LastFMClient.OnCompletion<CollectionPage<GeoTopArtist>>
     ) {
         let params = parent.normalizeParams(
             params: params.toDictionary(termKey: "country"),

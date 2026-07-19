@@ -39,7 +39,7 @@ internal struct RequestUtils: Requester {
 
     private static func build(params: [String : String], secure: Bool) -> URL {
         var urlComponents = URLComponents(
-            string: secure ? LastFM.SECURE_API_HOST : LastFM.INSECURE_API_HOST
+            string: secure ? LastFMClient.SECURE_API_HOST : LastFMClient.INSECURE_API_HOST
         )!
 
         urlComponents.queryItems = params.map({ (key: String, value: String) in
@@ -96,7 +96,7 @@ internal struct RequestUtils: Requester {
     }
 
     private static func handleResponse(
-        _ onCompletion: @escaping LastFM.OnCompletion<Data>
+        _ onCompletion: @escaping LastFMClient.OnCompletion<Data>
     ) -> (Data?, URLResponse?, Error?) -> Void {
         return { (data: Data?, response: URLResponse?, error: Error?) in
             guard error == nil else {
@@ -128,8 +128,8 @@ internal struct RequestUtils: Requester {
     }
 
     private static func handleEntityDecoding<T: Decodable>(
-        _ onCompletion: @escaping LastFM.OnCompletion<T>
-    ) -> (LastFM.OnCompletion<Data>) {
+        _ onCompletion: @escaping LastFMClient.OnCompletion<T>
+    ) -> (LastFMClient.OnCompletion<Data>) {
         return { result in
             switch (result) {
             case .success(let data):
@@ -164,7 +164,7 @@ internal struct RequestUtils: Requester {
     internal func getDataAndParse<T: Decodable>(
         params: [String: String],
         secure: Bool = false,
-        onCompletion: @escaping LastFM.OnCompletion<T>
+        onCompletion: @escaping LastFMClient.OnCompletion<T>
     ) {
         var params = params
         params["format"] =  "json"
@@ -199,7 +199,7 @@ internal struct RequestUtils: Requester {
     internal func postFormURLEncodedAndParse<T: Decodable>(
         payload: [String: String],
         secure: Bool,
-        onCompletion: @escaping LastFM.OnCompletion<T>
+        onCompletion: @escaping LastFMClient.OnCompletion<T>
     ) throws {
         guard let headerAndBody = try? Self.buildForFormURLEncoded(payload: payload) else {
             throw RuntimeError("Error at building payload body.")
