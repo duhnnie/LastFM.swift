@@ -83,7 +83,7 @@ Once you have an API account, you will need to create a LastFM.swift instance pr
 ```swift
 import LastFM
 
-let lastFM = LastFM(apiKey: "your_api_key", apiSecret: "your_api_secret")
+let lastFM = LastFMClient(apiKey: "your_api_key", apiSecret: "your_api_secret")
 ```
 
 After that, you'll be able to start consuming services (check [here](https://www.last.fm/api) for info/docs about all available services):
