@@ -42,11 +42,11 @@ internal struct RequestUtils: Requester {
             string: secure ? LastFMClient.SECURE_API_HOST : LastFMClient.INSECURE_API_HOST
         )!
 
-        urlComponents.queryItems = params.map({ (key: String, value: String) in
-            return URLQueryItem(name: key, value: value)
+        urlComponents.percentEncodedQueryItems = params.map({ (key: String, value: String) in
+            return URLQueryItem(name: key, value: value.lastfmEncode(escapeNonASCII: true))
         })
 
-        return urlComponents.lastFMUrl!
+        return urlComponents.url!
     }
 
     private static func buildForFormURLEncoded(

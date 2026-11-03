@@ -513,7 +513,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettoptracks&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
+                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettoptracks&artist=\(params.artist.lastfmEncode())&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
         )
     }
 
@@ -554,7 +554,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettoptracks&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
+                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettoptracks&artist=\(params.artist.lastfmEncode())&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
         )
     }
 
@@ -657,7 +657,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettoptracks&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
+                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettoptracks&artist=\(params.artist.lastfmEncode())&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
         )
     }
 
@@ -698,7 +698,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettoptracks&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
+                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettoptracks&artist=\(params.artist.lastfmEncode())&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
         )
     }
 
@@ -793,7 +793,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.asyncGetCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.getsimilar&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)")
+                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.getsimilar&artist=\(params.artist.lastfmEncode())&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)")
         )
     }
 
@@ -835,7 +835,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.getsimilar&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)")
+                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.getsimilar&artist=\(params.artist.lastfmEncode())&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)")
         )
     }
 
@@ -995,7 +995,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.asyncGetCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettopalbums&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
+                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettopalbums&artist=\(params.artist.lastfmEncode())&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
         )
     }
 
@@ -1030,7 +1030,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettopalbums&artist=\(params.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
+                "https://ws.audioscrobbler.com/2.0/?api_key=\(Constants.API_KEY)&format=json&method=artist.gettopalbums&artist=\(params.artist.lastfmEncode())&autocorrect=\(params.autocorrect ? "1" : "0")&limit=\(params.limit)&page=\(params.page)")
         )
     }
 
@@ -1121,7 +1121,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.asyncGetCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?format=json&username=pepiro&artist=Some%20Artist&api_key=someAPIKey&autocorrect=1&method=artist.getInfo&lang=en"
+                "https://ws.audioscrobbler.com/2.0?format=json&username=pepiro&artist=Some+Artist&api_key=someAPIKey&autocorrect=1&method=artist.getInfo&lang=en"
             )
         )
     }
@@ -1164,7 +1164,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?format=json&username=pepiro&artist=Some%20Artist&api_key=someAPIKey&autocorrect=1&method=artist.getInfo&lang=en"
+                "https://ws.audioscrobbler.com/2.0?format=json&username=pepiro&artist=Some+Artist&api_key=someAPIKey&autocorrect=1&method=artist.getInfo&lang=en"
             )
         )
     }
@@ -1195,7 +1195,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.asyncGetCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?format=json&artist=Some%20Artist&api_key=someAPIKey&autocorrect=1&method=artist.getInfo&lang=es"
+                "https://ws.audioscrobbler.com/2.0?format=json&artist=Some+Artist&api_key=someAPIKey&autocorrect=1&method=artist.getInfo&lang=es"
             )
         )
     }
@@ -1237,7 +1237,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?format=json&artist=Some%20Artist&api_key=someAPIKey&autocorrect=1&method=artist.getInfo&lang=es"
+                "https://ws.audioscrobbler.com/2.0?format=json&artist=Some+Artist&api_key=someAPIKey&autocorrect=1&method=artist.getInfo&lang=es"
             )
         )
     }
@@ -1479,7 +1479,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?method=artist.getcorrection&artist=Some%20Artist&api_key=someAPIKey&format=json"
+                "https://ws.audioscrobbler.com/2.0?method=artist.getcorrection&artist=Some+Artist&api_key=someAPIKey&format=json"
             )
         )
     }
@@ -1514,7 +1514,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?method=artist.getcorrection&artist=Some%20Artist&api_key=someAPIKey&format=json"
+                "https://ws.audioscrobbler.com/2.0?method=artist.getcorrection&artist=Some+Artist&api_key=someAPIKey&format=json"
             )
         )
     }
@@ -1546,7 +1546,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.asyncGetCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&user=pepiro&method=artist.gettags&api_key=someAPIKey&format=json"
+                "https://ws.audioscrobbler.com/2.0?artist=Some+Artist&autocorrect=1&user=pepiro&method=artist.gettags&api_key=someAPIKey&format=json"
             )
         )
     }
@@ -1587,7 +1587,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&user=pepiro&method=artist.gettags&api_key=someAPIKey&format=json"
+                "https://ws.audioscrobbler.com/2.0?artist=Some+Artist&autocorrect=1&user=pepiro&method=artist.gettags&api_key=someAPIKey&format=json"
             )
         )
     }
@@ -1684,7 +1684,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&method=artist.gettoptags&api_key=someAPIKey&format=json"
+                "https://ws.audioscrobbler.com/2.0?artist=Some+Artist&autocorrect=1&method=artist.gettoptags&api_key=someAPIKey&format=json"
             )
         )
     }
@@ -1719,7 +1719,7 @@ class ArtistModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&method=artist.gettoptags&api_key=someAPIKey&format=json"
+                "https://ws.audioscrobbler.com/2.0?artist=Some+Artist&autocorrect=1&method=artist.gettoptags&api_key=someAPIKey&format=json"
             )
         )
     }
@@ -1739,8 +1739,6 @@ class ArtistModuleTests: XCTestCase {
 
         XCTAssertEqual(apiClient.getCalls.count, 1)
         XCTAssertEqual(apiClient.getCalls[0].headers, nil)
-        
-        print(apiClient.getCalls[0].url.absoluteString)
 
         XCTAssertTrue(
             Util.areSameURL(
@@ -1783,6 +1781,28 @@ class ArtistModuleTests: XCTestCase {
                 "https://ws.audioscrobbler.com/2.0?mbid=some-artist-mbid&autocorrect=0&method=artist.gettoptags&api_key=someAPIKey&format=json"
             )
         )
+    }
+    
+    func test_specialCharacters() throws {
+        for (term, encoded) in StringLastfmEncodeTests.escapeNonASCIITrueTests {
+            let params = ArtistInfoParams(term: term, criteria: .artist)
+            let expectation = expectation(description: "Waiting for getInfo() for \(term)")
+            
+            instance.getInfo(params: params) { result in
+                expectation.fulfill()
+            }
+            
+            waitForExpectations(timeout: 3)
+
+            XCTAssertTrue(
+                Util.areSameURL(
+                    apiClient.getCalls[0].url.absoluteString,
+                    "https://ws.audioscrobbler.com/2.0?artist=\(encoded)&autocorrect=1&api_key=someAPIKey&format=json&method=artist.getInfo"
+                )
+            )
+            
+            apiClient.clearMock()
+        }
     }
 
 }

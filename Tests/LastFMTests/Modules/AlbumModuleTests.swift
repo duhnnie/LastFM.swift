@@ -234,7 +234,7 @@ class AlbumModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.asyncGetCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?method=album.getinfo&artist=Various%20Artists&username=pepe&format=json&album=Some%20Album%20Title&api_key=someAPIKey&autocorrect=1"
+                "https://ws.audioscrobbler.com/2.0?method=album.getinfo&artist=Various+Artists&username=pepe&format=json&album=Some+Album+Title&api_key=someAPIKey&autocorrect=1"
             )
         )
     }
@@ -275,7 +275,7 @@ class AlbumModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?method=album.getinfo&artist=Various%20Artists&username=pepe&format=json&album=Some%20Album%20Title&api_key=someAPIKey&autocorrect=1"
+                "https://ws.audioscrobbler.com/2.0?method=album.getinfo&artist=Various+Artists&username=pepe&format=json&album=Some+Album+Title&api_key=someAPIKey&autocorrect=1"
             )
         )
     }
@@ -307,7 +307,7 @@ class AlbumModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.asyncGetCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?album=Music%20Sounds%20Better%20With%20You&method=album.getinfo&artist=Stardust&username=pepe&api_key=someAPIKey&format=json&autocorrect=1"
+                "https://ws.audioscrobbler.com/2.0?album=Music+Sounds+Better+With+You&method=album.getinfo&artist=Stardust&username=pepe&api_key=someAPIKey&format=json&autocorrect=1"
             )
         )
     }
@@ -348,7 +348,7 @@ class AlbumModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?album=Music%20Sounds%20Better%20With%20You&method=album.getinfo&artist=Stardust&username=pepe&api_key=someAPIKey&format=json&autocorrect=1"
+                "https://ws.audioscrobbler.com/2.0?album=Music+Sounds+Better+With+You&method=album.getinfo&artist=Stardust&username=pepe&api_key=someAPIKey&format=json&autocorrect=1"
             )
         )
     }
@@ -452,7 +452,7 @@ class AlbumModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.asyncGetCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?method=album.getinfo&artist=Some%20Artist&album=Some%20Album%20Title&format=json&lang=fr&autocorrect=0&api_key=someAPIKey"
+                "https://ws.audioscrobbler.com/2.0?method=album.getinfo&artist=Some+Artist&album=Some+Album+Title&format=json&lang=fr&autocorrect=0&api_key=someAPIKey"
             )
         )
     }
@@ -494,7 +494,7 @@ class AlbumModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?method=album.getinfo&artist=Some%20Artist&album=Some%20Album%20Title&format=json&lang=fr&autocorrect=0&api_key=someAPIKey"
+                "https://ws.audioscrobbler.com/2.0?method=album.getinfo&artist=Some+Artist&album=Some+Album+Title&format=json&lang=fr&autocorrect=0&api_key=someAPIKey"
             )
         )
     }
@@ -876,7 +876,7 @@ class AlbumModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.asyncGetCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?artist=Some%20Artist&album=Some%20Album&autocorrect=1&user=pepiro&method=album.gettags&api_key=someAPIKey&format=json"
+                "https://ws.audioscrobbler.com/2.0?artist=Some+Artist&album=Some+Album&autocorrect=1&user=pepiro&method=album.gettags&api_key=someAPIKey&format=json"
             )
         )
     }
@@ -918,7 +918,7 @@ class AlbumModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?artist=Some%20Artist&album=Some%20Album&autocorrect=1&user=pepiro&method=album.gettags&api_key=someAPIKey&format=json"
+                "https://ws.audioscrobbler.com/2.0?artist=Some+Artist&album=Some+Album&autocorrect=1&user=pepiro&method=album.gettags&api_key=someAPIKey&format=json"
             )
         )
     }
@@ -1019,7 +1019,7 @@ class AlbumModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.asyncGetCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&method=album.gettoptags&api_key=someAPIKey&album=Some%20Album&format=json"
+                "https://ws.audioscrobbler.com/2.0?artist=Some+Artist&autocorrect=1&method=album.gettoptags&api_key=someAPIKey&album=Some+Album&format=json"
             )
         )
     }
@@ -1058,7 +1058,7 @@ class AlbumModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&method=album.gettoptags&api_key=someAPIKey&album=Some%20Album&format=json"
+                "https://ws.audioscrobbler.com/2.0?artist=Some+Artist&autocorrect=1&method=album.gettoptags&api_key=someAPIKey&album=Some+Album&format=json"
             )
         )
     }
