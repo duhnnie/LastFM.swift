@@ -796,7 +796,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.asyncGetCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some%20Track&format=json&method=track.getInfo&artist=Some%20Artist&autocorrect=1"
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some+Track&format=json&method=track.getInfo&artist=Some+Artist&autocorrect=1"
             )
         )
     }
@@ -838,7 +838,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some%20Track&format=json&method=track.getInfo&artist=Some%20Artist&autocorrect=1"
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some+Track&format=json&method=track.getInfo&artist=Some+Artist&autocorrect=1"
             )
         )
     }
@@ -870,7 +870,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.asyncGetCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some%20Track&format=json&method=track.getInfo&artist=Some%20Artist&autocorrect=1"
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some+Track&format=json&method=track.getInfo&artist=Some+Artist&autocorrect=1"
             )
         )
     }
@@ -912,7 +912,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some%20Track&format=json&method=track.getInfo&artist=Some%20Artist&autocorrect=1"
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some+Track&format=json&method=track.getInfo&artist=Some+Artist&autocorrect=1"
             )
         )
     }
@@ -969,7 +969,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.asyncGetCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some%20Track&format=json&method=track.getInfo&artist=Some%20Artist&autocorrect=1&username=pepiro"
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some+Track&format=json&method=track.getInfo&artist=Some+Artist&autocorrect=1&username=pepiro"
             )
         )
     }
@@ -1011,7 +1011,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some%20Track&format=json&method=track.getInfo&artist=Some%20Artist&autocorrect=1&username=pepiro"
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Some+Track&format=json&method=track.getInfo&artist=Some+Artist&autocorrect=1&username=pepiro"
             )
         )
     }
@@ -1313,7 +1313,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.asyncGetCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?limit=5&method=track.search&artist=Some%20Artist&track=Some%20Track&api_key=someAPIKey&format=json&page=12"
+                "https://ws.audioscrobbler.com/2.0?limit=5&method=track.search&artist=Some+Artist&track=Some+Track&api_key=someAPIKey&format=json&page=12"
             )
         )
     }
@@ -1355,7 +1355,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?limit=5&method=track.search&artist=Some%20Artist&track=Some%20Track&api_key=someAPIKey&format=json&page=12"
+                "https://ws.audioscrobbler.com/2.0?limit=5&method=track.search&artist=Some+Artist&track=Some+Track&api_key=someAPIKey&format=json&page=12"
             )
         )
     }
@@ -1562,7 +1562,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.asyncGetCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&method=track.getcorrection&format=json&track=Some%20Track&artist=Some%20Artist"
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&method=track.getcorrection&format=json&track=Some+Track&artist=Some+Artist"
             )
         )
     }
@@ -1597,7 +1597,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&method=track.getcorrection&format=json&track=Some%20Track&artist=Some%20Artist"
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&method=track.getcorrection&format=json&track=Some+Track&artist=Some+Artist"
             )
         )
     }
@@ -1665,7 +1665,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.asyncGetCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Track%20X&limit=2&method=track.getsimilar&format=json&artist=Artist%20X&autocorrect=1"
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Track+X&limit=2&method=track.getsimilar&format=json&artist=Artist+X&autocorrect=1"
             )
         )
     }
@@ -1707,7 +1707,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Track%20X&limit=2&method=track.getsimilar&format=json&artist=Artist%20X&autocorrect=1"
+                "https://ws.audioscrobbler.com/2.0?api_key=someAPIKey&track=Track+X&limit=2&method=track.getsimilar&format=json&artist=Artist+X&autocorrect=1"
             )
         )
     }
@@ -1821,7 +1821,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.asyncGetCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&user=pepiro&method=track.gettags&api_key=someAPIKey&track=Some%20Track&format=json"
+                "https://ws.audioscrobbler.com/2.0?artist=Some+Artist&autocorrect=1&user=pepiro&method=track.gettags&api_key=someAPIKey&track=Some+Track&format=json"
             )
         )
     }
@@ -1863,7 +1863,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&user=pepiro&method=track.gettags&api_key=someAPIKey&track=Some%20Track&format=json"
+                "https://ws.audioscrobbler.com/2.0?artist=Some+Artist&autocorrect=1&user=pepiro&method=track.gettags&api_key=someAPIKey&track=Some+Track&format=json"
             )
         )
     }
@@ -1977,7 +1977,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.asyncGetCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&method=track.gettoptags&api_key=someAPIKey&track=Some%20Track&format=json"
+                "https://ws.audioscrobbler.com/2.0?artist=Some+Artist&autocorrect=1&method=track.gettoptags&api_key=someAPIKey&track=Some+Track&format=json"
             )
         )
     }
@@ -2017,7 +2017,7 @@ class TrackModuleTests: XCTestCase {
         XCTAssertTrue(
             Util.areSameURL(
                 apiClient.getCalls[0].url.absoluteString,
-                "https://ws.audioscrobbler.com/2.0?artist=Some%20Artist&autocorrect=1&method=track.gettoptags&api_key=someAPIKey&track=Some%20Track&format=json"
+                "https://ws.audioscrobbler.com/2.0?artist=Some+Artist&autocorrect=1&method=track.gettoptags&api_key=someAPIKey&track=Some+Track&format=json"
             )
         )
     }

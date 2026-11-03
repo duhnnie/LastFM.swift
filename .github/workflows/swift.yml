@@ -8,6 +8,7 @@ on:
     branches: [ "main", "develop" ]
   pull_request:
     branches: [ "main", "develop" ]
+  workflow_dispatch:
 
 jobs:
   build-macos:
@@ -23,7 +24,7 @@ jobs:
 
   build-linux:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
     - uses: actions/checkout@v3
