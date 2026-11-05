@@ -1,4 +1,4 @@
-FROM swift:latest
+FROM swift:6.2
 # FROM swiftlang/swift:nightly-focal
 
 # Set the working directory inside the container
