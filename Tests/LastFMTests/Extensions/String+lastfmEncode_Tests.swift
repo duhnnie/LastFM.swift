@@ -25,7 +25,7 @@ class StringLastfmEncodeTests: XCTestCase {
         ("+44", "%252B44"),
         ("P!nk", "P!nk"),
         ("Sunn O)))", "Sunn+O)))"),
-        ("SMITH & WESSON", "SMITH+&+WESSON"),
+        ("SMITH & WESSON", "SMITH+%26+WESSON"),
         ("Guns N' Roses", "Guns+N%27+Roses"),
         ("Sigur Rós", "Sigur+R%C3%B3s"),
         ("Ke$ha", "Ke$ha"),
@@ -36,7 +36,8 @@ class StringLastfmEncodeTests: XCTestCase {
         ("S.O.S. Band", "S.O.S.+Band"),
         ("..", "%252E."),
         ("...", "..."),
-        (".hidden", ".hidden")
+        (".hidden", ".hidden"),
+        ("John Carpenter & Alan Howarth", "John+Carpenter+%26+Alan+Howarth")
     ]
     
     internal static let escapeNonASCIIFalseTests: [StringEncodingTestCase] = [
@@ -52,7 +53,7 @@ class StringLastfmEncodeTests: XCTestCase {
         ("+44", "%252B44"),
         ("P!nk", "P!nk"),
         ("Sunn O)))", "Sunn+O)))"),
-        ("SMITH & WESSON", "SMITH+&+WESSON"),
+        ("SMITH & WESSON", "SMITH+%26+WESSON"),
         ("Guns N' Roses", "Guns+N%27+Roses"),
         ("Sigur Rós", "Sigur+Rós"),
         ("Ke$ha", "Ke$ha"),
@@ -63,7 +64,8 @@ class StringLastfmEncodeTests: XCTestCase {
         ("S.O.S. Band", "S.O.S.+Band"),
         ("..", "%252E."),
         ("...", "..."),
-        (".hidden", ".hidden")
+        (".hidden", ".hidden"),
+        ("John Carpenter & Alan Howarth", "John+Carpenter+%26+Alan+Howarth")
     ]
     
     func test_escapeNonASCII_true() throws {
