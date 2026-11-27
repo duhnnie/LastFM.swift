@@ -10,7 +10,7 @@ import Foundation
 extension String {
     
     private static let escapedOnce: Set<Unicode.Scalar> =
-        ["%", "/", "?", "#", "'", "[", "]", "\"", "<", ">", "\\", "^", "`", "{", "|", "}", ";"]
+        ["%", "/", "?", "#", "'", "[", "]", "\"", "<", ">", "\\", "^", "`", "{", "|", "}", ";", "&"]
 
     /// Encodes one artist/album/track name as a Last.fm URL path segment.
     ///
