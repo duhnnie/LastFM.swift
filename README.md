@@ -15,7 +15,7 @@ Swift code.
 
   ```swift
   dependencies: [
-      .package(url: "https://github.com/duhnnie/LastFM.swift", from: "1.8.0")
+      .package(url: "https://github.com/duhnnie/LastFM.swift", from: "1.8.1")
   ]
   ```
 
@@ -37,7 +37,7 @@ install LastFM.swift with Carthage:
  2. Update your Cartfile to include the following:
 
     ```ruby
-    github "duhnnie/LastFM.swift" ~> 1.8.0
+    github "duhnnie/LastFM.swift" ~> 1.8.1
     ```
 
  3. Run `carthage update` and
@@ -67,7 +67,7 @@ LastFM.swift with CocoaPods:
     use_frameworks!
 
     target 'YourAppTargetName' do
-        pod 'LastFM.swift', '~> 1.8.0'
+        pod 'LastFM.swift', '~> 1.7.0'
     end
     ```
 
@@ -75,6 +75,8 @@ LastFM.swift with CocoaPods:
 
 [CocoaPods]: https://cocoapods.org
 [CocoaPods Installation]: https://guides.cocoapods.org/using/getting-started.html#getting-started
+
+**NOTE:** Last version available via CocoaPods is 1.7.0
 
 ## Usage
 You will need a last.fm API account, you can get one [here](https://www.last.fm/api/account/create).
